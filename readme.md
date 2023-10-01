@@ -12,7 +12,7 @@ class is useful however, and it is  a good "theme" to acquire familiarity with X
 language and xmlux. 
   
 My goal consists, with modesty and if I'll be able, in making for XML – by my way –
-something like Leslie Leslie Lamport did for TeX. So I'm opened to contributors' works. 
+something like Leslie Lamport did for TeX. So I'm opened to contributors' works. 
 This doc document xmluxDoc.xml is written by xmlux entirely.  If you study
 README/xmluxDoc-xmlux codex, you'll understand xmlux better. I offer it in various usage
 combination.
