@@ -4,6 +4,5 @@
 _______________
 
 	v1.0.1: Oct 01, 2023	* II version.
-Corrected some mistakes.
-
+Some mistakes corrected.
 _______________
