@@ -6,7 +6,7 @@ contributors; now I'm still only in the primordial stage of the project.
 It handles, compiles, formats, edits, manipulates XML file; it wants to be a XML suite.
 
  
-# Prerequisites and dependi
+# Prerequisites and dependencies
 You should know something of xml language, you should know xml fundamentals, to understand
 what xmlux does. If you need to study basic subjects or advanced matters, you could 
 refer e.g. to Elliotte Rusty Harold's XML works, to w3c's XML space.  
