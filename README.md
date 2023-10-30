@@ -1,8 +1,4 @@
 # Intro
-xmlux is just the beginning of a my XML project. 
-It is an ambitious project that needs a great effort, for this reason it is also open to
-contributors; now I'm still only in the primordial stage of the project. 
- 
 It handles, compiles, formats, edits, manipulates XML file; it wants to be a XML suite.
 
  
