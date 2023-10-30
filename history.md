@@ -53,3 +53,13 @@ respectively.
 
 Upgraded documentation.
 
+_______________
+
+
+	v2.0.1: Oct 29, 2023
+
+Corrected xmlux.sh
+
+Corrected README.md
+
+
