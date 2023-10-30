@@ -8,9 +8,9 @@ what xmlux does. If you need to study basic subjects or advanced matters, you co
 refer e.g. to Elliotte Rusty Harold's XML works, to w3c's XML space.  
 
 You have to install:
-GNU coreutils;
-vim and gvim;
-bash, java, sed, grep, etc.
+- GNU coreutils;
+- vim and gvim;
+- bash, java, sed, grep, etc.
 
 
 # Installing and help
@@ -24,7 +24,7 @@ xmlux -h
 xmluxc -h
 ```
 
-# Usage
+# More info and usage
 See README/doc/xmluxDoc-xmlux/xmluxDoc.xml
  
 
