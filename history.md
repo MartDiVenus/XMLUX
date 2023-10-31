@@ -52,7 +52,6 @@ from <\pplux2nl> to <\pplux2bl>
 respectively.
 
 Upgraded documentation.
-
 _______________
 
 
@@ -61,5 +60,11 @@ _______________
 Corrected xmlux.sh
 
 Corrected README.md
+_______________
 
+
+	v2.0.2: Oct 31, 2023
+
+Corrected dtd file automatic production in xmluxc.sh
+_______________
 
