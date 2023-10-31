@@ -65,6 +65,6 @@ _______________
 
 	v2.0.2: Oct 31, 2023
 
-Corrected dtd file automatic production in xmluxc.sh
+Corrected dtd file automatic production (as regards images in paragraphs) in xmluxc.sh
 _______________
 
