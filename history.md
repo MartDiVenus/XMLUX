@@ -71,9 +71,9 @@ _______________
 
 	v2.1.0: Nov 22, 2023
 
-corrected xmluxv
+Corrected xmluxv.
 
-improved xmluxc
+Improved xmluxc.
 _______________
 
 
