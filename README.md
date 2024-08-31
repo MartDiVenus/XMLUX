@@ -26,6 +26,8 @@ cd xmlux-$version
 systemctl reboot
 xmlux -h
 xmluxc -h
+xmluxe -h
+xmluxv -h
 ```
 
 # More info and usage
