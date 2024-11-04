@@ -1,0 +1,47 @@
+<!-- (not kin) Titles tree
+XMLUX
+Synopsis
+Part
+Prerequisites and dependencies
+Installing and help
+Usage
+Changes
+Copyright
+Starting
+Generating files
+Editing lmx file
+Viewing xml or lmx codex
+: Trees views; find/match ID, name attribute, titles
+Logs
+Compiling lmx file
+Printing
+View xml file
+Mode
+Rules
+Advices
+Paragraph
+Special characters
+Patterns
+Importing images
+ToC Elements Structure
+Document classes
+Debugging
+xmluxe: LMX, XML structural composing, editing, manipulations automatically
+xtextus: LMX, XML opening and little structural composing, editing manually
+\cluxlt{}p\cluxgt \cluxlt{}/p\cluxgt
+\cluxlt{}pg\cluxgt \cluxlt{}/pg\cluxgt
+
+
+
+Typology and list of special characters
+Importing special characters
+Special patterns
+Importing patterns
+matter and brief book document classes
+matter and brief article document classes
+septem gradus data document class
+category dataset 01 document class
+category dataset 02 document class
+pie dataset document class
+ actions focus
+end titles tree (not kin) -->

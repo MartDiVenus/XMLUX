@@ -1,0 +1,13 @@
+* ppluxbl
+create a new blank line
+
+* pplux2bl
+create 2 new blank line
+
+
+* break: centrato e con i diamanti neri
+break		♦	<center> &#9830; &#8195; &#9830; &#8195; &#9830; </center>	\ppluxbreak 
+
+
+* indent: in accordo allo standard unix: 8 not breakable spaces
+indent		n.c.	&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;	 \ppluxind

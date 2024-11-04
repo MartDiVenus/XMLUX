@@ -1,0 +1,47 @@
+<!-- Elements and titles tree
+radix  XMLUX
+synopsis  Synopsis
+part  Part
+chapter  Prerequisites and dependencies
+chapter  Installing and help
+chapter  Usage
+section  Starting
+subsection  Generating files
+subsection  Editing lmx file
+subsubsection  Mode
+paragraph  xmluxe: LMX, XML structural composing, editing, manipulations automatically
+subparagraph  actions focus
+paragraph  xtextus: LMX, XML opening and little structural composing, editing manually
+subsubsection  Rules
+subsubsection  Advices
+subsubsection  Paragraph
+a01.03.01.02.04.01  \cluxlt{}p\cluxgt \cluxlt{}/p\cluxgt
+a01.03.01.02.04.02  \cluxlt{}pg\cluxgt \cluxlt{}/pg\cluxgt
+paragraph  
+paragraph  
+paragraph  
+subsubsection  Special characters
+paragraph  Typology and list of special characters
+paragraph  Importing special characters
+subsubsection  Patterns
+paragraph  Special patterns
+paragraph  Importing patterns
+subsubsection  Importing images
+subsubsection  ToC Elements Structure
+subsection  Viewing xml or lmx codex
+subsection  : Trees views; find/match ID, name attribute, titles
+subsection  Logs
+subsection  Compiling lmx file
+subsubsection  Document classes
+paragraph  matter and brief book document classes
+paragraph  matter and brief article document classes
+paragraph  septem gradus data document class
+paragraph  category dataset 01 document class
+paragraph  category dataset 02 document class
+paragraph  pie dataset document class
+subsubsection  Debugging
+subsection  Printing
+subsection  View xml file
+chapter  Changes
+chapter  Copyright
+end elements and titles tree -->
