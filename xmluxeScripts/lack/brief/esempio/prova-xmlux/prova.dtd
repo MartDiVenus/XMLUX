@@ -1,0 +1,102 @@
+<!-- Root = a= titulus = title = radix = radix a -->
+<!ELEMENT radix ANY>
+<!-- All that is in "synopsis" = synopsis = a00 -->
+<!ELEMENT synopsis (#PCDATA)>
+<!ATTLIST synopsis ID CDATA "a00">
+<!-- All that is under "section" = section = a01 -->
+<!ELEMENT section (paragraph+, saxum+, subparagraph+, subsaxum+, subsection+, subsubsection+)>
+<!ATTLIST section ID CDATA "a01">
+<!-- All that is in "section" = section = a02 -->
+<!ELEMENT section (#PCDATA)>
+<!ATTLIST section ID CDATA "a02">
+<!-- All that is under "section" = section = a03 -->
+<!ELEMENT section (paragraph+, saxum+, subparagraph+, subsaxum+, subsection+, subsubsection+)>
+<!ATTLIST section ID CDATA "a03">
+<!-- All that is under "subsection" = subsection = a01.01 -->
+<!ELEMENT subsection (paragraph+, saxum+, subparagraph+, subsaxum+, subsubsection+)>
+<!ATTLIST subsection ID CDATA "a01.01">
+<!-- All that is in "subsection" = subsection = a01.02 -->
+<!ELEMENT subsection (#PCDATA)>
+<!ATTLIST subsection ID CDATA "a01.02">
+<!-- All that is in "subsection" = subsection = a01.03 -->
+<!ELEMENT subsection (#PCDATA)>
+<!ATTLIST subsection ID CDATA "a01.03">
+<!-- All that is in "subsection" = subsection = a03.01 -->
+<!ELEMENT subsection (#PCDATA)>
+<!ATTLIST subsection ID CDATA "a03.01">
+<!-- All that is under "subsection" = subsection = a03.02 -->
+<!ELEMENT subsection (paragraph+, saxum+, subparagraph+, subsaxum+, subsubsection+)>
+<!ATTLIST subsection ID CDATA "a03.02">
+<!-- All that is in "subsection" = subsection = a03.03 -->
+<!ELEMENT subsection (#PCDATA)>
+<!ATTLIST subsection ID CDATA "a03.03">
+<!-- All that is under "subsubsection" = subsubsection = a01.01.01 -->
+<!ELEMENT subsubsection (paragraph+, saxum+, subparagraph+, subsaxum+)>
+<!ATTLIST subsubsection ID CDATA "a01.01.01">
+<!-- All that is in "subsubsection" = subsubsection = a03.02.01 -->
+<!ELEMENT subsubsection (#PCDATA)>
+<!ATTLIST subsubsection ID CDATA "a03.02.01">
+<!-- All that is under "subsubsection" = subsubsection = a03.02.02 -->
+<!ELEMENT subsubsection (paragraph+, saxum+, subparagraph+, subsaxum+)>
+<!ATTLIST subsubsection ID CDATA "a03.02.02">
+<!-- All that is in "subsubsection" = subsubsection = a03.02.03 -->
+<!ELEMENT subsubsection (#PCDATA)>
+<!ATTLIST subsubsection ID CDATA "a03.02.03">
+<!-- All that is in "subsubsection" = subsubsection = a03.02.04 -->
+<!ELEMENT subsubsection (#PCDATA)>
+<!ATTLIST subsubsection ID CDATA "a03.02.04">
+<!-- All that is under "paragraph" = paragraph = a01.01.01.01 -->
+<!ELEMENT paragraph (saxum+, subparagraph+, subsaxum+)>
+<!ATTLIST paragraph ID CDATA "a01.01.01.01">
+<!-- All that is in "paragraph" = paragraph = a03.02.02.01 -->
+<!ELEMENT paragraph (#PCDATA)>
+<!ATTLIST paragraph ID CDATA "a03.02.02.01">
+<!-- All that is under "paragraph" = paragraph = a03.02.02.02 -->
+<!ELEMENT paragraph (saxum+, subparagraph+, subsaxum+)>
+<!ATTLIST paragraph ID CDATA "a03.02.02.02">
+<!-- All that is in "paragraph" = paragraph = a03.02.02.03 -->
+<!ELEMENT paragraph (#PCDATA)>
+<!ATTLIST paragraph ID CDATA "a03.02.02.03">
+<!-- All that is under "subparagraph" = subparagraph = a01.01.01.01.01 -->
+<!ELEMENT subparagraph (saxum+, subsaxum+)>
+<!ATTLIST subparagraph ID CDATA "a01.01.01.01.01">
+<!-- All that is in "subparagraph" = subparagraph = a03.02.02.02.01 -->
+<!ELEMENT subparagraph (#PCDATA)>
+<!ATTLIST subparagraph ID CDATA "a03.02.02.02.01">
+<!-- All that is under "subparagraph" = subparagraph = a03.02.02.02.02 -->
+<!ELEMENT subparagraph (saxum+, subsaxum+)>
+<!ATTLIST subparagraph ID CDATA "a03.02.02.02.02">
+<!-- All that is in "subparagraph" = subparagraph = a03.02.02.02.03 -->
+<!ELEMENT subparagraph (#PCDATA)>
+<!ATTLIST subparagraph ID CDATA "a03.02.02.02.03">
+<!-- All that is under "saxum" = saxum = a01.01.01.01.01.01 -->
+<!ELEMENT saxum (subsaxum+)>
+<!ATTLIST saxum ID CDATA "a01.01.01.01.01.01">
+<!-- All that is under "saxum" = saxum = a03.02.02.02.02.01 -->
+<!ELEMENT saxum (subsaxum+)>
+<!ATTLIST saxum ID CDATA "a03.02.02.02.02.01">
+<!-- All that is under "saxum" = saxum = a03.02.02.02.02.02 -->
+<!ELEMENT saxum (subsaxum+)>
+<!ATTLIST saxum ID CDATA "a03.02.02.02.02.02">
+<!-- All that is in "saxum" = saxum = a03.02.02.02.02.03 -->
+<!ELEMENT saxum (#PCDATA)>
+<!ATTLIST saxum ID CDATA "a03.02.02.02.02.03">
+<!-- All that is in "subsaxum" = subsaxum = a01.01.01.01.01.01.01 -->
+<!ELEMENT subsaxum (#PCDATA)>
+<!ATTLIST subsaxum ID CDATA "a01.01.01.01.01.01.01">
+<!-- All that is in "subsaxum" = subsaxum = a03.02.02.02.02.01.01 -->
+<!ELEMENT subsaxum (#PCDATA)>
+<!ATTLIST subsaxum ID CDATA "a03.02.02.02.02.01.01">
+<!-- All that is in "subsaxum" = subsaxum = a03.02.02.02.02.02.01 -->
+<!ELEMENT subsaxum (#PCDATA)>
+<!ATTLIST subsaxum ID CDATA "a03.02.02.02.02.02.01">
+<!-- All that is in "subsaxum" = subsaxum = a03.02.02.02.02.02.02 -->
+<!ELEMENT subsaxum (#PCDATA)>
+<!ATTLIST subsaxum ID CDATA "a03.02.02.02.02.02.02">
+<!-- All that is in "subsaxum" = subsaxum = a03.02.02.02.02.02.03 -->
+<!ELEMENT subsaxum (#PCDATA)>
+<!ATTLIST subsaxum ID CDATA "a03.02.02.02.02.02.03">
+ 
+<!-- Constants -->
+ 
+ 

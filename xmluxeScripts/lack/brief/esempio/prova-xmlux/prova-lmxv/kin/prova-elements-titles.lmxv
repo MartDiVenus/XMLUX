@@ -1,0 +1,34 @@
+<!-- Elements and titles tree
+radix  Title
+synopsis  Synopsis
+section  Section a01
+subsection  Subsection a01.01
+subsubsection  Subsubsection a01.01.01
+paragraph  Paragraph a01.01.01.01
+subparagraph  Subparagraph a01.01.01.01.01
+saxum  Saxum a01.01.01.01.01.01
+subsaxum  Subsaxum a01.01.01.01.01.01.01
+subsection  xmluxe: Add title to subsection please
+section  xmluxe: aZeroTre
+section  xmluxe: Add title to section please
+subsection  xmluxe: Add title to subsection please
+subsection  xmluxe: Add title to subsection please
+subsubsection  xmluxe: Add title to subsubsection please
+subsubsection  xmluxe: Add title to subsubsection please
+paragraph  xmluxe: Add title to paragraph please
+paragraph  xmluxe: Add title to paragraph please
+subparagraph  xmluxe: Add title to subparagraph please
+subparagraph  xmluxe: Add title to subparagraph please
+saxum  xmluxe: Add title to saxum please
+subsaxum  xmluxe: Add title to subsaxum please
+saxum  xmluxe: Add title to saxum please
+subsaxum  xmluxe: Add title to subsaxum please
+subsaxum  xmluxe: Add title to subsaxum please
+subsaxum  xmluxe: Add title to subsaxum please
+saxum  xmluxe: Add title to saxum please
+subparagraph  xmluxe: Add title to subparagraph please
+paragraph  past aZeroTre.zeroDue.zeroDue.zeroTre
+subsubsection  sottosottosezione aZeroTre.zeroDue.zeroTre
+subsubsection  sottosottosezione aZeroTre.zeroDue.zeroTre
+subsection  xmluxe: Add title to subsection please
+end elements and titles tree -->

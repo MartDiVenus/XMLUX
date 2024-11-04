@@ -1,0 +1,11 @@
+Nota come tutti gli attributi 'name', sono differenti.
+Nota come tutti i titoli sono differenti; 
+non sei obbligato ad averli differenti, ma se avessi
+copie, non potresti sfruttare a pieno xmluxe e xmluxv.
+
+Nota come uso solo il minuscolo per il contenuto degli attributi 'name',
+mentre per i titolo inizio sempre con una maiuscola.
+Non sei obbligato a seguire questo stile, ma esso mi aiuta
+nel discernere le due funzioni e a saperle usare meglio in
+xmluxe e xmluxv.
+
