@@ -1,0 +1,51 @@
+Per inserire automaticamente un elemento GradusIII
+nella famiglia a02, nonostante esistono già:
+A-GradusIII (a02.01.01)
+T-GradusIII (a02.01.02)
+
+e ordinare tutto (in modalità ascendente) automaticamente alfanumericamente in base
+al titolo che verrà assegnato (interattivamente)
+all'elemento da inserire.
+
+xmluxe --ins-at=a02.01.01 -fprova
+
+prova.lmx.ok è l'output di successo ottenuto eseguendo l'istanza di sopra.
+
+Verrà prodotto a02.01.03 che a seconda del titolo assegnato
+varierà l'ID in funzione dei titolo e ID già esistenti, 
+nel caso dell'esempio, assegnando e.g. il titolo <Prova> all'ID che automaticamente
+verrà designato, avrò alla fine:
+
+A-GradusIII (a02.01.01)
+Prova (a02.01.02)
+T-GradusIII (a02.01.03)
+
+N.B. non è un mio errore aver scritto
+--ins-at=a02.01.01
+
+in tale modo, riferisco al codice semplicemente, che voglio 
+inserire un id del GradusIII nella famiglia a02 (GradusI), senza sapere
+quanti id sono già presenti in essa.
+
+
+Analogamente dovrebbe accadere per l'attributo 'name'
+--ins-a=a02.01.01
+
+e per la modalità discendente
+--ins-dt=a02.01.01
+
+--ins-d=a02.01.01
+
+
+Attenzione! Non è una semplice organizzazione, quale
+quella della rubrica del cellulare.
+E` un'organizzazione complessa perché ordina selettivamente
+livelli precisi, e soprattutto sottolivelli precisi senza
+intaccare i superiori. E` come se ordinassi la rubrica telefonica
+del cellulare in base ai numeri di telefono e non ai nomi e cognomi,
+ma ordinando questi ultimi in funzione dei primi. Ma ciò accade
+in xmulux, per sette livelli ricorsivi -> quindi la questione è complessa.
+A oggi pare funzionare perfettamente, ho testato per varie combinazioni.
+
+
+
