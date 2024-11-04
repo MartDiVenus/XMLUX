@@ -1,0 +1,239 @@
+<!-- Root = a= titulus = title = radix = radix a -->
+<!ELEMENT radix ANY>
+<!-- All that is under "synopsis" = synopsis = a00 -->
+<!ELEMENT synopsis (it+, p+, pg+, url+)>
+<!ATTLIST synopsis ID CDATA "a00">
+<!-- All that is under "part" = part = a01 -->
+<!ELEMENT part (chapter+, paragraph+, section+, subparagraph+, subsection+, subsubsection+)>
+<!ATTLIST part ID CDATA "a01">
+<!-- All that is under "chapter" = chapter = a01.01 -->
+<!ELEMENT chapter (enumerate+, it+, pg+)>
+<!ATTLIST chapter ID CDATA "a01.01">
+<!-- All that is under "chapter" = chapter = a01.02 -->
+<!ELEMENT chapter (CODE+, it+, p+)>
+<!ATTLIST chapter ID CDATA "a01.02">
+<!-- All that is under "chapter" = chapter = a01.03 -->
+<!ELEMENT chapter (OUTPUT+, p+, paragraph+, section+, SNIP+, subsection+, subsubsection+)>
+<!ATTLIST chapter ID CDATA "a01.03">
+<!-- All that is under "chapter" = chapter = a01.04 -->
+<!ELEMENT chapter (center+, enumerate+, it+, itemize+, p+, pcode+, sl+)>
+<!ATTLIST chapter ID CDATA "a01.04">
+<!-- All that is under "chapter" = chapter = a01.05 -->
+<!ELEMENT chapter (it+, p+, pg+)>
+<!ATTLIST chapter ID CDATA "a01.05">
+<!-- All that is under "section" = section = a01.03.01 -->
+<!ELEMENT section (OUTPUT+, p+, paragraph+, SNIP+, subsection+, subsubsection+)>
+<!ATTLIST section ID CDATA "a01.03.01">
+<!-- All that is under "subsection" = subsection = a01.03.01.01 -->
+<!ELEMENT subsection (code+, CODE+, it+, OUTPUT+, p+, pcode+, pg+, scaps+, sl+, SNIP+, under+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.01">
+<!-- All that is under "subsection" = subsection = a01.03.01.02 -->
+<!ELEMENT subsection (OUTPUT+, p+, paragraph+, SNIP+, subsubsection+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.02">
+<!-- All that is under "subsection" = subsection = a01.03.01.03 -->
+<!ELEMENT subsection (code+, CODE+, it+, OUTPUT+, p+, pcode+, scaps+, sl+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.03">
+<!-- All that is under "subsection" = subsection = a01.03.01.04 -->
+<!ELEMENT subsection (code+, CODE+, it+, OUTPUT+, p+, pcode+, scaps+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.04">
+<!-- All that is under "subsection" = subsection = a01.03.01.05 -->
+<!ELEMENT subsection (it+, pg+, sl+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.05">
+<!-- All that is under "subsection" = subsection = a01.03.01.06 -->
+<!ELEMENT subsection (code+, it+, OUTPUT+, p+, paragraph+, pcode+, pg+, scaps+, subsubsection+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.06">
+<!-- All that is under "subsection" = subsection = a01.03.01.07 -->
+<!ELEMENT subsection (code+, it+, p+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.07">
+<!-- All that is under "subsection" = subsection = a01.03.01.08 -->
+<!ELEMENT subsection (code+, p+)>
+<!ATTLIST subsection ID CDATA "a01.03.01.08">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.01 -->
+<!ELEMENT subsubsection (OUTPUT+, paragraph+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.01">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.02 -->
+<!ELEMENT subsubsection (it+, p+, pcode+, pg+, scaps+, sl+, snip+, SNIP+, square+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.02">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.03 -->
+<!ELEMENT subsubsection (it+, itemize+, p+, pcode+, pg+, SNIP+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.03">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.04 -->
+<!ELEMENT subsubsection (paragraph+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.04">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.05 -->
+<!ELEMENT subsubsection (it+, pg+, sl+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.05">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.06 -->
+<!ELEMENT subsubsection (p+, paragraph+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.06">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.07 -->
+<!ELEMENT subsubsection (paragraph+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.07">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.08 -->
+<!ELEMENT subsubsection (center+, imgFig01, imgFig02, imgFig03, imgFig04, imgFig05, imgFig06, imgFig07, imgFig08, lthr+, p+, pcode+, pg+, scaps+, small+, snip+, SNIP+, under+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.08">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.02.09 -->
+<!ELEMENT subsubsection (it+, p+, pg+, sl+, snip+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.02.09">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.06.01 -->
+<!ELEMENT subsubsection (enumerate+, it+, itemize+, p+, pg+, sl+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.06.01">
+<!-- All that is under "subsubsection" = subsubsection = a01.03.01.06.02 -->
+<!ELEMENT subsubsection (code+, it+, OUTPUT+, pg+)>
+<!ATTLIST subsubsection ID CDATA "a01.03.01.06.02">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.01.01 -->
+<!ELEMENT paragraph (bf+, code+, CODE+, it+, OUTPUT+, p+, pcode+, pg+, scaps+, sl+, small+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.01.01">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.01.02 -->
+<!ELEMENT paragraph (bf+, it+, pg+, sl+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.01.02">
+<!-- All that is in "paragraph" =  = a01.03.01.02.04.01 -->
+<!ELEMENT  (#PCDATA)>
+<!ATTLIST  ID CDATA "a01.03.01.02.04.01">
+<!-- All that is in "paragraph" =  = a01.03.01.02.04.02 -->
+<!ELEMENT  (#PCDATA)>
+<!ATTLIST  ID CDATA "a01.03.01.02.04.02">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.04.03 -->
+<!ELEMENT paragraph (it+, p+, sl+, SNIP+, url+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.04.03">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.04.04 -->
+<!ELEMENT paragraph (it+, p+, sl+, SNIP+, url+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.04.04">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.04.05 -->
+<!ELEMENT paragraph (it+, p+, pcode+, sl+, snip+, SNIP+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.04.05">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.06.01 -->
+<!ELEMENT paragraph (it+, pg+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.06.01">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.06.02 -->
+<!ELEMENT paragraph (it+, p+, pcode+, pg+, sl+, url+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.06.02">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.07.01 -->
+<!ELEMENT paragraph (it+, output+, pcode+, pg+, scaps+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.07.01">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.02.07.02 -->
+<!ELEMENT paragraph (p+, pg+, snip+, url+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.02.07.02">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.01 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.01">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.02 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.02">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.03 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.03">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.04 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.04">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.05 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.05">
+<!-- All that is under "paragraph" = paragraph = a01.03.01.06.01.06 -->
+<!ELEMENT paragraph (p+, pg+, snip+)>
+<!ATTLIST paragraph ID CDATA "a01.03.01.06.01.06">
+<!-- All that is under "subparagraph" = subparagraph = a01.03.01.02.01.01.01 -->
+<!ELEMENT subparagraph (code+, it+, p+, pcode+, pg+, sl+, SNIP+)>
+<!ATTLIST subparagraph ID CDATA "a01.03.01.02.01.01.01">
+<!-- All that is under "subparagraph" = subparagraph = a01.03.01.02.01.01.02 -->
+<!ELEMENT subparagraph (code+, CODE+, enumerate+, it+, output+, p+, pcode+, pg+, scaps+, sl+, small+, snip+, url+)>
+<!ATTLIST subparagraph ID CDATA "a01.03.01.02.01.01.02">
+ 
+<!-- Constants -->
+<!ELEMENT p (img*, it+, sl+, bf+, scaps+, under+, lthr+, url+, CODE+, code+, SNIP+, snip+, OUTPUT+, output+, pcode+, enumerate+, square+, itemize+, small+)>
+<!ELEMENT pg (img*, it+, sl+, bf+, scaps+, under+, lthr+, url+, CODE+, code+, SNIP+, snip+, OUTPUT+, output+, pcode+, enumerate+, square+, itemize+, small+)>
+ 
+ 
+<!ELEMENT img (#PCDATA)> >> xmluxDoc.dtd
+<!ATTLIST img ID CDATA #REQUIRED>
+<!ATTLIST img SOURCE CDATA #REQUIRED>
+<!ATTLIST img ALT CDATA #REQUIRED>
+<!ATTLIST img WIDTH CDATA #REQUIRED>
+<!ATTLIST img HEIGHT CDATA #REQUIRED>
+ 
+<!ELEMENT center (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
+<!ATTLIST code xml:space (default|preserve) 'preserve'>
+<!ELEMENT CODE (#PCDATA)>
+<!ATTLIST CODE xml:space (default|preserve) 'preserve'>
+<!ELEMENT pcode (#PCDATA)>
+<!ATTLIST pcode xml:space (default|preserve) 'preserve'>
+<!ELEMENT output (#PCDATA)>
+<!ATTLIST output xml:space (default|preserve) 'preserve'>
+<!ELEMENT OUTPUT (#PCDATA)>
+<!ATTLIST OUTPUT xml:space (default|preserve) 'preserve'>
+<!ELEMENT snip (#PCDATA)>
+<!ATTLIST snip xml:space (default|preserve) 'preserve'>
+<!ELEMENT SNIP (#PCDATA)>
+<!ATTLIST SNIP xml:space (default|preserve) 'preserve'>
+<!ELEMENT it (#PCDATA)>
+<!ELEMENT sl (#PCDATA)>
+<!ELEMENT bf (#PCDATA)>
+<!ELEMENT scaps (#PCDATA)>
+<!ELEMENT under (#PCDATA)>
+<!ELEMENT lthr (#PCDATA)>
+<!ELEMENT enumerate (#PCDATA)>
+<!ELEMENT square (#PCDATA)>
+<!ELEMENT itemize (#PCDATA)>
+<!ELEMENT small (#PCDATA)>
+ 
+<!-- Begin images details
+<!-- Image imgFig01 ID="fig01_a03.01.02.04" -->
+<!ELEMENT imgFig01 EMPTY>
+<!ATTLIST imgFig01 ID CDATA "fig01_a03.01.02.04" #REQUIRED>
+<!ATTLIST imgFig01 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig01 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig01 WIDTH CDATA "700px" #REQUIRED>
+<!ATTLIST imgFig01 HEIGHT CDATA "700px" #REQUIRED>
+<!-- Image imgFig02 ID="fig02" -->
+<!ELEMENT imgFig02 EMPTY>
+<!ATTLIST imgFig02 ID CDATA "fig02" #REQUIRED>
+<!ATTLIST imgFig02 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig02 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig02 WIDTH CDATA "800px" #REQUIRED>
+<!ATTLIST imgFig02 HEIGHT CDATA "800px" #REQUIRED>
+<!-- Image imgFig03 ID="fig03_a03.01.02.04" -->
+<!ELEMENT imgFig03 EMPTY>
+<!ATTLIST imgFig03 ID CDATA "fig03_a03.01.02.04" #REQUIRED>
+<!ATTLIST imgFig03 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig03 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig03 WIDTH CDATA "500px" #REQUIRED>
+<!ATTLIST imgFig03 HEIGHT CDATA "500px" #REQUIRED>
+<!-- Image imgFig04 ID="fig04" -->
+<!ELEMENT imgFig04 EMPTY>
+<!ATTLIST imgFig04 ID CDATA "fig04" #REQUIRED>
+<!ATTLIST imgFig04 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig04 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig04 WIDTH CDATA "900px" #REQUIRED>
+<!ATTLIST imgFig04 HEIGHT CDATA "900px" #REQUIRED>
+<!-- Image imgFig05 ID="fig05" -->
+<!ELEMENT imgFig05 EMPTY>
+<!ATTLIST imgFig05 ID CDATA "fig05" #REQUIRED>
+<!ATTLIST imgFig05 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig05 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig05 WIDTH CDATA "1000px" #REQUIRED>
+<!ATTLIST imgFig05 HEIGHT CDATA "1000px" #REQUIRED>
+<!-- Image imgFig06 ID="fig06" -->
+<!ELEMENT imgFig06 EMPTY>
+<!ATTLIST imgFig06 ID CDATA "fig06" #REQUIRED>
+<!ATTLIST imgFig06 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig06 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig06 WIDTH CDATA "1100px" #REQUIRED>
+<!ATTLIST imgFig06 HEIGHT CDATA "1100px" #REQUIRED>
+<!-- Image imgFig07 ID="fig07" -->
+<!ELEMENT imgFig07 EMPTY>
+<!ATTLIST imgFig07 ID CDATA "fig07" #REQUIRED>
+<!ATTLIST imgFig07 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig07 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig07 WIDTH CDATA "600px" #REQUIRED>
+<!ATTLIST imgFig07 HEIGHT CDATA "600px" #REQUIRED>
+<!-- Image imgFig08 ID="fig08" -->
+<!ELEMENT imgFig08 EMPTY>
+<!ATTLIST imgFig08 ID CDATA "fig08" #REQUIRED>
+<!ATTLIST imgFig08 SOURCE CDATA "pics/cherryTree.jpg" #REQUIRED>
+<!ATTLIST imgFig08 ALT CDATA "cherryTree" #REQUIRED>
+<!ATTLIST imgFig08 WIDTH CDATA "400px" #REQUIRED>
+<!ATTLIST imgFig08 HEIGHT CDATA "400px" #REQUIRED>
+<!-- End images details -->
+ 

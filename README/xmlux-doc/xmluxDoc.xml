@@ -1,0 +1,1647 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="xmluxDoc.css"?>
+<!DOCTYPE a SYSTEM "xmluxDoc.dtd">
+<!-- matter book document class -->
+
+
+<!-- begin radix -->
+<radix ID="a">XMLUX
+
+<synopsis ID="a00">Synopsis
+
+<pg>Even if they don't know about my existence:
+Prof. David J. Eck gave me the input to write by XML; 
+Prof. Leslie Lamport gave me the input to make something with XML, like LaTeX did with TeX;  
+Prof. Elliotte Rusty Harold gave me the final strenght to believe
+in the idea. But <it>xmlux</it> is still the beginning of a my XML project. 
+It is an ambitious project that needs a great effort, for this reason it is
+also open to contributors.
+</pg>
+<p>  </p>
+<pg>
+It handles, compiles, formats, edits, manipulates, filters, parses XML files; it wants to be a XML suite. </pg>
+<p>  </p> 
+<p> This doc document <it>xmluxDoc.xml</it> has been written by xmlux entirely.
+If you study <url>README/xmluxDoc-xmlux</url> codex, you'll understand <it>xmlux</it> better.
+I offer  it in various usage combinations.
+</p>
+
+<p>The chronological order of your studying should be:
+1) *.lmx
+2) *.lmxv (optional, but I suggest to use <it>xmluxv</it>)
+3) *-lmxv folder
+4) *.lmxe (optional, but I suggest to use <it>xmluxe</it> for a lot of reasons, so to read *.lmxe too)
+5) *.css
+6) *.xml
+7) *.dtd
+8) *.xmlp (if you are a developer and you want understand other <it>xmlux</it> things)
+</p>
+
+<center> &#9830; &#8195; &#9830; &#8195; &#9830; </center>
+
+<pg>About my aesthetic chromatic choices, they are not the most attractive preferences but I
+choose them for my, for yours tired eyes.
+</pg>
+
+</synopsis>
+<!-- end a00 -->
+
+<part ID="a01">Part
+
+<chapter ID="a01.01">Prerequisites and dependencies
+
+<pg>You should know something of xml language, you should know xml fundamentals,
+to understand what <it>xmlux</it> does.
+<p>  </p>
+
+If you need to study basic subjects or advanced matters, you could refer e.g. to 
+Elliotte Rusty Harold's XML works, to w3c's XML space.
+<p>  </p>
+You have to install:
+<enumerate>GNU coreutils;</enumerate>
+<enumerate>vim and gvim;</enumerate>
+<enumerate>java, bash &#8211; including sed, grep, awk, etc &#8211;.</enumerate>
+</pg>
+
+</chapter>
+<!-- end a01.01 -->
+
+<chapter ID="a01.02">Installing and help
+<p>I thought <it>xmlux</it> for a Unix system, I  tested it in a Unix system.
+
+<CODE>tar xvf xmlux-$version.tar.xz
+cd xmlux-$version
+./install.sh
+systemctl reboot
+xmlux -h
+xmluxc -h
+xmluxe -h
+xmluxv -h
+</CODE>
+</p>
+
+</chapter>
+<!-- end a01.02 -->
+
+<chapter ID="a01.03">Usage
+	
+<section ID="a01.03.01">Starting
+	
+<subsection ID="a01.03.01.01">Generating files
+	<!-- qua -->
+<p>
+<OUTPUT xml:space="preserve">
+Name: xmlux
+
+Goal: To handle xml files.
+
+Version: xmlux-3.0.0
+
+<scaps>available document classes</scaps>
+<it>matter book</it>&#x9;&#x9;&#x9;--matter-book
+
+<it>matter article</it>&#x9;&#x9;&#x9;--matter-article
+
+<it>brief book</it>&#x9;&#x9;&#x9;--brief-book
+
+<it>brief article</it>&#x9;&#x9;&#x9;--brief-article
+
+<it>septem gradus data</it>&#x9;&#x9;--data-seven
+
+
+help                                                            -h
+
+<scaps>usage</scaps>
+xmlux '--document-class' --f'path and name (without extension) of new file'
+
+wildcard <pcode>*</pcode> as <pcode>--f</pcode> entire value or partial value, is accepted.
+
+e.g.
+<code>xmlux --matter-book --f=/home/beatrix/test/bea</code>
+or
+<CODE>cd /home/beatrix/test
+xmlux --matter-book -fbea
+</CODE>
+
+It applies to new file &#x3C;bea.lmx&#x3E; the matter-book document class
+with css2 style, so the default preamble:
+<SNIP>
+&#x3C;?xml version="1.0" encoding="UTF-8" standalone="no"?&#x3E;
+&#x3C;?xml-stylesheet type="text/css" href="bea.css"?&#x3E;
+&#x3C;!DOCTYPE a SYSTEM "bea.dtd"&#x3E;
+&#x3C;!-- matter book document class --&#x3E;
+</SNIP>
+
+
+_Dev section, not supplied by this version.
+e.g.
+
+xmlux -v1.0 --stand=no --encoding=UTF-8 --style=css2 -fgreeting
+
+It applies to new file &#x3C;greeting.lmx&#x3E; the preamble:
+&#x3C;
+version=1.0
+encoding=UTF-8
+standalone=no
+stylesheet type="text/css" href="greeting.css"
+&#x3E;
+
+</OUTPUT>
+</p>
+
+
+<pg>You'll have a folder, with the name you will specify and <it>-xmlux</it> suffix, containg 
+*.lmx; it will be edited by you respecting some rules.
+<under>For structure editing, I suggest to edit it by <sl>xmluxe</sl> because <sl>xmluxe</sl> is powerful</under>.
+</pg>
+
+</subsection>
+<!-- end a01.03.01.01 -->
+
+<subsection ID="a01.03.01.02">Editing lmx file
+
+<subsubsection ID="a01.03.01.02.02">Rules
+<square><p>If you don't use <it>xmluxe</it> to compose <sl>lmx</sl> file &#8212; manually, you'll have to add 
+<pcode>&#x3C;!-- begin radix --&#x3E;</pcode>
+above <sl>radix</sl> element (on the head of <sl>radix</sl> element).</p> 
+<p>e.g.
+<SNIP>&#x3C;!-- begin radix --&#x3E;
+&#x3C;radix <scaps>id</scaps>=a&#x3E;
+</SNIP>
+</p>
+
+<pg>Generating *.lmx by <it>xmlux</it> and/or composing
+*.lmx by <it>xmluxe</it>, you will see this rule applied automatically.</pg></square>
+<p>  </p>
+<square><pg>ID Attribute must be written in capital letters, but not <it>name</it> attribute because
+JFreeChart doesn't accept capital letters for it.</pg></square>
+<p>  </p>
+<square><pg>If you use my software <sl>datalux</sl>&#8212;<it>name</it> attribute for <it>Key</it> elements and <it>Value</it> elements, 
+must contain <pcode>KEY</pcode> and <pcode>VALUE</pcode> respectively.
+	e.g.</pg>
+<snip>&#x3C;Key <scaps>id</scaps>="a01.01.01" name="KEY ..."&#x3E;</snip>
+</square>
+<p>  </p>
+<square><p><it>name</it> attribute must have the last position (field) in attribute line.
+e.g.
+<snip>&#x3C;section <scaps>id</scaps>="a01.01.01" <it>n</it><scaps>attr</scaps>="bla" name="bla bla"&#x3E;Bla Bla Bla</snip></p>
+</square>
+<p>  </p>
+<square><pg>You'll have <sl>xmlux</sl> document class specified on the top of *.lmx file, automatically.</pg>
+	<p>e.g. <snip>&#x3C;!-- matter book document class --&#x3E;</snip></p>
+	<p>You must not delete or move it.</p>
+</square>
+<p>  </p>
+<square><pg>For data document class readable by JFreeChart&#8212;Key and Value 
+element closings <pcode>&#x3C;/'element'&#x3E;</pcode>
+must not have a reserved line (row), e.g. the following closing is right</pg>
+<SNIP>&#x3C;Key <scaps>id</scaps>="..."&#x3E;'Key content'&#x3C;/Key&#x3E;</SNIP>
+</square>
+<p>  </p>
+<pg><square>For #PCDATA elements like (&#x3C;p&#x3E;,&#x3C;code&#x3E; etc.),
+so for not toc elements&#8212;you are free to not observe the following rule.
+If you don't use <it>xmluxe</it> to compose <sl>lmx</sl> file &#8212; manually,
+you have to add the following comment at the end of each toc element,
+&#x5B;just below the end of toc element&#x5D;: 
+<pcode>&#x3C;!-- end 'ID' --&#x3E;</pcode>
+e.g. at the end of this subsubsection a01.03.01.02.02, you have to have:
+<SNIP>&#x3C;/subsubsection&#x3E;
+&#x3C;!-- end a01.03.01.02.02 --&#x3E;
+</SNIP>
+There are other ways to get results but this rule is useful during the document composition too.
+</square></pg>
+<p>  </p>
+<!-- Anche se usassi <pg> al posto di <p>, avresti bisogno di inserire il punto all'interno
+di <it>Special characters.</it> per non avere il punto solo in un'altra riga.-->
+<square><pg>You must respect name of <sl>xmlux</sl>'s elements, e.g. 
+<pcode>&#x3C;chapter&#x3E;</pcode> for brief and matter books document classes,
+<pcode>&#x3C;saxum&#x3E;</pcode> for brief and matter articles document classes, 
+<pcode>&#x3C;Item&#x3E;</pcode> for category dataset* and piedataset
+	document classes, <pcode>&#x3C;gradusI&#x3E;</pcode> for septem gradus (data seven) document class.
+	In other words, you can't rename elements.</pg>
+</square>
+<p>  </p>
+<p><square>You have to respect special characters, like you will see in the subsubsection <it>Special characters.</it></square></p>
+<p>  </p>
+<p><square>You have to respect special patterns, like you will see in the subsubsection <it>Special patterns.</it></square></p>
+<p>  </p>
+<pg><square>You can rename radix ID, assigning any name, but you have to respect
+	my logical ID toc structure, like you will see in the subsubsection <it>Toc Elements Structure.</it>
+But for a reason of human visual cleanness, better to have a literal &#8211; not alphanumeric &#8211; root (radix)
+ID. e.g.
+<SNIP>&#x3C;radix <scaps>id</scaps>="a"&#x3E;Title
+</SNIP>
+</square></pg>
+<p>  </p>
+<p><square>Images to load must have <pcode>img</pcode> prefix, e.g. 
+<SNIP>&#x3C;imgFig01 <scaps>id</scaps>="..."&#x3E;</SNIP>.</square></p>
+</subsubsection>
+<!-- end a01.03.01.02.02 -->
+
+<subsubsection ID="a01.03.01.02.03">Advices
+<pg><itemize> For elements that have many spaces to preserve, like program blocks, program
+environments, it is a good routine to use <pcode>xml:space="preserve"</pcode>, e.g.
+<SNIP>&#x3C;CODE xml:space="preserve"&#x3E; 'code content' &#x3C;/CODE&#x3E;</SNIP>
+</itemize></pg>
+<p>  </p>
+<p><itemize><it>xmlux</it> layout is UTF-8 oriented.</itemize></p>
+</subsubsection>
+<!-- end a01.03.01.02.03 -->
+
+<subsubsection ID="a01.03.01.02.04">Paragraph
+<paragraph ID="a01.03.01.02.04.01">&#x3C;p&#x3E; &#x3C;/p&#x3E;
+<pg><pcode>&#x3C;p&#x3E; &#x3C;/p&#x3E;</pcode> needs for paragraphs that you want to format manually entirely.
+</pg>
+</paragraph>
+<!-- end a01.03.01.02.04.01 -->
+<paragraph ID="a01.03.01.02.04.02">&#x3C;pg&#x3E; &#x3C;/pg&#x3E;
+<pg><pcode>&#x3C;pg&#x3E; &#x3C;/pg&#x3E;</pcode> needs for automatic formatting. 
+However, inside  it, you can import 
+e.g. <snip>&#x5C;ppluxbl</snip> to insert a blank line; you can also use manual formatting by 
+<pcode>&#x3C;p&#x3E; &#x3C;/p&#x3E;</pcode> into <pcode>&#x3C;pg&#x3E; &#x3C;/pg&#x3E;</pcode>, 
+	to have both kinds of formatting.</pg>
+</paragraph>
+<!-- end a01.03.01.02.04.02 -->
+<paragraph ID="a01.03.01.02.04.03"><sl>addTab group</sl>
+<SNIP>
+&#x5C;start&#x7B;addTab&#x7D;&#x5B;'<it>n</it>'&#x5D;
+content to shift of '<it>n</it>' tabs
+&#x5C;finish&#x7B;addTab&#x7D;
+</SNIP>
+<p>For right and wrong examples, see old <sl>texlux</sl> manual extract: <url>/usr/local/lib/xmlux/xmluxcGroups/paragraph/esempio</url>.
+However, new <sl>texlux</sl> manual will be written by <sl>xmlux</sl>.
+</p>
+</paragraph>
+<!-- end a01.03.01.02.04.03 -->
+<paragraph ID="a01.03.01.02.04.04"><sl>wrapLines group</sl>
+<SNIP>
+&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq&#x5D;
+	content lines to wrap of '<it>n</it>' characters by VIM's <sl>gq</sl> command.
+&#x5C;finish&#x7B;wrapLines&#x7D;
+</SNIP>
+<SNIP>
+&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq,just,tab='<it>n</it>'&#x5D;
+content lines to wrap of '<it>n</it>' characters by VIM's <sl>gq</sl> command;
+to justify; to shift of '<it>n</it>' tabs.
+&#x5C;finish&#x7B;wrapLines&#x7D;
+</SNIP>
+<p>For right and wrong examples, see old <sl>texlux</sl> manual extract: <url>/usr/local/lib/xmlux/xmluxcGroups/paragraph/esempio</url>.
+However, new <sl>texlux</sl> manual will be written by <sl>xmlux</sl>.
+</p>
+</paragraph>
+<!-- end a01.03.01.02.04.04 -->
+<paragraph ID="a01.03.01.02.04.05"><sl>multicolumn group</sl>
+<SNIP>
+&#x5C;start&#x7B;multicolumn&#x7D;
+&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq&#x5D;
+First column content lines to wrap of '<it>n</it>' characters by VIM's <sl>gq</sl> command.
+&#x5C;finish&#x7B;wrapLines&#x7D;
+	
+&#x5C;multic	
+		
+&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq,just,tab='<it>n</it>'&#x5D;
+Second column content lines to wrap of '<it>n</it>' characters by VIM's <sl>gq</sl> command;
+to justify; to shift of '<it>n</it>' tabs.
+&#x5C;finish&#x7B;wrapLines&#x7D;
+&#x5C;finish&#x7B;multicolumn&#x7D;
+</SNIP>
+<p>  </p>
+<p>First block, defines first column:
+<snip>&#x5C;start&#x7B;multicolumn&#x7D;
+&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq&#x5D;
+</snip>
+Central command needs to starts second column:
+<snip>&#x5C;multic</snip> needs to starts second column.
+
+Third block defines second column. 
+<snip>&#x5C;start&#x7B;wrapLines&#x7D;&#x5B;width='<it>n</it>',gq,just,tab='<it>n</it>'&#x5D;</snip>
+You don't have to specify <pcode>just</pcode> necessarily, it is only a free choice.
+</p>
+</paragraph>
+<!-- end a01.03.01.02.04.05 -->
+
+</subsubsection>
+<!-- end a01.03.01.02.04 -->
+
+<subsubsection ID="a01.03.01.02.05">Environments
+<pg>I have not free time to list and to describe all environments provided by <sl>xmlux</sl>, but
+you can find every environment in  <sl>xmluxDoc</sl> codex, so in xmluxDoc.css in particular.
+I'm sorry to use <it>&#x3C;url&#x3E;</it> to specify local path too, but I find it a
+practical arrangement now; when I'll have free time, I'll introduce paths/links differentiations.</pg>
+</subsubsection>
+<!-- end a01.03.01.02.05 -->
+
+<subsubsection ID="a01.03.01.02.06">Special characters
+
+<paragraph ID="a01.03.01.02.06.01">Typology and list of special characters
+<pg>There are xml special characters, like e.g. &#x26;, &#x3C;, &#x3E;; and there are
+<it>xmlux</it> special character like *, &#x26;.
+The difference between them is the following: without <it>xmlux</it>, you can't write xml special characters nowhere
+if you don't express them by hexadecimal or decimal systems or by xml commands.
+Instead, with <it>xmlux</it>, if you don't express these special chars by hexadecimal or decimal systems or by xml
+commands, you shouldn't write <it>xmlux</it> special chars only in the element string &#8211; so
+in the element definition and/or in its title &#8211;. &#x3C;&#x3C;should'nt&#x3E;&#x3E; because it is not
+forbidden to write them in the element string too, but writing them there you'll compromise the 
+perfect production of xmluxc's files.
+</pg>
+</paragraph>
+<!-- end a01.03.01.02.06.01 -->
+
+<paragraph ID="a01.03.01.02.06.02">Importing special characters
+<p>Two examples of commands, you can find the list I'm making in <url>/usr/local/lib/xmlux/char/</url>.</p>
+<p xml:space="preserve">e.g.
+ampersand	 	         &#x26;               &#x26;#x26;        &#x5C;csluxamp
+blackDiamond		 &#9830;                &#x26;#9830;	&#x5C;cpluxdiam 
+</p>
+<p>  </p>
+<pg>I hope you help me, sending to me other commands organized by type, and respecting 
+the number of filled fields of my candidate files to this task (see <url>/usr/local/lib/xmlux/char/</url>).
+
+Since <it>xmlux</it> version 2.0.0, I've added fields for LaTeX equivalent  <it>xmlux</it>
+commands because I need them to convert <sl>lmx</sl> files to <sl>tex</sl> files in the next 
+future.
+</pg>
+
+<pg>In <url>/usr/local/lib/xmlux/char/w3cCharacters</url> I stocked official w3c's xml entities (characters),
+the greatest list of all times.
+</pg>
+<p> 
+e.g. 
+<pcode>&#x5C;clux$yourChoice</pcode> for a generic character;
+<pcode>&#x5C;cmlux$yourChoice</pcode> for a mathematical character;
+<pcode>&#x5C;cflux$yourChoice</pcode> for a physical character;
+<pcode>&#x5C;cclux$yourChoice</pcode> for a chemical character;
+and so on.
+</p>
+
+<p>  </p>
+
+	<pg> <it>xmlux</it>'s goal isn't to reach  TeX/LaTeX text quality (the highest text quality),
+	xml's targets and powers are others; however it is important to have a set of characters available, and a good
+	text layout.
+</pg>
+<p>  </p>
+<p><pcode>cslux</pcode> means <it>special character</it>.</p>
+<pg>To join on the right side &#8211; for the left side you don't need nothing &#8211; 
+a mapped character with an other character, or another command, you have to use 
+<pcode>&#x7B;&#x7D;</pcode> pattern.</pg>
+<pg>To break <sl>xmlux</sl> VIM's syntax syn region coloration, you have to use 
+<pcode>&#x7B;&#x7D;</pcode> pattern, as an alternative to a blank space.</pg>
+<p>e.g.
+<pcode>&#x5C;ppluxbl&#x7B;&#x7D;</pcode>
+</p>
+<pg>For these reasons I made <pcode>&#x7B;</pcode> and 
+<pcode>&#x7D;</pcode> as special characters.
+</pg>
+</paragraph>
+<!-- end a01.03.01.02.06.02 -->
+
+</subsubsection>
+<!-- end a01.03.01.02.06 -->
+
+<subsubsection ID="a01.03.01.02.07">Patterns
+
+<paragraph ID="a01.03.01.02.07.01">Special patterns
+<pg>Inside text body, it is forbidden to write  <pcode>id=</pcode> pattern with uppercase &#x3C;id&#x3E;.
+	This pattern  is a <it>xmlux</it> syntax reserved pattern, you can write it with uppercase &#x3C;ID&#x3E;
+only in	element strings. You can use lowercase in the body ot the text to express
+it, or you can use <pcode>&#x3C;scaps&#x3E;</pcode> environment (<it>small capital letter</it>)
+e.g. <snip>&#x3C;scaps&#x3E;id=a&#x3C;/scaps&#x3E;</snip>
+to have <output><scaps>id</scaps>=a</output>. Of course, you can use hexadecimal or decimal systems to write literal
+part of this reserved pattern.
+	Analogously, for other attributes except for <it>name</it> attribute because it must be written in lowercase.</pg>
+</paragraph>
+<!-- end a01.03.01.02.07.01 -->
+
+<paragraph ID="a01.03.01.02.07.02">Importing patterns
+
+<pg>Two examples of commands. I hope you help me, sending to me other commands
+organized by type.</pg>
+<p>e.g. for a paragraph pattern:
+<snip>&#x3C;&#x5C;pplux'yourChoice'</snip>
+e.g. for a decorative pattern:
+<snip>&#x3C;&#x5C;pdlux'yourChoice'</snip>
+</p>
+<p>  </p>
+<pg>You have some my patterns in <url>/usr/local/lib/xmlux/pattern</url>.</pg>
+</paragraph>
+<!-- end a01.03.01.02.07.02 -->
+
+
+</subsubsection>
+<!-- end a01.03.01.02.07 -->
+
+<subsubsection ID="a01.03.01.02.08">Importing images
+	
+<p>Images have to marked by <pcode>img</pcode> prefix, e.g. <snip>&#x3C;imgFig01</snip>.</p>
+<p>One image for line and with attributes, e.g.</p>
+<SNIP xml:space="preserve">
+&#x3C;center&#x3E; caption (optional line) &#x3C;/center&#x3E;
+<small>
+&#x3C;imgFig01 <scaps>id</scaps>="fig01" SOURCE="logo.png" <scaps>alt</scaps>="art" <scaps>width</scaps>="500px" <scaps>height</scaps>="500px" <scaps>float</scaps>="center"&#x3E;&#x3C;/imgFig01&#x3E;
+</small>
+</SNIP>
+
+<pg><under>N.B.</under> ALT's value made of composed words must be written in camel case, e.g. <pcode><scaps>alt</scaps>="artWork"</pcode>.</pg>
+<p>  </p>
+<pg>By <pcode>&#x3C;WITH&#x3E; and &#x3C;HEIGHT&#x3E;</pcode> you cut out the original image,
+you don't scale it.</pg>
+
+<pg>You can specify <pcode>&#x3C;WITH&#x3E;</pcode> with a step of 100&#8201;px, 
+from 100&#8201;px to 1700&#8201;px.</pg>
+
+<p>  </p>
+
+<pg> <pcode>FLOAT</pcode>, at this time I supply only center float; I've not time to make other floats now.
+For my page layout, I prefer my float system to other built-in floats.
+</pg>
+<p>  </p>
+<pg>I suggest &#8211; <under>but only as  <pcode>ID</pcode> value</under> &#8211;
+to specify the ID relative element too. 
+e.g.  <snip><scaps>id</scaps>="fig01_a03.01.02.04"</snip> not <lthr>&#x3C;imgFig01_a03.01.02.04 <scaps>id</scaps>=...</lthr>.</pg>
+<p>  </p>
+
+<p><center> Figura 01: cherry tree 700x700px</center></p>
+
+<imgFig01 ID="fig01_a03.01.02.04" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="700px" HEIGHT="700px" FLOAT="center"></imgFig01>
+<p>  </p>
+
+<center> Figura 02: cherry tree 800x800px</center>
+
+<imgFig02 ID="fig02" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="800px" HEIGHT="800px" FLOAT="center"></imgFig02>
+<p>  </p>
+
+<center> Figura 03: cherry tree 500x500px</center>
+
+<imgFig03 ID="fig03_a03.01.02.04" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="500px" HEIGHT="500px" FLOAT="center"></imgFig03>
+<p>  </p>
+
+<center> Figura 04: cherry tree 900x900px</center>
+
+<imgFig04 ID="fig04" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="900px" HEIGHT="900px" FLOAT="center"></imgFig04>
+<p>  </p>
+
+<center> Figura 05: cherry tree 1000x1000px</center>
+
+<imgFig05 ID="fig05" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="1000px" HEIGHT="1000px" FLOAT="center"></imgFig05>
+<p>  </p>
+
+<center> Figura 06: cherry tree 1100x1100px</center>
+
+<imgFig06 ID="fig06" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="1100px" HEIGHT="1100px" FLOAT="center"></imgFig06>
+<p>  </p>
+
+<center> Figura 07: cherry tree 600x600px</center>
+
+<imgFig07 ID="fig07" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="600px" HEIGHT="600px" FLOAT="center"></imgFig07>
+<p>  </p>
+
+<center> Figura 08: cherry tree 400x400px</center>
+
+<imgFig08 ID="fig08" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="400px" HEIGHT="400px" FLOAT="center"></imgFig08>
+
+</subsubsection>
+<!-- end a01.03.01.02.08 -->
+
+<subsubsection ID="a01.03.01.02.09">ToC Elements Structure
+<pg>You'll have in *.lmx file, a basic structure marked by a not modifiable ID,
+you can change only &#8211; but in all elements &#8211; the ID of the radix (root).
+<p>  </p>
+e.g. for <it>matter book document class</it> and <it>brief book document class</it>, 
+the way I suggest is the following scheme, if you think about a book, where <sl>'synopsis'</sl>
+and <sl>'part'</sl> are facultative elements. 
+e.g.</pg>
+<pg><snip>a</snip> is the root (radix), the title of the book.</pg>
+<pg><snip>a00</snip> can be the synopsis of the book.</pg>
+<pg><snip>a01</snip> is the first part of the book.</pg>
+<pg><snip>a01.01</snip> is the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01</snip> is the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01</snip> is the first subsection  of the first section of 
+the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01</snip> is the first subsubsection of the first
+subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01.01</snip> is the first paragraph of the first subsubsection of the
+first subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01.01.01</snip> is the first subparagraph of the first subsubsection
+of the first subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.02</snip> is the second subsubsection of the first
+subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.02</snip> is the second chapter of the book.</pg>
+<pg><snip>a02</snip> is the II part of the book.</pg>
+<pg><snip>a02.01</snip> is the first chapter of II part of the book.</pg>
+<pg><snip>a02.01.01</snip> is the first section of the first chapter of the second part of the
+book.</pg>
+<pg><snip>a02.01.01.01</snip> is the first subsection  of the first section of the first chapter
+of the second part of the book.</pg>
+<p>And so on.</p>
+<p>  </p>
+<pg>Having two folders e.g. bea-xmlux and garden-xmlux,
+you can compose the book in a single folder, e.g. BeaGarden-xmlux, so in a single *.xml;
+but this simple feature isn't supplied by this <it>xmlux</it> version &#8211; for time reasons &#8211;.
+</pg>
+</subsubsection>
+<!-- end a01.03.01.02.09 -->
+
+<subsubsection ID="a01.03.01.02.01">Mode
+<paragraph ID="a01.03.01.02.01.01">xmluxe: LMX, XML structural composing, editing, manipulations automatically
+<pg><bf><it>xmluxe</it> automatic mode</bf> (I suggest it):&#xD; 
+Using <it>xmluxe</it> you can compose and/or edit <sl>lmx</sl> file structure in an orderly, logical,
+	corrected, forced way. Thus, you don't have to respect rules like those to add comments manually.</pg>
+	<p>  </p>
+<pg>In addition, using <it>xmluxe</it> you don't fear to get ID adding/moving/removing wrong.</pg>
+
+<p>
+<CODE>xmluxe -h</CODE>
+<OUTPUT xml:space="preserve">
+Name: xmluxe
+
+Goal: to compose, edit, manipulate *.lmx structure by automatic, logical, orderly,
+forced way too.
+jump*, select*, parse*, render* are common actions for xmluxe and xtextus, but 
+xmluxe logs everything of them in *.lmxe.
+xtextus doesn't supply some other xmluxe's powerful actions.
+An other difference is the speed of execution, xmluxe is few milliseconds slower
+than xtextus.
+
+
+help                                                      -h
+
+	
+
+chars 		 					   -char
+open by gvim: /usr/local/lib/xmlux/char/
+	
+
+pattern							   -pattern
+open by gvim: /usr/local/lib/xmlux/pattern/
+
+
+
+
+Target (closed) file.					--f='Value without extension'                             
+wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
+is accepted. 
+If you have (into the project folder) one *.lmx only &#x5B;together other xmlux files&#x5D;,
+as default and as I suggest, just type one <pcode>*</pcode> &#x5B;e.g.
+<pcode>--f=*</pcode>&#x5D;.
+
+
+
+Open *.lmx file jumping to ID line by ID.					
+							--jump-id='ID'
+
+
+Open *.lmx file jumping to name attribute ID line by name attribute.	
+Warning! Double-quoted name attribute"
+							--jump-name="'name'"
+
+Open *.lmx file jumping to title line by title.				
+Warning! Double-quoted title"				--jump-title="'title'"
+
+
+
+
+Select by name attribute, in read-only mode,
+the element and its children.				--selectR-name="'name'"					
+Warning! Double-quoted name attribute.			
+
+Select by title, in read-only mode,
+the element and its children.				--selectR-title="'title'"					
+Warning! Double-quoted title.				
+
+
+Select by ID,in read-only mode,
+the element and its children.				--selectR-id='ID'						
+Warning! Not quoted ID, not double-quoted ID.		
+
+
+Select by name attribute, in write mode,
+the element and its children.				--selectW-name="'name'"				
+Warning! Double-quoted name attribute			
+
+
+Select by title, in write mode,
+the element and its children.				--selectW-title="'title'"
+Warning! Double-quoted name attribute.			
+
+
+Select by ID, the element and its children.		--selectW-id='ID'
+Warning! Not quoted ID, not double-quoted ID.
+
+
+
+
+Render through name attribute, by css* style, the element
+and its children.					--renderCss-name="'name'"
+Warning! Double-quoted name attribute
+
+
+Render through title, by css* style, the element
+and its children.					--renderCss-title="'title'"
+Warning! Double-quoted title
+
+
+Render through ID, by css* style, the element
+and its children.					--renderCss-id='ID'
+Warning! Not quoted ID, not double-quoted ID
+
+
+
+
+Parse by name attribute the element only, not its children.		
+Warning! Double-quoted name attribute"
+							--parse-name="'name'"
+
+
+Parse by title the element only, not its children.			
+Warning! Double-quoted title"
+							--parse-title="'title'"
+
+
+
+Parse by ID the element only, not its children.				
+Warning! Not quoted ID, not double-quoted ID"
+							--parse-id='ID'"
+
+
+
+Parse by name attribute the element and its children.		
+Warning! Double-quoted name attribute
+						--parse-name="'name'" -all
+
+
+Parse by title the element and its children.			
+Warning! Double-quoted title"
+						--parse-title="'title'" -all
+
+Parse by ID the element and its children.			
+Warning! Not quoted ID, not double-quoted ID
+						--parse-id='ID' -all
+
+
+
+
+Insert an ID family level					--ins='ID'
+
+
+	For:
+brief article, brief book, matter article, matter book, data-seven, 
+you can insert every elements.
+
+	For:
+category dataset01, category dataset02,
+you can insert Series or Items, value and key are inserted consequentially.
+
+	For:
+pie dataset,
+you can insert Items only, value and key are inserted consequentially.
+
+
+		Only for:
+brief article, brief book, matter article, matter book, data-seven;
+for category dataset01, category dataset02, pie dataset, it happens automatically. 
+Category dataset02 has not title for Items, it has titles for Series.
+Insert an ID family level, specifying title and content of element too.		
+								--ins='ID' -t
+
+		Only for:
+brief article, brief book, matter article, matter book, data-seven;
+for category dataset01, category dataset02, pie dataset, it happens automatically.
+Insert an ID family level, specifying name attribute of element too.		
+								--ins='ID' -name
+
+		Only for:
+brief article, brief book, matter article, matter book, data-seven;
+for category dataset01, category dataset02, pie dataset, it happens automatically.
+Category dataset02 has not title for Items, it has titles for Series.
+Insert an ID family level, specifying name attribute of element,
+and titles too.										
+								--ins='ID' -name -t
+
+
+
+
+	Only for septem gradus data document class (data-seven):
+Insert an ID family level, and sort ascending
+through name attribute that you'll supply interactively.	--ins-a='ID'
+
+Insert an ID family level, and sort ascending
+through name attribute, that you'll supply interactively;		
+specifying title and content of element too.			--ins-a='ID' -t
+
+Insert an ID family level, and sort ascending
+through title that you'll supply interactively.			--ins-at='ID'
+
+Insert an ID family level, and sort ascending
+through title that you'll supply interactively;		
+specifying name attribute too.					--ins-at='ID' -name
+
+Insert an ID family level, and sort descending
+through name attribute that you'll supply interactively.	--ins-d='ID'
+
+Insert an ID family level, and sort descending
+through name attribute,	that you'll supply interactively;
+specifying title and content of element too.			--ins-d='ID' -t
+
+
+Insert an ID family level, and sort descending
+through title.							--ins-dt='ID'
+
+Insert an ID family level, and sort descending
+through title that you'll supply interactively;		
+specifying name attribute too.					--ins-dt='ID' -name
+
+
+<small>Both, insert actions, are the fastest human way, but the slowest machine way.
+insert action is a very fast machine task however.</small>
+<small>Next istance &#x3C;Add the ID element&#x3E; is the slowest human way, but the fastest machine way.</small>
+
+
+
+
+Add the ID element.                       		  	--add='ID'
+
+Write title and content of the ID 
+element to add.             				  			-w
+
+For category dataset and pie dataset document classes:
+Add title of the ID Key element to add.  					-k
+Key ID and Value ID have same lenght, so if option -k is not
+specified, you'll want to add a Value element.  
+
+
+
+
+	Only for <sl>septem gradus data document class (data-seven)</sl>:
+Ascending sort by ID level and through name attribute:
+from A to Z, from 0 to +infinity				--sort-a='IDlevel'
+
+
+	Only for septem gradus data document class (data-seven):
+Descending sort by ID level and through name attribute:
+from Z to A, from +infinity to 0				--sort-d='IDlevel'
+
+
+Sort by ID level and through title.				-t
+
+
+
+Delete IDs lacks (IDs voids).
+It can consist in document checking.			  -delLack
+It makes no sense to specify this option for
+Keys or Values, because an Item can contain
+only one Key and one Value. You can express this
+option for Items, Series, chapters, sections, and
+any other element, except for Keys and Values.
+
+
+
+Remove the ID element and its children.                   --remove='ID'
+
+
+Remove the ID element and its children, 
+delete IDs lacks (voids) finally.                         --remove='ID' -delLack
+
+
+
+
+Move the ID element and its 
+children after 'Value' unit.                              --move='ID' -a'Value'
+
+Move all elements starting from the ID 
+element  &#x5B;and their children&#x5D; after 'Value' unit 
+until the relative end.                                   --move='ID' -a'Value' -end
+
+Move the ID element and its children 
+before 'Value' unit.                                      --move='ID' -b'Value'
+
+Move all elements starting from the ID
+element &#x5B;and their children&#x5D; before 'Value' unit
+until the relative end.	 			          --move='ID' -b'Value' -end
+
+
+
+
+	<scaps>Usage</scaps>
+cd 'path of the project'
+
+Simple are the following examples, but you can use <it>xmluxe</it> for any element, e.g. you
+can use xmluxe to move one or more paragraphs of the same family too:
+<code>xmluxe --action -option --f='Value without extension'</code>
+e.g.
+	Only for data document classes 
+(data-seven, category dataset01, category dataset02, pie dataset):
+To insert a gradusIII ID, of a01's family (a01 gradusI), e.g.
+xmluxe --ins=a01.01.01 --f=greeting
+e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04.
+But if exists a02.01.03, you will not get a02.01.04 because you have specified
+a01 family.
+
+
+
+	Only for <sl>septem gradus data document class (data-seven)</sl>:
+To sort by ID level axx.xx.xx (GradusIII) and through name attribute ascending.
+e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
+<code>xmluxe --sort-a=a01.01.01 --f=*</code>
+
+
+To sort by ID level axx.xx.xx (GradusIII) and through name attribute descending.
+e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
+<code>xmluxe --sort-d=a01.01.01 --f=*</code>
+
+
+To sort by ID level axx.xx.xx (GradusIII) and through title ascending.
+e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
+<code>xmluxe --sort-a=a01.01.01 -t --f=*</code>
+
+
+To sort by ID level axx.xx.xx (GradusIII) and through title descending.
+e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
+<code>xmluxe --sort-d=a01.01.01 -t --f=*</code>
+
+
+
+
+	Only for data document classes 
+( <sl>data-seven, category dataset01, category dataset02, pie dataset</sl>):
+To insert a gradusIII ID, of a01's family (a01 gradusI), e.g.
+<code>xmluxe --ins=a01.01.01 --f=greeting</code>
+e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04.
+But if exists a02.01.03, you will not get a02.01.04 because you have specified
+a01 family.
+
+
+	Only for <sl>septem gradus data document class (data-seven)</sl>:
+To insert a gradusIII ID, of a01's family (a01 gradusI), and to sort ascending
+through name attribute, both actions automatically.
+e.g. to add a GradusIII, that will be insert and sorted ascending through name
+attribute automatically:
+<code>xmluxe --ins-a=a01.01.01 --f=greeting</code>
+e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04
+but sorting by ID level and through name attribute.
+
+To insert a gradusIII ID, of a01's family (a01 gradusI), and to sort ascending
+through title, both actions automatically.
+e.g. to add a GradusIII, that will be insert and sorted ascending through title
+automatically:
+<code>xmluxe --ins-at=a01.01.01 --f=greeting</code>
+e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04
+but sorting by ID level and through title.
+
+
+
+To add the third chapter to the first part.
+<code>xmluxe --add=a01.03 --f=greeting</code>
+
+To add the third chapter to the first part; and to write title and content of the
+element to add, in this xmlux session.
+<code>xmluxe --add=a01.03 -w --f=greeting</code>
+
+
+
+
+e.g. If you have a lack between first chapter  and third chapter:
+<code>xmluxe -delLack --f=greeting</code>
+
+
+
+To remove the second chapter (and its children) of the first part,
+and to delete the lack that will be created (by removal) between
+first chapter  and third chapter.
+<code>xmluxe --remove=a01.02 -delLack --f=greeting</code>
+
+
+To remove the second chapter (and its children) of the first part.
+<code>xmluxe --remove=a01.02 --f=greeting</code>
+
+
+To select in read-only mode the ID element and its children.
+e.g.
+<code>xmluxe --selectR=a02 --f=greeting</code>
+
+To select in write mode the ID element and its children.
+<code>xmluxe --selectW=a02 --f=greeting</code>
+
+
+
+To move part a08, and its children, one unit after.
+<code>xmluxe --move=a08 -a1 --f=greeting</code>
+
+To move parts, and their children, one unit after until the end; starting from
+part a07.
+Be careful: You must specify the lowest ID among parts you want to move.
+e.g. you have parts from part a01 to a09. You want to move parts a07, a08, a09, 
+one unit after to have part a08, a09, a10; of course then, you'll have a lack
+between part a06 and part a08 because part a07 doesn't exist no more. e.g. you
+have done this because you want to add a new part a07 between part a06 and part
+a08, where part a08 is the past part a07.
+<code>xmluxe --move=a07 -a1 -end --f=greeting</code>
+
+
+To move part a01, and its children, two units after.
+<code>xmluxe --move=a01 -a2 --f=greeting</code>
+
+
+To move part a05, and its children, one unit before.
+<code>xmluxe --move=a05 -b1 --f=greeting</code>
+
+
+To move parts after part a06 &#x5B;including it&#x5D; and their children, one unit before,
+until the end. Be careful: You must specify the lowest ID among parts you want
+to move.
+e.g. you have parts from part a01 to part a08. Between part a04 and part a06 you
+have a lack (e.g. you removed part a05). To downshift part a08, a07, a06 of one
+unit to have  part a07, part a06, part a05: you have to select part a06 and you
+must specify '1' like value of option 'b'.
+<code>xmluxe --move=a06 -b1 -end --f=greeting</code>
+
+To move part a05, and its children, two units before.
+<code>xmluxe --move=a05 -b2 --f=greeting</code>
+</OUTPUT>
+</p>
+<pg>Of course, It has not sense to move synopsis; moving synopsis you'll deface <it>xmlux</it> 
+logical structure.</pg>
+<p>  </p>
+<pg>However, remember that you have to compile <sl>lmx</sl> file again, to have
+&#8211; after <sl>xmluxe</sl> editing &#8211; a new upgraded <sl>xml</sl>
+file. Instead, you don't need to compile again to have new <sl>xmluxv</sl> upgraded
+performances and log.
+</pg>
+</paragraph>
+<!-- end a01.03.01.02.01.01 -->
+
+<subparagraph ID="a01.03.01.02.01.01.01"><sl>insert</sl> and <sl>sort</sl> actions focus
+<p>e.g.
+<code>xmluxe --sortID-a=a01.01.01 --f=greeting</code></p>
+<p>All <pcode>GradusIII</pcode>'s elements will be sorted ascending, so you'll have:
+<SNIP>
+a01.01.01
+a01.01.02
+etc.
+a02.01.01
+a02.02.02
+etc.</SNIP>and relative fathers and children.</p>
+<pg>But <pcode>a01</pcode>, <pcode>a02</pcode>, <pcode>a01.01</pcode>, <pcode>a02.01</pcode> and so on
+blocks, will not mixed.
+Every block will be sorted separately, starting from its third 
+level (<pcode>GradusIII</pcode>)&#8212;this is a my will.
+So paternity, descendants will be respected and graphic translation will be done.
+</pg>
+<p>  </p>
+<p>  </p>
+<p>Automatically, to order everything alphanumerically, ascending, by ID and 
+through title that will be assigned interactively:
+<code>xmluxe --ins-at='ID family level' --f=bea</code>
+e.g.
+Automatically, to insert a <pcode>GradusIII</pcode> element in <pcode>a02</pcode> family, although:
+<pcode>A-GradusIII (a02.01.01)
+T-GradusIII (a02.01.02)</pcode>
+exist already.</p>
+<code>xmluxe --ins-at=a02.01.01 --f=bea</code>
+<p>It will be make <pcode>a02.01.03</pcode> that will be ordered ascending automatically.</p>
+<p>  </p>
+<p>Following the same way, you can order through <it>name</it> attribute, and by
+descending mode.
+<code>xmluxe --ins-a='ID family level' --f=bea</code>
+<code>xmluxe --ins-dt='ID family level' --f=bea</code>
+<code>xmluxe --ins-d='ID family level' --f=bea</code>
+</p>
+<pg>Warning! It is not a simple telephone book ordering/editing.
+It's a complex structure ordering/editing, because
+<sl>xmluxe</sl> orders precise levels selectively, and precise sublevels
+without "touching", mixing higher, lower or parallel levels.
+</pg>
+</subparagraph>
+<!-- end a01.03.01.02.01.01.01 -->
+
+<subparagraph ID="a01.03.01.02.01.01.02"><sl>select</sl>, <sl>parse</sl>, <sl>render</sl> actions focus
+<pg>*.xml gotten by rendering doesn't provide *.dtd file, because css rendering wants be only a fast way
+to extract contents from original *.xml, and to display by web browser, 
+for current <sl>xmlux</sl> version at least.
+<p>  </p> 
+Parsing by title key of an element without children has not sense.
+<p>  </p> 
+Rendering by title key of an element without children has not sense.
+<p>  </p> 
+Selecting  by title key of an element without children has sense, because
+you can read or edit xml codex.
+<p>  </p> 
+Later on, I'll explain the difference between two methods. 
+This subparagraph will not contain the explanation of above-mentioned actions
+		by ID key &#8211; even if <sl>xmlux</sl> provides it &#8211;
+because using ID is the powerful, universal but less human choice. 
+<p>  </p> 
+Finally, for everyday, resorting to <it>name</it> attribute is the best method.
+<p>  </p> 
+But I remind you that to get all relations between ID, <it>name</it> and title,
+there are following instances &#x5B;in which title key results very powerful&#x5D;:</pg>
+<CODE>xmluxv --find-title="'title'" --f=*
+xmluxv --find-name="'name'" --f=*
+xmluxv --find-id='ID' --f=*
+</CODE>
+<p>  </p>
+<enumerate><pg><sl>Method n. 1</sl>: To specify <it>name</it> attribute like
+	key to have more cleaness, aesthetic beauty, to travel beside almost human waves.
+For a likable reading is better to compose *.lmx with <it>name</it> attribute,
+by this way sickening repetitions of titles segments are avoided.
+<p>  </p>
+The only rule to respect is the following&#8212;any <it>name</it> attribute must
+be different from one other.</pg>
+<p>e.g. having
+<snip>&#x3C;gradusV <scaps>id</scaps>="a01.01.01.01.01" name="mom mobile number"&#x3E;123 45 67 891</snip>
+
+<code>xmluxe --parse-name="mom smartphone number" --f=contacts</code>
+<output>123 45 67 891</output> will be printed on stdout and on /tmp/parsed-xmluxe.
+</p>
+<p>e.g. having
+<snip>&#x3C;gradusIV <scaps>id</scaps>="a01.03.02.03" name="sister web">Web links</snip>
+for parsing, or selecting, or rendering of <pcode>&#x3C;gradusII&#x3E;Sister</pcode>'s web links,
+<it>name</it> attribute key is enough and is the best way to parse.
+<code>xmluxe --parse-name="sister web" --f=contacts</code>
+</p>
+<p>
+According to next <sl>Method n. 2</sl>, I'd have:
+<snip>&#x3C;gradusIV <scaps>id</scaps>="a01.03.02.03" name="sister web"&#x3E;Sister web links</snip>
+alias
+<snip>&#x3C;gradusIV <scaps>id</scaps>="a01.03.02.03"&#x3E;Sister web links</snip>
+<code>xmluxe --parse-titolo="Sister web links" --f=contacts</code>
+</p>
+<pg>
+	It needs to differentiate titles, inserting <pcode>Sister</pcode> in every <pcode>gradusII</pcode>'child title,
+	because in the document exists already:</pg>
+<p>e.g.
+<snip>&#x3C;gradusIV <scaps>id</scaps>="a01.01.02.03"&#x3E;Mom web links</snip>
+
+Hereafter, <sl>Method n. 2</sl> innerly.
+</p>
+</enumerate>
+<enumerate><pg><sl>Method n. 2</sl>: Using title key to not have search limits,
+losing aesthetic beauty but travelling beside human wave.</pg>
+<p>  </p>
+<pg>If I want to parse, or to render an element by its value (title), that I read
+	by web browser usually, rather <it>name</it> attribute is hidden&#8212;
+		title key search is better.</pg>
+<p>e.g.
+<snip>&#x3C;gradusIII <scaps>id</scaps>="a01.03.02" name="sister web"&#x3E;Sister web</snip>
+you can execute
+<code>xmluxe --renderCss-title="sister web" --f=contacts</code>
+
+Warning! Parsing, rendering of a value like title, has not sense.
+e.g. having
+<snip>&#x3C;gradusV <scaps>id</scaps>="a01.03.01.02.01" name="sister's house telephone number">777 66 55 4444</snip>
+<code>xmluxe --renderCss-title="777 66 55 4444" --f=contacts</code></p>
+<pg>Rightly, I'll get <output>777 66 55 4444</output> printed in web browser; even if by css style,
+it is of little usefulness.
+This is one of edge cases that operate with <sl>Method n. 1</sl> too,
+but by title key because it doesn't exist another title that is equal to
+above-mentioned &#x5B;telephone number is unique&#x5D;.</pg>
+<p>e.g. 
+<code>xmluxe --renderCss-name="sister's house telephone number" --f=contacts</code>
+</p>
+<pg>But, if you search a title with occurrence not equal to one &#x5B;because 
+not differentiated&#x5D;&#8212;the search will fail.
+That's why in <url>README/examples/contacts/keySearch-title_name_id</url> there are titles followed
+by <pcode>gradusII</pcode> content&#8212;to differentiate them and, so, to identify them.
+
+In this context, don't forget the power of action <pcode>--find-title="'title"</pcode> di 
+<sl>xmluxv</sl>.</pg>
+<p>e.g.
+<code> xmluxv --find-title="Web links" --f=*</code>
+<OUTPUT xml:space="preserve"><small>contatti-ids-titles.lmxv : a01.03.02.03 Web links
+contacts-ids-titles.lmxv : a02.01.02.03 Web links
+contacts-ids-names-titles.lmxv : a01.03.02.03 "sister web" Web links
+contacts-ids-names-titles.lmxv : a02.01.02.03 "web colleague" Web links
+contacts-elements-titles.lmxv : gradusIV  Web links
+contacts-elements-titles.lmxv : gradusIV  Web links
+contacts-ids-elements-titles.lmxv : a01.03.02.03 gradusIV Web links
+contacts-ids-elements-titles.lmxv : a02.01.02.03 gradusIV Web links
+contacts-ids-elements-names-titles.lmxv : a01.03.02.03 gradusIV "sister web" Web links
+contacts-ids-elements-names-titles.lmxv : a02.01.02.03 gradusIV "web colleague" Web links
+contacts-titles.lmxv : Web links
+contacts-titles.lmxv : Web links
+
+
+--find-title="Web links"
+printed on
+contacts-lmxv/contacts-lmxv_find.txt
+
+and with coloured &#x3C;:&#x3E; separator on
+contacts-lmxv/contacts-lmxv_find-coloured.txt
+to print executing:
+echo -e "$(cat contacts-lmxv/contacts-lmxv_find-coloured.txt)"
+
+You have
+contacts-lmxv/contacts-lmxv_find-paths.txt
+too.</small></OUTPUT></p>
+</enumerate>
+</subparagraph>
+<!-- end a01.03.01.02.01.01.02 -->
+
+<paragraph ID="a01.03.01.02.01.02">xtextus: LMX, XML opening and little structural composing, editing manually
+<pg><bf><it>xtextus</it> manual mode:</bf>
+I suggest to use <it>xtextus</it> for <sl>xml</sl> or <sl>lmx</sl> codex opening,
+or for little structural modifications.
+</pg>
+</paragraph>
+<!-- end a01.03.01.02.01.02 -->
+
+</subsubsection>
+<!-- end a01.03.01.02.01 -->
+</subsection>
+<!-- end a01.03.01.02 -->
+
+<subsection ID="a01.03.01.03">Viewing xml or lmx codex
+<p>I suggest to use <it>xtextus</it> to view <sl>xml</sl> or <sl>lmx</sl> codex files.
+<CODE>
+xtextus -h
+</CODE>
+<OUTPUT xml:space="preserve">
+Goal: View and/or edit *.xml or *.lmx by xml vim syntax, tags (to do), and my vim
+colours.
+jump*, select*, parse*, render* are common actions for xtextus and xmluxe, but
+xtextus doesn't log anything of them.
+xtextus doesn't supply some other xmluxe's powerful actions.
+An other difference is the speed of execution, xtextus is few milliseconds faster than
+xmluxe.
+
+For xtextus and xmluxe common actions, see xmluxe help or xmluxe README section.
+
+	
+help                                                      -h
+
+	
+
+chars 		 					   -char
+open by gvim: /usr/local/lib/xmlux/char/
+	
+
+pattern							   -pattern
+open by gvim: /usr/local/lib/xmlux/pattern/
+
+
+
+
+target file 
+wildcard <pcode>*</pcode> as <pcode>--f</pcode> entire value or partial value, is accepted.
+If you have (into the project folder) one *.lmx only &#x5B;together other xmlux files&#x5D;,
+as default and as I suggest, just type one <pcode>*</pcode> &#x5B;e.g. <pcode>--f=*</pcode>&#x5D;.
+	
+
+For jump*, select*, parse*, render* actions 		
+						--f='Value without extension'
+
+
+For -o, -p options					  
+						--f='Value with or without extension'
+
+
+
+open file						  -o
+
+
+print in ps and pdf, with xml fancy syntax		  -p
+
+
+
+<scaps>Usage</scaps>
+
+<code>cd 'path of the project'</code>
+
+<code>xtextus 'option' --f='Value with or without extension'</code>
+
+<code>xtextus 'action' --f='Value without extension'</code>
+
+e.g.
+
+<code>cd greeting-xmlux</code>
+
+<code>xtextus -o --f=greeting.xml</code>
+
+<code>xtextus -o --f=greeting.lmx</code>
+
+<code>xtextus -o --f=greeting</code>
+
+<code>xtextus -p --f=greeting.xml</code>
+
+<code>xtextus -p --f=greeting.lmx</code>
+
+<code>xtextus -p --f=greeting</code>
+
+<code>xtextus --jump-id=a01.01 --f=greeting</code>
+
+<code>xtextus --selectR-name="happy" --f=greeting</code>
+	
+<code>xtextus --selectW-id="a01.01.01" --f=greeting</code>
+
+<code>xtextus --parse-title="Sunny" --f=greeting</code>
+
+<code>xtextus --renderCss-id="a02" --f=greeting</code>
+</OUTPUT>
+</p>
+</subsection>
+<!-- end a01.03.01.03 -->
+
+<subsection ID="a01.03.01.04"><it>xmluxv</it>: Trees views; find/match ID, name attribute, titles
+<p>
+<CODE>xmluxv -h</CODE>
+<OUTPUT xml:space="preserve">
+help					-h
+
+target file				--f='file name  without extension'
+wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
+is accepted. 
+If you have (into the project folder) one *.lmx only &#x5B;together other xmlux files&#x5D;,
+as default and as I suggest, just type one <pcode>*</pcode> &#x5B;e.g. <pcode>--f=*</pcode>&#x5D;.
+
+
+
+view IDs list                                           		-id
+
+view <it>name</it>s list                                           		-n
+
+view elements list                                                      -e
+
+view titles list                                                        -t
+
+view IDs and <it>name</it>s list                                 		-in
+
+view IDs and elements list                               		-ie
+
+view IDs and titles list                                 		-it
+
+view elements and titles list                                           -et
+
+view IDs, elements and <it>name</it>s list                        		-ien
+
+view IDs, elements and <it>name</it>s list                        		-int
+
+view IDs, elements and titles list                			-iet
+
+view IDs, elements, <it>name</it>s and titles list                		-all
+
+find/match IDs or <it>name</it>s or titles, and their relations:"
+
+find/match IDs						--find-id='ID'
+					or equally	--find-id="''ID'"
+
+find/match <it>name</it>			only		--find-name="'name'""
+
+find/match title			only		--find-title="'title'""
+
+
+<scaps>usage</scaps>
+<code>xmluxv -option --f&#x3C;Value without extension&#x3E;</code>
+
+e.g.
+<code>xmluxv -s -all --f=bea</code>
+
+<code>xmluxv -all --f=bea</code>
+
+
+<code>xmluxv --find-id='ID' --f=bea"</code>
+or equally
+<code>xmluxv --find-id=\"'ID'\" --f=bea</code>
+
+for <it>name</it> attribute, only double-quoted value is accepted:
+<code>xmluxv --find-name=\"'name'\" --f=bea</code>
+
+for title, only double-quoted value is accepted:
+<code>xmluxv --find-title=\"'title'\" --f=bea</code>
+
+</OUTPUT>
+</p>
+</subsection>
+<!-- end a01.03.01.04 -->
+
+<subsection ID="a01.03.01.05">Logs
+<pg><it>xmluxe</it> and <it>xmluxv</it> produce <sl>lmxe</sl> log file, and <sl>lmxv</sl> log file respectively.
+Where, <sl>lmxe</sl> log file is appointed for <sl>lmx</sl> file changes tracking; while
+in <sl>lmxv</sl> there are various trees and lists of <sl>lmx</sl>/<sl>xml</sl> structure.
+</pg>
+
+</subsection>
+<!-- end a01.03.01.05 -->
+
+<subsection ID="a01.03.01.06">Compiling lmx file
+<pg> You'll have a *.xml file at the end. If you want to improve it, a good practice is
+to modify *.lmx, and then to compile it again. This is the rigorous way, the best way.
+Only at the end you can edit *.xml for final revision, but I don't suggest direct *.xml
+editing&#8212;I suggest to edit *.xml indirectly, only working with *.lmx.
+</pg>
+
+<p><code>xmluxc -h</code></p>
+
+<OUTPUT xml:space="preserve">
+Goal: To compile *.lmx files to have xml files.
+	
+<scaps>help</scaps>&#x9;&#x9;&#x9;-h
+
+
+<scaps>target file</scaps>&#x9;&#x9;--f='file name without extension'
+wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
+is accepted. 
+If you have (into the project folder) one *.lmx only &#x5B;together other xmlux files&#x5D;,
+as default and as I suggest, just type one <pcode>*</pcode> &#x5B;e.g.
+<pcode>--f=*</pcode>&#x5D;.
+
+
+<scaps>margin borders</scaps>&#x9;&#x9;--margin=true
+
+
+<scaps>usage</scaps>
+<code>xmluxc -option --action --f='name of the file whitout extension'</code>
+
+e.g.:
+<code>xmluxc --f=greeting</code>
+
+<code>xmluxc --margin=true --f=greeting</code>
+</OUTPUT>
+
+<p>  </p>
+
+<p>After compiling by 
+<code>xmluxc --f='path and name (without extension) of file'</code>
+e.g.
+<code>xmluxc --f=/home/beatrix/test/bea-xmlux</code>
+or 
+<code>cd /home/beatrix/test/bea-xmlux</code>
+<code>xmluxc --f=bea</code>
+you'll have these files automatically:
+1) *.css
+
+2) *.dtd 
+
+3) *.lmxp (for expert users: you'll have it after compiling)
+By it, you can check possible problems after compiling, and you can try to correct them in it 
+before editing *.lmx again, or before editing *.xml finally. 
+It is also useful (for developers) to understand <it>xmlux</it> internally better.
+
+4) *.xml
+</p>
+<pg>Finally, the xml file &#8212; *.xml to view, to edit for final revision 
+&#8211; I repeat, I suggest to edit *.xml indirectly, only working with *.lmx &#8211;,
+to print without fancy syntax by web browser, or to print with fancy syntax 
+&#x5B;getting *.ps and *.pdf&#x5D;  by <it>xmulx/xtextus</it> (see later
+'Printing' topic).</pg>
+
+
+<subsubsection ID="a01.03.01.06.02">Debugging
+<pg>If you commit an ortographic mistake, writing a wrong command, you have to press
+<code>&#x5B;Ctrl-C&#x5D;</code> sequence to close <it>xmluxc</it> sometimes.
+</pg>
+	<p>  </p>
+<pg>If you commit a mistake, writing twice the same ID for two elements, you'll have 
+a perfect output *.xml sometimes, and e.g. the following message on the stderr:
+<OUTPUT>sed: expression -e #1, character 9: regular expression not ended to address</OUTPUT>
+</pg>
+</subsubsection>
+<!-- end a01.03.01.06.02 -->
+
+
+<subsubsection ID="a01.03.01.06.01">Document classes
+<p>Now <sl>xmlux</sl> supplies  the following document classes:
+<enumerate><it>matter book document class</it>;</enumerate>
+<enumerate><it>matter article document class</it>;</enumerate>
+<enumerate><it>brief book document class</it>;</enumerate>
+<enumerate><it>brief article document class</it>;</enumerate>
+<enumerate><it>septem gradus data document class (data-seven)</it>.</enumerate>
+<enumerate><it>category dataset 01 document class</it>.</enumerate>
+<enumerate><it>category dataset 02 document class</it>.</enumerate>
+<enumerate><it>pie dataset document class</it>.</enumerate>
+</p>
+<p>  </p>
+<pg><it>In septem gradus data document class (data-seven)</it>
+data document class you have only the limit to have
+seven recursive levels. <sl>data</sl> document classes
+should have more levels to satisfy some very hard scientific requestes. But I need 
+free time to implement other levels, even if I solved the problem to have existing levels.
+If some developer would add other levels, he should replicate existing levels
+bringing opportune modifications as I have done to have e.g. level number seven from
+level number six, and so on.</pg>
+<p>  </p>
+<pg>
+	<itemize><it>matter book</it> has counters, it displays <sl>Times New Roman serif</sl> fonts. It has
+		parts and chapters.</itemize>
+	<itemize><it>brief book</it> has not counters, it displays <sl>Times New Roman serif</sl> fonts. It has
+parts and chapters.</itemize>
+	<itemize><it>matter article</it> has counters, it displays <sl>Arial serif</sl> fonts. It has not
+parts and chapters, but it has saxum under subparagraph, and subsaxum under saxum.</itemize>
+	<itemize><it>brief article</it> has not counters, it displays <sl>Arial serif</sl> fonts. It has not
+parts and chapters, but it has saxum under subparagraph, and subsaxum under saxum.</itemize>
+	<itemize><it>septem gradus data</it> has not counters, it displays <sl>Roboto sans serif</sl> fonts.
+		For this document class, <sl>xmluxc</sl> doesn't provide synopsis element by default. ToC structure is
+	parallel to previous document class, even if it has not synopsis and names of elements are different.</itemize>
+<itemize><it>category dataset 01 document class</it> has not counters. It has an own ToC structure, different
+	from any previous document class. It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+<itemize><it>category dataset 02 document class</it> has not counters. It has an own ToC structure, different
+	from any previous document class,  but it is very similar only to category dataset 01 class. It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+<itemize><it>pie dataset class</it> has not counters. It has an own ToC structure, different
+	from any previous document class, it is similar only to category dataset 01 and 02 classes.
+	It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+</pg>
+
+</subsubsection>
+<!-- end a01.03.01.06.01 -->
+
+<paragraph ID="a01.03.01.06.01.01">matter and brief book document classes
+<pg><snip>a</snip> is the root (radix), the title of the book.</pg>
+<pg><snip>a00</snip> can be the synopsis of the book.</pg>
+<pg><snip>a01</snip> is the first part of the book.</pg>
+<pg><snip>a01.01</snip> is the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01</snip> is the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01</snip> is the first subsection  of the first section of 
+the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01</snip> is the first subsubsection of the first
+subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01.01</snip> is the first paragraph of the first subsubsection of the
+first subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.01.01.01</snip> is the first subparagraph of the first subsubsection
+of the first subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.01.01.01.02</snip> is the second subsubsection of the first
+subsection of the first section of the first chapter of the I part of the book.</pg>
+<pg><snip>a01.02</snip> is the second chapter of the book.</pg>
+<pg><snip>a02</snip> is the II part of the book.</pg>
+<pg><snip>a02.01</snip> is the first chapter of II part of the book.</pg>
+<pg><snip>a02.01.01</snip> is the first section of the first chapter of the second part of the
+book.</pg>
+<pg><snip>a02.01.01.01</snip> is the first subsection  of the first section of the first chapter
+of the second part of the book.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.01 -->
+
+
+<paragraph ID="a01.03.01.06.01.02">matter and brief article document classes
+<pg><snip>a</snip> is the root (radix), the title of the article.</pg>
+<pg><snip>a00</snip> can be the synopsis of the article.</pg>
+<pg><snip>a01</snip> is the first section of the article.</pg>
+<pg><snip>a01.01</snip> is the first subsection of the first section of the article.</pg>
+<pg><snip>a01.01.01</snip> is the first subsubsection of the first subsection of the I section of the article.</pg>
+<pg><snip>a01.01.01.01</snip> is the first paragraph of the first subsubsection of 
+the first subsection of the I section of the article.</pg>
+<pg><snip>a01.01.01.01.01</snip> is the first subparagraph of the first
+the first paragraph of the first subsubsection of 
+the first subsection of the I section of the article.</pg>
+<pg><snip>a01.01.01.01.01.01</snip> is the first saxum of the first 
+subparagraph of the first
+the first paragraph of the first subsubsection of 
+the first subsection of the I section of the article.</pg>
+<pg><snip>a01.01.01.01.01.01.01</snip> is the first subsaxum of the first
+saxum of the first 
+subparagraph of the first
+the first paragraph of the first subsubsection of 
+the first subsection of the I section of the article.</pg>
+<pg><snip>a01.01.01.01.02</snip> is the second subparagraph of the first
+the first paragraph of the first subsubsection of 
+the first subsection of the I section of the article.</pg>
+<pg><snip>a01.02</snip> is the second subsection of the article.</pg>
+<pg><snip>a02</snip> is the II section of the article.</pg>
+<pg><snip>a02.01</snip> is the first subsection of II section of the article.</pg>
+<pg><snip>a02.01.01</snip> is the first subsubsection of the first subsection of the second section of the
+article.</pg>
+<pg><snip>a02.01.01.01</snip> is the first paragraph of the 
+first subsubsection of the first subsection of the second section of the article.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.02 -->
+<paragraph ID="a01.03.01.06.01.03">septem gradus data document class
+<pg><snip>a</snip> is the root (radix), the title of data document.</pg>
+<pg><snip>a01</snip> is gradusI of data document.</pg>
+<pg><snip>a01.01</snip> is gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01</snip> is gradusIII of gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01.01</snip> is gradusIV of gradusIII of gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01.01.01</snip> is gradusV of gradusIV of gradusIII of 
+ gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01.01.01.01</snip> is gradusVI of gradusV of gradusIV of gradusIII of 
+ gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01.01.01.01.01</snip> is gradusVII of gradusVI of gradusV of  gradusIV of gradusIII of 
+ gradusII of gradusI of data document.</pg>
+<pg><snip>a01.01.01.01.02</snip> is gradusV of gradusIV of gradusIII of  gradusII of gradusI of data document.</pg>
+<pg><snip>a01.02</snip> is the second gradusII of data document.</pg>
+<pg><snip>a02</snip> is the II gradusI of data document.</pg>
+<pg><snip>a02.01</snip> is gradusII of II gradusI of data document.</pg>
+<pg><snip>a02.01.01</snip> is gradusIII of gradusII of gradusI of the article.</pg>
+<pg><snip>a02.01.01.01</snip> is gradusIV of gradusIII of gradusII of gradusI of data document.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.03 -->
+<paragraph ID="a01.03.01.06.01.04">category dataset 01 document class
+<pg><snip>a</snip> is the root (radix), the title of data document.</pg>
+<pg><snip>a01</snip> is the Series n. 1 of data document.</pg>
+<pg><snip>a01.01</snip> is the Item n. 1 of Series n. 1 of data document.</pg>
+<pg><snip>a01.01.01</snip> is the Key of Item n. 1 of the Series n. 1 of data document.</pg>
+<pg><snip>a01.01.02</snip> is the Value of the Item n. 1 of the Series n. 1 of data document.</pg>
+<pg><snip>a02</snip> is the Series n. 2 of data document.</pg>
+<pg><snip>a02.01</snip> is the Item n. 1 of Series n. 2 of data document.</pg>
+<pg><snip>a02.01.01</snip> is the Key of Item n. 1 of the Series n. 2 of data document.</pg>
+<pg><snip>a02.01.02</snip> is the Value of the Item n. 1 of the Series n. 2 of data document.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.04 -->
+<paragraph ID="a01.03.01.06.01.05">category dataset 02 document class
+<pg><snip>a</snip> is the root (radix), the title of data document.</pg>
+<pg><snip>a01</snip> is the Series n. 1 of data document.</pg>
+<pg><snip>a01.01</snip> is the Item n. 1 of Series n. 1 of data document.</pg>
+<pg><snip>a01.01.01</snip> is the Key of Item n. 1 of the Series n. 1 of data document.</pg>
+<pg><snip>a01.01.02</snip> is the Value of the Item n. 1 of the Series n. 1 of data document.</pg>
+<pg><snip>a02</snip> is the Series n. 2 of data document.</pg>
+<pg><snip>a02.01</snip> is the Item n. 1 of Series n. 2 of data document.</pg>
+<pg><snip>a02.01.01</snip> is the Key of Item n. 1 of the Series n. 2 of data document.</pg>
+<pg><snip>a02.01.02</snip> is the Value of the Item n. 1 of the Series n. 2 of data document.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.05 -->
+<paragraph ID="a01.03.01.06.01.06">pie dataset document class
+<pg><snip>a</snip> is the root (radix), the title of data document.</pg>
+<pg><snip>a01</snip> is the Item n. 1 of data document.</pg>
+<pg><snip>a01.01</snip> is the Key of Item n. 1 of data document.</pg>
+<pg><snip>a01.02</snip> is the Value of the Item n. 1 of data document.</pg>
+<pg><snip>a02</snip> is the Item n. 2 of data document.</pg>
+<pg><snip>a02.01</snip> is the Key of Item n. 2 of data document.</pg>
+<pg><snip>a02.02</snip> is the Value of the Item n. 2 of data document.</pg>
+<p>And so on.</p>
+</paragraph>
+<!-- end a01.03.01.06.01.06 -->
+</subsection>
+<!-- end a01.03.01.06 -->
+
+<subsection ID="a01.03.01.07">Printing
+<p>e.g. You can print this doc *.xml as *.pdf  by your web browser.</p>
+
+<p>But If you open *.lmx or *.xml by <it>xtextus</it>, you can execute 
+<code>/usr/local/lib/xmlux/xtextus/stampa.sh</code> 
+to print *.xml or *.lmx getting *.ps and *.pdf; you'll have xml fancy printings.</p>
+</subsection>
+<!-- end a01.03.01.07 -->
+
+<subsection ID="a01.03.01.08">View xml file
+<p><code>yourWebBrowser *.xml</code>
+I suggest chromium web browser.</p>
+</subsection>
+<!-- end a01.03.01.08 -->
+</section>
+<!-- end a01.03.01 -->
+</chapter>
+<!-- end a01.03 -->
+
+<chapter ID="a01.04">Changes
+<center>v3.0.0 2024-11-04</center>
+<p>
+<itemize>Improved <pcode> --f='*' </pcode> option usage.</itemize>
+<itemize>Improved and corrected <pcode> --=f'without extension'</pcode> in <sl>xtextus</sl>.</itemize>
+<itemize>Improved and corrected <pcode> --add</pcode> action in <sl>xmluxe</sl>.</itemize>
+<itemize>Added:
+<enumerate><it>matter article document class</it>;</enumerate>
+<enumerate><it>brief book document class</it>;</enumerate>
+<enumerate><it>brief article document class</it>;</enumerate>
+<enumerate><it>septem gradus data document class</it>.</enumerate>
+<enumerate><it>category dataset 01 document class</it>.</enumerate>
+<enumerate><it>category dataset 02 document class</it>.</enumerate>
+<enumerate><it>pie dataset document class</it>.</enumerate>
+<enumerate><it>xmluxe sort actions</it>.</enumerate>
+<enumerate><it>xmluxe insert actions</it>.</enumerate>
+<enumerate><it>xmluxe and xtextus select actions</it>.</enumerate>
+<enumerate><it>xmluxe and xtextus parse actions</it>.</enumerate>
+<enumerate><it>xmluxe and xtextus render actions</it>.</enumerate>
+<enumerate><it>xmluxe and xtextus jump actions</it>.</enumerate>
+<enumerate><it>xmluxe delLack option</it>.</enumerate>
+<enumerate><it>xmluxv folder feature</it>.</enumerate>
+<enumerate><it>xmluxv find actions</it>.</enumerate>
+<enumerate><it>xmluxv various options</it>.</enumerate>
+So, some options and actions are changed.</itemize>
+</p>
+</chapter>
+<!-- end a01.04 -->
+
+<chapter ID="a01.05">Copyright
+<p>Copyright (C) not commercial 
+2023.10.29 - 2024.11.04
+Mario Fantini (marfant7@gmail.com).
+
+BASH copyright applies to <it>xmlux</it>'s BASH usage.
+VIM copyright applies to <it>xmlux</it>'s VIM usage.
+JAVA copyright applies to <it>xmlux</it>'s JAVA usage.
+W3C copyright applies to <it>xmlux</it>'s W3C usage.
+And so on, as regards all tools and languages used by <it>xmlux</it>.
+</p>
+
+<pg>e.g. about warranty, GNU copyright applies to <it>xmlux</it> usage fully:
+&#xD;
+&#x3C;&#x3C;This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.&#x3E;&#x3E;
+</pg>
+<p>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Mainly, my copyright means: you can use, share <it>xmlux</it> &#8211; for noble causes &#8211;, but:
+	&#x2022; you have to specify, to declare its paternity (mine), and whose contributors'
+	&#8201;&#8201;&#8201;important "brushstrokes";
+	&#x2022; you have to respect bash, vim, java, w3c, &#x5B;and so on&#x5D; copyrights.
+</p>
+</chapter>
+<!-- end a01.05 -->
+
+</part>
+<!-- end part a01 -->
+
+</radix>
