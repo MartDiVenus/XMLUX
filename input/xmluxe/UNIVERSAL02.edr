@@ -1,0 +1,13 @@
+
+
+let favoriteInput = input("\n:")
+
+call writefile(split(favoriteInput, "\n", 1), glob('/tmp/xmluxe-vimInputUNIVERSAL'), 'b')
+
+endfunction
+
+call Input()
+
+endfun
+
+
