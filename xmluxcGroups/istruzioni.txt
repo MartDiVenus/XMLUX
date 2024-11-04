@@ -1,0 +1,3 @@
+Devi inserire solo eseguibili testati e unici.
+Non inserire eseguibili di prova perché verrebbero caricati da xmluxc
+a discapito del funzionamento di xmlux.

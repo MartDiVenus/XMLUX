@@ -1,0 +1,4 @@
+fun! WRAPLINES#WRAPLINES()
+:xs/^/\\cpluxtab{}\\cpluxtab{}\\cpluxtab{}\\cpluxtab{}/g
+endfun
+ 

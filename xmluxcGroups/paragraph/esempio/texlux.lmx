@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="texlux.css"?>
+<!DOCTYPE a SYSTEM "texlux.dtd">
+<!-- matter book document class -->
+
+<!-- begin radix -->
+<radix ID="a">TEXLUX
+	
+<synopsis ID="a00">Sinossi
+<pg><sl>texlux</sl> elabora, compila, carica, [in tutti i casi selezionando]:
+pagine di testo, figure, tabelle.
+\cpluxlf{}
+Presenta anche modelli con esempi, per i document class: article, beamer,
+proc, book, mio book (che non è una document class ma un template), 
+scrbook, report, minimal, standalone. \cluxndash
+</pg>
+
+</synopsis>
+<!-- end a00 -->
+
+<part ID="a01">Parte I
+
+<chapter ID="a01.01">Eseguibili principali
+
+<pg>Per <it>eseguibili principali</it> intendo quelli eseguiti direttamente
+dall'utente. Nel capitolo II invece verranno descritti gli eseguibili 
+secondari, non per importanza, ma perché eseguiti indirettamente
+	dall'utente \cluxndash{} attraverso i principali \cluxndash.</pg>
+
+<p> Prova addTab
+\start{addTab}[2]
+corpo interno ad addTab
+\finish{addTab}
+</p>
+
+<section ID="a01.01.01">texlux
+<p>
+<OUTPUT xml:space="preserve">
+	
+-chap='arg'\cpluxtab{}Seleziona i capitoli (per document class quali book, report etc.).
+
+
+-sec='arg'\cpluxtab{}Seleziona le sezioni (per document class quali article etc.).
+
+\start{multicolumn}
+\start{wrapLines}[width=30,gq]
+-ecFig='arg'
+\finish{wrapLines}
+	
+\multic	
+		
+\start{wrapLines}[width=50,gq,just,tab=2]
+Elabora, compila una, o più o tutte le figure.
+Ovviamente, nel caso decidessi di non elaborare tutte le figure, il file contents/*/*.tex
+cercherebbe di caricarle cmq tutte se non usassi l'opzione che vedrai tra poco -hideFig=`arg'. 
+Quindi, senza ricorrere a -hideFig=`arg', selezionare solo alcune figure da elaborare, va bene
+quando le restanti sono state almeno una volta elaborate e quindi preparate per il caricamento da
+parte di contents/*/*.tex. la possibilità di selezionare una o più figure, è utile a non perdere 
+tempo a elaborare tutte le figure (anche quelle già pronte) ogni volta.
+\finish{wrapLines}
+\finish{multicolumn}
+
+
+	
+-ecFig=all\cpluxtab{}Elabora, compila  tutte le figure.
+	
+-ecFig='n'\cpluxtab{}Elabora, compila solo la figura 'capitolo'.'n'. 
+\start{wrapLines}[width=60,gq,tab=2]
+Ti ricordo che LaTeX elenca le figure per capitolo.n non per
+capitolo.sezione.n, non per capitolo.senzione.sottosezione.n. Quindi,
+la figura 'n' presente in una sottosezione verrà cmq indicizzata come
+'capitolo'.'n'.
+\finish{wrapLines}
+
+-ecFig='m,n'\cpluxtab{}Elabora, compila solo le figure $capitolo.$n e 'capitolo'.'m';
+\start{addTab}
+non necessariamente contigure e puoi esprimerne alche più di due (sempre
+separate dalla virgole però).
+\finish{addTab}
+
+-ecFig='m-o'\cpluxtab{}Elabora, compila solo le figure che vanno da 'capitolo'.'m' a 'capitolo'.'o'.
+
+
+-ecFigReset\cpluxtab{}Le opzioni -chap='argomento' o -sec='argomento' sono necessarie.
+\start{wrapLines}[width=50,gq,tab=2]
+Resetta la numerazione delle figure. Senza tale opzione, se si elabora solo e.g.
+il capitolo 4, le figure avranno la numerazione \csluxlt{}4.1\csluxgt-
+\csluxlt{}4.2\csluxgt- etc. mentre nella 'Lista Delle Figure' saranno elencate
+come \csluxlt{}1.1\csluxgt- \csluxgt{}1.2\csluxgt{} etc. Questo perché texlux
+di default suppone che si elabora solo il capitolo n. 4 per motivi di
+implementazione del libro, e che alla fine -- quando tutti i capitoli sono stati
+implementati bene -- verranno elaborati tutti i capitoli. Tale opzione
+-ecFigReset, invece, resetta la numerazione in modo da non avere nemmeno
+"momentaneamente" la discrasia tra la numerazione nel corpo e nella Lista, in
+quanto avrai anche nel corpo \csluxlt{}1.1\csluxgt-  \csluxlt{}1.2\csluxgt-
+Tuttavia, quando verranno elaborati tutti i capitoli, la numerazione sarà
+coerente e non ha senso, ovviamente, ricorrere a tale opzione. Tale opzione, non
+è stata pensata solo per avere coerenza tra corpo e Lista, ma se si dovesse
+scegliere di produrre solo alcuni capitoli di un libro (scartandone alcuni con
+l'opzione -chap) --- allora tale opzione -ecFigReset è molto utile.
+\finish{wrapLines}
+
+
+-ecTab='argomento'\cpluxtab{}Lo stesso di -ecFig='argomento', ma per le tabelle.
+
+
+-ecTabReset\cpluxtab{}Lo stesso di -ecFigReset, ma per le tabelle.
+
+
+-hideFig='argomento'\cpluxtab{}Per gli argomenti vale ciò che ho presentetato in -ecFig='argomento'.
+\start{wrapLines}[width=70,gq,tab=2]
+La funzione di tale opzione è quella di non caricare le figure espresse. Esse
+possono essere compilate, elaborate se -hideFig='...' è espresso insieme a
+-ecFig='...' ma anche in tal caso le figure non verrebbero caricate dal
+contents/*.tex. E` un'opzione molto utile quando ci si vuole concentrare sul
+testo o su alcune figure soltanto, senza quindi perdere tempo o creare
+confusione. Si può usare anche insieme a -showFig, per selezionare in maniera
+ancora più fine, a patto che venga espresso prima -hideFig='...' e poi
+-showFig='...'.
+e.g. -hideFig='all' -showFig='3,4'
+e.g. -hideFig='3-10' -showFig='5-7'
+\finish{wrapLines}
+
+
+-hideTab='argomento'\cpluxtab{}Lo stesso di -hideFig ma vale per le tabelle.
+
+
+-showFig='argomento'\cpluxtab{}Per gli argomenti vale ciò che ho presentetato in -ecFig='argomento'.
+\start{addTab}
+La funzione di tale opzione è quella di caricare le figure espresse. Esse
+possono essere compilate, elaborate se -showFig='...' è espresso insieme a
+-ecFig='...'. E` un'opzione molto utile quando ci si vuole concentrare sul
+testo o su alcune figure soltanto, senza quindi perdere tempo o creare
+confusione. Si può usare anche insieme a -hideFig, per selezionare in maniera
+ancora più fine, a patto che venga espresso prima -hideFig='...' e poi
+-showFig='...' e.g. -hideFig='all' -showFig='3,4' e.g. -hideFig='3-10'
+-showFig='5-7'
+\finish{addTab}
+
+
+-showTab='argomento'\cpluxtab{}Lo stesso di -showFig ma vale per le tabelle.
+
+
+-listFig\cpluxtab{}Serve -chap='argomento'. Invece di compilare, elenca le figure, rispettivamente,
+dei capitoli o delle sezioni selezionati.
+
+
+-listTab\cpluxtab{}Serve -chap='argomento' o -sec='argomento'. Invece di compilare, elenca le tabelle,
+</OUTPUT>
+</p>
+
+<subsection ID="a01.01.01.01">Subsection a01.01.01.01
+
+<subsubsection ID="a01.01.01.01.01">Subsubsection a01.01.01.01.01
+
+<paragraph ID="a01.01.01.01.01.01">Paragraph a01.01.01.01.01.01
+
+<subparagraph ID="a01.01.01.01.01.01.01">Subparagraph a01.01.01.01.01.01.01
+
+</subparagraph>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</paragraph>
+<!-- end a01.01.01.01.01.01 -->
+
+</subsubsection>
+<!-- end a01.01.01.01.01 -->
+
+</subsection>
+<!-- end a01.01.01.01 -->
+
+</section>
+<!-- end a01.01.01 -->
+
+</chapter>
+<!-- end a01.01 -->
+
+</part>
+<!-- end a01 -->
+
+</radix>

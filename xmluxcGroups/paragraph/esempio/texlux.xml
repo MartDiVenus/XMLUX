@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="texlux.css"?>
+<!DOCTYPE a SYSTEM "texlux.dtd">
+<!-- matter book document class -->
+
+<!-- begin radix -->
+<radix ID="a">TEXLUX
+	
+<synopsis ID="a00">Sinossi
+<pg><sl>texlux</sl> elabora, compila, carica, [in tutti i casi selezionando]:
+pagine di testo, figure, tabelle.
+&#xA;
+Presenta anche modelli con esempi, per i document class: article, beamer,
+proc, book, mio book (che non è una document class ma un template), 
+scrbook, report, minimal, standalone. &#8211;
+</pg>
+
+</synopsis>
+<!-- end a00 -->
+
+<part ID="a01">Parte I
+
+<chapter ID="a01.01">Eseguibili principali
+
+<pg>Per <it>eseguibili principali</it> intendo quelli eseguiti direttamente
+dall'utente. Nel capitolo II invece verranno descritti gli eseguibili 
+secondari, non per importanza, ma perché eseguiti indirettamente
+	dall'utente &#8211; attraverso i principali &#8211;.</pg>
+
+<p> Prova addTab
+&#x9;&#x9;corpo interno ad addTab
+</p>
+
+<section ID="a01.01.01">texlux
+<p>
+<OUTPUT xml:space="preserve">
+	
+-chap='arg'&#x9;Seleziona i capitoli (per document class quali book, report etc.).
+
+
+-sec='arg'&#x9;Seleziona le sezioni (per document class quali article etc.).
+
+-ecFig='arg'&#x9;Elabora, compila una, o più  o	tutte  le  figure.
+&#x9;&#x9;Ovviamente, nel caso decidessi	di  non  elaborare
+&#x9;&#x9;tutte  le   figure,   il   file   contents/*/*.tex
+&#x9;&#x9;cercherebbe di caricarle cmq tutte se  non  usassi
+&#x9;&#x9;l'opzione  che	vedrai	tra  poco  -hideFig=`arg'.
+&#x9;&#x9;Quindi,   senza   ricorrere   a    -hideFig=`arg',
+&#x9;&#x9;selezionare solo alcune figure	da  elaborare,	va
+&#x9;&#x9;bene quando le	restanti  sono	state  almeno  una
+&#x9;&#x9;volta  elaborate  e  quindi   preparate   per	il
+&#x9;&#x9;caricamento  da  parte	di  contents/*/*.tex.	la
+&#x9;&#x9;possibilità di selezionare una	o  più	figure,  è
+&#x9;&#x9;utile a non perdere tempo  a  elaborare  tutte	le
+&#x9;&#x9;figure	(anche	quelle	già  pronte)  ogni  volta.
+
+
+	
+-ecFig=all&#x9;Elabora, compila  tutte le figure.
+	
+-ecFig='n'&#x9;Elabora, compila solo la figura 'capitolo'.'n'. 
+&#x9;&#x9;Ti ricordo che LaTeX elenca le figure per capitolo.n non per
+&#x9;&#x9;capitolo.sezione.n, non per
+&#x9;&#x9;capitolo.senzione.sottosezione.n. Quindi, la figura 'n'
+&#x9;&#x9;presente in una sottosezione verrà cmq indicizzata come
+&#x9;&#x9;'capitolo'.'n'.
+
+-ecFig='m,n'&#x9;Elabora, compila solo le figure $capitolo.$n e 'capitolo'.'m';
+&#x9;non necessariamente contigure e puoi esprimerne alche più di due (sempre
+&#x9;separate dalla virgole però).
+
+-ecFig='m-o'&#x9;Elabora, compila solo le figure che vanno da 'capitolo'.'m' a 'capitolo'.'o'.
+
+
+-ecFigReset&#x9;Le opzioni -chap='argomento' o -sec='argomento' sono necessarie.
+&#x9;&#x9;Resetta la numerazione delle figure. Senza tale
+&#x9;&#x9;opzione, se si elabora solo e.g.  il capitolo 4,
+&#x9;&#x9;le figure avranno la numerazione &#x3C;4.1&#x3E;- &#x3C;4.2&#x3E;-
+&#x9;&#x9;etc. mentre nella 'Lista Delle Figure' saranno
+&#x9;&#x9;elencate come &#x3C;1.1&#x3E;- &#x3E;1.2&#x3E; etc. Questo perché
+&#x9;&#x9;texlux di default suppone che si elabora solo il
+&#x9;&#x9;capitolo n. 4 per motivi di implementazione del
+&#x9;&#x9;libro, e che alla fine -- quando tutti i capitoli
+&#x9;&#x9;sono stati implementati bene -- verranno elaborati
+&#x9;&#x9;tutti i capitoli. Tale opzione -ecFigReset,
+&#x9;&#x9;invece, resetta la numerazione in modo da non
+&#x9;&#x9;avere nemmeno "momentaneamente" la discrasia tra
+&#x9;&#x9;la numerazione nel corpo e nella Lista, in quanto
+&#x9;&#x9;avrai anche nel corpo &#x3C;1.1&#x3E;-  &#x3C;1.2&#x3E;- Tuttavia,
+&#x9;&#x9;quando verranno elaborati tutti i capitoli, la
+&#x9;&#x9;numerazione sarà coerente e non ha senso,
+&#x9;&#x9;ovviamente, ricorrere a tale opzione. Tale
+&#x9;&#x9;opzione, non è stata pensata solo per avere
+&#x9;&#x9;coerenza tra corpo e Lista, ma se si dovesse
+&#x9;&#x9;scegliere di produrre solo alcuni capitoli di un
+&#x9;&#x9;libro (scartandone alcuni con l'opzione -chap) ---
+&#x9;&#x9;allora tale opzione -ecFigReset è molto utile.
+
+
+-ecTab='argomento'&#x9;Lo stesso di -ecFig='argomento', ma per le tabelle.
+
+
+-ecTabReset&#x9;Lo stesso di -ecFigReset, ma per le tabelle.
+
+
+-hideFig='argomento'&#x9;Per gli argomenti vale ciò che ho presentetato in -ecFig='argomento'.
+&#x9;&#x9;La funzione di tale opzione è quella di non caricare le figure
+&#x9;&#x9;espresse. Esse possono essere compilate, elaborate se -hideFig='...' è
+&#x9;&#x9;espresso insieme a -ecFig='...' ma anche in tal caso le figure non
+&#x9;&#x9;verrebbero caricate dal contents/*.tex. E` un'opzione molto utile
+&#x9;&#x9;quando ci si vuole concentrare sul testo o su alcune figure soltanto,
+&#x9;&#x9;senza quindi perdere tempo o creare confusione. Si può usare anche
+&#x9;&#x9;insieme a -showFig, per selezionare in maniera ancora più fine, a
+&#x9;&#x9;patto che venga espresso prima -hideFig='...' e poi -showFig='...'.
+&#x9;&#x9;e.g. -hideFig='all' -showFig='3,4' e.g. -hideFig='3-10' -showFig='5-7'
+
+
+-hideTab='argomento'&#x9;Lo stesso di -hideFig ma vale per le tabelle.
+
+
+-showFig='argomento'&#x9;Per gli argomenti vale ciò che ho presentetato in -ecFig='argomento'.
+&#x9;La funzione di tale opzione è quella di caricare le figure espresse. Esse
+&#x9;possono essere compilate, elaborate se -showFig='...' è espresso insieme a
+&#x9;-ecFig='...'. E` un'opzione molto utile quando ci si vuole concentrare sul
+&#x9;testo o su alcune figure soltanto, senza quindi perdere tempo o creare
+&#x9;confusione. Si può usare anche insieme a -hideFig, per selezionare in maniera
+&#x9;ancora più fine, a patto che venga espresso prima -hideFig='...' e poi
+&#x9;-showFig='...' e.g. -hideFig='all' -showFig='3,4' e.g. -hideFig='3-10'
+&#x9;-showFig='5-7'
+
+
+-showTab='argomento'&#x9;Lo stesso di -showFig ma vale per le tabelle.
+
+
+-listFig&#x9;Serve -chap='argomento'. Invece di compilare, elenca le figure, rispettivamente,
+dei capitoli o delle sezioni selezionati.
+
+
+-listTab&#x9;Serve -chap='argomento' o -sec='argomento'. Invece di compilare, elenca le tabelle,
+</OUTPUT>
+</p>
+
+<subsection ID="a01.01.01.01">Subsection a01.01.01.01
+
+<subsubsection ID="a01.01.01.01.01">Subsubsection a01.01.01.01.01
+
+<paragraph ID="a01.01.01.01.01.01">Paragraph a01.01.01.01.01.01
+
+<subparagraph ID="a01.01.01.01.01.01.01">Subparagraph a01.01.01.01.01.01.01
+
+</subparagraph>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</paragraph>
+<!-- end a01.01.01.01.01.01 -->
+
+</subsubsection>
+<!-- end a01.01.01.01.01 -->
+
+</subsection>
+<!-- end a01.01.01.01 -->
+
+</section>
+<!-- end a01.01.01 -->
+
+</chapter>
+<!-- end a01.01 -->
+
+</part>
+<!-- end a01 -->
+
+</radix>

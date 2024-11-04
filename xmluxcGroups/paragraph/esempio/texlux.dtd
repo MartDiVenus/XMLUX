@@ -1,0 +1,34 @@
+<!-- Root = a= titulus = title = radix = radix a -->
+<!ELEMENT radix ANY>
+<!-- All that is under "synopsis" = synopsis = a00 -->
+<!ELEMENT synopsis (pg+, sl+)>
+<!ATTLIST synopsis ID CDATA "a00">
+<!-- All that is under "part" = part = a01 -->
+<!ELEMENT part (chapter+, paragraph+, section+, subparagraph+, subsection+, subsubsection+)>
+<!ATTLIST part ID CDATA "a01">
+<!-- All that is under "chapter" = chapter = a01.01 -->
+<!ELEMENT chapter (it+, p+, paragraph+, pg+, section+, subparagraph+, subsection+, subsubsection+)>
+<!ATTLIST chapter ID CDATA "a01.01">
+<!-- All that is under "section" = section = a01.01.01 -->
+<!ELEMENT section (OUTPUT+, p+, paragraph+, subparagraph+, subsection+, subsubsection+)>
+<!ATTLIST section ID CDATA "a01.01.01">
+<!-- All that is under "subsection" = subsection = a01.01.01.01 -->
+<!ELEMENT subsection (paragraph+, subparagraph+, subsubsection+)>
+<!ATTLIST subsection ID CDATA "a01.01.01.01">
+<!-- All that is under "subsubsection" = subsubsection = a01.01.01.01.01 -->
+<!ELEMENT subsubsection (paragraph+, subparagraph+)>
+<!ATTLIST subsubsection ID CDATA "a01.01.01.01.01">
+<!-- All that is under "paragraph" = paragraph = a01.01.01.01.01.01 -->
+<!ELEMENT paragraph (subparagraph+)>
+<!ATTLIST paragraph ID CDATA "a01.01.01.01.01.01">
+<!-- All that is in "subparagraph" = subparagraph = a01.01.01.01.01.01.01 -->
+<!ELEMENT subparagraph (#PCDATA)>
+<!ATTLIST subparagraph ID CDATA "a01.01.01.01.01.01.01">
+ 
+<!-- Constants -->
+<!ELEMENT p (it+, sl+)>
+<!ELEMENT pg (it+, sl+)>
+ 
+ 
+<!ELEMENT it (#PCDATA)>
+<!ELEMENT sl (#PCDATA)>

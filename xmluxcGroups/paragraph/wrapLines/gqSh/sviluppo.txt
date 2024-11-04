@@ -1,0 +1,78 @@
+* Al multicolumn e al wrap, devi implementare e testare i pattern,
+i  paragraph pattern soprattutto. E` utile la possibilità
+di creare linee vuote all'interno dei gruppi \start{wrap} e quindi 
+anche dei multicolumn. Ho già preparato i cambi "reverse" per i pattern
+ma non li ho testati, in quanto spezzando porto i pattern all'interno
+del corpo quando invece a essi deve essere riservata una riga, come
+nel caso di ppblux o pp2blux o ppbreaklux.
+
+I soluzione OK LA MIGLIORE:
+assegna una riga per ogni pattern, la riga precedente, e quella del pattern devono terminare con \\
+e.g.
+
+\starth{multicolumn}
+\start{wrapLines}[width=20]
+I colonna
+\finish{wrapLines}
+
+\multic
+
+\start{wrapLines}[width=50,gq]
+bla bla bla \\
+\ppblux \\
+abra abra abra.
+\finish{wrapLines}
+
+\finish{multicolumn}
+
+In questo modo posso spezzare il gruppo in 5 parti:
+I. bla bla bla 
+
+II. riga vuota (che verrà eliminata)
+
+III. \ppblux 
+
+IV. riga vuota (che verrà eliminata)
+
+V. abra abra abra.
+
+E quindi posso elaborare in questo modo:
+a)  usare il comando di vim (join) per unire solo le righe
+della I parte per poi poterle spezzare di width specificata;
+b) spezzare  la I parte;
+c) concatenare la I parte con la III parte rimasta integra,
+d)  usare il comando di vim (join) per unire solo le righe
+della V parte per poi poterle spezzare di width specificata;
+e) spezzare la V parte;
+f) concatenare il tutto;
+g) tradurre il pattern. 
+
+OK, in questo modo non occorre nemmeno convertire e riconvertire i pattern in UTF-8,
+perché a \pattern è destinata unna riga esclusiva e quindi non hai problemi di coerenza.
+
+II soluzione:
+Crea un environment con argomento il pattern, tanto xmluxc
+compone il multicolumn in base al comando \multic.
+e.g.
+\starth{multicolumn}
+\start{wrapLines}[width=20]
+I colonna
+\finish{wrapLines}
+
+\multic
+
+\start{wrapLines}[width=50,gq]
+II colonna (I parte)
+\finish{wrapLines}
+
+\pattern{ppblux}
+
+\start{wrapLines}[width=50,gq]
+II colonna (II parte)
+\finish{wrapLines}
+
+
+\finish{multicolumn}
+
+
+
