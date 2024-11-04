@@ -1,0 +1,22 @@
+<!-- IDs and elements tree
+a radix
+a01 gradusI
+a01.01 gradusII
+a01.01.01 gradusIII
+a01.01.01.01 gradusIV
+a01.01.01.01.01 gradusV
+a01.01.01.01.01.01 gradusVI
+a01.01.01.01.01.01.01 gradusVII
+a01.01.02 gradusIII
+a01.01.02.01 gradusIV
+a01.01.02.01.01 gradusV
+a01.01.02.01.01.01 gradusVI
+a01.01.02.01.01.01.01 gradusVII
+a02 gradusI
+a02.01 gradusII
+a02.01.01 gradusIII
+a02.01.01.01 gradusIV
+a02.01.01.01.01 gradusV
+a02.01.01.01.01.01 gradusVI
+a02.01.01.01.01.01.01 gradusVII
+end IDs and elements tree -->

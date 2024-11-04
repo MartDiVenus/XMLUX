@@ -1,0 +1,8 @@
+Allo stato attuale matter-book e brief-book, per xmluxv, sono uguali.
+Tuttavia, ho separato i due, per lasciare la possibilità in futuro
+di differenziarli eventualmente -- per ora non occorre e non credo 
+lo farò in futuro, ma non mi è costato nulla predisporre il tutto --.
+
+Nei commenti dei codici article e data potrebbero esserci dei retaggi
+ininfluenti delle document class book, in quanto ho adattato gli altri
+sui book.

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="prova.css"?>
+<!DOCTYPE a SYSTEM "prova.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix ID="a" name="eg">Title
+
+<gradusI ID="a01" name="I grado Iblocco">GradusI a01
+
+<gradusII ID="a01.01" name="II grado IbloccoIsubblocco">GradusII a01.01
+
+<gradusIII ID="a01.01.01" name="III grado IbloccoIsubblocco">GradusIII a01.01.01
+
+<gradusIV ID="a01.01.01.01" name="IV grado IbloccoIsubblocco">GradusIV a01.01.01.01
+
+<gradusV ID="a01.01.01.01.01" name="V grado IbloccoIsubblocco">GradusV a01.01.01.01.01
+
+<gradusVI ID="a01.01.01.01.01.01" name="VI grado IbloccoIsubblocco">GradusVI a01.01.01.01.01.01
+
+<gradusVII ID="a01.01.01.01.01.01.01" name="VII grado IbloccoIsubblocco">GradusVII a01.01.01.01.01.01.01
+
+</gradusVII>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.01 -->
+
+</gradusIII>
+<!-- end a01.01.01 -->
+
+<gradusIII ID="a01.01.02" name="III grado IbloccoIIsubblocco">GradusIII a01.01.02
+
+<gradusIV ID="a01.01.02.01" name="IV grado IbloccoIIsubblocco">GradusIV a01.01.02.01
+
+<gradusV ID="a01.01.02.01.01" name="V grado IbloccoIIsubblocco">GradusV a01.01.02.01.01
+
+<gradusVI ID="a01.01.02.01.01.01" name="VI grado IbloccoIIsubblocco">GradusVI a01.01.02.01.01.01
+
+<gradusVII ID="a01.01.02.01.01.01.01" name="VII grado IbloccoIIsubblocco">GradusVII a01.01.02.01.01.01.01
+
+</gradusVII>
+<!-- end a01.01.02.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.02.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.02.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.02.01 -->
+
+</gradusIII>
+<!-- end a01.01.02 -->
+</gradusII>
+<!-- end a01.01 -->
+
+</gradusI>
+<!-- end a01 -->
+
+<gradusI ID="a02" name="I grado IIblocco">GradusI a02
+
+<gradusII ID="a02.01" name="II grado IIblocco">GradusII a02.01
+
+<gradusIII ID="a02.01.01" name="III grado IIblocco">GradusIII a02.01.01
+
+<gradusIV ID="a02.01.01.01" name="IV grado IIblocco">GradusIV a02.01.01.01
+
+<gradusV ID="a02.01.01.01.01" name="V grado IIblocco">GradusV a02.01.01.01.01
+
+<gradusVI ID="a02.01.01.01.01.01" name="VI grado IIblocco">GradusVI a02.01.01.01.01.01
+
+<gradusVII ID="a02.01.01.01.01.01.01" name="VII grado IIblocco">GradusVII a02.01.01.01.01.01.01
+
+</gradusVII>
+<!-- end a02.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a02.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a02.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a02.01.01.01 -->
+
+</gradusIII>
+<!-- end a02.01.01 -->
+
+</gradusII>
+<!-- end a02.01 -->
+
+</gradusI>
+<!-- end a02 -->
+
+</radix>

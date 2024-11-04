@@ -1,0 +1,22 @@
+<!-- IDs and titles tree
+a Title
+a01 GradusI a01
+a01.01 GradusII a01.01
+a01.01.01 GradusIII a01.01.01
+a01.01.01.01 GradusIV a01.01.01.01
+a01.01.01.01.01 GradusV a01.01.01.01.01
+a01.01.01.01.01.01 GradusVI a01.01.01.01.01.01
+a01.01.01.01.01.01.01 GradusVII a01.01.01.01.01.01.01
+a01.01.02 GradusIII a01.01.02
+a01.01.02.01 GradusIV a01.01.02.01
+a01.01.02.01.01 GradusV a01.01.02.01.01
+a01.01.02.01.01.01 GradusVI a01.01.02.01.01.01
+a01.01.02.01.01.01.01 GradusVII a01.01.02.01.01.01.01
+a02 GradusI a02
+a02.01 GradusII a02.01
+a02.01.01 GradusIII a02.01.01
+a02.01.01.01 GradusIV a02.01.01.01
+a02.01.01.01.01 GradusV a02.01.01.01.01
+a02.01.01.01.01.01 GradusVI a02.01.01.01.01.01
+a02.01.01.01.01.01.01 GradusVII a02.01.01.01.01.01.01
+end IDs and titles tree -->

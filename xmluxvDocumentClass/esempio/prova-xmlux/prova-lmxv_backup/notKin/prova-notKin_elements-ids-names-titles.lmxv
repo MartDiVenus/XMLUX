@@ -1,0 +1,22 @@
+<!-- (not kin) Elements, IDs, names and titles tree
+radix a "eg" Title
+gradusI a01 "I grado Iblocco" GradusI a01
+gradusI a02 "I grado IIblocco" GradusI a02
+gradusII a01.01 "II grado IbloccoIsubblocco" GradusII a01.01
+gradusII a02.01 "II grado IIblocco" GradusII a02.01
+gradusIII a01.01.01 "III grado IbloccoIsubblocco" GradusIII a01.01.01
+gradusIII a01.01.02 "III grado IbloccoIIsubblocco" GradusIII a01.01.02
+gradusIII a02.01.01 "III grado IIblocco" GradusIII a02.01.01
+gradusIV a01.01.01.01 "IV grado IbloccoIsubblocco" GradusIV a01.01.01.01
+gradusIV a01.01.02.01 "IV grado IbloccoIIsubblocco" GradusIV a01.01.02.01
+gradusIV a02.01.01.01 "IV grado IIblocco" GradusIV a02.01.01.01
+gradusV a01.01.01.01.01 "V grado IbloccoIsubblocco" GradusV a01.01.01.01.01
+gradusV a01.01.02.01.01 "V grado IbloccoIIsubblocco" GradusV a01.01.02.01.01
+gradusV a02.01.01.01.01 "V grado IIblocco" GradusV a02.01.01.01.01
+gradusVI a01.01.01.01.01.01 "VI grado IbloccoIsubblocco" GradusVI a01.01.01.01.01.01
+gradusVI a01.01.02.01.01.01 "VI grado IbloccoIIsubblocco" GradusVI a01.01.02.01.01.01
+gradusVI a02.01.01.01.01.01 "VI grado IIblocco" GradusVI a02.01.01.01.01.01
+gradusVII a01.01.01.01.01.01.01 "VII grado IbloccoIsubblocco" GradusVII a01.01.01.01.01.01.01
+gradusVII a01.01.02.01.01.01.01 "VII grado IbloccoIIsubblocco" GradusVII a01.01.02.01.01.01.01
+gradusVII a02.01.01.01.01.01.01 "VII grado IIblocco" GradusVII a02.01.01.01.01.01.01
+end Elements, IDs, names and titles tree (not kin) -->

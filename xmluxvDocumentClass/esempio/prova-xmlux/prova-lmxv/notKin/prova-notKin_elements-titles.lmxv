@@ -1,0 +1,22 @@
+<!-- (not kin) Elements and titles tree
+radix Title
+gradusI GradusI a01
+gradusI GradusI a02
+gradusII GradusII a01.01
+gradusII GradusII a02.01
+gradusIII GradusIII a01.01.01
+gradusIII GradusIII a01.01.02
+gradusIII GradusIII a02.01.01
+gradusIV GradusIV a01.01.01.01
+gradusIV GradusIV a01.01.02.01
+gradusIV GradusIV a02.01.01.01
+gradusV GradusV a01.01.01.01.01
+gradusV GradusV a01.01.02.01.01
+gradusV GradusV a02.01.01.01.01
+gradusVI GradusVI a01.01.01.01.01.01
+gradusVI GradusVI a01.01.02.01.01.01
+gradusVI GradusVI a02.01.01.01.01.01
+gradusVII GradusVII a01.01.01.01.01.01.01
+gradusVII GradusVII a01.01.02.01.01.01.01
+gradusVII GradusVII a02.01.01.01.01.01.01
+end elements and titles tree (not kin) -->

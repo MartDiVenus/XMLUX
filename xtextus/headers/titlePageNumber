@@ -1,0 +1,3 @@
+:set printheader:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\ \ \ \ \ \ \ $nomeSenzaEstensione\ \%N
+:hardcopy > $pathIsolato/$nomeSenzaEstensione.ps
+ZZ
