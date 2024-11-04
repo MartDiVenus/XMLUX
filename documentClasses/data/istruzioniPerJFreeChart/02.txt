@@ -1,0 +1,11 @@
+Affinché JFreeChart visualizzi interamente i titoli degli elementi
+Key e Value, devi scrivere l'elemento tutto su una riga, ossia, 
+la chiusura deve andare sulla stessa riga dell'apertura.
+
+e.g.
+
+<Key ID="a01.01.01" name="Key a01.01.01">Musica</Key>
+<!-- end a01.01.01 -->
+<Value ID="a01.01.02" name="Value a01.01.02">100.4</Value>
+<!-- end a01.01.02 -->
+

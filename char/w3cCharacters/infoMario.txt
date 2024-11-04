@@ -1,0 +1,9 @@
+AllCharExadecimal
+https://github.com/w3c/xml-entities/tree/gh-pages
+materiale/xmlEntitiesGithub/
+
+0025.html black diamond e simili
+
+0020.html spaces, dashes etc.
+
+000.html quelli base

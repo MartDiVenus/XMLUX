@@ -1,0 +1,24 @@
+Every field must not have white spaces and they must begin with an alphanumeric character.
+
+
+I field: name of character
+	e.g. greater-thanSign, plusMinus
+
+
+II field: for internal reverse functions of codex
+
+
+III field: exadecimal or decimal value
+
+
+IV field: xmlux command
+
+
+V filed: LaTeX equivalent command 
+	(it needs for xmlux future automatic conversion from *.lmx to *.tex)
+
+
+VI filed: LaTeX command package: <default> if command is LaTeX built-in.
+	(it needs for xmlux future automatic conversion from *.lmx to *.tex)
+
+

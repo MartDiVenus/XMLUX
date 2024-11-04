@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="matter-book.css"?>
+<!DOCTYPE a SYSTEM "matter-book.dtd">
+<!-- matter book document class -->
+
+
+<!-- begin radix -->
+<radix ID="a">Title
+	
+<synopsis ID="a00">Synopsis
+
+</synopsis>
+<!-- end a00 -->
+
+<part ID="a01">Part a01
+
+<chapter ID="a01.01">Chapter a01.01
+
+<section ID="a01.01.01">Section a01.01.01
+
+<subsection ID="a01.01.01.01">Subsection a01.01.01.01
+
+<subsubsection ID="a01.01.01.01.01">Subsubsection a01.01.01.01.01
+
+<paragraph ID="a01.01.01.01.01.01">Paragraph a01.01.01.01.01.01
+
+<subparagraph ID="a01.01.01.01.01.01.01">Subparagraph a01.01.01.01.01.01.01
+
+</subparagraph>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</paragraph>
+<!-- end a01.01.01.01.01.01 -->
+
+</subsubsection>
+<!-- end a01.01.01.01.01 -->
+
+</subsection>
+<!-- end a01.01.01.01 -->
+
+</section>
+<!-- end a01.01.01 -->
+
+</chapter>
+<!-- end a01.01 -->
+
+</part>
+<!-- end a01 -->
+
+<part ID="a02">Part a02
+
+</part>
+<!-- end a02 -->
+
+</radix>
