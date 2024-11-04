@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="brief-article.css"?>
+<!DOCTYPE a SYSTEM "brief-article.dtd">
+<!-- brief article document class -->
+
+
+<!-- begin radix -->
+<radix ID="a">Title
+	
+<synopsis ID="a00">Synopsis
+
+</synopsis>
+<!-- end a00 -->
+
+<section ID="a01">Section a01
+
+<subsection ID="a01.01">Subsection a01.01
+
+<subsubsection ID="a01.01.01">Subsubsection a01.01.01
+
+<paragraph ID="a01.01.01.01">Paragraph a01.01.01.01
+
+<subparagraph ID="a01.01.01.01.01">Subparagraph a01.01.01.01.01
+
+<saxum ID="a01.01.01.01.01.01">Saxum a01.01.01.01.01.01
+
+<subsaxum ID="a01.01.01.01.01.01.01">Subsaxum a01.01.01.01.01.01.01
+
+</subsaxum>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</saxum>
+<!-- end a01.01.01.01.01.01 -->
+
+</subparagraph>
+<!-- end a01.01.01.01.01 -->
+
+</paragraph>
+<!-- end a01.01.01.01 -->
+
+</subsubsection>
+<!-- end a01.01.01 -->
+
+</subsection>
+<!-- end a01.01 -->
+
+</section>
+<!-- end a01 -->
+
+<section ID="a02">Section a02
+
+</section>
+<!-- end a02 -->
+
+</radix>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="categoryDataset01.css"?>
+<!DOCTYPE a SYSTEM "categoryDataset01.dtd">
+<!-- category dataset 01 document class -->
+
+<!-- begin radix -->
+<CategoryDataset ID="a" name="a">Passioni
+	<Series ID="a01" name="Discipline">Series n. 1
+    		<Item ID="a01.01" name="Item a01.01">Item n. 1
+    			<Key ID="a01.01.01" name="Key a01.01.01">Musica</Key>
+    			<!-- end a01.01.01 -->
+    			<Value ID="a01.01.02" name="Value a01.01.02">100.4</Value>
+			<!-- end a01.01.02 -->
+    		</Item>
+		<!-- end a01.01 --> 
+		<Item ID="a01.02" name="Item a01.02">Item n. 2
+			<Key ID="a01.02.01" name="Key a01.02.01">Pittura</Key>
+			<!-- end a01.02.01 -->
+      			<Value ID="a01.02.02" name="Value a01.02.02">75.5</Value>
+			<!-- end a01.02.02 -->
+		</Item>
+		<!-- end a01.02 --> 
+	</Series>
+</CategoryDataset>

@@ -1,0 +1,67 @@
+Guida: una volta letta, digita [:q]
+
+
+Costanti: Le costanti sono valori che si ripetono identicamente
+per più keys all interno di uno o più items.
+Est comodo esprimere le costanti per non dover immetterle sempre
+nella clonazione o nell aggiornamento.
+e.g. per le analisi del sangue, i limiti inferiore e superiore di un
+paramentro, sono costanti in quanto tutte le rilevazioni hanno essi
+come limite. Per esempio, avrò quindi:
+<<
+...
+<Series ...>Rilevazioni
+
+<item ...>
+<Key ...>gennaio
+</Key>
+<Value>1.5
+</Value>
+</item>
+
+<item ...>
+<Key ...>maggio
+</Key>
+<Value>1.8
+</Value>
+</item>
+
+</Series>
+
+<Series ...>Limite inferiore
+
+<item ...>
+<Key ...>gennaio
+</Key>
+<Value>0.3
+</Value>
+</item>
+
+<item ...>
+<Key ...>maggio
+</Key>
+<Value>0.3
+</Value>
+</item>
+
+</Series>
+
+<Series ...>Limite superiore
+
+<item ...>
+<Key ...>gennaio
+</Key>
+<Value>2
+</Value>
+</item>
+
+<item ...>
+<Key ...>maggio
+</Key>
+<Value>2
+</Value>
+</item>
+
+</Series>
+...
+>>

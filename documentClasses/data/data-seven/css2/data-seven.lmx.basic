@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="data-seven.css"?>
+<!DOCTYPE a SYSTEM "data-seven.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix ID="a" name="a">Title
+
+<gradusI ID="a01" name="gradusI">GradusI a01
+
+<gradusII ID="a01.01" name="gradusII">GradusII a01.01
+
+<gradusIII ID="a01.01.01" name="gradusIII">GradusIII a01.01.01
+
+<gradusIV ID="a01.01.01.01" name="gradusIV">GradusIV a01.01.01.01
+
+<gradusV ID="a01.01.01.01.01" name="gradusV">GradusV a01.01.01.01.01
+
+<gradusVI ID="a01.01.01.01.01.01" name="gradusVI">GradusVI a01.01.01.01.01.01
+
+<gradusVII ID="a01.01.01.01.01.01.01" name="gradusVII">GradusVII a01.01.01.01.01.01.01
+
+</gradusVII>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.01 -->
+
+</gradusIII>
+<!-- end a01.01.01 -->
+
+</gradusII>
+<!-- end a01.01 -->
+
+</gradusI>
+<!-- end a01 -->
+
+<gradusI ID="a02">GradusI a02
+
+</gradusI>
+<!-- end a02 -->
+
+</radix>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="categoryDataset02.css"?>
+<!DOCTYPE a SYSTEM "categoryDataset02.dtd">
+<!-- category dataset 02 document class -->
+
+<!-- begin radix -->
+
+<CategoryDataset ID="a" name="a">Acquisti in euro
+	<Series ID="a01" name="elettronica a01">Elettronica
+		<Item ID="a01.01" name="item a01.01">
+			<Key ID="a01.01.01" name="Key a01.01.01">2023</Key>
+			<!-- end a01.01.01 -->
+			<Value ID="a01.01.02" name="Data a01.01.02"/>
+			<!-- end a01.01.02 -->
+		</Item>
+		<!-- end a01.01 -->
+		<Item ID="a01.02" name="item a01.02">
+			<Key ID="a01.02.01" name="Key a01.02.01">2022</Key>
+			<!-- end a01.02.01 -->
+			<Value ID="a01.02.02" name="Data a01.02.02">500.0</Value>
+			<!-- end a01.02.02 -->
+		</Item>
+		<!-- end a01.02 -->
+	</Series>
+	<!-- end a01 -->
+	<Series ID="a02" name="tessile a02">Tessile
+		<Item ID="a02.01" name="item a02.01">
+			<Key ID="a02.01.01" name="Key a02.01.01">2023</Key>
+			<!-- end a02.01.01 -->
+			<Value ID="a02.01.02" name="Data a02.01.02">100.00</Value>
+			<!-- end a02.01.01 -->
+		</Item>
+		<!-- end a02.01 -->
+		<Item ID="a02.02" name="item a02.02">
+			<Key ID="a02.02.01" name="Key a02.02.01">2022</Key>
+			<!-- end a02.02.01 -->
+			<Value ID="a02.02.02" name="Data a02.02.02">100.0</Value>
+			<!-- end a02.02.02 -->
+		</Item>
+		<!-- end a02.02 -->
+	</Series>
+	<!-- end a02 -->
+</CategoryDataset>

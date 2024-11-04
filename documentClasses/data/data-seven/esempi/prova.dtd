@@ -1,0 +1,63 @@
+<!-- Root = a= titulus = title = radix = radix a -->
+<!ELEMENT radix ANY>
+<!-- All that is in "gradusI" = gradusI = a01 -->
+<!ELEMENT gradusI (#PCDATA)>
+<!ATTLIST gradusI ID CDATA "a01">
+<!-- All that is in "gradusI" = gradusI = a02 -->
+<!ELEMENT gradusI (#PCDATA)>
+<!ATTLIST gradusI ID CDATA "a02">
+<!-- All that is under "gradusII" = gradusII = a01.01 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusII ID CDATA "a01.01">
+<!-- All that is under "gradusII" = gradusII = a02.01 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusII ID CDATA "a02.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.01.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIII ID CDATA "a01.01.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.01.02 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIII ID CDATA "a01.01.02">
+<!-- All that is under "gradusIII" = gradusIII = a02.01.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIII ID CDATA "a02.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.01.01 -->
+<!ELEMENT gradusIV (gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.02.01 -->
+<!ELEMENT gradusIV (gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.02.01">
+<!-- All that is under "gradusIV" = gradusIV = a02.01.01.01 -->
+<!ELEMENT gradusIV (gradusV+, gradusVI+, gradusVII+)>
+<!ATTLIST gradusIV ID CDATA "a02.01.01.01">
+<!-- All that is under "gradusV" = gradusV = a01.01.01.01.01 -->
+<!ELEMENT gradusV (gradusVI+, gradusVII+)>
+<!ATTLIST gradusV ID CDATA "a01.01.01.01.01">
+<!-- All that is under "gradusV" = gradusV = a01.01.02.01.01 -->
+<!ELEMENT gradusV (gradusVI+, gradusVII+)>
+<!ATTLIST gradusV ID CDATA "a01.01.02.01.01">
+<!-- All that is under "gradusV" = gradusV = a02.01.01.01.01 -->
+<!ELEMENT gradusV (gradusVI+, gradusVII+)>
+<!ATTLIST gradusV ID CDATA "a02.01.01.01.01">
+<!-- All that is under "gradusVI" = gradusVI = a01.01.01.01.01.01 -->
+<!ELEMENT gradusVI (gradusVII+)>
+<!ATTLIST gradusVI ID CDATA "a01.01.01.01.01.01">
+<!-- All that is under "gradusVI" = gradusVI = a01.01.02.01.01.01 -->
+<!ELEMENT gradusVI (gradusVII+)>
+<!ATTLIST gradusVI ID CDATA "a01.01.02.01.01.01">
+<!-- All that is under "gradusVI" = gradusVI = a02.01.01.01.01.01 -->
+<!ELEMENT gradusVI (gradusVII+)>
+<!ATTLIST gradusVI ID CDATA "a02.01.01.01.01.01">
+<!-- All that is in "gradusVII" = gradusVII = a01.01.01.01.01.01.01 -->
+<!ELEMENT gradusVII (#PCDATA)>
+<!ATTLIST gradusVII ID CDATA "a01.01.01.01.01.01.01">
+<!-- All that is in "gradusVII" = gradusVII = a01.01.02.01.01.01.01 -->
+<!ELEMENT gradusVII (#PCDATA)>
+<!ATTLIST gradusVII ID CDATA "a01.01.02.01.01.01.01">
+<!-- All that is in "gradusVII" = gradusVII = a02.01.01.01.01.01.01 -->
+<!ELEMENT gradusVII (#PCDATA)>
+<!ATTLIST gradusVII ID CDATA "a02.01.01.01.01.01.01">
+ 
+<!-- Constants -->
+ 
+ 
