@@ -26,5 +26,5 @@ Open README/doc/xmluxDoc-xmlux/xmluxDoc.xml by a desktop pc web browser.
 
 e.g.
 ```bash
-chromium README/doc/xmluxDoc-xmlux/xmluxDoc.xml
+chromium README/xmluxDoc-xmlux/xmluxDoc.xml
 ```
