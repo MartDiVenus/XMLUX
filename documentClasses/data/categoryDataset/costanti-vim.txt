@@ -13,17 +13,13 @@ come limite. Per esempio, avrò quindi:
 <Series ...>Rilevazioni
 
 <item ...>
-<Key ...>gennaio
-</Key>
-<Value>1.5
-</Value>
+<Key ...>gennaio</Key>
+<Value>1.5</Value>
 </item>
 
 <item ...>
-<Key ...>maggio
-</Key>
-<Value>1.8
-</Value>
+<Key ...>maggio</Key>
+<Value>1.8</Value>
 </item>
 
 </Series>
@@ -31,17 +27,13 @@ come limite. Per esempio, avrò quindi:
 <Series ...>Limite inferiore
 
 <item ...>
-<Key ...>gennaio
-</Key>
-<Value>0.3
-</Value>
+<Key ...>gennaio</Key>
+<Value>0.3</Value>
 </item>
 
 <item ...>
-<Key ...>maggio
-</Key>
-<Value>0.3
-</Value>
+<Key ...>maggio</Key>
+<Value>0.3</Value>
 </item>
 
 </Series>
@@ -49,17 +41,13 @@ come limite. Per esempio, avrò quindi:
 <Series ...>Limite superiore
 
 <item ...>
-<Key ...>gennaio
-</Key>
-<Value>2
-</Value>
+<Key ...>gennaio</Key>
+<Value>2</Value>
 </item>
 
 <item ...>
-<Key ...>maggio
-</Key>
-<Value>2
-</Value>
+<Key ...>maggio</Key>
+<Value>2</Value>
 </item>
 
 </Series>
