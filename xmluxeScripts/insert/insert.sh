@@ -2289,7 +2289,7 @@ key=$(cat /tmp/xmluxe-insertKey)
 
 #cp /tmp/insXmluxe-newSeries-01 /tmp/insXmluxe-newSeries
 
-vim -c "%s/<Key ID=\"$idItem.01\" name.*>$pastKey$/<Key ID=\"$idItem.01\" name=\"KEY $key\">$key/g" /tmp/insXmluxe-newSeries -c :w -c :q
+vim -c "%s/<Key ID=\"$idItem.01\" name.*>$pastKey$/<Key ID=\"$idItem.01\" name=\"KEY $key\">$key<\/Key>/g" /tmp/insXmluxe-newSeries -c :w -c :q
 
 ## Aggiornamento dei valori per ogni Key
 
@@ -2459,7 +2459,7 @@ costantiValues
 #
 ##cp /tmp/insXmluxe-newSeries-01 /tmp/insXmluxe-newSeries
 #
-vim -c "%s/Value ID=\"$idItem.02\" name.*>$pastValue$/Value ID=\"$idItem.02\" name=\"VALUE $value\">$value/g" /tmp/insXmluxe-newSeries -c :w -c :q
+vim -c "%s/Value ID=\"$idItem.02\" name.*>$pastValue$/Value ID=\"$idItem.02\" name=\"VALUE $value\">$value<\/Value>/g" /tmp/insXmluxe-newSeries -c :w -c :q
 
 done
 
@@ -2669,7 +2669,7 @@ item=$(cat /tmp/xmluxe-insertItem)
 cat $targetFile.lmx | sed -n ''$beginAnteIDLine','$endAnteIDLine'p' > /tmp/insXmluxe-innerItem
 
 ### La Key precedente <ante>
-#grep "<Key" /tmp/insXmluxe-innerItem | sed 's/.*>//g' > /tmp/insXmluxe-key
+#grep "<Key" /tmp/insXmluxe-innerItem | sed 's/.*">//g' | sed 's/<.*//g' > /tmp/insXmluxe-key
 
 #key=$(cat /tmp/insXmluxe-key)
 
@@ -2699,7 +2699,7 @@ if test $bytesCostanti -gt 0
 then
 
 ### Il Value precedente <ante>
-grep "<Value" /tmp/insXmluxe-innerItem | sed 's/.*>//g' > /tmp/insXmluxe-value
+grep "<Value" /tmp/insXmluxe-innerItem | sed 's/.*">//g' | sed 's/<.*//g' > /tmp/insXmluxe-value
 
 value=$(cat /tmp/insXmluxe-value)
 
@@ -3004,10 +3004,8 @@ series=$(cat /tmp/xmluxe-insertSeries)
 
 #cp /tmp/insXmluxe-newSeries-01 /tmp/insXmluxe-newSeries
 
-#######
 
 vim -c "%s/<Series ID=\"$idSeries\" name.*>$pastSeries$/<Series ID=\"$idSeries\" name=\"$series\">$series/g" /tmp/insXmluxe-newSeries -c :w -c :q
-
 
 	## L'Item in Category Dataset02 non è individuabile con tale metodo perché non ha titolo,
 	## eseguire la ricerca per name="".
@@ -3096,7 +3094,16 @@ key=$(cat /tmp/xmluxe-insertKey)
 
 #cp /tmp/insXmluxe-newSeries-01 /tmp/insXmluxe-newSeries
 
-vim -c "%s/<Key ID=\"$idItem.01\" name.*>$pastKey$/<Key ID=\"$idItem.01\" name=\"KEY $key\">$key/g" /tmp/insXmluxe-newSeries -c :w -c :q
+### testing 
+#cp /tmp/insXmluxe-newSeries /tmp/insXmluxe-newSeriesTestingKey
+
+vim -c "%s/<Key ID=\"$idItem.01\" name.*>$pastKey$/<Key ID=\"$idItem.01\" name=\"KEY $key\">$key<\/Key>/g" /tmp/insXmluxe-newSeries -c :w -c :q
+
+#read -p "
+#testing 3103
+#/tmp/insXmluxe-newSeriesTestingKey
+#/tmp/insXmluxe-newSeries
+#" EnterNull
 
 ## Aggiornamento dei valori per ogni Key
 
@@ -3114,9 +3121,19 @@ cat /tmp/insXmluxe-stringaValueResp | sed 's/>.*/>/g' | sed 's/ name=".*>/>/g' |
 
 dettaglioValue=$(cat /tmp/insXmluxe-stringaDettaglioValue)
 
+#read -p "
+#testing 3118
+#dettaglioValue = $dettaglioValue
+#" EnterNull
+
 costantiValues() {
 
 if [ ! -f /tmp/xmlux-valuesCostExists ]; then
+
+#read -p "
+#testing 3127 
+#/tmp/xmlux-valuesCostExists non esiste
+#" EnterNull
 
 vim /usr/local/lib/xmlux/documentClasses/data/categoryDataset/costanti-vim.txt
 
@@ -3235,7 +3252,7 @@ fi
 
 else
 
-	## scritto dalla precedente immessione di Value come costante
+	## scritto dalla precedente immissione di Value come costante
 value=$(cat /tmp/xmlux-Value)
 
 echo ":%s/<Value ID=\"$idValue\" name=\"VALUE $nameValue\">$value/<Value ID=\"$idValue\" name=\"VALUE $nameValue\">$series/g" >> /tmp/xmlux-sostLmxVim
@@ -3260,8 +3277,17 @@ costantiValues
 #
 ##cp /tmp/insXmluxe-newSeries-01 /tmp/insXmluxe-newSeries
 #
-vim -c "%s/Value ID=\"$idItem.02\" name.*>$pastValue$/Value ID=\"$idItem.02\" name=\"VALUE $value\">$value/g" /tmp/insXmluxe-newSeries -c :w -c :q
 
+### testing
+#cp /tmp/insXmluxe-newSeries /tmp/insXmluxe-newSeriesTestingValue
+
+vim -c "%s/Value ID=\"$idItem.02\" name.*>$pastValue$/Value ID=\"$idItem.02\" name=\"VALUE $value\">$value<\/Value>/g" /tmp/insXmluxe-newSeries -c :w -c :q
+
+#read -p "
+#testing 3285
+#/tmp/insXmluxe-newSeriesTestingValue
+#/tmp/insXmluxe-newSeries
+#" EnterNull
 
 done
 
@@ -3435,13 +3461,13 @@ echo "$newID" > /tmp/insXmluxe-newID
 cat $targetFile.lmx | sed -n ''$beginAnteIDLine','$endAnteIDLine'p' > /tmp/insXmluxe-innerItem
 
 ### La Key precedente <ante>
-#grep "<Key" /tmp/insXmluxe-innerItem | sed 's/.*>//g' > /tmp/insXmluxe-key
+#grep "<Key" /tmp/insXmluxe-innerItem | sed 's/.*">//g' | sed 's/<.*//g' > /tmp/insXmluxe-key
 
 #key=$(cat /tmp/insXmluxe-key)
 
 #read -p "
-#testing 2273
-#key = $key
+#testing 3469
+#/tmp/insXmluxe-innerItem
 #" EnterNull
 
 echo ""
@@ -3465,12 +3491,12 @@ if test $bytesCostanti -gt 0
 then
 
 ### Il Value precedente <ante>
-grep "<Value" /tmp/insXmluxe-innerItem | sed 's/.*>//g' > /tmp/insXmluxe-value
+grep "<Value" /tmp/insXmluxe-innerItem | sed 's/.*">//g' | sed 's/<.*//g' > /tmp/insXmluxe-value
 
 value=$(cat /tmp/insXmluxe-value)
 
 #read -p "
-#testing 2247
+#testing 3499
 #costante
 #value = $value
 #" EnterNull
@@ -3513,6 +3539,10 @@ cp /tmp/xmluxe-vimInputUNIVERSAL /tmp/xmluxe-value
 
 value=$(cat /tmp/xmluxe-value)
 
+#read -p "
+#testing 3543 
+#value = $value
+#" EnterNull
 
 fi
 
@@ -3529,6 +3559,13 @@ echo "
 
 </Item>
 <!-- end $newID -->" > /tmp/insXmluxe-toInject
+
+#read -p "
+#testing 3560
+#value = $value
+#key = $key
+#" EnterNull
+
 
 #		read -p "
 #testing 2196
