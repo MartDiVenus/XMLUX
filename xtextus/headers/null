@@ -1,0 +1,4 @@
+set printoptions=header:0
+:hardcopy > $pathIsolato/$nomeSenzaEstensione.ps
+ZZ
+
