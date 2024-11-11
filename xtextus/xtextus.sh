@@ -38,18 +38,24 @@ For xtextus and xmluxe common actions, see xmluxe help or xmluxe README section.
 	
 help                                                      -h
 
+chars 		 					   -char
+open by gvim: /usr/local/lib/xmlux/char/
+	
+
+pattern							   -pattern
+open by gvim: /usr/local/lib/xmlux/pattern/
+
 
 target file 						    
 wildcard * as --f entire value or partial value, is accepted.
 For jump*, select*, parse*, render* actions 		  --f='Value without extension'
-For -o, -p options					  --f='Value with or without extension'
-But if you have (into the project folder) one *.lmx only [together other xmlux files],
-as default and as I suggest, just type one * [e.g. --f=*]: *.lmx will be open because it has
-priority.
+For -o, -p, -view options				  --f='Value with or without extension'
 
 open file						  -o
 
 print in ps and pdf, with xml fancy syntax		  -p
+
+
 
 Usage:
 cd 'path of the project'
@@ -74,15 +80,21 @@ xtextus -p --f=greeting.lmx
 
 xtextus -p --f=greeting
 
+
 xtextus --jump-id=a01.01 --f=greeting
+xtextus --jump-id=a01.01 --f=*
 
 xtextus --selectR-name=\"happy\" --f=greeting
-	
+xtextus --selectR-name=\"happy\" --f=*
+
 xtextus --selectW-id=\"a01.01.01\" --f=greeting
+xtextus --selectW-id=\"a01.01.01\" --f=*
 
 xtextus --parse-title=\"Sunny\" --f=greeting
+xtextus --parse-title=\"Sunny\" --f=*
 
 xtextus --renderCss-id=\"a02\" --f=greeting
+xtextus --renderCss-id=\"a02\" --f=*
 
 
 Copyright:
@@ -92,6 +104,8 @@ GNU copyright applies to its Mario Fantini's GNU tools usage.
 XML copyright applies to its Mario Fantini's XML tools usage.
 VIM copyright applies to its Mario Fantini's VIM usage.
 Java copyright applies to its Mario Fantini's JAVA tools usage.
+XMLView.java https://yumberc.github.io/
+
 And so on.
 "
 
@@ -243,7 +257,7 @@ touch /tmp/xtextus-nessunaEstensione
 #### Lascia a me tale scelta, occorre modificare
 #### /usr/local/lib/xmlux/xtesto/.../etc/vimrc.local,
 #### /usr/local/lib/xmlux/xtesto/.../etc/gvimrc.local
-#### /usr/share/vim/vim82/colors
+#### /usr/share/vim/vim90/colors
 #### in base a essa.
 prColors="mart.vim"
 
