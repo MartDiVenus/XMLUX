@@ -4,13 +4,13 @@ sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
 
 sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
 
-if [ ! -f /usr/share/vim/vim82/syntax/lmx.vim ]; then
-  sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim82/syntax/lmx.vim /usr/share/vim/vim82/syntax
-  sudo chown root:root /usr/share/vim/vim82/syntax/lmx.vim
-  sudo chmod ugao-xrw /usr/share/vim/vim82/syntax/lmx.vim
-  sudo chmod u+w /usr/share/vim/vim82/syntax/lmx.vim
-  sudo chmod uga+r /usr/share/vim/vim82/syntax/lmx.vim
-  sudo chmod ug+r /usr/share/vim/vim82/syntax/lmx.vim
+if [ ! -f /usr/share/vim/vim90/syntax/lmx.vim ]; then
+  sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/lmx.vim /usr/share/vim/vim90/syntax
+  sudo chown root:root /usr/share/vim/vim90/syntax/lmx.vim
+  sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/lmx.vim
+  sudo chmod u+w /usr/share/vim/vim90/syntax/lmx.vim
+  sudo chmod uga+r /usr/share/vim/vim90/syntax/lmx.vim
+  sudo chmod ug+r /usr/share/vim/vim90/syntax/lmx.vim
 fi
 
 if [ ! -d /home/$USER/.vim/autoload ]; then
@@ -24,12 +24,12 @@ if [ ! -d /home/$USER/.vim/autoload ]; then
   chmod -R ug+r /home/$USER/.vim/autoload
 fi
 
-if [ ! -f /usr/share/vim/vim82/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim82/colors/mart.vim /usr/share/vim/vim82/colors
-   sudo chown root:root /usr/share/vim/vim82/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim82/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim82/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim82/colors/mart.vim
+if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
+   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
+   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
+   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
+   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
+   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
 fi
 
 ############################ Eseguibile per la compilazione
@@ -194,7 +194,7 @@ echo " "
 echo " "
 echo " "
 echo "Copyright:
-Copyright (C) 2023.09.23 Mario Fantini (marfant7@gmail.com).
+Copyright (C) 2023.09.23 Mario Fantini (ing.mariofantini@gmail.com).
 Bash copyright applies to its Mario Fantini's BASH usage.
 GNU copyright applies to its Mario Fantini's GNU tools usage.
 XML copyright applies to its Mario Fantini's XML tools usage.
