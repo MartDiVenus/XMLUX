@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: XML/LMX
 " Maintainer: Christian Brabandt <cb@256bit.org>, Mario Fantini
-" <ing.mariofantini@gmail.com>"
+" <marfant7@gmail.com>"
 " Repository: https://github.com/chrisbra/vim-xml-ftplugin
 " Previous Maintainer: Johannes Zellner <johannes@zellner.org>
 " Author: Paul Siegmann <pauls@euronet.nl>, Mario Fantini <marfant@gmail.com>.
