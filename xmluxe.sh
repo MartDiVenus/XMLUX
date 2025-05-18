@@ -484,7 +484,7 @@ xmluxe --sort-d=a01.01.01 -t --f=*
 
 
 Copyright:
-Copyright (C) 2023.09.23 Mario Fantini (ing.mariofantini@gmail.com).
+Copyright (C) 2023.09.23 Mario Fantini (marfant7@gmail.com).
 Bash copyright applies to its Mario Fantini's BASH usage.
 GNU copyright applies to its Mario Fantini's GNU tools usage.
 XML copyright applies to its Mario Fantini's XML tools usage.
