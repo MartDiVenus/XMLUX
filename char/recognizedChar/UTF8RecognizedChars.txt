@@ -1,4 +1,0 @@
-cancelletto			#			&#x23;			\cluxnumb		\#		default
-leftQuotationMark		"			&#x22;			\cluxquotmark		``		default
-leftQuotationMark		"			&#x22;			\cluxquotmark		''		default
-

@@ -1,8 +1,0 @@
-emSpace 		n.			&#8195;			\cluxmsp		\:			default
-enSpace 		☠			&#8194;			\cluxnsp		\;			default 	
-greater-thanSign 	< 			&#x3E;			\cluxgt			\textgreater		default
-less-thanSign 		< 			&#x3C;			\cluxlt			\textless		default
-mdash			—.			&#8212;			\cluxmdash		---			default	
-ndash			—			&#8211; 		\cluxndash		--			default
-thinSpace		↓			&#8201;			\cluxthinsp		\,			default
-copyright		©			&#xA9;			\cluxcopyright		\copyright		default

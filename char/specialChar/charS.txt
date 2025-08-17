@@ -1,8 +1,0 @@
-ampersand		&			&#x26;			\csluxamp			\&			default
-leftCurlyBracket	{			&#x7B;			\csluxlcurly			\{			default
-greater-thanSign	>			&#x3E;			\csluxgt			\textgreater		default
-less-thanSign		<			&#x3C;			\csluxlt			\textless		default
-reverseSolidus		\			&#x5C;			\csluxbslash			\textbackslash		default
-rightCurlyBracket	}			&#x7D;			\csluxrcurly			\}			default
-rightSquareBracket	]			&#x5D;			\csluxrsquare			\rbrack			default
-rightSquareBracket	[			&#x5B;			\csluxlsquare			\lbrack			default
