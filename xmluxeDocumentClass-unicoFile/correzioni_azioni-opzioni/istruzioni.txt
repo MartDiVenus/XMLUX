@@ -1,0 +1,3 @@
+Ho dovuto eseguire due passi, perché sono stato non efficiente
+al primo. Si può fare tutto in un passo, e meglio con il metodo
+presente in 'secondo_passo', ossia con le funzioni di vim.

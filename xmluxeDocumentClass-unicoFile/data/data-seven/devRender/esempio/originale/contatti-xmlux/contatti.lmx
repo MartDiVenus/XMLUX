@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="contatti.css"?>
+<!DOCTYPE a SYSTEM "contatti.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix ID="a" name="contatti">Contatti
+
+<gradusI ID="a01" name="parenti">Parenti
+
+<gradusII ID="a01.01" name="mamma">Mamma
+
+<gradusIII ID="a01.01.01" name="recapiti telefonici mamma">Recapiti telefonici mamma
+
+<gradusIV ID="a01.01.01.01" name="mobili mamma">Mobili mamma
+
+<gradusV ID="a01.01.01.01.01" name="cellulare mamma">320 47 43 057
+</gradusV>
+<!-- end a01.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.01 -->
+
+<gradusIV ID="a01.01.01.02" name="fissi mamma">Fissi mamma
+<gradusV ID="a01.01.01.02.01" name="fisso casa mamma">0831 849101
+</gradusV>
+<!-- end a01.01.01.02.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.02 -->
+</gradusIII>
+<!-- end a01.01.01 -->
+
+<gradusIII ID="a01.01.02" name="indirizzi mamma">Indirizzi mamma
+
+<gradusIV ID="a01.01.02.01" name="fisici mamma">Indirizzi fisici mamma
+<gradusV ID="a01.01.02.01.01" name="domicilio mamma">domicilio: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.01.02.01.01 -->
+<gradusV ID="a01.01.02.01.02" name="residenza mamma">residenza: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.01.02.01.02 -->
+</gradusIV>
+<!-- end a01.01.02.01 -->
+
+<gradusIV ID="a01.01.02.03" name="web mamma">Indirizzi Web mamma
+<gradusV ID="a01.01.02.03.01" name="gmail mamma">cosimaribezzo@gmail.com
+</gradusV>
+<!-- end a01.01.02.03.01 -->
+<gradusV ID="a01.01.02.03.02" name="libero mamma">mimmaribezzo@libero.it
+</gradusV>
+<!-- end a01.01.02.03.02 -->
+</gradusIV>
+<!-- end a01.01.02.03 -->
+
+</gradusIII>
+<!-- end a01.01.02 -->
+</gradusII>
+<!-- end a01.01 -->
+
+
+<gradusII ID="a01.02" name="pater">Pater
+
+<gradusIII ID="a01.02.01" name="recapiti telefonici pater">Recapiti telefonici pater
+
+<gradusIV ID="a01.02.01.01" name="mobili pater">Mobili pater
+
+<gradusV ID="a01.02.01.01.01" name="cellulare pater">338 12 82 755
+</gradusV>
+<!-- end a01.02.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.02.01.01 -->
+
+<gradusIV ID="a01.02.01.02" name="fissi pater">Fissi pater
+
+<gradusV ID="a01.02.01.02.01" name="fisso casa pater">0831 849101
+</gradusV>
+<!-- end a01.02.01.02.01 -->
+</gradusIV>
+<!-- end a01.02.01.02 -->
+
+</gradusIII>
+<!-- end a01.02.01 -->
+
+<gradusIII ID="a01.02.02" name="indirizzi pater">Indirizzi pater
+
+<gradusIV ID="a01.02.02.01" name="fisici pater">Indirizzi fisici pater
+<gradusV ID="a01.02.02.01.01" name="domicilio pater">domicilio: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.02.02.01.01 -->
+<gradusV ID="a01.02.02.01.02" name="residenza pater">residenza: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.02.02.01.02 -->
+</gradusIV>
+<!-- end a01.02.02.01 -->
+
+<gradusIV ID="a01.02.02.03" name="web pater">Indirizzi Web pater
+<gradusV ID="a01.02.02.03.01" name="gmail pater"> floro.fantini@gmail.com
+</gradusV>
+<!-- end a01.02.02.03.01 -->
+
+<gradusV ID="a01.02.02.03.02" name="pec pater"> floro.fantini@pec.it
+</gradusV>
+<!-- end a01.02.02.03.02 -->
+
+</gradusIV>
+<!-- end a01.02.02.03 -->
+
+</gradusIII>
+<!-- end a01.02.02 -->
+
+</gradusII>
+<!-- end a01.02 -->
+
+
+
+<gradusII ID="a01.03" name="sorella">Sorella
+
+<gradusIII ID="a01.03.01" name="recapiti telefonici sorella">Recapiti telefonici sorella
+
+<gradusIV ID="a01.03.01.01" name="mobili sorella">Mobili sorella
+
+<gradusV ID="a01.03.01.01.01" name="cellulare sorella">328 35 25 357
+</gradusV>
+<!-- end a01.03.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.03.01.01 -->
+
+<gradusIV ID="a01.03.01.02" name="fissi sorella">Fissi sorella
+
+<gradusV ID="a01.03.01.02.01" name="fisso casa sorella">081 18 36 1308
+</gradusV>
+<!-- end a01.03.01.02.01 -->
+
+</gradusIV>
+<!-- end a01.03.01.02 -->
+
+</gradusIII>
+<!-- end a01.03.01 -->
+
+<gradusIII ID="a01.03.02" name="indirizzi sorella">Indirizzi sorella
+
+<gradusIV ID="a01.03.02.01" name="fisici sorella">Indirizzi fisici sorella
+<gradusV ID="a01.03.02.01.01" name="domicilio sorella">domicilio: Via Michelangelo
+</gradusV>
+<!-- end a01.03.02.01.01 -->
+<gradusV ID="a01.03.02.01.02" name="residenza sorella">residenza: Via Michelangelo
+</gradusV>
+<!-- end a01.03.02.01.02 -->
+</gradusIV>
+<!-- end a01.03.02.01 -->
+
+<gradusIV ID="a01.03.02.03" name="web sorella">Indirizzi web sorella
+
+<gradusV ID="a01.03.02.03.01" name="gmail sorella">g.fantini@gmail.com
+</gradusV>
+<!-- end a01.03.02.03.01 -->
+
+<gradusV ID="a01.03.02.03.02" name="pec sorella">
+</gradusV>
+<!-- end a01.03.02.03.02 -->
+
+</gradusIV>
+<!-- end a01.03.02.03 -->
+
+</gradusIII>
+<!-- end a01.03.02 -->
+
+</gradusII>
+<!-- end a01.03 -->
+
+</gradusI>
+<!-- end a01 -->
+
+
+<gradusI ID="a02" name="colleghi">Colleghi
+
+<gradusII ID="a02.01" name="aa">AA
+
+<gradusIII ID="a02.01.01" name="recapiti telefonici aa">Recapiti telefonici aa
+
+<gradusIV ID="a02.01.01.01" name="mobili aa">Mobili aa
+
+<gradusV ID="a02.01.01.01.01" name="cellulare aa">xxx xx xx xx
+</gradusV>
+<!-- end a02.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a02.01.01.01 -->
+
+<gradusIV ID="a02.01.01.02" name="fissi aa">Fissi aa
+
+<gradusV ID="a02.01.01.02.01" name="fisso casa aa">yyyy yyyyyy
+</gradusV>
+<!-- end a02.01.01.02.01 -->
+
+</gradusIV>
+<!-- end a02.01.01.02 -->
+
+</gradusIII>
+<!-- end a02.01.01 -->
+
+<gradusIII ID="a02.01.02" name="indirizzi aa">Indirizzi aa
+
+<gradusIV ID="a02.01.02.01" name="fisici aa">Indirizzi fisici aa
+<gradusV ID="a02.01.02.01.01" name="domicilio aa">domicilio: BB
+</gradusV>
+<!-- end a02.01.02.01.01 -->
+<gradusV ID="a02.01.02.01.02" name="residenza aa">residenza: CC
+</gradusV>
+<!-- end a02.01.02.01.02 -->
+</gradusIV>
+<!-- end a02.01.02.01 -->
+
+<gradusIV ID="a02.01.02.03" name="web aa">Indirizzi web aa
+
+<gradusV ID="a02.01.02.03.01" name="gmail aa">w@w.com
+</gradusV>
+<!-- end a02.01.02.03.01 -->
+
+<gradusV ID="a02.01.02.03.02" name="pec aa">
+</gradusV>
+<!-- end a02.01.02.03.02 -->
+
+</gradusIV>
+<!-- end a02.01.02.03 -->
+
+</gradusIII>
+<!-- end a02.01.02 -->
+
+</gradusII>
+<!-- end a02.01 -->
+
+</gradusI>
+<!-- end a02 -->
+
+</radix>

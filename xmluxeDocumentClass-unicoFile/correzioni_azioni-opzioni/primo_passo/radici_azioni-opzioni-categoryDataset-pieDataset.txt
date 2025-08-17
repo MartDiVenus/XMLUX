@@ -1,0 +1,48 @@
+Le correzioni per vim, 2024.09.25
+
+--jump=
+%s/grep "^--jump"/grep "^--jump="/g
+
+
+--selectR-
+:%s/grep "selectR-/grep "^--selectR-/g
+
+
+--selectW-
+:%s/grep "selectW-/grep "^--selectW-/g
+
+
+--renderCss-
+:%s/grep "renderCss-/grep "^--renderCss-/g
+
+
+--parse-
+:%s/grep "parse-/grep "^--parse-/g
+
+--add=
+:%s/grep "add/grep "^--add=/g
+
+
+-w
+:%s/grep "^-w/grep "^-w$/g
+
+
+-name
+:%s/grep "^-name/grep "^-name$/g
+
+
+-k
+:%s/grep "^-k/grep "^-k$/g
+
+
+--remove=
+:%s/grep "remove/grep "^--remove=/g
+
+--move=
+:%s/grep "move/grep "^--move=/g
+
+
+-a
+
+-b
+

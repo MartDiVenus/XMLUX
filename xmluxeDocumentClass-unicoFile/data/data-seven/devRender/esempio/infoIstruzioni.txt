@@ -1,0 +1,22 @@
+La via più veloce è quella di ottenere il rendering
+direttamente dal file *.xml.
+Quindi se si volesse cambiare qualcosa al contenuto
+del rendering, si può intervenire direttamente nel
+file *.xml, o meglio ancora nel file *.lmx da cui
+il rendering *.xml deriva.
+Nell'esempio, 
+'selezione/renderedCss.xml' 
+deriva da
+'originale/contatti-xmlux/contatti.xml'
+quindi da
+'originale/contatti-xmlux/contatti.lmx'
+
+
+istanze:
+xmluxc --f=contatti
+xmluxe --renderCss-id=a01.01.02 --f=contatti
+
+ugualmente con
+xmluxe --renderCss-name=a01.01.02 --f=contatti
+
+xmluxe --renderCss-title=a01.01.02 --f=contatti
