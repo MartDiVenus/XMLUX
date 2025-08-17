@@ -1,0 +1,758 @@
+#!/bin/bash
+
+targetFile="$(cat /tmp/xmluxvTargetFile)"
+
+## Tutti gli id che iniziano con <a>, ossia il ITEM a.
+# è troppo vincolante utilizzare la chiave <a>.
+#grep -o "ID=\"a*.*" $targetFile.lmx > /tmp/xmluxv-css01
+# In questo modo puoi scrivere ID anche nel preambolo, perché quest'ultimo escluso.
+
+cat $targetFile.lmx | sed -n '/<!-- begin radix/,$p' > /tmp/xmluxv-css0000
+
+## mi serve la coerenza di numero di righe tra il file lmx in cui effettuerò le iniezioni
+## e il file selezionato in cui ho escluso il preambolo.
+grep -n "<!-- begin radix" $targetFile.lmx | cut -d: -f1 > /tmp/xmluxv-nLineaBeginRadix
+
+leggoNBeginRadix=$(cat /tmp/xmluxv-nLineaBeginRadix)
+
+righeEsatte=$(($leggoNBeginRadix - 1))
+
+touch /tmp/xmluxv-IpezzoCoerenzaBeginRadixLmx
+
+declare -i var=0
+
+while ((k++ <$righeEsatte))
+  do
+  var=$var+1
+  echo "riga per coerenza con il file lmx n. $var" >> /tmp/xmluxv-IpezzoCoerenzaBeginRadixLmx
+done 
+
+cat /tmp/xmluxv-IpezzoCoerenzaBeginRadixLmx /tmp/xmluxv-css0000 > /tmp/xmluxv-css000
+
+## Il I ID è sempre quello del root, io non specifico nulla nel preambolo xml. 
+grep "ID=*" /tmp/xmluxv-css000 | head -n 1 > /tmp/xmluxv-css00
+
+## leggo il valore di root
+cat /tmp/xmluxv-css00 | cut -d= -f2,2 | sed 's/"//g' | sed 's/>/ /' | awk '$1 > 0 {print $1}' > /tmp/xmluxv-idRoot
+
+leggoIdRoot="$(cat /tmp/xmluxv-idRoot)"
+
+## ora posso selezionare tutti gli ID appartenenti al root
+grep "ID=\"$leggoIdRoot" /tmp/xmluxv-css000 | awk '$1 > 0 {print $2}' > /tmp/xmluxv-css01
+
+cat /tmp/xmluxv-css01 | sort > /tmp/xmluxv-css02
+
+cat /tmp/xmluxv-css02 | uniq > /tmp/xmluxv-css03
+
+## tutti i capitoli e sottostanti elementi
+grep "\." /tmp/xmluxv-css03 > /tmp/xmluxv-css04
+
+cat /tmp/xmluxv-css04 | sort > /tmp/xmluxv-css05
+
+## solo i capitoli, ossia gli a* senza .
+comm -3 /tmp/xmluxv-css03 /tmp/xmluxv-css05 > /tmp/xmluxv-css06
+
+## Nei valori degli elementi non possono esserci caratteri speciali, quali e.g. *, #, &.
+# perché grep non leggerebbe la stringa e quindi non producendo file *.dtd, *.css perfetti.
+
+################ INIZIO ROOT 
+
+rm -fr  /tmp/xmluxv-cssRoot
+
+mkdir /tmp/xmluxv-cssRoot
+
+split -l1 /tmp/xmluxv-css01 /tmp/xmluxv-cssRoot/
+
+
+for c in $(ls /tmp/xmluxv-cssRoot)
+do
+	leggoC="$(cat /tmp/xmluxv-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxv-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxv-item
+
+	leggoItem="$(cat /tmp/xmluxv-item)"
+
+	cat /tmp/xmluxv-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxv-id0
+
+	cat /tmp/xmluxv-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxv-id
+
+	leggoID="$(cat /tmp/xmluxv-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxv-title
+
+	leggoTitle="$(cat /tmp/xmluxv-title)"
+
+	leggoIdRoot="$(cat /tmp/xmluxv-idRoot)"
+
+	if test $leggoIdRoot == $leggoID
+
+	then
+	
+	  echo "$leggoID" >> /tmp/xmluxv-allIDs
+
+	  echo "$leggoItem" >> /tmp/xmluxv-allElements
+
+	  echo "$leggoTitle" >> /tmp/xmluxv-allTitles
+
+          echo "$leggoItem $leggoIdRoot" >> /tmp/xmluxv-itemsEtIDs
+
+	  echo "$leggoItem $leggoID $leggoTitle" >> /tmp/xmluxv-itemsEtIDsEtTitles
+
+	  echo "$leggoID $leggoTitle" >> /tmp/xmluxv-IDsEtTitles
+
+	  echo "$leggoItem $leggoTitle" >> /tmp/xmluxv-itemsEtTitles
+
+	  echo "$leggoItem" > /tmp/xmluxv-itemRoot
+
+rm -f /tmp/xmluxv-cssRoot/$c
+
+	fi
+
+
+done
+################ FINE ROOT 
+
+################ INIZIO  SERIES
+
+mkdir /tmp/xmluxv-Series
+
+for c in $(ls /tmp/xmluxv-cssRoot)
+
+do
+	leggoC="$(cat /tmp/xmluxv-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxv-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxv-item
+
+	leggoItem="$(cat /tmp/xmluxv-item)"
+
+	cat /tmp/xmluxv-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxv-id0
+
+	cat /tmp/xmluxv-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxv-id
+
+	leggoID="$(cat /tmp/xmluxv-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxv-title
+
+	leggoTitle="$(cat /tmp/xmluxv-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxv-id | awk '{ print length }' > /tmp/xmluxv-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxv-dotFrequency)
+
+
+	#### Series, non ha mai punti nell'ID.
+
+	if test $leggoDotFrequency -eq 0
+
+	then
+
+		cp /tmp/xmluxv-cssRoot/$c /tmp/xmluxv-Series
+
+		cp /tmp/xmluxv-item /tmp/xmluxv-itemSeries
+
+echo "$leggoID" >> /tmp/xmluxv-allIDs
+
+echo "$leggoItem" >> /tmp/xmluxv-allElements
+
+echo "$leggoTitle" >> /tmp/xmluxv-allTitles
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxv-itemsEtIDs
+
+echo "$leggoItem $leggoID $leggoTitle" >> /tmp/xmluxv-itemsEtIDsEtTitles
+
+echo "$leggoID $leggoTitle" >> /tmp/xmluxv-IDsEtTitles
+
+echo "$leggoItem $leggoTitle" >> /tmp/xmluxv-itemsEtTitles
+
+rm -f /tmp/xmluxv-cssRoot/$c
+
+	fi
+
+
+done
+################ FINE SERIES
+
+############## INIZIO ITEM
+mkdir /tmp/xmluxv-ITEM
+
+for c in $(ls /tmp/xmluxv-cssRoot)
+
+do
+
+	leggoC="$(cat /tmp/xmluxv-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxv-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxv-item
+
+	leggoItem="$(cat /tmp/xmluxv-item)"
+
+	cat /tmp/xmluxv-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxv-id0
+
+	cat /tmp/xmluxv-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxv-id
+	
+	leggoID="$(cat /tmp/xmluxv-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxv-title
+
+	leggoTitle="$(cat /tmp/xmluxv-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxv-id | awk '{ print length }' > /tmp/xmluxv-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxv-dotFrequency)
+
+	#### GradusII: il ITEM, insieme a part, non ha mai punti nell'ID; ma Series lo risolvo diversamente.
+
+	if test $leggoDotFrequency -eq 1
+
+	then
+
+echo "$leggoID" >> /tmp/xmluxv-allIDs
+
+echo "$leggoItem" >> /tmp/xmluxv-allElements
+
+echo "$leggoTitle" >> /tmp/xmluxv-allTitles
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxv-itemsEtIDs
+
+echo "$leggoItem $leggoID $leggoTitle" >> /tmp/xmluxv-itemsEtIDsEtTitles
+
+echo "$leggoID $leggoTitle" >> /tmp/xmluxv-IDsEtTitles
+
+echo "$leggoItem $leggoTitle" >> /tmp/xmluxv-itemsEtTitles
+
+cp /tmp/xmluxv-cssRoot/$c /tmp/xmluxv-ITEM
+
+cp /tmp/xmluxv-item /tmp/xmluxv-itemITEM
+
+rm -f /tmp/xmluxv-cssRoot/$c
+
+	fi
+	
+done
+################ FINE ITEM 
+
+################ INIZIO KEY or VALUE
+
+mkdir /tmp/xmluxv-KeyOrValue
+
+leggoIdRoot="$(cat /tmp/xmluxv-idRoot)"
+
+grep "ID=\"$leggoIdRoot" /tmp/xmluxv-css05 > /tmp/xmluxv-sectionAnd
+
+
+rm -fr /tmp/xmluxv-css05Split
+
+mkdir /tmp/xmluxv-css05Split
+
+split -l1 /tmp/xmluxv-sectionAnd  /tmp/xmluxv-css05Split/
+
+for d in $(ls /tmp/xmluxv-css05Split)
+
+do
+
+rm -f /tmp/xmluxv-pcdata
+
+touch /tmp/xmluxv-pcdata
+
+	leggoD="$(cat /tmp/xmluxv-css05Split/$d)"
+
+        grep "$leggoD" /tmp/xmluxv-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxv-item
+
+	leggoItem="$(cat /tmp/xmluxv-item)"
+
+	cat /tmp/xmluxv-css05Split/$d | sed 's/>/ /g' > /tmp/xmluxv-id0
+
+	cat /tmp/xmluxv-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxv-id
+	
+	leggoID="$(cat /tmp/xmluxv-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*"//g' | sed 's/>//g' | sed 's/<.*//g' > /tmp/xmluxv-title
+
+	leggoTitle="$(cat /tmp/xmluxv-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxv-id | awk '{ print length }' > /tmp/xmluxv-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxv-dotFrequency)
+
+	if test $leggoDotFrequency -eq 2
+
+	then
+
+echo "$leggoID" >> /tmp/xmluxv-allIDs
+
+echo "$leggoItem" >> /tmp/xmluxv-allElements
+
+echo "$leggoTitle" >> /tmp/xmluxv-allTitles
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxv-itemsEtIDs
+
+echo "$leggoItem $leggoID $leggoTitle" >> /tmp/xmluxv-itemsEtIDsEtTitles
+
+echo "$leggoID $leggoTitle" >> /tmp/xmluxv-IDsEtTitles
+
+echo "$leggoItem $leggoTitle" >> /tmp/xmluxv-itemsEtTitles
+
+cp /tmp/xmluxv-css05Split/$d /tmp/xmluxv-KeyOrValue
+
+cp /tmp/xmluxv-item /tmp/xmluxv-itemKeyOrValue
+
+rm -f /tmp/xmluxv-css05Split/$d
+
+fi
+
+done
+
+################ FINE KEY or VALUE
+
+
+rm -f $targetFile.lmxv
+
+touch $targetFile.lmxv
+
+
+##################################### non nella struttura familiare
+## the ID tree
+echo " " >> $targetFile.lmxv
+
+echo "NOT KIN" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) IDs tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allIDs)" >> $targetFile.lmxv
+
+echo "end IDs tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+ 
+echo "<!--(not kin) Elements tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allElements)" >> $targetFile.lmxv
+
+echo "end elements tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) Titles alias Keys or Values tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allTitles)" >> $targetFile.lmxv
+
+echo "end titles alias Keys or Values tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) IDs and relative elements tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-itemsEtIDs)" >> $targetFile.lmxv
+
+echo "end IDs and relative elements tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) IDs and relative titles alias Keys or Values tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-IDsEtTitles)" >> $targetFile.lmxv
+
+echo "end IDs and relative titles alias Keys or Values tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) Elements and relative titles alias Keys or Values tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-itemsEtTitles)" >> $targetFile.lmxv
+
+echo "end elements and relative titles alias Keys or Values tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- (not kin) Elements, relative IDs and titles alias Keys or Values tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-itemsEtIDsEtTitles)" >> $targetFile.lmxv
+
+echo "end elements, relative IDs and titles alias Keys or Values tree (not kin) -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+##################################### secondo la struttura familiare
+
+cat /tmp/xmluxv-allIDs | sort > /tmp/xmluxv-allIDsRec
+
+mkdir /tmp/xmluxv-allIDsRecSplit
+
+split -l1 /tmp/xmluxv-allIDsRec /tmp/xmluxv-allIDsRecSplit/
+
+for a in $(ls /tmp/xmluxv-allIDsRecSplit/)
+
+do
+
+leggoIDRec="$(cat /tmp/xmluxv-allIDsRecSplit/$a)"
+
+echo $leggoIDRec > /tmp/xmluxv-allIDRec
+
+## lascia lo spazio dopo ^$leggoIDRec, è voluto.
+grep "^$leggoIDRec " /tmp/xmluxv-IDsEtTitles | awk '{for(i=2;i<=NF;i++) print " " $i}' | tr -d '\n' | sed 's/^.//g' > /tmp/xmluxv-titleRecB00
+
+leggoTitle00="$(cat /tmp/xmluxv-titleRecB00)"
+
+## Mi serve echo perché mi dà un "carriage return"
+echo "$leggoTitle00" > /tmp/xmluxv-titleRecB
+
+cat /tmp/xmluxv-titleRecB >> /tmp/xmluxv-allTitlesRec
+
+leggoTitleRecB="$(cat /tmp/xmluxv-titleRecB)"
+
+## lascia lo spazio prima e dopo ^$leggoIDRec, è voluto.
+grep " $leggoIDRec " /tmp/xmluxv-itemsEtIDsEtTitles | awk '$1 > 0 {print $1}' > /tmp/xmluxv-elementsRecB
+
+cat /tmp/xmluxv-elementsRecB >> /tmp/xmluxv-allElementsRec
+
+leggoAllElementsRecB="$(cat /tmp/xmluxv-elementsRecB)"
+
+echo "$leggoIDRec $leggoAllElementsRecB $leggoTitleRecB" >> /tmp/xmluxv-itemsEtIDsEtTitlesRec
+
+echo "$leggoIDRec $leggoTitleRecB" >> /tmp/xmluxv-IDsEtTitlesRec
+
+echo "$leggoAllElementsRecB  $leggoTitleRecB" >> /tmp/xmluxv-itemsEtTitlesRec
+
+echo "$leggoIDRec $leggoAllElementsRecB" >> /tmp/xmluxv-idEtElementsRec
+
+done
+
+echo " " >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "KIN" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- IDs tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allIDsRec)" >> $targetFile.lmxv
+
+echo "end IDs tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+ 
+echo "<!-- Elements tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allElementsRec)" >> $targetFile.lmxv
+
+echo "end elements tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- Titles tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-allTitlesRec)" >> $targetFile.lmxv
+
+echo "end titles tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- IDs and relative elements tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-idEtElementsRec)" >> $targetFile.lmxv
+
+echo "end IDs and relative elements tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- IDs and relative titles tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-IDsEtTitlesRec)" >> $targetFile.lmxv
+
+echo "end IDs and relative titles tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- Elements and relative titles tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-itemsEtTitlesRec)" >> $targetFile.lmxv
+
+echo "end elements and relative titles tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+echo "<!-- Elements, relative IDs and titles tree" >> $targetFile.lmxv
+
+echo "$(cat /tmp/xmluxv-itemsEtIDsEtTitlesRec)" >> $targetFile.lmxv
+
+echo "end elements, relative IDs and titles tree -->" >> $targetFile.lmxv
+
+echo " " >> $targetFile.lmxv
+
+############################# opzioni
+
+grep "^-id" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- IDs tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end IDs tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- IDs tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+
+
+grep "^-el" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- Elements tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end elements tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- Elements tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+
+grep "^-ti" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- Titles alias Keys or Values tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end titles alias Keys or Values tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- Titles alias Keys or Values tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+grep "^-ei" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- IDs and relative elements tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end IDs and relative elements tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- IDs and relative elements tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+grep "^-it" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- IDs and relative titles alias Keys or Values tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end IDs and relative titles alias Keys or Values tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- IDs and relative titles alias Keys or Values tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+
+grep "^-et" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- Elements and relative titles alias Keys or Values tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end elements and relative titles alias Keys or Values tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+grep -A $blocco "<!-- Elements and relative titles alias Keys or Values tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+grep "^-all" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheck
+
+stat --format %s /tmp/xmluxv-optionCheck > /tmp/xmluxv-optionCheckBytes
+
+leggoBytesOptionCheck=$(cat /tmp/xmluxv-optionCheckBytes)
+
+if test $leggoBytesOptionCheck -gt 0
+
+then
+	grep -n "<!-- Elements, relative IDs and titles alias Keys or Values tree"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineBegin
+
+	begin=$(cat /tmp/xmluxv-nLineBegin)
+
+	grep -n "end elements, relative IDs and titles alias Keys or Values tree -->"  $targetFile.lmxv | cut -d: -f1,1 > /tmp/xmluxv-nLineEnd
+
+	end=$(cat /tmp/xmluxv-nLineEnd)
+
+	blocco=$(($end - $begin))
+
+
+grep -A $blocco "<!-- Elements, relative IDs and titles alias Keys or Values tree" $targetFile.lmxv > /tmp/xmluxv-blockToView
+
+grep "^-s" /tmp/xmluxvPseudoOptions/* > /tmp/xmluxv-optionCheckS
+
+stat --format %s /tmp/xmluxv-optionCheckS > /tmp/xmluxv-optionCheckSBytes
+
+leggoBytesOptionCheckS=$(cat /tmp/xmluxv-optionCheckSBytes)
+
+if test ! $leggoBytesOptionCheckS -gt 0
+
+then
+
+gview -f -geometry 70x70 /tmp/xmluxv-blockToView
+
+fi
+
+fi
+
+rm -rf /tmp/xmluxv*
+
+exit
+

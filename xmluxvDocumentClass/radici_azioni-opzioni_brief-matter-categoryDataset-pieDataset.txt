@@ -1,0 +1,16 @@
+Le correzioni per vim, 2024.09.25
+
+-s
+:%s/grep "^-s/grep "^-s$/g
+
+-all
+:%s/grep "^-all/grep "^-all$/g
+
+--find-name
+:%s/grep "^--find-name/grep "^--find-name=/g
+
+--find-title
+:%s/grep "^--find-title/grep "^--find-title=/g
+
+--find-id
+:%s/grep "^--find-id/grep "^--find-id=/g

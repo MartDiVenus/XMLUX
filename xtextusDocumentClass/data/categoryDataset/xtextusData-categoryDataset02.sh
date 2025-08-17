@@ -267,7 +267,6 @@ sudo chmod u+w /etc/vim/* 2> /dev/null
 	break
 fi
 
-
 grep "^-p$" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionPrint
 
 stat --format %s /tmp/xtextus-actionPrint > /tmp/xtextus-actionPrintBytes
@@ -1992,7 +1991,32 @@ done
 
 fi
 
+grep "^-view$" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-optionView
+
+stat --format %s /tmp/xtextus-optionView > /tmp/xtextus-optionViewBytes
+
+leggoBytes=$(cat /tmp/xtextus-optionViewBytes)
+
+if test $leggoBytes -gt 0
+
+then
+
+	echo $targetFile > /tmp/xmlux-fullName
+
+	/usr/local/lib/xmlux/trattamentoFiles.sh
+
+	nomeFileSenzaEstensione=$(cat /tmp/xmlux-nomeSenzaEstensione)
+
+	## attenzione, ho bisogno del percorso completo con $PWD
+/usr/local/lib/xmlux/xmlViewer-non_miei/Yumberc/xmlViewerMio/conJavalux/javaluxYumbXmlVs.sh $PWD/$nomeFileSenzaEstensione.xml	
+
+break
+
+fi
+
 done
 
+
 exit
+
 

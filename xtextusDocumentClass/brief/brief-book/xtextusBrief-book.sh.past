@@ -1,42 +1,9 @@
 #!/bin/bash
 
 
-for estensione in {1}
-
-do
-
-if [ -f /tmp/xtextus-estensioneLmx ]; then
-
 tOrig=$(cat /tmp/xtextus-TargetFile)
 
 targetFile=$(cat /tmp/xmlux-nomeSenzaEstensione)
-
-break
-
-fi
-
-if [ -f /tmp/xtextus-estensioneXml ]; then
-
-tOrig=$(cat /tmp/xtextus-TargetFile)
-
-targetFile=$(cat /tmp/xmlux-nomeSenzaEstensione)
-
-break
-
-fi
-
-if [ -f /tmp/xtextus-nessunaEstensione ]; then
-
-tOrig="$(cat /tmp/xtextus-TargetFilePre).lmx"
-
-targetFile=$(cat /tmp/xtextus-TargetFilePre)
-
-break
-
-fi
-
-done
-
 
 echo $PWD > /tmp/xtextus-posnow
 
@@ -73,7 +40,7 @@ for option in {1}
 
 do
 
-grep "^-o$" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionOpen
+grep "^-o$" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionOpen
 
 stat --format %s /tmp/xtextus-actionOpen > /tmp/xtextus-actionOpenBytes
 
@@ -83,184 +50,11 @@ if test $leggoBytes -gt 0
 
 then
 
-	for estensioneAgain in {1}
+	echo "
 
-	do
-
-if [ -f /tmp/xtextus-estensioneLmx ]; then
-
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-break
-
-fi
-
-
-if [ -f /tmp/xtextus-estensioneXml ]; then
- 
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-break
-
-fi
-
-
-if [ -f /tmp/xtextus-nessunaEstensione ]; then
-
-####################### Se il file non esistesse  
-
-
-read -p "Choose the codex type you want open:
-
-1. lmx
-
-2. xml
-
-:" choiceLanguage
-
-
-
-if test $choiceLanguage == 1
-  then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/lmx.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/lmx.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/lmx.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-echo "$tOrig" > /tmp/xtextus-tOrig-per-stampa
-
-fi
-
-
-
-if test $choiceLanguage == 2 
-  then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-tOrig="$(cat /tmp/xtextus-TargetFilePre).xml"
-
-echo "$tOrig" > /tmp/xtextus-tOrig-per-stampa
-
-fi
-
-fi
-
-done
-
-sudo chown root:root /etc/vim 2> /dev/null
-sudo chmod ugao-xrw /etc/vim 2> /dev/null
-sudo chmod uga+r /etc/vim 2> /dev/null
-sudo chmod ga+x /etc/vim 2> /dev/null
-sudo chmod g-w /etc/vim 2> /dev/null
-sudo chmod u+w /etc/vim 2> /dev/null
-sudo chmod ugao-xrw /etc/vim/* 2> /dev/null
-sudo chmod uga+r /etc/vim/* 2> /dev/null
-sudo chmod u+w /etc/vim/* 2> /dev/null
+° To refresh
+:cal reloadSource#Source()
+"
 
 	gvim -c ':source /etc/vim/gvimrc.local' -c :nos $tOrig -c :w
 
@@ -268,7 +62,7 @@ sudo chmod u+w /etc/vim/* 2> /dev/null
 fi
 
 
-grep "^-p$" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionPrint
+grep "^-p$" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionPrint
 
 stat --format %s /tmp/xtextus-actionPrint > /tmp/xtextus-actionPrintBytes
 
@@ -278,221 +72,12 @@ if test $leggoBytes -gt 0
 
 then
 
-	for estensioneAgain in {1}
-
-	do
-
-if [ -f /tmp/xtextus-estensioneLmx ]; then
-
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-break
-
-fi
-
-
-if [ -f /tmp/xtextus-estensioneXml ]; then
- 
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-break
-
-fi
-
-
-if [ -f /tmp/xtextus-nessunaEstensione ]; then
-
-####################### Se il file non esistesse  
-
-
-read -p "Choose the codex type you want open:
-
-1. lmx
-
-2. xml
-
-:" choiceLanguage
-
-
-
-if test $choiceLanguage == 1
-  then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/lmx.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/lmx.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/lmx.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-echo "$tOrig" > /tmp/xtextus-tOrig-per-stampa
-
-fi
-
-
-
-if test $choiceLanguage == 2 
-  then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/xml.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/syntax/xml.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/xml.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/xml.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/xml/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/xml/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-tOrig="$(cat /tmp/xtextus-TargetFilePre).xml"
-
-echo "$tOrig" > /tmp/xtextus-tOrig-per-stampa
-
-fi
-
-fi
-
-done
-
-sudo chown root:root /etc/vim 2> /dev/null
-sudo chmod ugao-xrw /etc/vim 2> /dev/null
-sudo chmod uga+r /etc/vim 2> /dev/null
-sudo chmod ga+x /etc/vim 2> /dev/null
-sudo chmod g-w /etc/vim 2> /dev/null
-sudo chmod u+w /etc/vim 2> /dev/null
-sudo chmod ugao-xrw /etc/vim/* 2> /dev/null
-sudo chmod uga+r /etc/vim/* 2> /dev/null
-sudo chmod u+w /etc/vim/* 2> /dev/null
-
 	/usr/local/lib/xmlux/xtextus/stampa.sh
 
 	break
 fi
 
-
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/vimrc.local /etc/vim/
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/etc/vim/gvimrc.local /etc/vim/
-   if [ ! -f /usr/share/vim/vim90/syntax/lmx.vim ]; then
-     sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/syntax/lmx.vim /usr/share/vim/vim90/syntax
-     sudo chown root:root /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ugao-xrw /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod u+w /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod uga+r /usr/share/vim/vim90/syntax/lmx.vim
-     sudo chmod ug+r /usr/share/vim/vim90/syntax/lmx.vim
-   fi
-   if [ ! -d /home/$USER/.vim/autoload ]; then
-     mkdir /home/$USER/.vim/autoload
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-    else
-     cp /usr/local/lib/xmlux/xtextus/lmx/functions/* /home/$USER/.vim/autoload 2> /dev/null
-     chown -R $USER:$USER /home/$USER/.vim/autoload
-     chmod -R ug+r /home/$USER/.vim/autoload
-   fi
-
-if [ ! -f /usr/share/vim/vim90/colors/mart.vim ]; then
-   sudo cp /usr/local/lib/xmlux/xtextus/lmx/usr/share/vim/vim90/colors/mart.vim /usr/share/vim/vim90/colors
-   sudo chown root:root /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod ugao-xrw /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod u+w /usr/share/vim/vim90/colors/mart.vim
-   sudo chmod uga+r /usr/share/vim/vim90/colors/mart.vim
-fi
-
-grep "^--jump" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionJump
+grep "^--jump" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionJump
 
 stat --format %s /tmp/xtextus-actionJump > /tmp/xtextus-actionJumpBytes
 
@@ -507,7 +92,7 @@ then
 	do
 
 ######### jump by ID
-grep "^--jump-id=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionJump
+grep "^--jump-id=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionJump
 
 stat --format %s /tmp/xtextus-actionJump > /tmp/xtextus-actionJumpBytes
 
@@ -531,7 +116,7 @@ fi
 
 
 ######### jump by name
-grep "^--jump-name=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionJump-name
+grep "^--jump-name=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionJump-name
 
 stat --format %s /tmp/xtextus-actionJump-name > /tmp/xtextus-actionJump-nameBytes
 
@@ -560,7 +145,7 @@ break
 fi
 
 ######### jump by title
-grep "^--jump-title=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionJump-title
+grep "^--jump-title=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionJump-title
 
 stat --format %s /tmp/xtextus-actionJump-title > /tmp/xtextus-actionJump-titleBytes
 
@@ -594,7 +179,7 @@ done
 fi
 
 
-grep "^--selectR" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectR
+grep "^--selectR" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectR
 
 stat --format %s /tmp/xtextus-actionSelectR > /tmp/xtextus-actionSelectRBytes
 
@@ -609,7 +194,7 @@ then
 	do
 
 ######### Select id block in read-only mode
-grep "^--selectR-id=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectR
+grep "^--selectR-id=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectR
 
 stat --format %s /tmp/xtextus-actionSelectR > /tmp/xtextus-actionSelectRBytes
 
@@ -704,7 +289,7 @@ fi
 
 
 ######### Select name block in read-only mode
-grep "^--selectR-name=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectR-name
+grep "^--selectR-name=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectR-name
 
 stat --format %s /tmp/xtextus-actionSelectR-name > /tmp/xtextus-actionSelectR-nameBytes
 
@@ -776,7 +361,7 @@ fi
 
 
 ######### Select title block in read-only mode
-grep "^--selectR-title=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectR-title
+grep "^--selectR-title=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectR-title
 
 stat --format %s /tmp/xtextus-actionSelectR-title > /tmp/xtextus-actionSelectR-titleBytes
 
@@ -849,7 +434,7 @@ fi
 
 
 
-grep "^--selectW" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectW
+grep "^--selectW" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectW
 
 stat --format %s /tmp/xtextus-actionSelectW > /tmp/xtextus-actionSelectWBytes
 
@@ -865,7 +450,7 @@ then
 
 ######### Select id block in write mode
 
-grep "^--selectW-id=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectW
+grep "^--selectW-id=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectW
 
 stat --format %s /tmp/xtextus-actionSelectW > /tmp/xtextus-actionSelectWBytes
 
@@ -953,7 +538,7 @@ fi
 
 
 ######### Select name block in write mode
-grep "^--selectW-name=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectW-name
+grep "^--selectW-name=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectW-name
 
 stat --format %s /tmp/xtextus-actionSelectW-name > /tmp/xtextus-actionSelectW-nameBytes
 
@@ -1052,7 +637,7 @@ fi
 
 
 ######### Select title block in read-only mode
-grep "^--selectW-title=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionSelectW-title
+grep "^--selectW-title=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionSelectW-title
 
 stat --format %s /tmp/xtextus-actionSelectW-title > /tmp/xtextus-actionSelectW-titleBytes
 
@@ -1146,9 +731,7 @@ break
 fi
 
 
-############### ACTION PARSE
-
-grep "^--parse" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionParse
+grep "^--parse" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionParse
 
 stat --format %s /tmp/xtextus-actionParse > /tmp/xtextus-actionParseBytes
 
@@ -1158,16 +741,254 @@ if test $leggoBytes -gt 0
 
 then
 
-/usr/local/lib/xmlux/xtextusScripts/parse/parse.sh
+	for parse in {1}
+
+	do
+
+######### Parse name block in read-only mode
+grep "^--parse-name=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionParseR-name
+
+stat --format %s /tmp/xtextus-actionParseR-name > /tmp/xtextus-actionParseR-nameBytes
+
+leggoBytes=$(cat /tmp/xtextus-actionParseR-nameBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xtextus-actionParseR-name | sed 's/.*=//g' > /tmp/xtextus-idToParseR-name
+
+	nameToParse=$(cat /tmp/xtextus-idToParseR-name)
+
+/usr/local/bin/xmluxv -s --find-name="$nameToParse" --f=$targetFile
+
+grep "\"$nameToParse\"" $targetFile-lmxv/kin/$targetFile-ids-names.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToParseR
+
+idToParseR="$(cat /tmp/xtextus-idToParseR)"
+
+grep -n "ID=\"$idToParseR\"" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseRBeginLine
+
+nLineBeginIdToParseR=$(cat /tmp/xtextus-idToParseRBeginLine)
+
+grep -n "<!-- end $idToParseR -->" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseREndLine
+
+
+####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
+nLineEndIdToParseR=$(cat /tmp/xtextus-idToParseREndLine)
+
+echo $nLineEndIdToParseR - $nLineBeginIdToParseR | bc > /tmp/xtextus-linesToParse
+
+linesToParseR=$(cat /tmp/xtextus-linesToParse)
+
+linesToParseRPlusComment=$(($linesToParseR + 1))
+
+cp $targetFile.lmx /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dalla I riga all'inizio del blocco da selezionare
+
+echo $(($nLineBeginIdToParseR - 2)) > /tmp/xtextus-realFirstLine
+
+realFirstLine=$(cat /tmp/xtextus-realFirstLine)
+
+echo  "1 Gd$realFirstLine
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command01-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
+linesToParseRPlus=$(($linesToParseR + 1))
+
+echo  "$linesToParseRPlus GdG
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command02-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+#gview -f /tmp/xtextus-bloccoSelezionato.lmx
+
+cat /tmp/xtextus-bloccoSelezionato.lmx | sed 's/.*>//g' > /tmp/parsed-xtextus
+
+echo ""
+echo ""
+echo "Following stdout is about parsing of 
+xtextus --parse-name=$nameToParse --f=$targetFile
+you have extracted content on /tmp/parsed-xtextus"
+echo ""
+echo ""
+
+cat /tmp/parsed-xtextus
+
+
+fi
+
+
+######### Parse title block in read-only mode
+grep "^--parse-title=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionParseR-title
+
+stat --format %s /tmp/xtextus-actionParseR-title > /tmp/xtextus-actionParseR-titleBytes
+
+leggoBytes=$(cat /tmp/xtextus-actionParseR-titleBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xtextus-actionParseR-title | sed 's/.*=//g' > /tmp/xtextus-idToParseR-title
+
+	titleToParse=$(cat /tmp/xtextus-idToParseR-title)
+
+/usr/local/bin/xmluxv -s --find-title="$titleToParse" --f=$targetFile
+
+grep "$titleToParse$" $targetFile-lmxv/kin/$targetFile-ids-titles.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToParseR
+
+idToParseR="$(cat /tmp/xtextus-idToParseR)"
+
+grep -n "ID=\"$idToParseR\"" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseRBeginLine
+
+nLineBeginIdToParseR=$(cat /tmp/xtextus-idToParseRBeginLine)
+
+grep -n "<!-- end $idToParseR -->" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseREndLine
+
+
+####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
+nLineEndIdToParseR=$(cat /tmp/xtextus-idToParseREndLine)
+
+echo $nLineEndIdToParseR - $nLineBeginIdToParseR | bc > /tmp/xtextus-linesToParse
+
+linesToParseR=$(cat /tmp/xtextus-linesToParse)
+
+linesToParseRPlusComment=$(($linesToParseR + 1))
+
+cp $targetFile.lmx /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dalla I riga all'inizio del blocco da selezionare
+
+echo $(($nLineBeginIdToParseR - 2)) > /tmp/xtextus-realFirstLine
+
+realFirstLine=$(cat /tmp/xtextus-realFirstLine)
+
+echo  "1 Gd$realFirstLine
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command01-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
+linesToParseRPlus=$(($linesToParseR + 1))
+
+echo  "$linesToParseRPlus GdG
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command02-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+#gview -f /tmp/xtextus-bloccoSelezionato.lmx
+
+cat /tmp/xtextus-bloccoSelezionato.lmx | sed 's/.*>//g' > /tmp/parsed-xtextus
+
+echo ""
+echo ""
+echo "Following stdout is about parsing of 
+xtextus --parse-title=$titleToParse --f=$targetFile
+you have extracted content on /tmp/parsed-xtextus"
+echo ""
+echo ""
+
+cat /tmp/parsed-xtextus
+
+
+fi
+
+
+######### Parse id block in read-only mode
+grep "^--parse-id=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionParseR-id
+
+stat --format %s /tmp/xtextus-actionParseR-id > /tmp/xtextus-actionParseR-idBytes
+
+leggoBytes=$(cat /tmp/xtextus-actionParseR-idBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xtextus-actionParseR-id | sed 's/.*=//g' > /tmp/xtextus-idToParseR-id
+
+	idToParse=$(cat /tmp/xtextus-idToParseR-id)
+
+grep -n "ID=\"$idToParse\"" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseBeginLine
+
+nLineBeginIdToParseR=$(cat /tmp/xtextus-idToParseBeginLine)
+
+grep -n "<!-- end $idToParse -->" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToParseREndLine
+
+####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
+nLineEndIdToParseR=$(cat /tmp/xtextus-idToParseREndLine)
+
+echo $nLineEndIdToParseR - $nLineBeginIdToParseR | bc > /tmp/xtextus-linesToParse
+
+linesToParseR=$(cat /tmp/xtextus-linesToParse)
+
+linesToParseRPlusComment=$(($linesToParseR + 1))
+
+cp $targetFile.lmx /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dalla I riga all'inizio del blocco da selezionare
+
+echo $(($nLineBeginIdToParseR - 2)) > /tmp/xtextus-realFirstLine
+
+realFirstLine=$(cat /tmp/xtextus-realFirstLine)
+
+echo  "1 Gd$realFirstLine
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command01-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
+linesToParseRPlus=$(($linesToParseR + 1))
+
+echo  "$linesToParseRPlus GdG
+ZZ
+
+" | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
+
+
+vim -s /tmp/xtextus-command02-bloccoSelezionato /tmp/xtextus-bloccoSelezionato.lmx
+
+
+#gview -f /tmp/xtextus-bloccoSelezionato.lmx
+
+cat /tmp/xtextus-bloccoSelezionato.lmx | sed 's/.*>//g' > /tmp/parsed-xtextus
+
+echo ""
+echo ""
+echo "Following stdout is about parsing of 
+xtextus --parse-id=$idToParse --f=$targetFile
+you have extracted content on /tmp/parsed-xtextus"
+echo ""
+echo ""
+
+cat /tmp/parsed-xtextus
+
+
+fi
+
+done
 
 break
 
 fi
 
 
-############## ACTION RENDER
-
-grep "^--render" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionRender
+grep "^--render" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionRender
 
 stat --format %s /tmp/xtextus-actionRender > /tmp/xtextus-actionRenderBytes
 
@@ -1182,7 +1003,7 @@ then
 	do
 
 ######### Render id block
-grep "^--renderCss-id=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionRenderedR
+grep "^--renderCss-id=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionRenderedR
 
 stat --format %s /tmp/xtextus-actionRenderedR > /tmp/xtextus-actionRenderedRBytes
 
@@ -1191,38 +1012,38 @@ leggoBytes=$(cat /tmp/xtextus-actionRenderedRBytes)
 if test $leggoBytes -gt 0
 
 then
-	cat /tmp/xtextus-actionRenderedR | sed 's/.*=//g' > /tmp/xtextus-idToRenderR
+	cat /tmp/xtextus-actionRenderedR | sed 's/.*=//g' > /tmp/xtextus-idToRenderedR
 
-	idToRenderR="$(cat /tmp/xtextus-idToRenderR)"
+	idToRenderedR="$(cat /tmp/xtextus-idToRenderedR)"
 
 
 	## Invece di intervenire sul codice lmx, lavoro direttament sul xml.
-#	grep -n "ID=\"$idToRenderR\"" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToRenderRBeginLine
+#	grep -n "ID=\"$idToRenderedR\"" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToRenderedRBeginLine
 
-#nLineBeginIdToRenderR=$(cat /tmp/xtextus-idToRenderRBeginLine)
+#nLineBeginIdToRenderedR=$(cat /tmp/xtextus-idToRenderedRBeginLine)
 
-#grep -n "<!-- end $idToRenderR -->" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToRenderREndLine
+#grep -n "<!-- end $idToRenderedR -->" /tmp/xtextus-css000 | cut -d: -f1,1 > /tmp/xtextus-idToRenderedREndLine
 
 	
-	grep -n "ID=\"$idToRenderR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderRBeginLine
+	grep -n "ID=\"$idToRenderedR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedRBeginLine
 
-nLineBeginIdToRenderR=$(cat /tmp/xtextus-idToRenderRBeginLine)
+nLineBeginIdToRenderedR=$(cat /tmp/xtextus-idToRenderedRBeginLine)
 
-grep -n "<!-- end $idToRenderR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderREndLine
+grep -n "<!-- end $idToRenderedR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedREndLine
 
 
 ####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
-nLineEndIdToRenderR=$(cat /tmp/xtextus-idToRenderREndLine)
+nLineEndIdToRenderedR=$(cat /tmp/xtextus-idToRenderedREndLine)
 
-echo $nLineEndIdToRenderR - $nLineBeginIdToRenderR | bc > /tmp/xtextus-linesToRender
+echo $nLineEndIdToRenderedR - $nLineBeginIdToRenderedR | bc > /tmp/xtextus-linesToRendered
 
-linesToRenderR=$(cat /tmp/xtextus-linesToRender)
+linesToRenderedR=$(cat /tmp/xtextus-linesToRendered)
 
-linesToRenderRPlusComment=$(($linesToRenderR + 1))
+linesToRenderedRPlusComment=$(($linesToRenderedR + 1))
 
 
 ## Rimuovo dalla I riga all'inizio del blocco da selezionare
-echo $(($nLineBeginIdToRenderR - 2)) > /tmp/xtextus-realFirstLine
+echo $(($nLineBeginIdToRenderedR - 2)) > /tmp/xtextus-realFirstLine
 
 realFirstLine=$(cat /tmp/xtextus-realFirstLine)
 
@@ -1236,9 +1057,9 @@ cp $targetFile.xml /tmp/xtextus-bloccoSelezionato
 vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato
 
 ## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
-linesToRenderRPlus=$(($linesToRenderR + 1))
+linesToRenderedRPlus=$(($linesToRenderedR + 1))
 
-echo  "$linesToRenderRPlus GdG
+echo  "$linesToRenderedRPlus GdG
 ZZ
 
 " | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
@@ -1269,7 +1090,7 @@ vim -s /tmp/xtextus-commandDelFirstEtLastLine /tmp/xtextus-notKin_elements
 
 cat /tmp/xtextus-notKin_elements | sed '/^$/d' | uniq > /tmp/xtextus-ToCTree
 
-grep "$idToRenderR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
+grep "$idToRenderedR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
 
 element=$(cat /tmp/xtextus-relativeElement)
  
@@ -1300,20 +1121,20 @@ do
 
 	leggoToC=$(cat /tmp/xtextus-ToCStructureSplit/$tocStructure)
 
-#	if test "$leggoToC" == "synopsis"
+	if test "$leggoToC" == "synopsis"
 
-#	then
+	then
 	
-#	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
-#	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
 
-#	else
+	else
 
 	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
 
 	echo "$leggoToC" > /tmp/xtextus-inverseOrderToC-$var
 
-#	fi	
+	fi	
 	VarMenoUno=$(($var - 1))
 
 	if [ -f /tmp/xtextus-inverseOrder-$VarMenoUno ]; then
@@ -1353,17 +1174,17 @@ done
 
 cat /tmp/xtextus-intestazione /tmp/xtextus-bloccoSelezionato > /tmp/xtextus-bloccoSelezionatoIntestato
 
-rm -fr /tmp/renderCss-xmlux
+rm -fr /tmp/renderCss-xtextus
 
-mkdir /tmp/renderCss-xmlux
+mkdir /tmp/renderCss-xtextus
 
-cp -r . /tmp/renderCss-xmlux/
+cp -r . /tmp/renderCss-xtextus/
 
 ## in questo modo copio eventuali immagini da caricare
 
-rm /tmp/renderCss-xmlux/*.back
+rm /tmp/renderCss-xtextus/*.back
 
-rm /tmp/renderCss-xmlux/*.css
+rm /tmp/renderCss-xtextus/*.css
 
 ## In questa versione di xmlux non offro il file render con il *.dtd,
 # per creare il file *.dtd devo seguire la via più lunga.
@@ -1372,27 +1193,33 @@ rm /tmp/renderCss-xmlux/*.css
 # -- visto che non sto estraendo da un file xml --, e compilare il nuovo file ottenuto.
 # Se invece seguissi la via più veloce, potrei manipolare il file *.dtd originario, in base al nuovo xml.
 # Ora non ho tempo.
-rm /tmp/renderCss-xmlux/*.dtd
+rm /tmp/renderCss-xtextus/*.dtd
 
-rm /tmp/renderCss-xmlux/*.xml
+rm /tmp/renderCss-xtextus/*.xml
 
-rm /tmp/renderCss-xmlux/*.lmx
+rm /tmp/renderCss-xtextus/*.lmx
 
-rm -f /tmp/renderCss-xmlux/*.lmxv
+rm -f /tmp/renderCss-xtextus/*.lmxv
 
-rm -fr /tmp/renderCss-xmlux/*lmxv*
+rm -fr /tmp/renderCss-xtextus/*lmxv*
 
-rm /tmp/renderCss-xmlux/*.lmxp
+rm /tmp/renderCss-xtextus/*.lmxp
 
-rm -f /tmp/renderCss-xmlux/*.lmxe
+rm -f /tmp/renderCss-xtextus/*.lmxe
 
-cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xmlux/renderedCss.xml
+cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xtextus/renderedCss.xml
 
-cp $targetFile.css /tmp/renderCss-xmlux/renderedCss.css
+### Dev: con la sottostante istanza, annullo le impostazioni css della sinossi
+## cat $targetFile.css | sed 's/Synopsis*.*//g' > /tmp/renderCss-xtextus/renderedCss.css
+
+#else
+
+cp $targetFile.css /tmp/renderCss-xtextus/renderedCss.css
+
+#fi
 
 
-
-#cd /tmp/renderCss-xmlux
+#cd /tmp/renderCss-xtextus
 
 #/usr/local/bin/xmluxc --f=renderedCss
 
@@ -1408,7 +1235,7 @@ do
 if test $scelta -eq 1
 
 then
-	chromium /tmp/renderCss-xmlux/renderedCss.xml
+	chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 	break
 fi
@@ -1421,8 +1248,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 
 path=$(cat /tmp/xtextus-parsingPath)
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 break
@@ -1432,7 +1259,7 @@ if test $scelta -eq 3
 
 then
 
-chromium /tmp/renderCss-xmlux/renderedCss.xml
+chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 clear
 
@@ -1440,8 +1267,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 
 path=$(cat /tmp/xtextus-parsingPath)
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 break
@@ -1450,12 +1277,11 @@ fi
 
 done
 
-break
-
 fi
 
 ######### Render name block
-grep "^--renderCss-name=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionRenderedR-name
+grep "^--renderCss-name=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionRenderedR-name
+
 stat --format %s /tmp/xtextus-actionRenderedR-name > /tmp/xtextus-actionRenderedR-nameBytes
 
 leggoBytes=$(cat /tmp/xtextus-actionRenderedR-nameBytes)
@@ -1463,36 +1289,35 @@ leggoBytes=$(cat /tmp/xtextus-actionRenderedR-nameBytes)
 if test $leggoBytes -gt 0
 
 then
+	cat  /tmp/xtextus-actionRenderedR-name | sed 's/.*=//g' > /tmp/xtextus-idToRenderedR-name
+	nameToRendered=$(cat /tmp/xtextus-idToRenderedR-name)
 
-	cat  /tmp/xtextus-actionRenderedR-name | sed 's/.*=//g' > /tmp/xtextus-idToRenderR-name
-	nameToRender=$(cat /tmp/xtextus-idToRenderR-name)
+/usr/local/bin/xmluxv -s --find-name="$nameToRendered" --f=$targetFile
 
-	/usr/local/bin/xmluxv -s --find-name="$nameToRender" --f=$targetFile
+grep "\"$nameToRendered\"" $targetFile-lmxv/kin/$targetFile-ids-names.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToRenderedR
 
-grep "\"$nameToRender\"" $targetFile-lmxv/kin/$targetFile-ids-names.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToRenderR
+idToRenderedR="$(cat /tmp/xtextus-idToRenderedR)"
 
-idToRenderR="$(cat /tmp/xtextus-idToRenderR)"
+	grep -n "ID=\"$idToRenderedR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedRBeginLine
 
-	grep -n "ID=\"$idToRenderR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderRBeginLine
+nLineBeginIdToRenderedR=$(cat /tmp/xtextus-idToRenderedRBeginLine)
 
-nLineBeginIdToRenderR=$(cat /tmp/xtextus-idToRenderRBeginLine)
-
-grep -n "<!-- end $idToRenderR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderREndLine
+grep -n "<!-- end $idToRenderedR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedREndLine
 
 
 ####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
-nLineEndIdToRenderR=$(cat /tmp/xtextus-idToRenderREndLine)
+nLineEndIdToRenderedR=$(cat /tmp/xtextus-idToRenderedREndLine)
 
-echo $nLineEndIdToRenderR - $nLineBeginIdToRenderR | bc > /tmp/xtextus-linesToRender
+echo $nLineEndIdToRenderedR - $nLineBeginIdToRenderedR | bc > /tmp/xtextus-linesToRendered
 
-linesToRenderR=$(cat /tmp/xtextus-linesToRender)
+linesToRenderedR=$(cat /tmp/xtextus-linesToRendered)
 
-linesToRenderRPlusComment=$(($linesToRenderR + 1))
+linesToRenderedRPlusComment=$(($linesToRenderedR + 1))
 
 
 
 ## Rimuovo dalla I riga all'inizio del blocco da selezionare
-echo $(($nLineBeginIdToRenderR - 2)) > /tmp/xtextus-realFirstLine
+echo $(($nLineBeginIdToRenderedR - 2)) > /tmp/xtextus-realFirstLine
 
 realFirstLine=$(cat /tmp/xtextus-realFirstLine)
 
@@ -1507,9 +1332,9 @@ vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato
 
 
 ## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
-linesToRenderRPlus=$(($linesToRenderR + 1))
+linesToRenderedRPlus=$(($linesToRenderedR + 1))
 
-echo  "$linesToRenderRPlus GdG
+echo  "$linesToRenderedRPlus GdG
 ZZ
 
 " | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
@@ -1541,7 +1366,7 @@ vim -s /tmp/xtextus-commandDelFirstEtLastLine /tmp/xtextus-notKin_elements
 
 cat /tmp/xtextus-notKin_elements | sed '/^$/d' | uniq > /tmp/xtextus-ToCTree
 
-grep "$idToRenderR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
+grep "$idToRenderedR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
 
 element=$(cat /tmp/xtextus-relativeElement)
  
@@ -1572,20 +1397,21 @@ do
 
 	leggoToC=$(cat /tmp/xtextus-ToCStructureSplit/$tocStructure)
 
-#	if test "$leggoToC" == "synopsis"
+	if test "$leggoToC" == "synopsis"
 
-#	then
+	then
 	
-#	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
-#	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
 
-#	else
+	else
 
 	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
 
 	echo "$leggoToC" > /tmp/xtextus-inverseOrderToC-$var
 
-#	fi	
+
+	fi	
 	VarMenoUno=$(($var - 1))
 
 	if [ -f /tmp/xtextus-inverseOrder-$VarMenoUno ]; then
@@ -1626,17 +1452,17 @@ done
 
 cat /tmp/xtextus-intestazione /tmp/xtextus-bloccoSelezionato > /tmp/xtextus-bloccoSelezionatoIntestato
 
-rm -fr /tmp/renderCss-xmlux
+rm -fr /tmp/renderCss-xtextus
 
-mkdir /tmp/renderCss-xmlux
+mkdir /tmp/renderCss-xtextus
 
-cp -r . /tmp/renderCss-xmlux/
+cp -r . /tmp/renderCss-xtextus/
 
 ## in questo modo copio eventuali immagini da caricare
 
-rm /tmp/renderCss-xmlux/*.back
+rm /tmp/renderCss-xtextus/*.back
 
-rm /tmp/renderCss-xmlux/*.css
+rm /tmp/renderCss-xtextus/*.css
 
 ## In questa versione di xmlux non offro il file render con il *.dtd,
 # per creare il file *.dtd devo seguire la via più lunga.
@@ -1645,26 +1471,26 @@ rm /tmp/renderCss-xmlux/*.css
 # -- visto che non sto estraendo da un file xml --, e compilare il nuovo file ottenuto.
 # Se invece seguissi la via più veloce, potrei manipolare il file *.dtd originario, in base al nuovo xml.
 # Ora non ho tempo.
-rm /tmp/renderCss-xmlux/*.dtd
+rm /tmp/renderCss-xtextus/*.dtd
 
-rm /tmp/renderCss-xmlux/*.xml
+rm /tmp/renderCss-xtextus/*.xml
 
-rm /tmp/renderCss-xmlux/*.lmx
+rm /tmp/renderCss-xtextus/*.lmx
 
-rm -f /tmp/renderCss-xmlux/*.lmxv
+rm -f /tmp/renderCss-xtextus/*.lmxv
 
-rm -fr /tmp/renderCss-xmlux/*lmxv*
+rm -fr /tmp/renderCss-xtextus/*lmxv*
 
-rm /tmp/renderCss-xmlux/*.lmxp
+rm /tmp/renderCss-xtextus/*.lmxp
 
-rm -f /tmp/renderCss-xmlux/*.lmxe
+rm -f /tmp/renderCss-xtextus/*.lmxe
 
-cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xmlux/renderedCss.xml
+cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xtextus/renderedCss.xml
 
-cp $targetFile.css /tmp/renderCss-xmlux/renderedCss.css
+cp $targetFile.css /tmp/renderCss-xtextus/renderedCss.css
 
 
-#cd /tmp/renderCss-xmlux
+#cd /tmp/renderCss-xtextus
 
 #/usr/local/bin/xmluxc --f=renderedCss
 
@@ -1680,7 +1506,7 @@ do
 if test $scelta -eq 1
 
 then
-	chromium /tmp/renderCss-xmlux/renderedCss.xml
+	chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 	break
 fi
@@ -1693,8 +1519,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 
 path=$(cat /tmp/xtextus-parsingPath)
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 break
@@ -1704,7 +1530,7 @@ if test $scelta -eq 3
 
 then
 
-chromium /tmp/renderCss-xmlux/renderedCss.xml
+chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 clear
 
@@ -1713,8 +1539,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 path=$(cat /tmp/xtextus-parsingPath)
 	
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 break
@@ -1723,12 +1549,10 @@ fi
 
 done
 
-break
-
 fi
 
 ######### Render title block
-grep "^--renderCss-title=" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-actionRenderedR-title
+grep "^--renderCss-title=" /tmp/xtextus-PseudoOptions/* > /tmp/xtextus-actionRenderedR-title
 
 stat --format %s /tmp/xtextus-actionRenderedR-title > /tmp/xtextus-actionRenderedR-titleBytes
 
@@ -1737,31 +1561,31 @@ leggoBytes=$(cat /tmp/xtextus-actionRenderedR-titleBytes)
 if test $leggoBytes -gt 0
 
 then
-	cat /tmp/xtextus-actionRenderedR-title | sed 's/.*=//g' > /tmp/xtextus-idToRenderR-title
-	titleToRender=$(cat /tmp/xtextus-idToRenderR-title)
+	cat /tmp/xtextus-actionRenderedR-title | sed 's/.*=//g' > /tmp/xtextus-idToRenderedR-title
+	titleToRendered=$(cat /tmp/xtextus-idToRenderedR-title)
 
-/usr/local/bin/xmluxv -s --find-title="$titleToRender" --f=$targetFile
+/usr/local/bin/xmluxv -s --find-title="$titleToRendered" --f=$targetFile
 
-grep "$titleToRender$" $targetFile-lmxv/kin/$targetFile-ids-titles.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToRenderR
+grep "$titleToRendered$" $targetFile-lmxv/kin/$targetFile-ids-titles.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-idToRenderedR
 
-idToRenderR="$(cat /tmp/xtextus-idToRenderR)"
-	grep -n "ID=\"$idToRenderR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderRBeginLine
+idToRenderedR="$(cat /tmp/xtextus-idToRenderedR)"
+	grep -n "ID=\"$idToRenderedR\"" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedRBeginLine
 
-nLineBeginIdToRenderR=$(cat /tmp/xtextus-idToRenderRBeginLine)
+nLineBeginIdToRenderedR=$(cat /tmp/xtextus-idToRenderedRBeginLine)
 
-grep -n "<!-- end $idToRenderR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderREndLine
+grep -n "<!-- end $idToRenderedR -->" $targetFile.xml | cut -d: -f1,1 > /tmp/xtextus-idToRenderedREndLine
 
 
 ####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
-nLineEndIdToRenderR=$(cat /tmp/xtextus-idToRenderREndLine)
+nLineEndIdToRenderedR=$(cat /tmp/xtextus-idToRenderedREndLine)
 
-echo $nLineEndIdToRenderR - $nLineBeginIdToRenderR | bc > /tmp/xtextus-linesToRender
+echo $nLineEndIdToRenderedR - $nLineBeginIdToRenderedR | bc > /tmp/xtextus-linesToRendered
 
-linesToRenderR=$(cat /tmp/xtextus-linesToRender)
+linesToRenderedR=$(cat /tmp/xtextus-linesToRendered)
 
-linesToRenderRPlusComment=$(($linesToRenderR + 1))
+linesToRenderedRPlusComment=$(($linesToRenderedR + 1))
 
-echo $(($nLineBeginIdToRenderR - 2)) > /tmp/xtextus-realFirstLine
+echo $(($nLineBeginIdToRenderedR - 2)) > /tmp/xtextus-realFirstLine
 
 realFirstLine=$(cat /tmp/xtextus-realFirstLine)
 
@@ -1774,9 +1598,9 @@ cp $targetFile.xml /tmp/xtextus-bloccoSelezionato
 
 vim -s /tmp/xtextus-command01-bloccoSelezionato /tmp/xtextus-bloccoSelezionato
 
-linesToRenderRPlus=$(($linesToRenderR + 1))
+linesToRenderedRPlus=$(($linesToRenderedR + 1))
 
-echo  "$linesToRenderRPlus GdG
+echo  "$linesToRenderedRPlus GdG
 ZZ
 
 " | sed 's/ //g' > /tmp/xtextus-command02-bloccoSelezionato
@@ -1806,7 +1630,7 @@ vim -s /tmp/xtextus-commandDelFirstEtLastLine /tmp/xtextus-notKin_elements
 
 cat /tmp/xtextus-notKin_elements | sed '/^$/d' | uniq > /tmp/xtextus-ToCTree
 
-grep "$idToRenderR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
+grep "$idToRenderedR$" $targetFile-lmxv/notKin/$targetFile-notKin_elements-ids.lmxv | awk '$1 > 0 {print $1}' > /tmp/xtextus-relativeElement
 
 element=$(cat /tmp/xtextus-relativeElement)
  
@@ -1836,20 +1660,21 @@ do
 
 	leggoToC=$(cat /tmp/xtextus-ToCStructureSplit/$tocStructure)
 
-#	if test "$leggoToC" == "synopsis"
+	if test "$leggoToC" == "synopsis"
 
-#	then
+	then
 	
-#	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
-#	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
+	echo "</$leggoToC>" >> /tmp/xtextus-intestazione
 
-#	else
+	else
 
 	echo "<$leggoToC>" >> /tmp/xtextus-intestazione
 
 	echo "$leggoToC" > /tmp/xtextus-inverseOrderToC-$var
 
-#	fi	
+
+	fi	
 	VarMenoUno=$(($var - 1))
 
 	if [ -f /tmp/xtextus-inverseOrder-$VarMenoUno ]; then
@@ -1890,17 +1715,17 @@ done
 
 cat /tmp/xtextus-intestazione /tmp/xtextus-bloccoSelezionato > /tmp/xtextus-bloccoSelezionatoIntestato
 
-rm -fr /tmp/renderCss-xmlux
+rm -fr /tmp/renderCss-xtextus
 
-mkdir /tmp/renderCss-xmlux
+mkdir /tmp/renderCss-xtextus
 
-cp -r . /tmp/renderCss-xmlux/
+cp -r . /tmp/renderCss-xtextus/
 
 ## in questo modo copio eventuali immagini da caricare
 
-rm /tmp/renderCss-xmlux/*.back
+rm /tmp/renderCss-xtextus/*.back
 
-rm /tmp/renderCss-xmlux/*.css
+rm /tmp/renderCss-xtextus/*.css
 
 ## In questa versione di xmlux non offro il file render con il *.dtd,
 # per creare il file *.dtd devo seguire la via più lunga.
@@ -1909,26 +1734,26 @@ rm /tmp/renderCss-xmlux/*.css
 # -- visto che non sto estraendo da un file xml --, e compilare il nuovo file ottenuto.
 # Se invece seguissi la via più veloce, potrei manipolare il file *.dtd originario, in base al nuovo xml.
 # Ora non ho tempo.
-rm /tmp/renderCss-xmlux/*.dtd
+rm /tmp/renderCss-xtextus/*.dtd
 
-rm /tmp/renderCss-xmlux/*.xml
+rm /tmp/renderCss-xtextus/*.xml
 
-rm /tmp/renderCss-xmlux/*.lmx
+rm /tmp/renderCss-xtextus/*.lmx
 
-rm -f /tmp/renderCss-xmlux/*.lmxv
+rm -f /tmp/renderCss-xtextus/*.lmxv
 
-rm -fr /tmp/renderCss-xmlux/*lmxv*
+rm -fr /tmp/renderCss-xtextus/*lmxv*
 
-rm /tmp/renderCss-xmlux/*.lmxp
+rm /tmp/renderCss-xtextus/*.lmxp
 
-rm -f /tmp/renderCss-xmlux/*.lmxe
+rm -f /tmp/renderCss-xtextus/*.lmxe
 
-cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xmlux/renderedCss.xml
+cp /tmp/xtextus-bloccoSelezionatoIntestato /tmp/renderCss-xtextus/renderedCss.xml
 
-cp $targetFile.css /tmp/renderCss-xmlux/renderedCss.css
+cp $targetFile.css /tmp/renderCss-xtextus/renderedCss.css
 
 
-#cd /tmp/renderCss-xmlux
+#cd /tmp/renderCss-xtextus
 
 #/usr/local/bin/xmluxc --f=renderedCss
 
@@ -1945,7 +1770,7 @@ do
 if test $scelta -eq 1
 
 then
-	chromium /tmp/renderCss-xmlux/renderedCss.xml
+	chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 	break
 fi
@@ -1958,8 +1783,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 
 path=$(cat /tmp/xtextus-parsingPath)
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 break
@@ -1969,7 +1794,7 @@ if test $scelta -eq 3
 
 then
 
-chromium /tmp/renderCss-xmlux/renderedCss.xml
+chromium /tmp/renderCss-xtextus/renderedCss.xml
 
 clear
 
@@ -1977,8 +1802,8 @@ java /usr/local/lib/xmlux/java/xtextus/parsing/parsingPath.java
 
 path=$(cat /tmp/xtextus-parsingPath)
 
-cp /tmp/renderCss-xmlux/renderedCss.xml $path
-cp /tmp/renderCss-xmlux/renderedCss.css $path
+cp /tmp/renderCss-xtextus/renderedCss.xml $path
+cp /tmp/renderCss-xtextus/renderedCss.css $path
 sync
 
 fi
@@ -1990,29 +1815,6 @@ break
 fi
 
 done
-
-fi
-
-grep "^-view$" /tmp/xtextusPseudoOptions/* > /tmp/xtextus-optionView
-
-stat --format %s /tmp/xtextus-optionView > /tmp/xtextus-optionViewBytes
-
-leggoBytes=$(cat /tmp/xtextus-optionViewBytes)
-
-if test $leggoBytes -gt 0
-
-then
-
-	echo $targetFile > /tmp/xmlux-fullName
-
-	/usr/local/lib/xmlux/trattamentoFiles.sh
-
-	nomeFileSenzaEstensione=$(cat /tmp/xmlux-nomeSenzaEstensione)
-
-	## attenzione, ho bisogno del percorso completo con $PWD
-/usr/local/lib/xmlux/xmlViewer-non_miei/Yumberc/xmlViewerMio/conJavalux/javaluxYumbXmlVs.sh $PWD/$nomeFileSenzaEstensione.xml	
-
-break
 
 fi
 

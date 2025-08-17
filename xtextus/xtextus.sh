@@ -38,24 +38,20 @@ For xtextus and xmluxe common actions, see xmluxe help or xmluxe README section.
 	
 help                                                      -h
 
-chars 		 					   -char
-open by gvim: /usr/local/lib/xmlux/char/
-	
-
-pattern							   -pattern
-open by gvim: /usr/local/lib/xmlux/pattern/
-
 
 target file 						    
 wildcard * as --f entire value or partial value, is accepted.
 For jump*, select*, parse*, render* actions 		  --f='Value without extension'
-For -o, -p, -view options				  --f='Value with or without extension'
+For -o, -p, -st, -view options				  --f='Value with or without extension'
+P.S. -view option reads only xml files.
 
 open file						  -o
 
 print in ps and pdf, with xml fancy syntax		  -p
 
-
+Only for septem gradus data (data-seven):
+make a structure for the first gradusI
+(e.g. a01) and its children. 		                  -st
 
 Usage:
 cd 'path of the project'
@@ -81,6 +77,16 @@ xtextus -p --f=greeting.lmx
 xtextus -p --f=greeting
 
 
+xtextus -st --f=greeting.lmx
+
+
+xtextus -view --f=greeting
+aka
+xtextus -view --f=greeting.xml
+aka
+xtextus -view --f=*
+
+
 xtextus --jump-id=a01.01 --f=greeting
 xtextus --jump-id=a01.01 --f=*
 
@@ -104,8 +110,6 @@ GNU copyright applies to its Mario Fantini's GNU tools usage.
 XML copyright applies to its Mario Fantini's XML tools usage.
 VIM copyright applies to its Mario Fantini's VIM usage.
 Java copyright applies to its Mario Fantini's JAVA tools usage.
-XMLView.java https://yumberc.github.io/
-
 And so on.
 "
 
