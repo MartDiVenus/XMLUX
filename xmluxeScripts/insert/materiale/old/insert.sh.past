@@ -1,0 +1,354 @@
+#!/bin/bash
+
+rm -fr /tmp/InsXmluxe-ins*
+rm -fr /tmp/xmluxse*
+
+cp /tmp/xmluxeTargetFile /tmp/insXmluxe-TargetFile
+
+targetFile="$(cat /tmp/insXmluxe-TargetFile)"
+
+
+idToInsert="$(cat /tmp/insXmluxe-idToInsert)"
+
+
+insertMain () {
+
+for a in {1}
+
+do
+
+grep "^--ins" /tmp/InsXmluxe-PseudoOptions/* > /tmp/xmluxseSort-actionSortID
+
+stat --format %s /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortIDBytes
+
+leggoBytesActionSortID=$(cat /tmp/xmluxseSort-actionSortIDBytes)
+
+## I if
+if test $leggoBytesActionSortID -gt 0
+
+then
+
+	for b in {1}
+
+	do
+
+grep "^--ins=" /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortID-aResp
+
+stat --format %s /tmp/xmluxseSort-actionSortID-aResp > /tmp/xmluxseSort-actionSortID-aBytes
+
+sortIdABytes=$(cat /tmp/xmluxseSort-actionSortID-aBytes) 
+
+if test $sortIdABytes -gt 0
+
+then
+	echo "cimice insert only" > /tmp/xmluxseSort-cimiceOnlyInsert
+
+	break
+fi
+
+grep "^--ins-a=" /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortID-aResp
+
+stat --format %s /tmp/xmluxseSort-actionSortID-aResp > /tmp/xmluxseSort-actionSortID-aBytes
+
+sortIdABytes=$(cat /tmp/xmluxseSort-actionSortID-aBytes) 
+
+if test $sortIdABytes -gt 0
+
+then
+	echo "cimice ascending through name attribute" > /tmp/xmluxseSort-cimiceAscendingIDa-name
+
+	break
+fi
+
+grep "^--ins-at=" /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortID-aResp
+
+stat --format %s /tmp/xmluxseSort-actionSortID-aResp > /tmp/xmluxseSort-actionSortID-aBytes
+
+sortIdABytes=$(cat /tmp/xmluxseSort-actionSortID-aBytes) 
+
+if test $sortIdABytes -gt 0
+
+then
+	echo "cimice ascending through title" > /tmp/xmluxseSort-cimiceAscendingIDa-title
+
+	break
+fi
+
+
+grep "^--ins-d=" /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortID-dResp
+
+stat --format %s /tmp/xmluxseSort-actionSortID-dResp > /tmp/xmluxseSort-actionSortID-dBytes
+
+sortIdDBytes=$(cat /tmp/xmluxseSort-actionSortID-dBytes) 
+
+if test $sortIdDBytes -gt 0
+then
+
+	echo "cimice descending through name attribute" > /tmp/xmluxseSort-cimiceDescendingIDd-name
+break
+
+fi
+
+grep "^--ins-dt=" /tmp/xmluxseSort-actionSortID > /tmp/xmluxseSort-actionSortID-dResp
+
+stat --format %s /tmp/xmluxseSort-actionSortID-dResp > /tmp/xmluxseSort-actionSortID-dBytes
+
+sortIdDBytes=$(cat /tmp/xmluxseSort-actionSortID-dBytes) 
+
+if test $sortIdDBytes -gt 0
+then
+
+	echo "cimice descending through title attribute" > /tmp/xmluxseSort-cimiceDescendingIDd-title
+break
+
+fi
+
+done
+
+fi
+
+done
+
+}
+
+insertMain
+
+/usr/local/bin/xmluxv -ie -s --f=$targetFile
+
+## Pulisco dai commenti
+cat /tmp/xmluxev-blockToView | sed '/<!--/d' | sed '/-->/d' > /tmp/xmluxsev-blockToViewSed
+
+## il titolo principale del file non devo ordinarlo ovviamente
+#vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxsev-blockToViewSed
+
+cat /tmp/xmluxsev-blockToViewSed | awk '$1 > 0 {print $1}' > /tmp/insXmluxe-IDColumn
+
+grep -n "^$idToInsert$" /tmp/insXmluxe-IDColumn | cut -d: -f1,1 > /tmp/insXmluxe-IDnLine
+
+idNLine=$(cat /tmp/insXmluxe-IDnLine)
+
+sed -n ''$idNLine'p' /tmp/xmluxsev-blockToViewSed | awk '$1 > 0 {print $2}' > /tmp/insXmluxe-elementToInsert
+
+leggoItem="$(cat /tmp/insXmluxe-elementToInsert)"
+
+## Seleziono il grado I
+
+cat /tmp/insXmluxe-idToInsert | cut -d. -f1,1 > /tmp/insXmluxe-insGradusI
+
+leggoGradusI="$(cat /tmp/insXmluxe-insGradusI)"
+
+grep "$leggoGradusI" /tmp/insXmluxe-IDColumn > /tmp/insXmluxe-IDsSelected
+
+grep "$leggoGradusI......$" /tmp/insXmluxe-IDsSelected | tail -n1 > /tmp/insXmluxe-lastID
+
+lastIDGradusI="$(cat /tmp/insXmluxe-lastID)"
+
+grep -n "<!-- end $lastIDGradusI -->" $targetFile.lmx | cut -d: -f1,1 > /tmp/insXmluxe-nLineLastIdGradus
+
+leggoLastIdGradusLine=$(cat /tmp/insXmluxe-nLineLastIdGradus)
+
+cat /tmp/insXmluxe-lastID | sed 's/\.[^\.]*$//' > /tmp/insXmluxe-lastIDPrefix
+
+prefix="$(cat /tmp/insXmluxe-lastIDPrefix)"
+
+cat /tmp/insXmluxe-lastID | sed 's/.*\.//' | sed '2p' > /tmp/insXmluxe-lastSubId
+
+lastSubId=$(cat /tmp/insXmluxe-lastSubId)
+
+subId=$(echo $lastSubId + 1 | bc)
+
+if test $subId -lt 10
+
+then
+	subIdL="0$subId"
+
+else
+
+subIdL=$subId
+
+fi
+
+newID="$prefix.$subIdL"
+
+echo "$newID" > /tmp/insXmluxe-newID
+
+
+### Opzioni 'name' (-name) e 'title' (-t)
+grep "^-name$" /tmp/InsXmluxe-PseudoOptions/* > /tmp/xmluxse-insertName
+
+stat --format %s /tmp/xmluxse-insertName > /tmp/xmluxse-insertNameBytes
+
+leggoBytesOptionName=$(cat /tmp/xmluxse-insertNameBytes)
+
+## I if
+if test $leggoBytesOptionName -gt 0
+
+then
+
+java /usr/local/lib/xmlux/java/xmluxe/insert/insertName.java
+
+name=$(cat /tmp/xmluxe-insertName)
+
+
+grep "^-t$" /tmp/InsXmluxe-PseudoOptions/* > /tmp/xmluxse-insertTitle
+
+stat --format %s /tmp/xmluxse-insertTitle > /tmp/xmluxse-insertTitleBytes
+
+leggoBytesOptionTitle=$(cat /tmp/xmluxse-insertTitleBytes)
+
+## I if
+if test $leggoBytesOptionTitle -gt 0
+
+then
+
+echo "Insert title (at line n. 3), and possible content (starting from line n. 4)
+of $leggoItem to insert. At the end save and exit.
+" > /tmp/insXmluxe-optionW.lmx
+
+			gvim -f /tmp/insXmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/insXmluxe-optionW.lmx)"
+
+			echo "
+<$leggoItem ID=\"$newID\" name=\"$name\">$leggoW
+</$leggoItem>
+<!-- end $newID -->" > /tmp/insXmluxe-toInject
+
+else
+
+echo "
+<$leggoItem ID=\"$newID\" name=\"$name\">
+
+</$leggoItem>
+<!-- end $newID -->" > /tmp/insXmluxe-toInject
+
+fi
+
+sed -n '1,'$leggoLastIdGradusLine'p' $targetFile.lmx > /tmp/insXmluxe-IbloccoIniezione
+
+sed -n ''$leggoLastIdGradusLine',$p' $targetFile.lmx > /tmp/insXmluxe-IIbloccoIniezione
+
+vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-IIbloccoIniezione
+
+
+cat /tmp/insXmluxe-IbloccoIniezione /tmp/insXmluxe-toInject > /tmp/insXmluxe-IIIbloccoIniezione
+
+cat /tmp/insXmluxe-IIIbloccoIniezione /tmp/insXmluxe-IIbloccoIniezione > $targetFile.lmx
+
+
+else
+
+grep "^-t$" /tmp/InsXmluxe-PseudoOptions/* > /tmp/xmluxse-insertTitle
+
+stat --format %s /tmp/xmluxse-insertTitle > /tmp/xmluxse-insertTitleBytes
+
+leggoBytesOptionTitle=$(cat /tmp/xmluxse-insertTitleBytes)
+
+if test $leggoBytesOptionTitle -gt 0
+
+then
+
+echo "Insert title (at line n. 3), and possible content (starting from line n. 4)
+of $leggoItem to insert. At the end save and exit.
+" > /tmp/insXmluxe-optionW.lmx
+
+			gvim -f /tmp/insXmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/insXmluxe-optionW.lmx)"
+
+			echo "
+<$leggoItem ID=\"$newID\" >$leggoW
+</$leggoItem>
+<!-- end $newID -->" > /tmp/insXmluxe-toInject
+
+
+else
+
+echo "
+<$leggoItem ID=\"$newID\" >
+
+</$leggoItem>
+<!-- end $newID -->" > /tmp/insXmluxe-toInject
+
+fi
+
+sed -n '1,'$leggoLastIdGradusLine'p' $targetFile.lmx > /tmp/insXmluxe-IbloccoIniezione
+
+sed -n ''$leggoLastIdGradusLine',$p' $targetFile.lmx > /tmp/insXmluxe-IIbloccoIniezione
+
+vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/insXmluxe-IIbloccoIniezione
+
+
+cat /tmp/insXmluxe-IbloccoIniezione /tmp/insXmluxe-toInject > /tmp/insXmluxe-IIIbloccoIniezione
+
+cat /tmp/insXmluxe-IIIbloccoIniezione /tmp/insXmluxe-IIbloccoIniezione > $targetFile.lmx
+
+fi
+
+if [ -f /tmp/xmluxseSort-cimiceOnlyInsert ]; then
+
+	exit
+fi
+
+
+#### Sorting
+### Rispetto all'eseguibile sorting/sorting.sh ci sono delle modifiche perché
+## questo è lanciato automaticamente appunto.
+
+
+for ascendingDescending in {1}
+
+do
+
+if [ -f /tmp/xmluxseSort-cimiceAscendingIDa-name ]; then
+
+/usr/local/bin/xmluxe --sort-a=$idToInsert --f=$targetFile
+
+break
+
+fi
+
+if [ -f /tmp/xmluxseSort-cimiceAscendingIDa-title ]; then
+
+
+/usr/local/bin/xmluxe --sort-a=$idToInsert -t --f=$targetFile
+
+break
+
+fi
+
+if [ -f /tmp/xmluxseSort-cimiceDescendingIDd-name ]; then
+
+/usr/local/bin/xmluxe --sort-d=$idToInsert --f=$targetFile
+
+break
+
+fi
+
+if [ -f /tmp/xmluxseSort-cimiceDescendingIDd-title ]; then
+
+
+/usr/local/bin/xmluxe --sort-d=$idToInsert -t --f=$targetFile
+
+break
+
+fi
+
+done
+
+
+rm -fr /tmp/xmluxse*
+
+rm -fr /tmp/insXmluxe*
+
+exit
+
+
