@@ -35,30 +35,32 @@ rm -fr /tmp/xmluxc*
 
 #touch /tmp/xmluxc-itemsEtTitlesRec
 
+echo ""$*"" > /tmp/xmluxc-AllParameters
 
-rm -fr /tmp/xmluxcPseudoOptions
+cat /tmp/xmluxc-AllParameters | sed 's/ /:/g' | tr ':\n' '\n' > /tmp/xmluxc-AllParametersToSplit
 
-mkdir /tmp/xmluxcPseudoOptions
+# appendo un'opzione immaginaria per permettere lo split nel caso fosse fornita solo
+# un'opzione, e.g. 
+# $> ena -cC
+# Non avviene lo split con una sola riga.
+#echo "opzioneImmaginaria" >> /tmp/xmluxc-AllParametersToSplit
 
-rm -fr /tmp/xmluxcPseudoOptionsSchemi
+mkdir /tmp/xmluxc-AllParaSplit
 
-mkdir /tmp/xmluxcPseudoOptionsSchemi
+split -l1 /tmp/xmluxc-AllParametersToSplit /tmp/xmluxc-AllParaSplit/
 
-## Possibile opzione/azione
-leggo1="$(echo $1 > /tmp/xmluxcPseudoOptions/01)"
 
-## Possibile opzione/azione  
-leggo2="$(echo $2 > /tmp/xmluxcPseudoOptions/02)"
+for a in $(ls /tmp/xmluxc-AllParaSplit)
 
-## Possibile opzione/azione  
-leggo3="$(echo $3 > /tmp/xmluxcPseudoOptions/03)"
+do
 
-## Target: percorso e nome del file
-leggo4="$(echo $4 >  /tmp/xmluxcPseudoOptions/04)"
+grep "^-h" /tmp/xmluxc-AllParaSplit/$a > /tmp/xmluxc-HelpPara
 
-rileggoInput1="$(cat /tmp/xmluxcPseudoOptions/01 2> /dev/null)"
+stat --format %s /tmp/xmluxc-HelpPara > /tmp/xmluxc-HelpParaBytes
 
-if test "$rileggoInput1" == "-h"
+leggoBytes=$(cat /tmp/xmluxc-HelpParaBytes)
+
+if test $leggoBytes -gt 0
 
 then
 
@@ -95,6 +97,10 @@ If you have (into the project folder) one *.lmx only [together other xmlux files
 as default and as I suggest, just type one * [e.g. --f=*].
 
 
+dtd file creation	--dtd=false/true
+To have a fast compilation, you have to specify --dtd=false.
+
+
 margin borders		--margin=true
 
 
@@ -103,7 +109,9 @@ cd 'path of the project'
 xmluxc -option --action --f='name of the file without extension'
 
 e.g.:
-xmluxc -fgreeting
+xmluxc --f=greeting
+
+xmluxc --dtd=false --f=greeting
 
 xmluxc --margin=true --f=greeting
 
@@ -121,13 +129,12 @@ rm -fr /tmp/xmluxc*
 
 exit
 
+break
+
 fi
 
-for a in $(ls /tmp/xmluxcPseudoOptions)
 
-do
-
-	grep "^--f=" /tmp/xmluxcPseudoOptions/$a > /tmp/xmluxcTargetFileOp
+	grep "^--f=" /tmp/xmluxc-AllParaSplit/$a > /tmp/xmluxcTargetFileOp
 
 	stat --format %s /tmp/xmluxcTargetFileOp > /tmp/xmluxcTargetFileBytes
 
@@ -137,16 +144,54 @@ do
 
 	then
 
-	cat /tmp/xmluxcPseudoOptions/$a | sed 's/--f=//g' > /tmp/xmluxcTargetFilePre
+	cat /tmp/xmluxc-AllParaSplit/$a | sed 's/--f=//g' > /tmp/xmluxcTargetFilePre
+
+
+	leggoTargetFilePre=$(cat /tmp/xmluxcTargetFilePre)
+
+	ls $leggoTargetFilePre.lmx | cut -d. -f1,1 > /tmp/xmluxcTargetFile
+
+	targetFile=$(cat /tmp/xmluxcTargetFile)
 
         fi
+
+
+	grep "^--dtd" /tmp/xmluxc-AllParaSplit/$a > /tmp/xmluxcTargetFileOp
+
+	stat --format %s /tmp/xmluxcTargetFileOp > /tmp/xmluxcTargetFileBytes
+
+	leggoBytes=$(cat /tmp/xmluxcTargetFileBytes)
+
+	if test $leggoBytes -gt 1
+
+	then
+       
+	cat /tmp/xmluxc-AllParaSplit/$a | sed 's/--dtd=//g' > /tmp/xmluxc-dtd-true-or-false
+
+	dtdTrueOrFalse=$(cat /tmp/xmluxc-dtd-true-or-false)
+
+	if test "$dtdTrueOrFalse" == "false"
+
+	then
+	
+	touch /tmp/xmluxc-escapeDtd
+
+		fi
+
+	fi
 done
 
-leggoTargetFilePre="$(cat /tmp/xmluxcTargetFilePre)"
+## fuori dal ciclo perché leggerebbe prima --dtd che --f
+if [ -f /tmp/xmluxc-escapeDtd ]; then
 
-ls $leggoTargetFilePre.lmx | cut -d. -f1,1 > /tmp/xmluxcTargetFile
+cat $targetFile.lmx | sed '/^<!DOCTYPE a SYSTEM.*dtd/d' > /tmp/xmluxc-dtdReference-deleted
 
-targetFile="$(cat /tmp/xmluxcTargetFile)"
+cp /tmp/xmluxc-dtdReference-deleted $targetFile.lmx
+
+fi
+
+
+
 
 ###### Caratteri
 
@@ -811,7 +856,7 @@ vim -c ":%s/{}//g" $targetFile.xml -c :w -c :q &> /dev/null
 04-costruzioneCss () {
 ####### Costruzione del file *.css, e del file *.dtd
 
-grep -R  "^--margin=true" /tmp/xmluxcPseudoOptions > /tmp/xmluxcMarginTrue
+grep -R  "^--margin=true" /tmp/xmluxc-AllParaSplit > /tmp/xmluxcMarginTrue
 
 stat --format %s /tmp/xmluxcMarginTrue > /tmp/xmluxcMarginTrueBytes
 
@@ -823,7 +868,11 @@ touch $targetFile.css
 
 rm -f $targetFile.dtd
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 touch $targetFile.dtd
+
+fi
 
 ### Il file *.dtd non + un file xml
 ## echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > $targetFile.dtd

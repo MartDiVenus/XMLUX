@@ -173,7 +173,7 @@ echo " "
 echo "Usage:
 cd 'path of the project'
 
-xmluxv -option -option --f<Value without extension>"
+xmluxv -option --action --f<Value without extension>"
 echo " "
 echo "e.g."
 echo "xmluxv -s -all --f=bea"
