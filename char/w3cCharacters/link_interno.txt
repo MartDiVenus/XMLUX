@@ -1,0 +1,2 @@
+In offline:
+01-tools-utility/01-language/characters-systems/w3cCharacters

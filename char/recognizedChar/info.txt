@@ -1,0 +1,6 @@
+* I seguenti caratteri non hanno bisogno di essere tradotti,
+in quanto vengono resi direttamente con il loro input nel sistema UTF-8.
+
+i.e. non ho bisogno di esprimere nel file *.xml, <#> con &#x23;, o con \cluxnumb, perché
+l'xml accetta direttamente l'input <#>.
+

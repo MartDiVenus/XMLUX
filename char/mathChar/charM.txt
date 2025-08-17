@@ -1,0 +1,4 @@
+greater-thanSign	<			&#x3E;			\cmluxgt		\textgreater		default
+less-thanSign		<			&#x3C;			\cmluxlt		\textless		default
+plusMinus		±			&#xB1;			\cmluxpm		\pm			default
+thinSpace		↓			&#8201;			\cmluxthinsp		\,			default
