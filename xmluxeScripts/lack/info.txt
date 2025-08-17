@@ -1,3 +1,0 @@
-Testato solo brief-article, con successo.
-Le altre document class non ho avuto tempo per testarle, 
-ma a meno di errori di distrazione, credo stiano bene.
