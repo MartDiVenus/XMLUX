@@ -15,7 +15,7 @@ comm -3 /tmp/xmluxc-css03 /tmp/xmluxc-css05 > /tmp/xmluxc-css06
 ## Nei valori degli elementi non possono esserci caratteri speciali, quali e.g. *, #, &.
 # perché grep non leggerebbe la stringa e quindi non producendo file *.dtd, *.css perfetti.
 
-################ INIZIO ROOT = TITLE = TITULUS = CATEGORY-DATASET CSS, DTD
+################ INIZIO ROOT = TITLE = TITULUS = PIE-DATASET CSS, DTD
 
 rm -fr  /tmp/xmluxc-cssRoot
 
@@ -72,12 +72,8 @@ font-family: Roboto, "Roboto", sans-serif }" >> $targetFile.css
 #
 #echo "$leggoItem" > /tmp/xmluxc-itemRoot
 
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
 	  echo "<!-- Root = $leggoIdRoot= titulus = title = category dataset 01  = $leggoItem $leggoIdRoot -->
 <!ELEMENT $leggoItem ANY>" >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-fi
 
 rm -f /tmp/xmluxc-cssRoot/$c
 
@@ -87,10 +83,12 @@ rm -f /tmp/xmluxc-cssRoot/$c
 done
 ################ FINE ROOT CSS, DTD
 
+
+
 rm -fr /tmp/xmluxc-toc
 
 touch /tmp/xmluxc-toc
-################ INIZIO  SERIES CSS
+################ INIZIO  ITEM CSS
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -116,42 +114,38 @@ do
 	if test $leggoDotFrequency -eq 0
 
 	then
-	
+
 	leggoBytesMarginTrue=$(cat /tmp/xmluxcMarginTrueBytes)
 
 	if test $leggoBytesMarginTrue -gt 0
 
 		then
+	echo "/** 'Item' = $leggoItem $leggoID*/
+$leggoItem { display: block; font-size: 23pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif; 
+margin-left: 300px; margin-right: 300px; padding-top: 3ex; padding-bottom: 3ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50);
+border-top: 2px solid rgb(25, 25, 50);  border-left: 2px solid rgb(25, 25, 50); border-right: 2px solid rgb(25, 25, 50) }" >> $targetFile.css
 
-		echo "/* 'Series' = $leggoItem  $leggoID */
-$leggoItem { display: block; 
-font-size: 23pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif; 
-margin-left: 270px; margin-right: 300px; text-align: left; padding-top: 2ex; border-left: 2px solid rgb(25, 25, 50);
-border-right: 2px solid rgb(25, 25, 50); border-top: 2px solid rgb(25, 25, 50);  border-bottom: 2px solid rgb(25, 25, 50); width: 11.15in }" >> $targetFile.css
-		
-else
+		else ## del margin=true
 
-		echo "/* 'Series' = $leggoItem  $leggoID */
-$leggoItem { display: block; 
-font-size: 23pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif; 
-margin-left: 270px; margin-right: 300px; text-align: left; padding-top: 2ex }" >> $targetFile.css
-
-	fi
+		echo "/** 'Item' = $leggoItem $leggoID*/
+$leggoItem { display: block; font-size: 23pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif;
+margin-left: 300px; margin-right: 300px; padding-top: 3ex; padding-bottom: 3ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50) }" >> $targetFile.css
 
 	break
 
+	        fi
 
 	fi
 
 done
-################ FINE SERIES CSS
+################ FINE ITEM CSS
 
 ### Per scrivere una volta solo un elemento nel file css, e nel file dtd per dichiararlo:
 ## basta individuarlo una volta sola, ecco perché uso i cicli con break.
 ## Ma poi uso gli stessi cicli ma senza break, per scrivere tutti gli elementi come log, 
 ## in dtd commentati, e per il futuro quando implementerò in xnlux xslt e xml schema.
 
-################ INIZIO ITEM CSS
+################ INIZIO KEY or VALUE CSS
 for c in $(ls /tmp/xmluxc-cssRoot)
 
 do
@@ -167,7 +161,7 @@ do
 	
 	leggoID="$(cat /tmp/xmluxc-id)"
 
-	## Inizio Seriese 01 08 ottobre
+	## Inizio ITEMe 01 08 ottobre
 
 	sed 's/[^.]//g' /tmp/xmluxc-id | awk '{ print length }' > /tmp/xmluxc-dotFrequency
 
@@ -179,22 +173,20 @@ do
 
 	leggoBytesMarginTrue=$(cat /tmp/xmluxcMarginTrueBytes)
 
-	if test $leggoBytesMarginTrue -gt 0
+#	if test $leggoBytesMarginTrue -gt 0
 
-		then
+#		then
+#echo "/* Key or Value $leggoItem $leggoID */
+#$leggoItem { display: block; font-size: 95%; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif;
+#padding-top: 2ex; padding-bottom: 2ex; border-bottom: 2px solid rgb(25, 25, 50); border-top: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
 
-		echo "/** 'Item' = $leggoItem $leggoID*/
-$leggoItem { display: block; font-size: 17pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif; 
-padding-top: 2ex; padding-bottom: 4ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50);
-width: 10.65in }" >> $targetFile.css
+#else
+echo "/* Key or Value $leggoItem $leggoID */
+$leggoItem { display: block; font-size: 95%; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif;
+padding-top: 2ex; padding-bottom: 2ex }" >> $targetFile.css
 
-		else ## del margin=true
 
-		echo "/** 'Item' = $leggoItem $leggoID*/
-$leggoItem { display: block; font-size: 17pt; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif; 
-padding-top: 3ex; padding-bottom: 1ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
-
-	fi
+#	fi
 
 	echo $leggoItem >> /tmp/xmluxc-toc
 
@@ -203,61 +195,7 @@ padding-top: 3ex; padding-bottom: 1ex; padding-left: 2ex; padding-right: 2ex; bo
 	fi
 	
 done
-############## FINE ITEM CSS
-
-
-################ INIZIO KEY or VALUE -> CSS
-
-leggoIdRoot="$(cat /tmp/xmluxc-idRoot)"
-
-grep "ID=\"$leggoIdRoot" /tmp/xmluxc-css05 > /tmp/xmlux-keyOrValueAnd
-
-rm -fr /tmp/xmluxc-css05Split
-
-mkdir /tmp/xmluxc-css05Split
-
-split -l1 /tmp/xmlux-keyOrValueAnd  /tmp/xmluxc-css05Split/
-
-
-
-for d in $(ls /tmp/xmluxc-css05Split)
-
-do
-	leggoD="$(cat /tmp/xmluxc-css05Split/$d)"
-
-        grep "$leggoD" /tmp/xmluxc-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxc-item
-
-	leggoItem="$(cat /tmp/xmluxc-item)"
-
-	cat /tmp/xmluxc-css05Split/$d | sed 's/>/ /g' > /tmp/xmluxc-id0
-
-	cat /tmp/xmluxc-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxc-id
-	
-	leggoID="$(cat /tmp/xmluxc-id)"
-
-	## Inizio Seriese 01 10 ottobre
-
-	sed 's/[^.]//g' /tmp/xmluxc-id | awk '{ print length }' > /tmp/xmluxc-dotFrequency
-
-	leggoDotFrequency=$(cat /tmp/xmluxc-dotFrequency)
-
-	if test $leggoDotFrequency -eq 2
-
-	then
-
-		## è una sezione perché ha 1 pto.
-## qui va il css per le sezioni
-
-echo "/* Key or Value $leggoItem $leggoID */
-$leggoItem { display: block; font-size: 95%; font-weight: bold; font-family: Roboto, \"Roboto\", sans-serif;
-padding-top: 1ex; padding-bottom: 2ex; border-top: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
-		
-	break
-
-	fi
-done
-
-################ FINE KEY or VALUE -> CSS
+############## FINE KEY or VALUE CSS
 
 
 rm -fr /tmp/xmluxc-whiteSpace
@@ -265,8 +203,7 @@ rm -fr /tmp/xmluxc-whiteSpace
 mkdir /tmp/xmluxc-whiteSpace
 
 
-################ INIZIO  SERIES DTD, LOG, XML SCHEMA, XSL
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+################ INIZIO  ITEM  DTD, LOG, XML SCHEMA, XSL
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -301,7 +238,7 @@ do
 	leggoIdRoot="$(cat /tmp/xmluxc-idRoot)"
 
 	## A differenza della sinossi non posso più usare un'unica istanza del tipo grep -A, grep -B, grep -B perché
-	## a differenza della sinossi e di Series, posso avere più capitoli in un file *.lmx.	
+	## a differenza della sinossi e di ITEM, posso avere più capitoli in un file *.lmx.	
 
 	cat /tmp/xmluxc-css000 | sed -n '/<'$leggoItem' ID="'$leggoID'"/,$p' | sed '/<\/'$leggoItem'/q' > /tmp/xmluxc-linesDtdPre01
 
@@ -356,20 +293,20 @@ leggoPartElements="$(cat /tmp/xmluxc-ElementSUTr)"
 
 ### Se non volessi riportare esattamente tutti i sotto-elementi, potrei usare:
 ## <+> per esprimere <one or more> 
-## e.g. tale elemento Series può contenere uno o più sotto-elementi <Key or Value>, dovrei scrivere:
+## e.g. tale elemento ITEM può contenere uno o più sotto-elementi <Sub-key or Sub-value>, dovrei scrivere:
 ## Item+
 ##
 ## <*> per esprimere <zero or more>
-## e.g. tale elemento Series può contenere zero o più sotto-elementi <Item>, dovrei scrivere:
+## e.g. tale elemento ITEM può contenere zero o più sotto-elementi <Item>, dovrei scrivere:
 ## Item*
 ##
-echo "<!-- All that is under \"Series\" = $leggoItem = $leggoID -->
+echo "<!-- All that is under \"ITEM\" = $leggoItem = $leggoID -->
 <!ELEMENT $leggoItem ($leggoPartElements)>
 <!ATTLIST $leggoItem ID CDATA \"$leggoID\">" > /tmp/xmluxc-preDtd
 
 else
 
-echo "<!-- All that is in \"Series\" = $leggoItem = $leggoID -->
+echo "<!-- All that is in \"ITEM\" = $leggoItem = $leggoID -->
 <!ELEMENT $leggoItem (#PCDATA)>
 <!ATTLIST $leggoItem ID CDATA \"$leggoID\">" > /tmp/xmluxc-preDtd
 
@@ -388,10 +325,10 @@ rm -f /tmp/xmluxc-cssRoot/$c
 
 
 done
-################ FINE SERIES CSS, DTD, LOG, XML SCHEMA, XSLT
+################ FINE ITEM CSS, DTD, LOG, XML SCHEMA, XSLT
 
 
-############## INIZIO ITEM LOG, DTD (b), XSLT, XML SCHEMA
+############## INIZIO KEY or VALUE LOG, DTD (b), XSLT, XML SCHEMA
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -1148,12 +1085,12 @@ leggoPcdataList="$(cat /tmp/xmluxc-pcdataTr)"
 
 ### Se non volessi riportare esattamente tutti i sotto-elementi, potrei usare:
 ## <+> per esprimere <one or more> 
-## e.g. tale elemento Item può contenere uno o più sotto-elementi <Key or Value>, dovrei scrivere:
-## Key or Value+
+## e.g. tale elemento Item può contenere uno o più sotto-elementi <Sub-key or Sub-value>, dovrei scrivere:
+## Sub-key or Sub-value+
 ##
 ## <*> per esprimere <zero or more>
-## e.g. tale elemento Item può contenere zero o più sotto-elementi <Key or Value>, dovrei scrivere:
-## Key or Value*
+## e.g. tale elemento Item può contenere zero o più sotto-elementi <Sub-key or Sub-value>, dovrei scrivere:
+## Sub-key or Sub-value*
 ##
 echo "<!-- All that is under \"Item\" = $leggoItem = $leggoID -->
 <!ELEMENT $leggoItem ($leggoPcdataList)>
@@ -1189,831 +1126,7 @@ rm -f /tmp/xmluxc-cssRoot/$c
 	fi
 	
 done
-################ FINE ITEM LOG, DTD (b), XSLT, XML SCHEMA
-
-#### ok 12 ottobre 10:23 fare anche Series prima, e poi tutto ciò che viene dopo Item
-
-################ INIZIO KEY or VALUE -> DTD, LOGS, XSLT, XML SCHEMA
-rm -f /tmp/xmluxc-ElementDtd
-
-touch /tmp/xmluxc-ElementDtd
-
-
-leggoIdRoot="$(cat /tmp/xmluxc-idRoot)"
-
-grep "ID=\"$leggoIdRoot" /tmp/xmluxc-css05 > /tmp/xmlux-keyOrValueAnd
-
-
-rm -fr /tmp/xmluxc-css05Split
-
-mkdir /tmp/xmluxc-css05Split
-
-split -l1 /tmp/xmlux-keyOrValueAnd  /tmp/xmluxc-css05Split/
-
-for d in $(ls /tmp/xmluxc-css05Split)
-
-do
-
-rm -f /tmp/xmluxc-pcdata
-
-touch /tmp/xmluxc-pcdata
-
-	leggoD="$(cat /tmp/xmluxc-css05Split/$d)"
-
-        grep "$leggoD" /tmp/xmluxc-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxc-item
-
-	leggoItem="$(cat /tmp/xmluxc-item)"
-
-	cat /tmp/xmluxc-css05Split/$d | sed 's/>/ /g' > /tmp/xmluxc-id0
-
-	cat /tmp/xmluxc-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxc-id
-	
-	leggoID="$(cat /tmp/xmluxc-id)"
-
-	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxc-title
-
-	leggoTitle="$(cat /tmp/xmluxc-title)"
-
-	sed 's/[^.]//g' /tmp/xmluxc-id | awk '{ print length }' > /tmp/xmluxc-dotFrequency
-
-	leggoDotFrequency=$(cat /tmp/xmluxc-dotFrequency)
-
-	if test $leggoDotFrequency -eq 2
-
-	then
-
-		## è una sezione perché ha 2 pti.
-## qui va il css per le sezioni
-
-	## A iniziare dai capitoli non posso più usare un'unica istanza del tipo grep -A, grep -B, grep -B perché
-	## a differenza della sinossi e di Series, posso avere più capitoli in un file *.lmx.
-
-	cat /tmp/xmluxc-css000 | sed -n '/<'$leggoItem' ID="'$leggoID'"/,$p' | sed '/<!-- end '$leggoID' -->/q' > /tmp/xmluxc-linesDtd
-
-	#cat /tmp/xmluxc-css000 | grep -A 100000000 "<$leggoItem ID=\"$leggoID\"" | grep -B 100000000 "<!-- end $leggoID -->" > /tmp/xmluxc-linesDtd
-
-	vim -s /usr/local/lib/xmlux/command-delLastLine /tmp/xmluxc-linesDtd
-
-	vim -s /usr/local/lib/xmlux/command-delLastLine /tmp/xmluxc-linesDtd
-
-	vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxc-linesDtd
-
-	cat /tmp/xmluxc-linesDtd | sed '/^<!/d' |  sed '/^<\//d' | sed -r '/^\s*$/d' > /tmp/xmluxc-linesDtdElements0
-
-	cat /tmp/xmluxc-linesDtdElements0 | sed '/^<\//d' | sed -r '/^\s*$/d' > /tmp/xmluxc-linesDtdElements
-
-		## Devo restringere l'individuazione dei pcdata solo nell'elemento corrente, e non nei suoi children.
-
-	## pre 21 ottobre
-	cat /tmp/xmluxc-linesDtdElements | grep "ID=\"$leggoIdRoot" > /tmp/xmluxc-linesDtd001
-
-	## questo mi seleziona anche se sono presenti ID di immagini all'interno di tutto il sezione
-	#cat /tmp/xmluxc-linesDtdElements | grep -o "ID=\"$leggoIdRoot*.*" > /tmp/xmluxc-linesDtd001
-
-	stat --format %s /tmp/xmluxc-linesDtd001 > /tmp/xmluxc-linesDtd001Bytes
-
-	leggoBytesDtd001=$(cat /tmp/xmluxc-linesDtd001Bytes)
-
-	## la sezione ha children o meno
-	if test $leggoBytesDtd001 -gt 0
-
-	then
-## ha children 
-	cat /tmp/xmluxc-linesDtd001 | head -n1 | awk '$1 > 0 {print $2}' | sed 's/>/ /g' | cut -d= -f2,2 | sed 's/"//g' | awk '$1 > 0 {print $1}' > /tmp/xmluxc-idPCDATA
-
-	leggoIdPCDATA="$(cat /tmp/xmluxc-idPCDATA)"
-
-	cat /tmp/xmluxc-linesDtdElements | sed '/ID="'$leggoIdPCDATA'"/q' > /tmp/xmluxc-linesDtd00
-
-	#cat /tmp/xmluxc-linesDtdElements | grep -B 100000000 "ID=\"$leggoIdPCDATA\"" > /tmp/xmluxc-linesDtd00
-
-	else
-
-	cp /tmp/xmluxc-linesDtdElements /tmp/xmluxc-linesDtd00
-
-	fi
-
-grep "<p>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#p="p"
-
-echo "p+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<p>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/p>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-
-grep "<pg>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#pg="pg"
-
-echo "pg+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<pg>/d'  /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/pg>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-## center
-
-grep "<center>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#center="center"
-
-echo "center+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<center>/d'  /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/center>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-grep "<code>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#code="code"
-
-echo "code+, " >> /tmp/xmluxc-pcdata
-echo "code" > /tmp/xmluxc-whiteSpace/code
-
-fi
-
-sed -r '/<code>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/code>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-
-grep "<CODE>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#CODE="CODE"
-
-echo "CODE+, " >> /tmp/xmluxc-pcdata
-
-echo "CODE" > /tmp/xmluxc-whiteSpace/CODE
-
-fi
-
-sed -r '/<CODE>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/CODE>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-grep "<PCODE>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-PCODE="PCODE"
-
-echo "PCODE+, " >> /tmp/xmluxc-pcdata
-
-echo "PCODE" > /tmp/xmluxc-whiteSpace/PCODE
-
-fi
-
-sed -r '/<PCODE>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/PCODE>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-grep "<pcode>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#pcode="pcode"
-
-echo "pcode+, " >> /tmp/xmluxc-pcdata
-
-echo "pcode" > /tmp/xmluxc-whiteSpace/pcode
-
-fi
-
-sed -r '/<pcode>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/pcode>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<snip>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#snip="snip"
-
-echo "snip+, " >> /tmp/xmluxc-pcdata
-
-echo "snip" > /tmp/xmluxc-whiteSpace/snip
-
-fi
-
-sed -r '/<snip>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/snip>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<SNIP>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#SNIP="SNIP"
-
-echo "SNIP+, " >> /tmp/xmluxc-pcdata
-
-echo "SNIP" > /tmp/xmluxc-whiteSpace/SNIP
-
-fi
-
-sed -r '/<SNIP>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/SNIP>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<output>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#output="output"
-
-echo "output+, " >> /tmp/xmluxc-pcdata
-
-echo "output" > /tmp/xmluxc-whiteSpace/output
-
-fi
-
-sed -r '/<output>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/output>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<OUTPUT>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#OUTPUT="OUTPUT"
-
-echo "OUTPUT+, " >> /tmp/xmluxc-pcdata
-
-echo "OUTPUT" > /tmp/xmluxc-whiteSpace/OUTPUT
-
-fi
-
-sed -r '/<OUTPUT>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/OUTPUT>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<it>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#it="it"
-
-echo "it+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<it>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/it>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<sl>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#sl="sl"
-
-echo "sl+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<sl>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/sl>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<bf>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#bf="bf"
-
-echo "bf+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<bf>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/bf>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<light>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#light="light"
-
-echo "light+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<light>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/light>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<em>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#em="em"
-
-echo "em+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<em>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/em>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<scaps>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#scaps="scaps"
-
-echo "scaps+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<scaps>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/scaps>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<under>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#under="under"
-
-echo "under+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<under>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/under>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<lthr>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#lthr="lthr"
-echo "lthr+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<lthr>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/lthr>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<url>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#url="url"
-
-echo "url+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<url>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/url>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<description>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#description="description"
-
-echo "description+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<description>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/description>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<enumerate>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#enumerate="enumerate"
-
-echo "enumerate+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<enumerate>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/enumerate>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<task>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#task="task"
-
-echo "task+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<task>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/task>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<roman>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#roman="roman"
-
-echo "roman+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<roman>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/roman>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<ROMAN>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#ROMAN="ROMAN"
-
-echo "ROMAN+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<ROMAN>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/ROMAN>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<square>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#square="square"
-
-echo "square+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<square>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/square>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<itemize>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#itemize="itemize"
-
-echo "itemize+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<itemize>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/itemize>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<large>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#large="large"
-
-echo "large+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<large>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/large>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<Large>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#Large="Large"
-
-echo "Large+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<Large>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/Large>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-grep "<small>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#small="small"
-
-echo "small+, " >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<small>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/small>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-# images in pcdata
-
-grep "<img" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#img="img"
-cat /tmp/xmluxc-elementPCDATA | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxc-imgPCDATAElement
-
-rm -fr /tmp/xmluxc-splitImgPCDATA
-
-mkdir /tmp/xmluxc-splitImgPCDATA
-
-split -l1 /tmp/xmluxc-imgPCDATAElement /tmp/xmluxc-splitImgPCDATA/
-
-for i in $(ls /tmp/xmluxc-splitImgPCDATA)
-
-do
-	leggoI="$(cat /tmp/xmluxc-splitImgPCDATA/$i)"
-
-	echo "$leggoI ," | sed 's/ //g' > /tmp/xmluxc-imgPCDATAElementComposto 
-
-leggoImgPCDATAElement="$(cat /tmp/xmluxc-imgPCDATAElementComposto)"
-
-echo "$leggoImgPCDATAElement " >> /tmp/xmluxc-pcdata
-
-done
-
-fi
-
-sed -r '/<img/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/img/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-grep "<tiny>" /tmp/xmluxc-linesDtd00 > /tmp/xmluxc-elementPCDATA
-
-stat --format %s /tmp/xmluxc-elementPCDATA > /tmp/xmluxc-Bytes
-
-leggoBytes=$(cat /tmp/xmluxc-Bytes)
-
-if test $leggoBytes -gt 0
-then
-
-#tiny="tiny"
-
-echo "tiny" >> /tmp/xmluxc-pcdata
-
-fi
-
-sed -r '/<tiny>/d' /tmp/xmluxc-linesDtdElements > /tmp/xmluxc-linesDtd01
-
-sed -r '/<\/tiny>/d' /tmp/xmluxc-linesDtd01 > /tmp/xmluxc-linesDtdElements
-
-
-grep -oh "\w*<\w*" /tmp/xmluxc-linesDtdElements | sed 's/.*<//g' | sed -r '/^\s*$/d' | sort | uniq | awk '$1 > 0 {print $1}' | sed 's/<//g' | sed 's/>.*//g' | sed 's/$/+, /' > /tmp/xmluxc-ElementDtd
-
-cat /tmp/xmluxc-ElementDtd /tmp/xmluxc-pcdata > /tmp/xmluxc-ElementEtPcdata
-
-cat /tmp/xmluxc-ElementEtPcdata | sort | uniq > /tmp/xmluxc-ElementEtPcdataSU 
-
-cat /tmp/xmluxc-ElementEtPcdataSU | tr -d '\n' > /tmp/xmluxc-pcdataTr 
-
-stat --format %s /tmp/xmluxc-pcdataTr > /tmp/xmluxc-pcdataTrBytes
-
-leggoBytes=$(cat /tmp/xmluxc-pcdataTrBytes)
-
-if test $leggoBytes -gt 0
-
-then
-
-leggoPcdataList="$(cat /tmp/xmluxc-pcdataTr)"
-
-### Se non volessi riportare esattamente tutti i sotto-elementi, potrei usare:
-## <+> per esprimere <one or more> 
-## e.g. tale elemento Key or Value può contenere uno o più sotto-elementi <Key or Value>, dovrei scrivere:
-## Key or Value+
-##
-## <*> per esprimere <zero or more>
-## e.g. tale elemento Key or Value può contenere zero o più sotto-elementi <Key or Value>, dovrei scrivere:
-## Key or Value*
-##
-echo "<!-- All that is under \"Key or Value\" = $leggoItem = $leggoID -->
-<!ELEMENT $leggoItem ($leggoPcdataList)>
-<!ATTLIST $leggoItem ID CDATA \"$leggoID\">" > /tmp/xmluxc-preDtd
-
-else
-
-echo "<!-- All that is in \"Key or Value\" = $leggoItem = $leggoID -->
-<!ELEMENT $leggoItem (#PCDATA)>
-<!ATTLIST $leggoItem ID CDATA \"$leggoID\">" > /tmp/xmluxc-preDtd
-
-fi
-
-cat /tmp/xmluxc-preDtd | sed 's/, )/)/g' > /tmp/xmluxc-preDtd1
-
-cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
-
-#echo "$leggoID" >> /tmp/xmluxc-allIDs
-#
-#echo "$leggoItem" >> /tmp/xmluxc-allElements
-#
-#echo "$leggoTitle" >> /tmp/xmluxc-allTitles
-#
-#echo "$leggoItem $leggoID" >> /tmp/xmluxc-itemsEtIDs
-#
-#echo "$leggoItem $leggoID $leggoTitle" >> /tmp/xmluxc-itemsEtIDsEtTitles
-#
-#echo "$leggoID $leggoTitle" >> /tmp/xmluxc-IDsEtTitles
-#
-#echo "$leggoItem $leggoTitle" >> /tmp/xmluxc-itemsEtTitles
-#
-rm -f /tmp/xmluxc-css05Split/$d
-
-fi
-
-done
-
-# chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-# 
-fi
-
-################ FINE KEY or VALUE -> DTD, LOGS, XSLT, XML SCHEMA
+################ FINE KEY or VALUE LOG, DTD (b), XSLT, XML SCHEMA
 
 
 ################ PCDATA in *.css
@@ -2247,8 +1360,6 @@ tiny { font-size: 12pt; font-weight: normal; font-family: Roboto, \"Roboto\", sa
 
 
 ### Costanti
-
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo " " >> $targetFile.dtd
 
@@ -2951,7 +2062,7 @@ echo ":silent! %s/( /(/g" >> /home/$USER/.vim/vimScript/xmlux/XMLUXTMP.vim
 echo ":silent! %s/,)/)/g" >> /home/$USER/.vim/vimScript/xmlux/XMLUXTMP.vim
 
 ## Inoltre bisogna togliere il doppio spazio che si crea [dopo la pulizia] 
-## dopo <p> dagli elementi che vanno daa Key or Value a gradusVII
+## dopo <p> dagli elementi che vanno daa Sub-key or Sub-value a gradusVII
 echo ":silent! %s/p+,  /p+, /g" >> /home/$USER/.vim/vimScript/xmlux/XMLUXTMP.vim
 
 echo " " >> /home/$USER/.vim/vimScript/xmlux/XMLUXTMP.vim
@@ -2990,9 +2101,6 @@ if [ -f /tmp/xmluxc-imageExists ]; then
 echo " " >> $targetFile.dtd
 
 echo "<!-- Begin images details" >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ## images in *.css
 
@@ -3117,8 +2225,6 @@ do
 
 		leggoImageFLOAT="$(cat /tmp/xmluxc-imageFLOAT)"
 
-		if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
 		echo "<!-- Image $leggoImageElement ID=\"$leggoImageID\" -->
 <!ELEMENT $leggoImageElement EMPTY>
 <!ATTLIST $leggoImageElement ID CDATA \"$leggoImageID\" #REQUIRED>
@@ -3126,10 +2232,6 @@ do
 <!ATTLIST $leggoImageElement ALT CDATA \"$leggoImageALT\" #REQUIRED>
 <!ATTLIST $leggoImageElement WIDTH CDATA \"$leggoImageWIDTH\" #REQUIRED>
 <!ATTLIST $leggoImageElement HEIGHT CDATA \"$leggoImageHEIGHT\" #REQUIRED>" >> $targetFile.dtd
-
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
-		fi
 
 		cat /tmp/xmluxc-imageWIDTH | sed 's/px//g' > /tmp/xmluxc-imageWIDTHlessPx
 
@@ -3327,16 +2429,9 @@ margin-left: $marginLeftPx }" >> $targetFile.css
 
 done
 
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
-
 echo "<!-- End images details -->" >> $targetFile.dtd
 
 echo " " >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-
-fi
 
 fi
 

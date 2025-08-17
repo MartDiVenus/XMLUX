@@ -697,6 +697,12 @@ pie dataset,
 you can insert Items only, value and key are inserted consequentially.
 
 
+Only for septem gradus data (data-seven)
+Insert gradusI ID, cloning the structure made by 
+xtextus' -st option. 						--ins='ID' -st
+
+
+
 		Only for:
 brief article, brief book, matter article, matter book, data-seven;
 for category dataset01, category dataset02, pie dataset, it happens automatically. 
@@ -718,6 +724,22 @@ Insert an ID family level, specifying name attribute of element,
 and titles too.										
 								--ins='ID' -name -t
 
+	
+Insert an ID family level, following the structure assigned
+in *.str file, and sort ascending through name attribute	--ins-a='ID' -st
+that you'll supply interactively.
+
+Insert an ID family level, following the structure assigned
+in *.str file, and sort ascending through title			--ins-at='ID' -st
+that you'll supply interactively.
+
+Insert an ID family level, following the structure assigned
+in *.str file, and sort descending through name attribute	--ins-d='ID' -st
+that you'll supply interactively.
+
+Insert an ID family level, following the structure assigned
+in *.str file, and sort descending through title		--ins-dt='ID' -st
+that you'll supply interactively.
 
 
 
@@ -822,6 +844,21 @@ until the relative end.	 			          --move='ID' -b'Value' -end
 
 
 
+Delete multiple empty lines.				-delEmpty
+Avoid to use this option in documents having 
+<pcode>xml:space="preserve"</pcode>
+because it would ruin the formatting.
+
+
+Add one empty line after an element closing		-addEmpty
+<pcode>\cluxlt{}!-- end ... --\cluxgt</pcode>
+
+
+Execute -delEmpty and -addEmpty options 
+together in one instance				-format
+
+
+
 	<scaps>Usage</scaps>
 cd 'path of the project'
 
@@ -863,7 +900,7 @@ e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03
 
 
 	Only for data document classes 
-( <sl>data-seven, category dataset01, category dataset02, pie dataset</sl>):
+(<sl>data-seven, category dataset01, category dataset02, pie dataset</sl>):
 To insert a gradusIII ID, of a01's family (a01 gradusI), e.g.
 <code>xmluxe --ins=a01.01.01 --f=greeting</code>
 e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04.
@@ -1193,6 +1230,8 @@ For jump*, select*, parse*, render* actions
 
 For -o, -p, -view options					  
 						--f='Value with or without extension'
+P.S. -view option reads only xml files.
+
 
 
 open file						  -o
@@ -1200,6 +1239,14 @@ open file						  -o
 
 print in ps and pdf, with xml fancy syntax		  -p
 
+
+Only for septem gradus data (data-seven):
+make a structure for the first gradusI
+(e.g. a01) and its children. 		                  -st
+
+
+
+view xml by Yumberc XMLView (Java FX)		  	  -view
 
 
 <scaps>Usage</scaps>
@@ -1227,6 +1274,16 @@ e.g.
 
 <code>xtextus -p --f=greeting</code>
 
+
+<code>xtextus -st --f=greeting.lmx</code>
+
+
+<code>xtextus -view --f=greeting</code>
+aka
+<code>xtextus -view --f=greeting.xml</code>
+aka
+<code>xtextus -view --f=*</code>
+	
 
 <code>xtextus --jump-id=a01.01 --f=greeting</code>
 <code>xtextus --jump-id=a01.01 --f=*</code>
@@ -1296,7 +1353,7 @@ find/match title			only		--find-title="'title'""
 
 
 <scaps>usage</scaps>
-<code>xmluxv -option --f\csluxlt{}Value without extension\csluxgt</code>
+<code>xmluxv -option --action --f\csluxlt{}Value without extension\csluxgt</code>
 
 e.g.
 <code>xmluxv -s -all --f=bea</code>
@@ -1351,6 +1408,9 @@ as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g.
 <pcode>--f=*</pcode>\csluxrsquare.
 
 
+<scaps>dtd file creation</scaps>\cpluxtab--dtd=false/true
+To have a fast compilation, you have to specify --dtd=false.
+
 <scaps>margin borders</scaps>\cpluxtab\cpluxtab--margin=true
 
 
@@ -1359,6 +1419,8 @@ as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g.
 
 e.g.:
 <code>xmluxc --f=greeting</code>
+
+<code>xmluxc --dtd=false --f=greeting</code>
 
 <code>xmluxc --margin=true --f=greeting</code>
 </OUTPUT>
@@ -1591,30 +1653,28 @@ I suggest chromium web browser.</p>
 <!-- end a01.03 -->
 
 <chapter ID="a01.04">Changes
-<center>v3.0.0 2024-11-04</center>
+<center>v3.2.0 2025-04-17</center>
 <p>
-<itemize>Improved <pcode> --f='*' </pcode> option usage.</itemize>
-<itemize>Improved and corrected <pcode> --=f'without extension'</pcode> in <sl>xtextus</sl>.</itemize>
-<itemize>Improved and corrected <pcode> --add</pcode> action in <sl>xmluxe</sl>.</itemize>
-<itemize>Added:
-<enumerate><it>matter article document class</it>;</enumerate>
-<enumerate><it>brief book document class</it>;</enumerate>
-<enumerate><it>brief article document class</it>;</enumerate>
-<enumerate><it>septem gradus data document class</it>.</enumerate>
-<enumerate><it>category dataset 01 document class</it>.</enumerate>
-<enumerate><it>category dataset 02 document class</it>.</enumerate>
-<enumerate><it>pie dataset document class</it>.</enumerate>
-<enumerate><it>xmluxe sort actions</it>.</enumerate>
-<enumerate><it>xmluxe insert actions</it>.</enumerate>
-<enumerate><it>xmluxe and xtextus select actions</it>.</enumerate>
-<enumerate><it>xmluxe and xtextus parse actions</it>.</enumerate>
-<enumerate><it>xmluxe and xtextus render actions</it>.</enumerate>
-<enumerate><it>xmluxe and xtextus jump actions</it>.</enumerate>
-<enumerate><it>xmluxe delLack option</it>.</enumerate>
-<enumerate><it>xmluxv folder feature</it>.</enumerate>
-<enumerate><it>xmluxv find actions</it>.</enumerate>
-<enumerate><it>xmluxv various options</it>.</enumerate>
-So, some options and actions are changed.</itemize>
+	<itemize>Corrected <sl>xmluxv</sl> help, adding <pcode>--action</pcode>.</itemize>
+	
+	<itemize>Corrected <sl>xmluxe</sl> <pcode>--sort</pcode> actions.</itemize>
+
+	<itemize>Corrected <pcode>cluxgt</pcode> representation in
+	<url>/usr/local/lib/xmlux/char/genericChar/char.txt</url>
+	<url>/usr/local/lib/xmlux/char/mathChar/charM.txt</url>
+        </itemize>
+
+	<itemize>Improved <sl>xmluxe</sl> adding:
+	<enumerate><pcode>--ins=... -st</pcode> action;</enumerate>
+	<enumerate><pcode>-delEmpty</pcode> option;</enumerate>
+	<enumerate><pcode>-addEmpty</pcode> option;</enumerate>
+	<enumerate><pcode>-format</pcode> option;</enumerate>
+</itemize>
+
+	<itemize>Improved <sl>xtextus</sl> adding <pcode>-st</pcode> option.</itemize>
+
+
+	<itemize>Improved <sl>xmluxc</sl> adding <pcode>--dtd</pcode> action.</itemize>
 </p>
 </chapter>
 <!-- end a01.04 -->

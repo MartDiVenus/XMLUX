@@ -72,9 +72,13 @@ font-family: Arial, "Arial", serif }" >> $targetFile.css
 #echo "$leggoItem $leggoTitle" >> /tmp/xmluxc-itemsEtTitles
 #
 #echo "$leggoItem" > /tmp/xmluxc-itemRoot
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 	  echo "<!-- Root = $leggoIdRoot= titulus = title = radix = $leggoItem $leggoIdRoot -->
 <!ELEMENT $leggoItem ANY>" >> $targetFile.dtd
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 rm -f /tmp/xmluxc-cssRoot/$c
 
@@ -382,7 +386,7 @@ done
 
 ################ FINE SUBPARAGRAPH -> CSS
 
-################ INIZIO PARAPGRAPH -> CSS
+################ INIZIO SAXUM -> CSS
 
 for d in $(ls /tmp/xmluxc-css05Split)
 
@@ -465,6 +469,7 @@ mkdir /tmp/xmluxc-whiteSpace
 
 
 ############# INIZIO SINOSSI LOG, DTD, XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -1163,10 +1168,14 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ############# FINE SINOSSI LOG, DTD (b), XSLT, XML SCHEMA 
 
 ################ INIZIO  SECTION  DTD, LOG, XML SCHEMA, XSL
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -1288,10 +1297,16 @@ rm -f /tmp/xmluxc-cssRoot/$c
 
 
 done
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
 ################ FINE SECTION CSS, DTD, LOG, XML SCHEMA, XSLT
 
 
 ############## INIZIO SUBSECTIONS LOG, DTD (b), XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -2089,11 +2104,19 @@ rm -f /tmp/xmluxc-cssRoot/$c
 	fi
 	
 done
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
 ################ FINE SUBSECTIONS LOG, DTD (b), XSLT, XML SCHEMA
 
 #### ok 12 ottobre 10:23 fare anche section prima, e poi tutto ciò che viene dopo subsection
 
 ################ INIZIO SUBSUBSECTION -> DTD, LOGS, XSLT, XML SCHEMA
+#
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 rm -f /tmp/xmluxc-ElementDtd
 
 touch /tmp/xmluxc-ElementDtd
@@ -2908,10 +2931,14 @@ rm -f /tmp/xmluxc-css05Split/$d
 fi
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ################ FINE SUBSUBSECTION -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO PARAGRAPH -> DTD
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -3712,10 +3739,14 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ################ FINE PARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO SUBPARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -4517,10 +4548,14 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ################ FINE SUBPARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
 
-################ INIZIO PARAPGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
+################ INIZIO SAXUM -> DTD, LOGS, XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -5323,10 +5358,14 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ################ FINE SAXUM -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO SUBSAXUM -> DTD, LOGS, XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -6128,6 +6167,9 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 
 	fi
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ################ FINE SUBSAXUM -> DTD, LOGS, XSLT, XML SCHEMA
 
@@ -6362,6 +6404,7 @@ tiny { font-size: 12pt; font-weight: normal; font-family: Arial, \"Arial\", seri
 
 
 ### Costanti
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo " " >> $targetFile.dtd
 
@@ -7103,6 +7146,9 @@ if [ -f /tmp/xmluxc-imageExists ]; then
 echo " " >> $targetFile.dtd
 
 echo "<!-- Begin images details" >> $targetFile.dtd
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ## images in *.css
 
@@ -7227,6 +7273,8 @@ do
 
 		leggoImageFLOAT="$(cat /tmp/xmluxc-imageFLOAT)"
 
+		if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 		echo "<!-- Image $leggoImageElement ID=\"$leggoImageID\" -->
 <!ELEMENT $leggoImageElement EMPTY>
 <!ATTLIST $leggoImageElement ID CDATA \"$leggoImageID\" #REQUIRED>
@@ -7234,6 +7282,11 @@ do
 <!ATTLIST $leggoImageElement ALT CDATA \"$leggoImageALT\" #REQUIRED>
 <!ATTLIST $leggoImageElement WIDTH CDATA \"$leggoImageWIDTH\" #REQUIRED>
 <!ATTLIST $leggoImageElement HEIGHT CDATA \"$leggoImageHEIGHT\" #REQUIRED>" >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+		fi
+
 
 		cat /tmp/xmluxc-imageWIDTH | sed 's/px//g' > /tmp/xmluxc-imageWIDTHlessPx
 
@@ -7431,9 +7484,15 @@ margin-left: $marginLeftPx }" >> $targetFile.css
 
 done
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 echo "<!-- End images details -->" >> $targetFile.dtd
 
 echo " " >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 fi
 

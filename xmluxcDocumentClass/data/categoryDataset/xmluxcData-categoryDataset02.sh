@@ -72,8 +72,13 @@ font-family: Roboto, "Roboto", sans-serif }" >> $targetFile.css
 #
 #echo "$leggoItem" > /tmp/xmluxc-itemRoot
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 	  echo "<!-- Root = $leggoIdRoot= titulus = title = category dataset 01  = $leggoItem $leggoIdRoot -->
 <!ELEMENT $leggoItem ANY>" >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+fi
 
 rm -f /tmp/xmluxc-cssRoot/$c
 
@@ -259,6 +264,7 @@ mkdir /tmp/xmluxc-whiteSpace
 
 
 ################ INIZIO  SERIES DTD, LOG, XML SCHEMA, XSL
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -2001,6 +2007,9 @@ fi
 
 done
 
+# chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+# 
+fi
 ################ FINE KEY or VALUE -> DTD, LOGS, XSLT, XML SCHEMA
 
 
@@ -2235,6 +2244,7 @@ tiny { font-size: 12pt; font-weight: normal; font-family: Roboto, \"Roboto\", sa
 
 
 ### Costanti
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo " " >> $targetFile.dtd
 
@@ -2977,6 +2987,11 @@ echo " " >> $targetFile.dtd
 
 echo "<!-- Begin images details" >> $targetFile.dtd
 
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
+
 ## images in *.css
 
 echo "/* IMAGES */" >> $targetFile.css
@@ -3100,6 +3115,9 @@ do
 
 		leggoImageFLOAT="$(cat /tmp/xmluxc-imageFLOAT)"
 
+
+		if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+		
 		echo "<!-- Image $leggoImageElement ID=\"$leggoImageID\" -->
 <!ELEMENT $leggoImageElement EMPTY>
 <!ATTLIST $leggoImageElement ID CDATA \"$leggoImageID\" #REQUIRED>
@@ -3108,6 +3126,8 @@ do
 <!ATTLIST $leggoImageElement WIDTH CDATA \"$leggoImageWIDTH\" #REQUIRED>
 <!ATTLIST $leggoImageElement HEIGHT CDATA \"$leggoImageHEIGHT\" #REQUIRED>" >> $targetFile.dtd
 
+		fi
+		
 		cat /tmp/xmluxc-imageWIDTH | sed 's/px//g' > /tmp/xmluxc-imageWIDTHlessPx
 
 		leggoImageWIDTHlessPx="$(cat /tmp/xmluxc-imageWIDTHlessPx)"
@@ -3304,9 +3324,14 @@ margin-left: $marginLeftPx }" >> $targetFile.css
 
 done
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 echo "<!-- End images details -->" >> $targetFile.dtd
 
 echo " " >> $targetFile.dtd
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 fi
 

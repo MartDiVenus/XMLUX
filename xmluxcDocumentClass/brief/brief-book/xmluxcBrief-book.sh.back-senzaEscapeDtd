@@ -54,7 +54,7 @@ do
 ## Root non ha zeri ma  sempre e.g. <a>.
           echo "/* Root = $leggoIdRoot = radix = titulus */
 $leggoItem { background-color: rgb(54,69,79); color: rgb(170,170,170); text-align: center; font-size: 43pt; font-weight: bold;
-font-family: Times, "Times New Roman", serif }" >> $targetFile.css
+font-family: Arial, "Arial", serif }" >> $targetFile.css
 
 #echo "$leggoID" >> /tmp/xmluxc-allIDs
 #
@@ -71,13 +71,9 @@ font-family: Times, "Times New Roman", serif }" >> $targetFile.css
 #echo "$leggoItem $leggoTitle" >> /tmp/xmluxc-itemsEtTitles
 #
 #echo "$leggoItem" > /tmp/xmluxc-itemRoot
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 	  echo "<!-- Root = $leggoIdRoot= titulus = title = radix = $leggoItem $leggoIdRoot -->
 <!ELEMENT $leggoItem ANY>" >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 rm -f /tmp/xmluxc-cssRoot/$c
 
@@ -123,7 +119,7 @@ do
 
 		echo "/* Synopsis $leggoID */
 $leggoItem { display: block; font-size: 30pt; font-weight: bold;
-font-family: Times, \"Times New Roman\", serif; margin-left: 270px; margin-right: 300px; text-align: left; 
+font-family: Arial, \"Arial\", serif; margin-left: 270px; margin-right: 300px; text-align: left; 
 margin-top: 10ex; margin-bottom: 10ex; padding-top: 4ex; padding-bottom: 4ex; padding-left: 2ex; padding-right: 2ex; 
 border-bottom: 2px solid rgb(25, 25, 50); border-top: 2px solid rgb(25, 25, 50); 
 border-left: 2px solid rgb(25, 25, 50); border-right: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
@@ -132,7 +128,7 @@ border-left: 2px solid rgb(25, 25, 50); border-right: 2px solid rgb(25, 25, 50);
 
 		echo "/* Synopsis $leggoID */
 $leggoItem { display: block; font-size: 30pt; font-weight: bold;
-font-family: Times, \"Times New Roman\", serif; margin-left: 270px; margin-right: 300px; text-align: left; 
+font-family: Arial, \"Arial\", serif; margin-left: 270px; margin-right: 300px; text-align: left; 
 margin-top: 10ex; margin-bottom: 10ex; padding-top: 4ex; padding-bottom: 4ex; padding-left: 2ex; padding-right: 2ex; 
 border-bottom: 2px solid rgb(25, 25, 50); border-top: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
 
@@ -179,10 +175,8 @@ do
 		then
 
 		echo "/* 'part' = $leggoItem  $leggoID */
-$leggoItem { counter-increment: part-num }
-$leggoItem:before { content: counter(part-num) \". \" }
 $leggoItem { display: block; 
-font-size: 33pt; font-weight: bold; font-family: Times, \"Times New Roman\", serif; 
+font-size: 33pt; font-weight: bold; font-family: Arial, \"Arial\", serif; 
 margin-left: 270px; margin-right: 300px; text-align: left }" >> $targetFile.css
 
 	break
@@ -232,18 +226,14 @@ do
 		then
 
 		echo "/** 'chapter' = $leggoItem $leggoID*/
-$leggoItem { counter-increment: chapter-num }
-$leggoItem:before { content: counter(part-num) \".\" counter(chapter-num) \" \" }
-$leggoItem { display: block; font-size: 33pt; font-weight: bold; font-family: Times, \"Times New Roman\", serif; 
+$leggoItem { display: block; font-size: 33pt; font-weight: bold; font-family: Arial, \"Arial\", serif; 
 padding-top: 4ex; padding-bottom: 4ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50);
 border-top: 2px solid rgb(25, 25, 50);  border-left: 2px solid rgb(25, 25, 50); border-right: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
 
 		else ## del margin=true
 
 		echo "/** 'chapter' = $leggoItem $leggoID*/
-$leggoItem { counter-increment: chapter-num }
-$leggoItem:before { content: counter(part-num) \".\" counter(chapter-num) \" \" }
-$leggoItem { display: block; font-size: 33pt; font-weight: bold; font-family: Times, \"Times New Roman\", serif; 
+$leggoItem { display: block; font-size: 33pt; font-weight: bold; font-family: Arial, \"Arial\", serif; 
 padding-top: 3ex; padding-bottom: 3ex; padding-left: 2ex; padding-right: 2ex }" >> $targetFile.css
 
 	fi
@@ -300,10 +290,8 @@ do
 		## è una sezione perché ha 1 pto.
 ## qui va il css per le sezioni
 
-echo "/* Section $leggoItem $leggoID */
-$leggoItem { counter-increment: section-num}
-$leggoItem:before { content: counter(part-num) \".\" counter(chapter-num) \".\" counter(section-num) \" \" }
-$leggoItem { display: block; font-size: 95%; font-weight: bold; font-family: Times, \"Times New Roman\", serif;
+echo "/* section $leggoItem $leggoID */
+$leggoItem { display: block; font-size: 95%; font-weight: bold; font-family: Arial, \"Arial\", serif;
 padding-top: 2ex; padding-bottom: 2ex; border-bottom: 2px solid rgb(25, 25, 50); border-top: 2px solid rgb(25, 25, 50); width: 10.65in }" >> $targetFile.css
 		
 	break
@@ -343,9 +331,7 @@ do
 ## qui va il css per le sottosezioni
 
 echo "/* subsection $leggoItem $leggoID */
-$leggoItem { counter-increment: subsection-num }
-$leggoItem:before { content: counter(part-num) \".\" counter(chapter-num) \".\" counter(section-num) \".\" counter(subsection-num) \" \" }
-$leggoItem { display: block; font-size: 90%; font-weight: bold; font-family: Times, \"Times New Roman\", serif;
+$leggoItem { display: block; font-size: 90%; font-weight: bold; font-family: Arial, \"Arial\", serif;
 padding-top: 1ex; padding-bottom: 1ex }" >> $targetFile.css
 	
 break
@@ -385,9 +371,7 @@ do
 ## qui va il css per le sottosottosezioni
 
 echo "/* subsubsection $leggoItem $leggoID */
-$leggoItem {counter-increment: subsubsection-num}
-$leggoItem:before {content: counter(part-num) \".\" counter(chapter-num) \".\" counter(section-num) \".\" counter(subsection-num) \".\" counter(subsubsection-num) \" \" }
-$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Times, \"Times New Roman\", serif;
+$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Arial, \"Arial\", serif;
 padding-top: 1ex; padding-bottom: 1ex }" >> $targetFile.css
 
 	break
@@ -428,10 +412,7 @@ do
 ## qui va il css per i paragrafi
 
 echo "/* paragraph $leggoItem $leggoID */
-$leggoItem {counter-increment: paragraph-num}
-$leggoItem:before {content: counter(part-num) \".\" counter(chapter-num) \".\" counter(section-num) \".\" counter(subsection-num) \".\" counter(subsubsection-num) \".\" 
-counter(paragraph-num) \" \" }
-$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Times, \"Times New Roman\", serif;
+$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Arial, \"Arial\", serif;
 padding-top: 1ex; padding-bottom: 1ex }" >> $targetFile.css
 
 	break
@@ -469,9 +450,7 @@ do
 	then
 
 echo "/* subparagraph $leggoItem $leggoID */
-$leggoItem {counter-increment: subparagraph-num}
-$leggoItem:before {content: counter(part-num) \".\" counter(chapter-num) \".\" counter(section-num) \".\" counter(subsection-num) \".\" counter(subsubsection-num) \".\" counter(paragraph-num) \".\" counter(subparagraph-num) \" \" }
-$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Times, \"Times New Roman\", serif;
+$leggoItem {display: block; font-size: 90%; font-weight: bold; font-family: Arial, \"Arial\", serif;
 padding-top: 1ex; padding-bottom: 1ex }" >> $targetFile.css
 
 	break
@@ -486,7 +465,6 @@ mkdir /tmp/xmluxc-whiteSpace
 
 
 ############# INIZIO SINOSSI LOG, DTD, XSLT, XML SCHEMA
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -1185,14 +1163,10 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ############# FINE SINOSSI LOG, DTD (b), XSLT, XML SCHEMA 
 
 ################ INIZIO  PART  DTD, LOG, XML SCHEMA, XSL
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -1314,16 +1288,10 @@ rm -f /tmp/xmluxc-cssRoot/$c
 
 
 done
-
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
-
 ################ FINE PART CSS, DTD, LOG, XML SCHEMA, XSLT
 
 
 ############## INIZIO CHAPTERS LOG, DTD (b), XSLT, XML SCHEMA
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -2121,19 +2089,11 @@ rm -f /tmp/xmluxc-cssRoot/$c
 	fi
 	
 done
-
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
-
 ################ FINE CHAPTERS LOG, DTD (b), XSLT, XML SCHEMA
 
 #### ok 12 ottobre 10:23 fare anche part prima, e poi tutto ciò che viene dopo chapter
 
 ################ INIZIO SECTION -> DTD, LOGS, XSLT, XML SCHEMA
-
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
 rm -f /tmp/xmluxc-ElementDtd
 
 touch /tmp/xmluxc-ElementDtd
@@ -2949,14 +2909,9 @@ fi
 
 done
 
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
-
 ################ FINE SECTION -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO SUBSECTION -> DTD
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -3757,14 +3712,10 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ################ FINE SUBSECTION -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO SUBSUBSECTION -> DTD, LOGS, XSLT, XML SCHEMA
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -4566,14 +4517,10 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ################ FINE SUBSUBSECTION -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO PARAPGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -5376,14 +5323,10 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 	fi
 
 done
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ################ FINE PARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ INIZIO SUBPARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -6185,31 +6128,28 @@ cat /tmp/xmluxc-preDtd1 >> $targetFile.dtd
 
 	fi
 done
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ################ FINE SUBPARAGRAPH -> DTD, LOGS, XSLT, XML SCHEMA
 
 ################ PCDATA in *.css
 echo "/* PARAGRAPH ENV */
 p { display: block; font-size: 20pt; font-weight: normal; font-style: normal;
-font-family: Times, \"Times New Roman\", serif; white-space: pre; line-break: loose }
+font-family: Arial, \"Arial\", serif; white-space: pre; line-break: loose }
 pg { display: block; font-size: 20pt; font-weight: normal; font-style: normal;
-font-family: Times, \"Times New Roman\", serif; width: 1050px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word }
-center { display: block; font-size: 20pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif; text-align: center }
+font-family: Arial, \"Arial\", serif; width: 1050px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word }
+center { display: block; font-size: 20pt; font-weight: normal; font-family: Arial, \"Arial\", serif; text-align: center }
 /* FONTS */
 /** style **/
-it { font-size: 20pt; font-weight: normal; font-style: italic; font-family: Times, \"Times New Roman\", serif; white-space: pre }
-sl { font-size: 20pt; font-weight: normal; font-style: oblique; font-family: Times, \"Times New Roman\", serif; white-space: pre }
+it { font-size: 20pt; font-weight: normal; font-style: italic; font-family: Arial, \"Arial\", serif; white-space: pre }
+sl { font-size: 20pt; font-weight: normal; font-style: oblique; font-family: Arial, \"Arial\", serif; white-space: pre }
 /** weight, weight/style **/
-bf { font-size: 20pt; font-weight: bold; font-family: Times, \"Times New Roman\", serif; white-space: pre }
-em { font-size: 20pt; font-style: oblique; font-weight: bold; font-family: Times, \"Times New Roman\", serif; white-space: pre }
+bf { font-size: 20pt; font-weight: bold; font-family: Arial, \"Arial\", serif; white-space: pre }
+em { font-size: 20pt; font-style: oblique; font-weight: bold; font-family: Arial, \"Arial\", serif; white-space: pre }
 /** variant **/
-scaps { font-size: 20pt; font-weight: normal; font-style: normal; font-variant: small-caps; font-family: Times, \"Times New Roman\", serif; white-space: pre }
+scaps { font-size: 20pt; font-weight: normal; font-style: normal; font-variant: small-caps; font-family: Arial, \"Arial\", serif; white-space: pre }
 /* DECORATION */
-under { font-size: 20pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif; white-space: pre; text-decoration: underline }
-lthr { font-size: 20pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif; white-space: pre; text-decoration: line-through }
+under { font-size: 20pt; font-weight: normal; font-family: Arial, \"Arial\", serif; white-space: pre; text-decoration: underline }
+lthr { font-size: 20pt; font-weight: normal; font-family: Arial, \"Arial\", serif; white-space: pre; text-decoration: line-through }
 /* PATH, URL ENV */
 url { background-color: rgb(54,69,79); color: rgb(0,191,255);
 white-space: pre; font-size: 12pt; font-weight: normal; font-family: arial }
@@ -6245,10 +6185,10 @@ ROMAN { display: list-item; list-style-type: upper-roman }
 square { display: list-item; list-style-type: square }
 itemize { display: list-item; list-style-type: disc }
 /* SIZE ENV */
-large  { font-size: 25pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif }
-Large  { font-size: 28pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif }
-small  { font-size: 15pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif }
-tiny { font-size: 12pt; font-weight: normal; font-family: Times, \"Times New Roman\", serif }" >> $targetFile.css
+large  { font-size: 25pt; font-weight: normal; font-family: Arial, \"Arial\", serif }
+Large  { font-size: 28pt; font-weight: normal; font-family: Arial, \"Arial\", serif }
+small  { font-size: 15pt; font-weight: normal; font-family: Arial, \"Arial\", serif }
+tiny { font-size: 12pt; font-weight: normal; font-family: Arial, \"Arial\", serif }" >> $targetFile.css
 
 ################## ENDPCDATA IN CSS
 
@@ -6422,7 +6362,6 @@ tiny { font-size: 12pt; font-weight: normal; font-family: Times, \"Times New Rom
 
 
 ### Costanti
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo " " >> $targetFile.dtd
 
@@ -7164,9 +7103,6 @@ if [ -f /tmp/xmluxc-imageExists ]; then
 echo " " >> $targetFile.dtd
 
 echo "<!-- Begin images details" >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 ## images in *.css
 
@@ -7291,8 +7227,6 @@ do
 
 		leggoImageFLOAT="$(cat /tmp/xmluxc-imageFLOAT)"
 
-		if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-
 		echo "<!-- Image $leggoImageElement ID=\"$leggoImageID\" -->
 <!ELEMENT $leggoImageElement EMPTY>
 <!ATTLIST $leggoImageElement ID CDATA \"$leggoImageID\" #REQUIRED>
@@ -7300,10 +7234,6 @@ do
 <!ATTLIST $leggoImageElement ALT CDATA \"$leggoImageALT\" #REQUIRED>
 <!ATTLIST $leggoImageElement WIDTH CDATA \"$leggoImageWIDTH\" #REQUIRED>
 <!ATTLIST $leggoImageElement HEIGHT CDATA \"$leggoImageHEIGHT\" #REQUIRED>" >> $targetFile.dtd
-
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-		fi
 
 		cat /tmp/xmluxc-imageWIDTH | sed 's/px//g' > /tmp/xmluxc-imageWIDTHlessPx
 
@@ -7500,14 +7430,10 @@ margin-left: $marginLeftPx }" >> $targetFile.css
 
 
 done
-if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo "<!-- End images details -->" >> $targetFile.dtd
 
 echo " " >> $targetFile.dtd
-## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
-#
-fi
 
 fi
 

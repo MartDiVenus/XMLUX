@@ -1,0 +1,36 @@
+v3.2.0
+
+migliorato
+/usr/local/lib/xmlux/xmluxeScripts/add/data/data-seven-add.sh
+perché ho aggiunto l'azione -st per la clonazione della struttura che creo
+con  xtextus [sempre con l'opzione -st]
+
+migliorato l'help xmluxe
+
+corretto xmluxe/insert
+creava newID solo per le Category Dataset.
+
+migliorato xmluxe/insert perché ho aggiunto l'azione -st per la clonazione 
+della struttura che creo con  xtextus [sempre con l'opzione -st]
+
+corretto l'help di xmluxv,
+c'era <-option -option> anziché <-option -action>.
+
+migliorato e corretto l'help di
+xmluxe
+
+
+Avevo eliminato per errore sorting
+ora l'ho reintegrato e migliorato in quando non avevo
+effettuato cmq il sorting per gradusI, invece molto utile.
+
+
+Ho aggiunto le opzioni (per ora solo a data-seven, ma è facilissimo
+aggiungerle anche alle altre document class):
+-delEmpty
+-addEmpty
+-format
+
+
+Ho aggiunto l'opzione per poter creare il file *.dtd o meno,
+nel secondo caso la compilazione è molto più veloce.

@@ -72,8 +72,14 @@ font-family: Roboto, "Roboto", sans-serif }" >> $targetFile.css
 #
 #echo "$leggoItem" > /tmp/xmluxc-itemRoot
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 	  echo "<!-- Root = $leggoIdRoot= titulus = title = category dataset 01  = $leggoItem $leggoIdRoot -->
 <!ELEMENT $leggoItem ANY>" >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 rm -f /tmp/xmluxc-cssRoot/$c
 
@@ -204,6 +210,7 @@ mkdir /tmp/xmluxc-whiteSpace
 
 
 ################ INIZIO  ITEM  DTD, LOG, XML SCHEMA, XSL
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 for c in $(ls /tmp/xmluxc-cssRoot)
 
@@ -325,10 +332,15 @@ rm -f /tmp/xmluxc-cssRoot/$c
 
 
 done
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
 ################ FINE ITEM CSS, DTD, LOG, XML SCHEMA, XSLT
 
 
 ############## INIZIO KEY or VALUE LOG, DTD (b), XSLT, XML SCHEMA
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 rm -f /tmp/xmluxc-ElementDtd
 
@@ -1126,6 +1138,11 @@ rm -f /tmp/xmluxc-cssRoot/$c
 	fi
 	
 done
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
 ################ FINE KEY or VALUE LOG, DTD (b), XSLT, XML SCHEMA
 
 
@@ -1360,6 +1377,7 @@ tiny { font-size: 12pt; font-weight: normal; font-family: Roboto, \"Roboto\", sa
 
 
 ### Costanti
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
 
 echo " " >> $targetFile.dtd
 
@@ -2101,6 +2119,9 @@ if [ -f /tmp/xmluxc-imageExists ]; then
 echo " " >> $targetFile.dtd
 
 echo "<!-- Begin images details" >> $targetFile.dtd
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 ## images in *.css
 
@@ -2225,6 +2246,8 @@ do
 
 		leggoImageFLOAT="$(cat /tmp/xmluxc-imageFLOAT)"
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+		
 		echo "<!-- Image $leggoImageElement ID=\"$leggoImageID\" -->
 <!ELEMENT $leggoImageElement EMPTY>
 <!ATTLIST $leggoImageElement ID CDATA \"$leggoImageID\" #REQUIRED>
@@ -2232,6 +2255,11 @@ do
 <!ATTLIST $leggoImageElement ALT CDATA \"$leggoImageALT\" #REQUIRED>
 <!ATTLIST $leggoImageElement WIDTH CDATA \"$leggoImageWIDTH\" #REQUIRED>
 <!ATTLIST $leggoImageElement HEIGHT CDATA \"$leggoImageHEIGHT\" #REQUIRED>" >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
+
 
 		cat /tmp/xmluxc-imageWIDTH | sed 's/px//g' > /tmp/xmluxc-imageWIDTHlessPx
 
@@ -2429,9 +2457,15 @@ margin-left: $marginLeftPx }" >> $targetFile.css
 
 done
 
+if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+
 echo "<!-- End images details -->" >> $targetFile.dtd
 
 echo " " >> $targetFile.dtd
+
+## chiusura di if [ ! -f /tmp/xmluxc-escapeDtd ]; then
+#
+fi
 
 fi
 
