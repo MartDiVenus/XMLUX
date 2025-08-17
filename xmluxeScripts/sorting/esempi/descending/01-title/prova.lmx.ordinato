@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="prova.css"?>
+<!DOCTYPE a SYSTEM "prova.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix ID="a">Title
+
+<gradusI ID="a01">C GradusI 
+
+<gradusII ID="a01.01">A GradusII
+
+<gradusIII ID="a01.01.01">S-GradusIII_eg
+
+<gradusIV ID="a01.01.01.01">A GradusIV
+
+<gradusV ID="a01.01.01.01.01">M GradusV
+
+<gradusVI ID="a01.01.01.01.01.01">A GradusVI
+
+<gradusVII ID="a01.01.01.01.01.01.01">R GradusVII
+
+</gradusVII>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.01 -->
+
+</gradusIII>
+<!-- end a01.01.01 -->
+<gradusIII ID="a01.01.02">Q-GradusIII_eg
+
+<gradusIV ID="a01.01.02.01">A GradusIV
+
+<gradusV ID="a01.01.02.01.01">M GradusV
+
+<gradusVI ID="a01.01.02.01.01.01">A GradusVI
+
+<gradusVII ID="a01.01.02.01.01.01.01">R GradusVII
+
+</gradusVII>
+<!-- end a01.01.02.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.02.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.02.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.02.01 -->
+
+</gradusIII>
+<!-- end a01.01.02 -->
+<gradusIII ID="a01.01.03">E-GradusIII
+
+<gradusIV ID="a01.01.03.01">Gnam GradusIV
+
+<gradusV ID="a01.01.03.01.01">Slurp GradusV
+
+<gradusVI ID="a01.01.03.01.01.01">Zzz GradusVI
+
+<gradusVII ID="a01.01.03.01.01.01.01">Arg GradusVII
+
+</gradusVII>
+<!-- end a01.01.03.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.03.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.03.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.03.01 -->
+
+</gradusIII>
+<!-- end a01.01.03 -->
+
+</gradusII>
+<!-- end a01.01 -->
+
+</gradusI>
+<!-- end a01 -->
+
+<gradusI ID="a02">GradusI
+
+<gradusII ID="a02.01">GradusII
+
+<gradusIII ID="a02.01.01">B-GradusIII
+
+<gradusIV ID="a02.01.01.01">GradusIV
+
+<gradusV ID="a02.01.01.01.01">GradusV
+
+<gradusVI ID="a02.01.01.01.01.01">GradusVI
+
+<gradusVII ID="a02.01.01.01.01.01.01">GradusVII
+
+</gradusVII>
+<!-- end a02.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a02.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a02.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a02.01.01.01 -->
+
+</gradusIII>
+<!-- end a02.01.01 -->
+<gradusIII ID="a02.01.02">A-GradusIII
+
+<gradusIV ID="a02.01.02.01">GradusIV
+
+<gradusV ID="a02.01.02.01.01">GradusV
+
+<gradusVI ID="a02.01.02.01.01.01">GradusVI
+
+<gradusVII ID="a02.01.02.01.01.01.01">GradusVII
+
+</gradusVII>
+<!-- end a02.01.02.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a02.01.02.01.01.01 -->
+
+</gradusV>
+<!-- end a02.01.02.01.01 -->
+
+</gradusIV>
+<!-- end a02.01.02.01 -->
+
+</gradusIII>
+<!-- end a02.01.02 -->
+
+</gradusII>
+<!-- end a02.01 -->
+
+</gradusI>
+<!-- end a02 -->
+
+</radix>

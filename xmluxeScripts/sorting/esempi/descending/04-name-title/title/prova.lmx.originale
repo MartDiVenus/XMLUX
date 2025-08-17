@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="prova.css"?>
+<!DOCTYPE a SYSTEM "prova.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix ID="a" name="eg">Title
+
+<gradusI ID="a01" name="Primo grado campagna">GradusI campagna
+
+<gradusII ID="a01.01" name="Secondo grado campagna">GradusII campagna
+
+<gradusIII ID="a01.01.01" name="Terzo grado campagna">GradusIII campagna
+
+<gradusIV ID="a01.01.01.01" name="Quarto grado campagna">GradusIV campagna
+
+<gradusV ID="a01.01.01.01.01" name="Quinto grado campagna">GradusV campagna
+
+<gradusVI ID="a01.01.01.01.01.01" name="Sesto grado campagna">GradusVI campagna
+
+<gradusVII ID="a01.01.01.01.01.01.01" name="Settimo grado campagna">GradusVII campagna
+
+</gradusVII>
+<!-- end a01.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.01.01 -->
+
+</gradusIII>
+<!-- end a01.01.01 -->
+<gradusIII ID="a01.01.02" name="Terzo grado mare">GradusIII mare
+
+<gradusIV ID="a01.01.02.01" name="Quarto grado mare">GradusIV mare
+
+<gradusV ID="a01.01.02.01.01" name="Quinto grado mare">GradusV mare
+
+<gradusVI ID="a01.01.02.01.01.01" name="Sesto grado mare">GradusVI mare
+
+<gradusVII ID="a01.01.02.01.01.01.01" name="Settimo grado mare">GradusVII mare
+
+</gradusVII>
+<!-- end a01.01.02.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a01.01.02.01.01.01 -->
+
+</gradusV>
+<!-- end a01.01.02.01.01 -->
+
+</gradusIV>
+<!-- end a01.01.02.01 -->
+
+</gradusIII>
+<!-- end a01.01.02 -->
+
+</gradusII>
+<!-- end a01.01 -->
+
+</gradusI>
+<!-- end a01 -->
+
+<gradusI ID="a02" name="Primo grado montagna">GradusI montagna
+
+<gradusII ID="a02.01" name="Secondo grado montagna">GradusII montagna
+
+<gradusIII ID="a02.01.01" name="Terzo grado montagna">GradusIII montagna
+
+<gradusIV ID="a02.01.01.01" name="Quarto grado montagna">GradusIV montagna
+
+<gradusV ID="a02.01.01.01.01" name="Quinto grado montagna">GradusV montagna
+
+<gradusVI ID="a02.01.01.01.01.01" name="Sesto grado montagna">GradusVI montagna
+
+<gradusVII ID="a02.01.01.01.01.01.01" name="Settimo grado montagna">GradusVII montagna
+
+</gradusVII>
+<!-- end a02.01.01.01.01.01.01 -->
+
+</gradusVI>
+<!-- end a02.01.01.01.01.01 -->
+
+</gradusV>
+<!-- end a02.01.01.01.01 -->
+
+</gradusIV>
+<!-- end a02.01.01.01 -->
+
+</gradusIII>
+<!-- end a02.01.01 -->
+
+</gradusII>
+<!-- end a02.01 -->
+
+</gradusI>
+<!-- end a02 -->
+
+</radix>

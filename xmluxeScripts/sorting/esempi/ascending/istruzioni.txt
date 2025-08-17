@@ -1,0 +1,61 @@
+Per septem data document class (data-seven)
+
+Sorting ascendente dei titoli.
+Verranno ordinati i titoli, e gli ID, in funzione dei primi.
+
+
+xmluxe --sortID-a=a01.01.01 --f=*
+
+Avverrà il sorting ascendente di tutti gli elementi del gradusIII, quindi
+a01.01.01
+a01.01.02
+etc.
+a02.01.01
+a02.02.02
+etc.
+
+con relativi figli.
+
+Ma i blocchi dei primi gradi ossia a01 e a02, non saranno mescolati;
+ognuno verrà ordinato separatamente a partire dal suo III grado ---
+volutamente da me.
+
+Verranno rispettate le paternità, le discendenze, e verrà effettuata
+anche la traslazione grafica.
+
+Nel caso, l'esempio [xmluxe --sortID-a=a01.01.01 --f=*] gli elementi che
+verranno ordinati sono:
+<gradusIII ID="a01.01.01">E-GradusIII_a01.01.01
+e figli
+
+<gradusIII ID="a01.01.02">S-GradusIII
+e figli
+
+<gradusIII ID="a01.01.03">Q-GradusIII_eg
+e figli
+
+N.B. a01.01.01 è già ordinato, verrà ordinato invece a01.01.03>Q-GradusIII
+che prenderà il posto di a01.01.02>S-GradusIII
+
+
+<gradusIII ID="a02.01.01">B-GradusIII
+e figli
+
+<gradusIII ID="a02.01.02">A-GradusIII
+e figli
+
+N.B. Già a02.01.01 non è ordinato.
+
+
+Nel file prova.lmx sono presentati volutamente disordinati alcuni,
+mentre nel file prova.lmx.ordinato sono stati ordinati da xmluxe con
+successo. prova.lmx.ordinato è l'output di successo da me denominato con *.ordinato.
+
+Non sei tenuto a riportare l'id anche nel titolo.
+
+Devi solo:
+1. Se non hai aggiunto l'ID con xmluxe, assegnare l'attributo ID="...", ovviamente.
+
+2. Non sei tenuto a scrivere i titoli con i trattini alti e/o bassi e/o in camel case:
+e.g. Mario_Marcello_Cristiano-Fantini; tuttavia puoi.
+
