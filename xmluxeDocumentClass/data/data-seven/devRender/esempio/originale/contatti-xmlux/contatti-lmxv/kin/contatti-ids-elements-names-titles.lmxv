@@ -1,0 +1,57 @@
+<!-- IDs, elements, names and titles tree
+a radix "contatti" Contatti
+a01 gradusI "parenti" Parenti
+a01.01 gradusII "mamma" Mamma
+a01.01.01 gradusIII "recapiti telefonici mamma" Recapiti telefonici mamma
+a01.01.01.01 gradusIV "mobili mamma" Mobili mamma
+a01.01.01.01.01 gradusV "cellulare mamma" 320 47 43 057
+a01.01.01.02 gradusIV "fissi mamma" Fissi mamma
+a01.01.01.02.01 gradusV "fisso casa mamma" 0831 849101
+a01.01.02 gradusIII "indirizzi mamma" Indirizzi mamma
+a01.01.02.01 gradusIV "Fisici mamma" Fisici
+a01.01.02.01.01 gradusV "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.01.02.01.02 gradusV "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.01.02.03 gradusIV "web mamma" Web
+a01.01.02.03.01 gradusV "gmail mamma" cosimaribezzo@gmail.com
+a01.01.02.03.02 gradusV "libero mamma" mimmaribezzo@libero.it
+a01.02 gradusII "pater" Pater
+a01.02.01 gradusIII "recapiti telefonici pater" Recapiti telefonici pater
+a01.02.01.01 gradusIV "mobili pater" Mobili pater
+a01.02.01.01.01 gradusV "cellulare pater" 338 12 82 755
+a01.02.01.02 gradusIV "fissi pater" Fissi pater
+a01.02.01.02.01 gradusV "fisso casa pater" 0831 849101
+a01.02.02 gradusIII "indirizzi pater" Indirizzi pater
+a01.02.02.01 gradusIV "Fisici pater" Fisici
+a01.02.02.01.01 gradusV "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.02.02.01.02 gradusV "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.02.02.03 gradusIV "web pater" Web
+a01.02.02.03.01 gradusV "gmail pater" floro.fantini@gmail.com
+a01.02.02.03.02 gradusV "pec pater" floro.fantini@pec.it
+a01.03 gradusII "sorella" Sorella
+a01.03.01 gradusIII "recapiti telefonici sorella" Recapiti telefonici sorella
+a01.03.01.01 gradusIV "mobili sorella" Mobili sorella
+a01.03.01.01.01 gradusV "cellulare sorella" 328 35 25 357
+a01.03.01.02 gradusIV "fissi sorella" Fissi sorella
+a01.03.01.02.01 gradusV "fisso casa sorella" 081 18 36 1308
+a01.03.02 gradusIII "indirizzi sorella" Indirizzi sorella
+a01.03.02.01 gradusIV "Fisici sorella" Fisici
+a01.03.02.01.01 gradusV "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.03.02.01.02 gradusV "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.03.02.03 gradusIV "web sorella" Web
+a01.03.02.03.01 gradusV "gmail sorella" g.fantini@gmail.com
+a01.03.02.03.02 gradusV "pec sorella" 
+a02 gradusI "colleghi" Colleghi
+a02.01 gradusII "aa" AA
+a02.01.01 gradusIII "recapiti telefonici aa" Recapiti telefonici aa
+a02.01.01.01 gradusIV "mobili aa" Mobili aa
+a02.01.01.01.01 gradusV "cellulare aa" xxx xx xx xx
+a02.01.01.02 gradusIV "fissi aa" Fissi aa
+a02.01.01.02.01 gradusV "fisso casa aa" yyyy yyyyyy
+a02.01.02 gradusIII "indirizzi aa" Indirizzi aa
+a02.01.02.01 gradusIV "Fisici aa" Fisici
+a02.01.02.01.01 gradusV "domicilio mamma" domicilio: BB
+a02.01.02.01.02 gradusV "residenza mamma" residenza: CC
+a02.01.02.03 gradusIV "web aa" Web
+a02.01.02.03.01 gradusV "gmail aa" w@w.com
+a02.01.02.03.02 gradusV "pec aa" 
+end IDs, elements, names and titles tree -->

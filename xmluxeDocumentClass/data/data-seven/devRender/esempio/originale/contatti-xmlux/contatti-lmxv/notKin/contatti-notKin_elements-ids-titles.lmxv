@@ -1,0 +1,57 @@
+<!-- (not kin) Elements, IDs and titles tree
+radix a Contatti
+gradusI a01 Parenti
+gradusI a02 Colleghi
+gradusII a01.01 Mamma
+gradusII a01.02 Pater
+gradusII a01.03 Sorella
+gradusII a02.01 AA
+gradusIII a01.01.01 Recapiti telefonici mamma
+gradusIII a01.01.02 Indirizzi mamma
+gradusIII a01.02.01 Recapiti telefonici pater
+gradusIII a01.02.02 Indirizzi pater
+gradusIII a01.03.01 Recapiti telefonici sorella
+gradusIII a01.03.02 Indirizzi sorella
+gradusIII a02.01.01 Recapiti telefonici aa
+gradusIII a02.01.02 Indirizzi aa
+gradusIV a01.01.01.01 Mobili mamma
+gradusIV a01.01.01.02 Fissi mamma
+gradusIV a01.01.02.01 Fisici
+gradusIV a01.01.02.03 Web
+gradusIV a01.02.01.01 Mobili pater
+gradusIV a01.02.01.02 Fissi pater
+gradusIV a01.02.02.01 Fisici
+gradusIV a01.02.02.03 Web
+gradusIV a01.03.01.01 Mobili sorella
+gradusIV a01.03.01.02 Fissi sorella
+gradusIV a01.03.02.01 Fisici
+gradusIV a01.03.02.03 Web
+gradusIV a02.01.01.01 Mobili aa
+gradusIV a02.01.01.02 Fissi aa
+gradusIV a02.01.02.01 Fisici
+gradusIV a02.01.02.03 Web
+gradusV a01.01.01.01.01 320 47 43 057
+gradusV a01.01.01.02.01 0831 849101
+gradusV a01.01.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.01.02.01.02 residenza: Via Torneo Dei Rioni, 43
+gradusV a01.01.02.03.01  cosimaribezzo@gmail.com
+gradusV a01.01.02.03.02  mimmaribezzo@libero.it
+gradusV a01.02.01.01.01 338 12 82 755
+gradusV a01.02.01.02.01 0831 849101
+gradusV a01.02.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.02.02.01.02 residenza: Via Torneo Dei Rioni, 43
+gradusV a01.02.02.03.01  floro.fantini@gmail.com
+gradusV a01.02.02.03.02  floro.fantini@pec.it
+gradusV a01.03.01.01.01 328 35 25 357
+gradusV a01.03.01.02.01 081 18 36 1308
+gradusV a01.03.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.03.02.01.02 residenza: Via Torneo Dei Rioni, 43
+gradusV a01.03.02.03.01 g.fantini@gmail.com
+gradusV a01.03.02.03.02 
+gradusV a02.01.01.01.01 xxx xx xx xx
+gradusV a02.01.01.02.01 yyyy yyyyyy
+gradusV a02.01.02.01.01 domicilio: BB
+gradusV a02.01.02.01.02 residenza: CC
+gradusV a02.01.02.03.01 w@w.com
+gradusV a02.01.02.03.02 
+end elements, IDs and titles tree (not kin) -->

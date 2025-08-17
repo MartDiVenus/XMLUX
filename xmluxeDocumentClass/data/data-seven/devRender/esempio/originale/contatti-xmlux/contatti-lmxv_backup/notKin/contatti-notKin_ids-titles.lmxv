@@ -1,0 +1,57 @@
+<!-- (not kin) IDs and titles tree
+a Contatti
+a01 Parenti
+a02 Colleghi
+a01.01 Mamma
+a01.02 Pater
+a01.03 Sorella
+a02.01 AA
+a01.01.01 Recapiti telefonici mamma
+a01.01.02 Indirizzi mamma
+a01.02.01 Recapiti telefonici pater
+a01.02.02 Indirizzi pater
+a01.03.01 Recapiti telefonici sorella
+a01.03.02 Indirizzi sorella
+a02.01.01 Recapiti telefonici aa
+a02.01.02 Indirizzi aa
+a01.01.01.01 Mobili mamma
+a01.01.01.02 Fissi mamma
+a01.01.02.01 Fisici
+a01.01.02.03 Web
+a01.02.01.01 Mobili pater
+a01.02.01.02 Fissi pater
+a01.02.02.01 Fisici
+a01.02.02.03 Web
+a01.03.01.01 Mobili sorella
+a01.03.01.02 Fissi sorella
+a01.03.02.01 Fisici
+a01.03.02.03 Web
+a02.01.01.01 Mobili aa
+a02.01.01.02 Fissi aa
+a02.01.02.01 Fisici
+a02.01.02.03 Web
+a01.01.01.01.01 320 47 43 057
+a01.01.01.02.01 0831 849101
+a01.01.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+a01.01.02.01.02 residenza: Via Torneo Dei Rioni, 43
+a01.01.02.03.01  cosimaribezzo@gmail.com
+a01.01.02.03.02  mimmaribezzo@libero.it
+a01.02.01.01.01 338 12 82 755
+a01.02.01.02.01 0831 849101
+a01.02.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+a01.02.02.01.02 residenza: Via Torneo Dei Rioni, 43
+a01.02.02.03.01  floro.fantini@gmail.com
+a01.02.02.03.02  floro.fantini@pec.it
+a01.03.01.01.01 328 35 25 357
+a01.03.01.02.01 081 18 36 1308
+a01.03.02.01.01 domicilio: Via Torneo Dei Rioni, 43
+a01.03.02.01.02 residenza: Via Torneo Dei Rioni, 43
+a01.03.02.03.01 g.fantini@gmail.com
+a01.03.02.03.02 
+a02.01.01.01.01 xxx xx xx xx
+a02.01.01.02.01 yyyy yyyyyy
+a02.01.02.01.01 domicilio: BB
+a02.01.02.01.02 residenza: CC
+a02.01.02.03.01 w@w.com
+a02.01.02.03.02 
+end IDs and titles tree (not kin) -->

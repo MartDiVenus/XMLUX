@@ -1,0 +1,2 @@
+...01.sh e ...02.sh sono equivalenti, mi riservo la distinzione
+solo per un futuro, anche se attualmente non ne vedo la necessità.

@@ -1,0 +1,2999 @@
+#!/bin/bash
+
+### ! A differenza di tutti gli altri tipi di document class di xmlux,
+## qui gli elementi Value e Key, per l'azione ADD, vengono specificati
+## tramite opzione -k. Quando -k viene espressa --- l'azione ADD richiede
+## l'elemento Key, altrimenti richiede l'elemento Value.
+
+targetFile="$(cat /tmp/xmluxeTargetFile)"
+
+## Tutti gli id che iniziano con <a>, ossia il capitolo a.
+# è troppo vincolante utilizzare la chiave <a>.
+#grep -o "ID=\"a*.*" $targetFile.lmx > /tmp/xmluxe-css01
+# In questo modo puoi scrivere ID anche nel preambolo, perché quest'ultimo escluso.
+cat $targetFile.lmx | sed -n '/<!-- begin radix/,$p' > /tmp/xmluxe-css0000
+
+## mi serve la coerenza di numero di righe tra il file lmx in cui effettuerò le iniezioni
+## e il file selezionato in cui ho escluso il preambolo.
+grep -n "<!-- begin radix" $targetFile.lmx | cut -d: -f1 > /tmp/xmluxe-nLineaBeginRadix
+
+leggoNBeginRadix=$(cat /tmp/xmluxe-nLineaBeginRadix)
+
+righeEsatte=$(echo $leggoNBeginRadix - 1 | bc)
+
+touch /tmp/xmluxe-IpezzoCoerenzaBeginRadixLmx
+
+declare -i var=0
+
+while ((k++ <$righeEsatte))
+  do
+  var=$var+1
+  echo "riga per coerenza con il file lmx n. $var" >> /tmp/xmluxe-IpezzoCoerenzaBeginRadixLmx
+done 
+
+cat /tmp/xmluxe-IpezzoCoerenzaBeginRadixLmx /tmp/xmluxe-css0000 > /tmp/xmluxe-css000
+
+## Il I ID è sempre quello del root, io non specifico nulla nel preambolo xml. 
+grep "ID=*" /tmp/xmluxe-css000 | head -n 1 > /tmp/xmluxe-css00
+
+## leggo il valore di root
+cat /tmp/xmluxe-css00 | cut -d= -f2,2 | sed 's/"//g' | sed 's/>/ /' | awk '$1 > 0 {print $1}' > /tmp/xmluxe-idRoot
+
+leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+
+## ora posso selezionare tutti gli ID appartenenti al root
+grep "ID=\"$leggoIdRoot" /tmp/xmluxe-css000 | awk '$1 > 0 {print $2}' > /tmp/xmluxe-css01
+
+cat /tmp/xmluxe-css01 | sort > /tmp/xmluxe-css02
+
+cat /tmp/xmluxe-css02 | uniq > /tmp/xmluxe-css03
+
+## tutti i capitoli e sottostanti elementi
+grep "\." /tmp/xmluxe-css03 > /tmp/xmluxe-css04
+
+cat /tmp/xmluxe-css04 | sort > /tmp/xmluxe-css05
+
+## solo i capitoli, ossia gli a* senza .
+comm -3 /tmp/xmluxe-css03 /tmp/xmluxe-css05 > /tmp/xmluxe-css06
+
+## Nei valori degli elementi non possono esserci caratteri speciali, quali e.g. *, #, &.
+# perché grep non leggerebbe la stringa e quindi non producendo file *.dtd, *.css perfetti.
+
+################ INIZIO ROOT 
+
+rm -fr  /tmp/xmluxe-cssRoot
+
+mkdir /tmp/xmluxe-cssRoot
+
+split -l1 /tmp/xmluxe-css01 /tmp/xmluxe-cssRoot/
+
+
+for c in $(ls /tmp/xmluxe-cssRoot)
+do
+	leggoC="$(cat /tmp/xmluxe-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxe-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxe-item
+
+	leggoItem="$(cat /tmp/xmluxe-item)"
+
+	cat /tmp/xmluxe-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxe-id0
+
+	cat /tmp/xmluxe-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-id
+
+	leggoID="$(cat /tmp/xmluxe-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxe-title
+
+	leggoTitle="$(cat /tmp/xmluxe-title)"
+
+	leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+
+	if test $leggoIdRoot == $leggoID
+
+	then
+
+echo "$leggoID" >> /tmp/xmluxe-allIDs
+
+echo "$leggoItem $leggoIdRoot" >> /tmp/xmluxe-itemsEtIDs
+
+echo "$leggoItem" > /tmp/xmluxe-itemRoot
+         
+rm -f /tmp/xmluxe-cssRoot/$c
+
+	fi
+
+
+done
+################ FINE ROOT 
+
+
+################ INIZIO  SERIES
+
+mkdir /tmp/xmluxe-gradusI
+
+for c in $(ls /tmp/xmluxe-cssRoot)
+
+do
+	leggoC="$(cat /tmp/xmluxe-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxe-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxe-item
+
+	leggoItem="$(cat /tmp/xmluxe-item)"
+
+	cat /tmp/xmluxe-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxe-id0
+
+	cat /tmp/xmluxe-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-id
+
+	leggoID="$(cat /tmp/xmluxe-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxe-title
+
+	leggoTitle="$(cat /tmp/xmluxe-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxe-id | awk '{ print length }' > /tmp/xmluxe-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxe-dotFrequency)
+
+
+	#### Series, non ha mai punti nell'ID.
+
+	if test $leggoDotFrequency -eq 0
+
+	then
+
+		cp /tmp/xmluxe-cssRoot/$c /tmp/xmluxe-gradusI
+
+		cp /tmp/xmluxe-item /tmp/xmluxe-itemSeries
+
+echo "$leggoID" >> /tmp/xmluxe-allIDs
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxe-itemsEtIDs
+
+rm -f /tmp/xmluxe-cssRoot/$c
+
+	fi
+
+
+done
+################ FINE SERIES 
+
+############## INIZIO ITEMS
+mkdir /tmp/xmluxe-gradusII
+
+for c in $(ls /tmp/xmluxe-cssRoot)
+
+do
+
+	leggoC="$(cat /tmp/xmluxe-cssRoot/$c)"
+
+        grep "$leggoC" /tmp/xmluxe-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxe-item
+
+	leggoItem="$(cat /tmp/xmluxe-item)"
+
+	cat /tmp/xmluxe-cssRoot/$c | sed 's/>/ /g' > /tmp/xmluxe-id0
+
+	cat /tmp/xmluxe-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-id
+	
+	leggoID="$(cat /tmp/xmluxe-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxe-title
+
+	leggoTitle="$(cat /tmp/xmluxe-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxe-id | awk '{ print length }' > /tmp/xmluxe-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxe-dotFrequency)
+
+	#### Capitolo: il capitolo, insieme a part, non ha mai punti nell'ID; ma gradusI lo risolvo diversamente.
+
+	if test $leggoDotFrequency -eq 1
+
+	then
+
+echo "$leggoID" >> /tmp/xmluxe-allIDs
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxe-itemsEtIDs
+
+cp /tmp/xmluxe-cssRoot/$c /tmp/xmluxe-gradusII
+
+cp /tmp/xmluxe-item /tmp/xmluxe-itemITEM
+
+rm -f /tmp/xmluxe-cssRoot/$c
+
+	fi
+	
+done
+################ FINE ITEMS 
+
+################ INIZIO KEYorVALUE
+
+mkdir /tmp/xmluxe-gradusIII
+
+leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+
+grep "ID=\"$leggoIdRoot" /tmp/xmluxe-css05 > /tmp/xmluxe-sectionAnd
+
+rm -fr /tmp/xmluxe-css05Split
+
+mkdir /tmp/xmluxe-css05Split
+
+split -l1 /tmp/xmluxe-sectionAnd  /tmp/xmluxe-css05Split/
+
+for d in $(ls /tmp/xmluxe-css05Split)
+
+do
+
+rm -f /tmp/xmluxe-pcdata
+
+touch /tmp/xmluxe-pcdata
+
+	leggoD="$(cat /tmp/xmluxe-css05Split/$d)"
+
+        grep "$leggoD" /tmp/xmluxe-css000 | awk '$1 > 0 {print $1}' | sed 's/<//g' > /tmp/xmluxe-item
+
+	leggoItem="$(cat /tmp/xmluxe-item)"
+
+	cat /tmp/xmluxe-css05Split/$d | sed 's/>/ /g' > /tmp/xmluxe-id0
+
+	cat /tmp/xmluxe-id0 | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-id
+	
+	leggoID="$(cat /tmp/xmluxe-id)"
+
+	grep "ID=\"$leggoID\"" $targetFile.lmx | sed 's/.*>//g' > /tmp/xmluxe-title
+
+	leggoTitle="$(cat /tmp/xmluxe-title)"
+
+	sed 's/[^.]//g' /tmp/xmluxe-id | awk '{ print length }' > /tmp/xmluxe-dotFrequency
+
+	leggoDotFrequency=$(cat /tmp/xmluxe-dotFrequency)
+
+	if test $leggoDotFrequency -eq 2
+
+	then
+
+echo "$leggoID" >> /tmp/xmluxe-allIDs
+
+echo "$leggoItem $leggoID" >> /tmp/xmluxe-itemsEtIDs
+
+cp /tmp/xmluxe-css05Split/$d /tmp/xmluxe-gradusIII
+
+cp /tmp/xmluxe-item /tmp/xmluxe-itemKeyOrValue
+
+rm -f /tmp/xmluxe-css05Split/$d
+
+fi
+
+done
+
+################ FINE KEYorVALUE
+
+
+if [ ! -f $targetFile.lmxe ]; then 
+
+touch $targetFile.lmxe
+
+fi
+
+############################################################## ACTION MOVE (21 ottobre)
+grep "move" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionMove
+
+stat --format %s /tmp/xmluxe-actionMove > /tmp/xmluxe-actionMoveBytes
+
+leggoBytesActionMove=$(cat /tmp/xmluxe-actionMoveBytes)
+
+
+## variabile già esistente
+## leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+
+## I if
+if test $leggoBytesActionMove -gt 0
+
+then
+
+	mkdir /tmp/xmluxe-allIDsContainer
+	
+	split -l1 /tmp/xmluxe-allIDs /tmp/xmluxe-allIDsContainer/
+
+### after -> vuoi scalare un id  in avanti
+	grep "^-a" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOp
+
+	stat --format %s /tmp/xmluxeTargetFileOp > /tmp/xmluxeTargetFileBytes
+
+	leggoBytes=$(cat /tmp/xmluxeTargetFileBytes)
+
+	if test $leggoBytes -gt 0
+
+	then
+
+		touch /tmp/xmluxe-optionA
+
+		cat /tmp/xmluxeTargetFileOp | cut -d: -f2,2 | sed 's/-a//g' > /tmp/xmluxe-afterValue
+
+		optionValue=$(cat /tmp/xmluxe-afterValue)
+
+	fi
+### before -> vuoi scalare un id  indietro
+	grep "^-b" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOp
+
+	stat --format %s /tmp/xmluxeTargetFileOp > /tmp/xmluxeTargetFileBytes
+
+	leggoBytes=$(cat /tmp/xmluxeTargetFileBytes)
+
+	if test $leggoBytes -gt 0
+
+	then
+
+		touch /tmp/xmluxe-optionB
+
+		cat /tmp/xmluxeTargetFileOp | cut -d: -f2,2 | sed 's/-b//g' > /tmp/xmluxe-beforeValue
+
+		optionValue=$(cat /tmp/xmluxe-beforeValue)
+
+	fi
+
+
+	cat /tmp/xmluxe-actionMove | cut -d= -f2,2 > /tmp/xmluxe-elementToMove
+
+	leggoIDToMove="$(cat /tmp/xmluxe-elementToMove)"
+
+	grep "$leggoIDToMove$" /tmp/xmluxe-allIDs > /tmp/xmluxe-verificoEsistenzaID
+
+	stat --format %s /tmp/xmluxe-verificoEsistenzaID > /tmp/xmluxe-verificoEsistenzaIDBytes
+
+	leggoBytesEsistenzaID=$(cat /tmp/xmluxe-verificoEsistenzaIDBytes)
+
+	if test ! $leggoBytesEsistenzaID -gt 0
+
+	then
+
+		clear
+		echo "Selected ID $leggoIDToMove to move, doesn't exist."
+		echo "Forced exit"
+
+		exit
+
+	fi
+
+
+## leggo la frequenza dei pti.
+	sed 's/[^.]//g' /tmp/xmluxe-elementToMove | awk '{ print length }' > /tmp/xmluxe-elementKind
+
+	leggoElementKind="$(cat /tmp/xmluxe-elementKind)"
+
+	########### inizio Series move
+
+	if test $leggoElementKind -eq 0
+
+	then
+
+	cat /tmp/xmluxe-elementToMove | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-LastPiece
+
+	originalValue=$(cat /tmp/xmluxe-LastPiece)
+
+		### Se l'opzione fosse -a di after
+		if [ -f	/tmp/xmluxe-optionA ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIList
+
+				for b in $(ls /tmp/xmluxe-gradusI)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusI/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIList
+
+				done
+
+				cat /tmp/xmluxe-gradusIList | sort > /tmp/xmluxe-gradusIListSorted
+
+				cat /tmp/xmluxe-gradusIListSorted | tail -n1 > /tmp/xmluxe-gradusIListSortedMax0
+
+				cat /tmp/xmluxe-gradusIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIListSortedMax01
+
+				cat /tmp/xmluxe-gradusIListSortedMax01 | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-gradusIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+echo "#!/bin/bash
+
+declare -i var=0
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+originalValueN=\$(echo $leggoMaxValue -\$var + 1 | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+		
+		echo \"$leggoIdRoot \$newValue\" | sed 's/ //g' > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+
+		echo \"$leggoIdRoot 0\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		else
+
+		echo \"$leggoIdRoot \$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+		
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+		echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue + $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue + $optionValue | bc)"
+
+		fi
+
+		else
+
+		newValue="$(echo $originalValue + $optionValue | bc)"
+		
+		fi
+		
+		echo "$leggoIdRoot $newValue" | sed 's/ //g' > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear	
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+		
+		exit
+		
+		fi
+
+		 done
+
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+		echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+		
+		fi
+
+		fi
+
+	#	fi
+## qua legge anche il capitolo, invece qui devo stare nel blocco delle parti
+	### Se l'opzione fosse -b di before
+		if [ -f	/tmp/xmluxe-optionB ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+## I if qua 
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIList
+
+				for b in $(ls /tmp/xmluxe-gradusI)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusI/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIList
+
+				done
+
+				cat /tmp/xmluxe-gradusIList | sort > /tmp/xmluxe-gradusIListSorted
+
+					
+## se il primo ID della listaè inferiore a quello specificato dall'utente con --move='ID'
+# allora non deve essere trattato. qua 
+
+cat /tmp/xmluxe-gradusIList | sort > /tmp/xmluxe-gradusIListSorted
+
+				cat /tmp/xmluxe-gradusIListSorted | tail -n1 > /tmp/xmluxe-gradusIListSortedMax0
+
+				cat /tmp/xmluxe-gradusIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIListSortedMax01
+
+				cat /tmp/xmluxe-gradusIListSortedMax01 | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-gradusIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+			
+echo "#!/bin/bash
+
+declare -i var=-1
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+
+originalValueN=\$(echo $originalValue +\$var | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+
+		echo \"$leggoIdRoot \$newValue\" | sed 's/ //g' > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+
+		echo \"$leggoIdRoot 0\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		else
+
+		echo \"$leggoIdRoot \$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+			echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla differenza, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+		
+		## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+		newValuePre="$(echo $originalValue - $optionValue | bc)"
+
+		## devo creare un nuovo condizionale nel caso in cui a seguito della differenza entrassi nella singola cifra
+
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+		
+		echo "$leggoIdRoot $newValue" | sed 's/ //g' > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+  	
+		exit
+		
+		fi
+
+		done
+	
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+		echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+
+		fi
+
+		fi
+
+		fi
+	
+#		exit
+
+#		fi
+		### con questo fi ho finito il blocco dell'elemento 'part', ora tocca al capitolo.
+
+#else
+#	echo "la frequenza è un'altra" > /dev/null
+
+# fi
+
+## I if chiuso
+
+############## fine gradusI move
+
+### inizio gradusII move	
+if test $leggoElementKind -eq 1
+
+	then
+	leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+	
+	cat /tmp/xmluxe-elementToMove | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-idNumericLessRoot
+
+	idNumericLessRoot=$(cat /tmp/xmluxe-idNumericLessRoot)
+
+	cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f1,1 > /tmp/xmluxe-idNumericIPiece
+
+	idNumericIPiece="$(cat /tmp/xmluxe-idNumericIPiece)"
+
+	cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f2,2 > /tmp/xmluxe-idNumericIIPiece
+## ricordati di aggiungere pezzi progressivamente per elementi inferiori al capitolo
+## ricordati di copiare l'ultimo pezzo in /tmp/xmluxe-LastPiece
+	cp /tmp/xmluxe-idNumericIIPiece /tmp/xmluxe-LastPiece
+
+	idNumericIIPiece="$(cat /tmp/xmluxe-idNumericIIPiece)"
+
+	if test $idNumericIIPiece -lt 10
+
+	then
+
+
+	originalValue=$(cat /tmp/xmluxe-idNumericIIPiece)
+
+		### Se l'opzione fosse -a di after
+		if [ -f	/tmp/xmluxe-optionA ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIIList
+
+				for b in $(ls /tmp/xmluxe-gradusII)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusII/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIIList
+
+				done
+### ti avviso che  per elementi inferiori al chapter avrai bisogno di comporre con più pezzi, e.g. per la sezione
+## echo "$leggoIdRoot $idNumericIPiece.$idNumericIIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIPrefixToMatch
+## Solo per il capitolo esiste tale alternativa commentata
+#				cat /tmp/xmluxe-elementToMove | cut -d. -f1,1 > /tmp/xmluxe-gradusIIPrefixToMatch
+				echo "$leggoIdRoot $idNumericIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIPrefixToMatch
+
+				leggoChaPrefixToMatch="$(cat /tmp/xmluxe-gradusIIPrefixToMatch)"
+
+				grep "$leggoChaPrefixToMatch" /tmp/xmluxe-gradusIIList >  /tmp/xmluxe-gradusIIListToSort
+
+				cat /tmp/xmluxe-gradusIIListToSort | sort > /tmp/xmluxe-gradusIIListSorted
+
+				cat /tmp/xmluxe-gradusIIListSorted | tail -n1 > /tmp/xmluxe-gradusIIListSortedMax0
+
+				cat /tmp/xmluxe-gradusIIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIIListSortedMax01
+
+				cat /tmp/xmluxe-gradusIIListSortedMax01 | cut -d. -f2,2 > /tmp/xmluxe-gradusIIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+echo "#!/bin/bash
+
+declare -i var=0
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+originalValueN=\$(echo $leggoMaxValue -\$var + 1 | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+		
+		echo \"$leggoIdRoot$idNumericIPiece.\$newValue\" > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+
+		echo \"$leggoIdRoot$idNumericIPiece.0\$originalValueN\" > /tmp/xmluxe-idToMoveN
+
+		else
+
+		echo \"$leggoIdRoot$idNumericIPiece.\$originalValueN\" > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+				echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue + $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue + $optionValue | bc)"
+
+		fi
+
+		else
+
+		newValue="$(echo $originalValue + $optionValue | bc)"
+		
+		fi
+		
+		echo "$leggoIdRoot$idNumericIPiece.$newValue" > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear	
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+		
+		exit
+		
+		fi
+
+		 done
+
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+		echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+		
+		fi
+
+		fi
+
+	### Se l'opzione fosse -b di before
+		if [ -f	/tmp/xmluxe-optionB ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIIList
+
+				for b in $(ls /tmp/xmluxe-gradusII)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusII/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIIList
+
+				done
+
+				### ti avviso che  per elementi inferiori al chapter avrai bisogno di comporre con più pezzi, e.g. per la sezione
+## echo "$leggoIdRoot $idNumericIPiece.$idNumericIIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIPrefixToMatch
+## Solo per il capitolo esiste tale alternativa commentata
+#				cat /tmp/xmluxe-elementToMove | cut -d. -f1,1 > /tmp/xmluxe-gradusIIPrefixToMatch
+				echo "$leggoIdRoot $idNumericIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIPrefixToMatch
+
+				leggoChaPrefixToMatch="$(cat /tmp/xmluxe-gradusIIPrefixToMatch)"
+
+				grep "$leggoChaPrefixToMatch" /tmp/xmluxe-gradusIIList >  /tmp/xmluxe-gradusIIListToSort
+
+				cat /tmp/xmluxe-gradusIIListToSort | sort > /tmp/xmluxe-gradusIIListSorted
+
+## se il primo ID della listaè inferiore a quello specificato dall'utente con --move='ID'
+# allora non deve essere trattato. qua 
+
+				cat /tmp/xmluxe-gradusIIListSorted | tail -n1 > /tmp/xmluxe-gradusIIListSortedMax0
+
+				## ricordati di cambiare -f2,2 in numeri crescenti progresivamente per elementi inferiori al capitolo
+				cat /tmp/xmluxe-gradusIIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIIListSortedMax01
+
+				## ricordati di cambiare -f2,2 in numeri crescenti progresivamente per elementi inferiori al capitolo
+				cat /tmp/xmluxe-gradusIIListSortedMax01 | cut -d. -f2,2 > /tmp/xmluxe-gradusIIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+echo "#!/bin/bash
+
+declare -i var=-1
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+
+originalValueN=\$(echo $originalValue +\$var | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+
+		echo \"$leggoIdRoot$idNumericIPiece.\$newValue\" > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+
+		echo \"$leggoIdRoot$idNumericIPiece.0\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		else
+
+		echo \"$leggoIdRoot$idNumericIPiece.\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+		echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla differenza, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+
+		if test $originalValue -lt 10
+
+		then
+
+		newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+		newValuePre="$(echo $originalValue - $optionValue | bc)"
+
+		## devo creare un nuovo condizionale nel caso in cui a seguito della differenza entrassi nella singola cifra
+
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+		
+		echo "$leggoIdRoot$idNumericIPiece.$newValue" > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+  	
+		exit
+		
+		fi
+
+		done
+		
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+			echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+
+		fi
+
+		fi
+	
+		fi
+fi	
+	### con questo fi ho finito il blocco dell'elemento 'capitolo', ora tocca alla sezione.
+
+### inizio gradusIII move	
+if test $leggoElementKind -eq 2
+
+	then
+	leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+	
+	cat /tmp/xmluxe-elementToMove | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-idNumericLessRoot
+
+	idNumericLessRoot=$(cat /tmp/xmluxe-idNumericLessRoot)
+
+	cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f1,1 > /tmp/xmluxe-idNumericIPiece
+
+	idNumericIPiece="$(cat /tmp/xmluxe-idNumericIPiece)"
+
+	cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f2,2 > /tmp/xmluxe-idNumericIIPiece
+
+	idNumericIIPiece="$(cat /tmp/xmluxe-idNumericIIPiece)"
+
+	cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f3,3 > /tmp/xmluxe-idNumericIIIPiece
+
+	idNumericIIIPiece="$(cat /tmp/xmluxe-idNumericIIIPiece)"
+## ricordati di aggiungere pezzi progressivamente per elementi inferiori al sezione
+## ricordati di copiare l'ultimo pezzo in /tmp/xmluxe-LastPiece
+	cp /tmp/xmluxe-idNumericIIIPiece /tmp/xmluxe-LastPiece
+
+	if test $idNumericIIIPiece -lt 10
+
+	then
+
+## ricordati di cambiare IIIPiece in IVPiece nel prox blocco subsection
+	originalValue=$(cat /tmp/xmluxe-idNumericIIIPiece)
+
+		### Se l'opzione fosse -a di after
+		if [ -f	/tmp/xmluxe-optionA ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIIIList
+
+				for b in $(ls /tmp/xmluxe-gradusIII)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusIII/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIIIList
+
+				done
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+				echo "$leggoIdRoot $idNumericIPiece.$idNumericIIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIIPrefixToMatch
+
+				leggoKeyOrValuesPrefixToMatch="$(cat /tmp/xmluxe-gradusIIIPrefixToMatch)"
+
+				grep "$leggoKeyOrValuesPrefixToMatch" /tmp/xmluxe-gradusIIIList > /tmp/xmluxe-gradusIIIListToSort
+
+				cat /tmp/xmluxe-gradusIIIListToSort | sort > /tmp/xmluxe-gradusIIIListSorted
+
+				cat /tmp/xmluxe-gradusIIIListSorted | tail -n1 > /tmp/xmluxe-gradusIIIListSortedMax0
+
+				### ricordati di NON cambiare -f2,2 per elementi inferiori a section
+				cat /tmp/xmluxe-gradusIIIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIIIListSortedMax01
+				### ricordati di cambiare -f3,3 in -f4,4 per la subsection
+				cat /tmp/xmluxe-gradusIIIListSortedMax01 | cut -d. -f3,3 > /tmp/xmluxe-gradusIIIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIIIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIIIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIIIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+echo "#!/bin/bash
+
+declare -i var=0
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+originalValueN=\$(echo $leggoMaxValue -\$var + 1 | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN + $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN + $optionValue | bc)\"
+
+		fi
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.\$newValue\" > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.0\$originalValueN\" > /tmp/xmluxe-idToMoveN
+
+		else
+		### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.\$originalValueN\" > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+		echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue + $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue + $optionValue | bc)"
+
+		fi
+
+		else
+
+		newValue="$(echo $originalValue + $optionValue | bc)"
+		
+		fi
+		### ricordati di aggiungere $idNumericIIIPiece in subsection	
+		echo "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$newValue" > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear	
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+		
+		exit
+		
+		fi
+
+		 done
+
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+			echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+		
+		fi
+
+		fi
+
+	### Se l'opzione fosse -b di before
+		if [ -f	/tmp/xmluxe-optionB ]; then
+
+			## se fosse stata espressa anche l'opzione -end
+
+			grep "^-end" /tmp/xmluxePseudoOptions/* > /tmp/xmluxeTargetFileOpAll
+
+			stat --format %s /tmp/xmluxeTargetFileOpAll > /tmp/xmluxeTargetFileBytesAll
+
+			leggoBytesAll=$(cat /tmp/xmluxeTargetFileBytesAll)
+
+			if test $leggoBytesAll -gt 0
+
+			then
+
+				touch /tmp/xmluxe-gradusIIIList
+
+				for b in $(ls /tmp/xmluxe-gradusIII)
+
+				do
+
+				leggoB="$(cat /tmp/xmluxe-gradusIII/$b)"
+				
+				echo "$leggoB" >> /tmp/xmluxe-gradusIIIList
+
+				done
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+				echo "$leggoIdRoot $idNumericIPiece.$idNumericIIPiece" | sed 's/ //g' > /tmp/xmluxe-gradusIIIPrefixToMatch
+
+				leggoKeyOrValuesPrefixToMatch="$(cat /tmp/xmluxe-gradusIIIPrefixToMatch)"
+
+				grep "$leggoKeyOrValuesPrefixToMatch" /tmp/xmluxe-gradusIIIList >  /tmp/xmluxe-gradusIIIListToSort
+
+				cat /tmp/xmluxe-gradusIIIListToSort | sort > /tmp/xmluxe-gradusIIIListSorted
+					
+## se il primo ID della listaè inferiore a quello specificato dall'utente con --move='ID'
+# allora non deve essere trattato. qua 
+
+				cat /tmp/xmluxe-gradusIIIListSorted | tail -n1 > /tmp/xmluxe-gradusIIIListSortedMax0
+
+				### ricordati di NON cambiare -f2,2 per elementi inferiori a section
+				cat /tmp/xmluxe-gradusIIIListSortedMax0 | sed 's/>/ /g' | awk '$1 > 0 {print $1}' | cut -d= -f2,2 | sed 's/"//g' > /tmp/xmluxe-gradusIIIListSortedMax01
+
+				### ricordati di cambiare -f3,3 in -f4,4 per la subsection
+				cat /tmp/xmluxe-gradusIIIListSortedMax01 | cut -d. -f3,3 > /tmp/xmluxe-gradusIIIListSortedMax
+
+
+				leggoMaxValuePre="$(cat /tmp/xmluxe-gradusIIIListSortedMax)"
+
+				if test $leggoMaxValuePre -lt 10
+
+				then
+					vim -c ":%s/^.//g" /tmp/xmluxe-gradusIIIListSortedMax -c :w -c :q
+
+				fi
+
+				leggoMaxValue="$(cat /tmp/xmluxe-gradusIIIListSortedMax)"
+
+				nIterazioni=$(echo $leggoMaxValue - $originalValue +1 | bc)
+
+echo "#!/bin/bash
+
+declare -i var=-1
+
+for n in {1..$nIterazioni}
+do
+
+var=\$var+1
+
+
+originalValueN=\$(echo $originalValue +\$var | bc)
+
+			if test \$originalValueN -lt 10
+
+		then
+
+		newValuePre=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla somma, entrassi nella doppia cifra.
+
+		if test \$newValuePre -lt 10
+
+		then
+
+			newValue=\"0\$(echo \$originalValueN - $optionValue | bc)\"
+
+		else
+
+			newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+		else
+
+		newValue=\"\$(echo \$originalValueN - $optionValue | bc)\"
+
+		fi
+
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.\$newValue\" > /tmp/xmluxe-fullNewId
+
+		fullNewID=\"\$(cat /tmp/xmluxe-fullNewId)\"
+
+		if test \$originalValueN -lt 10
+
+		then
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.0\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		else
+### ricordati di aggiungere $idNumericIIIPiece in subsection
+		echo \"$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.\$originalValueN\" | sed 's/ //g' > /tmp/xmluxe-idToMoveN
+
+		fi
+		
+		leggoIDToMoveN=\"\$(cat /tmp/xmluxe-idToMoveN)\"
+
+		vim -c \":%s/\$leggoIDToMoveN/\$fullNewID/g\" $targetFile.lmx -c :w -c :q
+
+			echo \"
+$(date +\"%Y-%m-%d-%H-%M\")	\$leggoIDToMoveN moved to \$fullNewID\" >> $targetFile.lmxe
+
+done
+
+echo \" \"  >> $targetFile.lmxe
+
+exit
+
+" > cicloNIterazioni.sh
+
+chmod uga+xr cicloNIterazioni.sh
+
+./cicloNIterazioni.sh
+
+rm cicloNIterazioni.sh
+
+
+		else
+
+			## IV if
+		if test $originalValue -lt 10
+
+		then
+
+		newValuePre="0$(echo $originalValue + $optionValue | bc)"
+## devo creare una nuovo condizionale nel caso in cui in seguito alla differenza, entrassi nella doppia cifra.
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+
+		if test $originalValue -lt 10
+
+		then
+
+		newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+		newValuePre="$(echo $originalValue - $optionValue | bc)"
+
+		## devo creare un nuovo condizionale nel caso in cui a seguito della differenza entrassi nella singola cifra
+
+		if test $newValuePre -lt 10
+
+		then
+
+			newValue="0$(echo $originalValue - $optionValue | bc)"
+
+		else
+
+			newValue="$(echo $originalValue - $optionValue | bc)"
+
+		fi
+
+		fi
+		### ricordati di aggiungere $idNumericIIIPiece in subsection	
+		echo "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$newValue" > /tmp/xmluxe-fullNewId
+
+		fullNewID="$(cat /tmp/xmluxe-fullNewId)"
+
+		for a in $(ls /tmp/xmluxe-allIDsContainer/)
+
+		do
+
+		leggoA="$(cat /tmp/xmluxe-allIDsContainer/$a)"
+
+		if test "$fullNewID" == "$leggoA"
+
+		then
+	
+		clear
+		echo "The new ID $fullNewID you want, exists already."
+		echo "Forced exit."
+  	
+		exit
+		
+		fi
+
+		done
+		
+		vim -c ":%s/$leggoIDToMove/$fullNewID/g" $targetFile.lmx -c :w -c :q
+
+		echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoIDToMove moved to $fullNewID" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+
+		fi
+
+		fi
+	
+		fi
+fi	
+### con questo fi ho finito il blocco dell elemento sezione, ora tocca alla sottosezione.
+
+################# fine gradusIII move
+
+fi
+## I if chiuso (quello dell'azione --move)
+
+
+
+############################################################## ACTION ADD
+
+grep "add" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionAdd
+
+stat --format %s /tmp/xmluxe-actionAdd > /tmp/xmluxe-actionAddBytes
+
+leggoBytes=$(cat /tmp/xmluxe-actionAddBytes)
+
+
+## variabile già esistente
+## leggoIdRoot="$(cat /tmp/xmluxe-idRoot)"
+
+if test $leggoBytes -gt 0
+
+then
+	rm -f /tmp/xmluxe-optionW.lmx
+
+	rm -f /tmp/xmluxe-optionKey.lmx
+
+
+	for a in $(ls /tmp/xmluxePseudoOptions)
+
+	do
+
+	grep "^-w" /tmp/xmluxePseudoOptions/$a > /tmp/xmluxeTargetFileOp
+
+	stat --format %s /tmp/xmluxeTargetFileOp > /tmp/xmluxeTargetFileBytes
+
+	leggoBytes=$(cat /tmp/xmluxeTargetFileBytes)
+
+	if test $leggoBytes -gt 1
+
+	then
+
+		touch /tmp/xmluxe-optionW.lmx
+	
+	fi
+
+	## Key or Value Element
+	grep "^-k" /tmp/xmluxePseudoOptions/$a > /tmp/xmluxeTargetFileOpK
+
+	stat --format %s /tmp/xmluxeTargetFileOpK > /tmp/xmluxeTargetFileBytes
+
+	leggoBytes=$(cat /tmp/xmluxeTargetFileBytes)
+
+	if test $leggoBytes -gt 1
+
+	then
+
+		touch /tmp/xmluxe-optionKey.lmx
+	
+	fi
+
+
+	done
+
+	cat /tmp/xmluxe-actionAdd | cut -d= -f2,2 > /tmp/xmluxe-elementToAdd
+
+	leggoIDToAdd="$(cat /tmp/xmluxe-elementToAdd)"
+
+	## verifico se l'id che l'utente vuole aggiungere esista già
+	grep "$leggoIDToAdd$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenza
+
+	stat --format %s /tmp/xmluxe-verificaEsistenza > /tmp/xmluxe-verificaEsistenzaBytes
+
+	leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaBytes)
+
+	if test $leggoBytes -gt 0
+
+	then
+		leggoElementEtId="$(cat /tmp/xmluxe-verificaEsistenza)"
+		clear
+
+		echo "$leggoElementEtId exists already." 
+		echo "Forced exit."
+
+		exit
+	fi
+
+	sed 's/[^.]//g' /tmp/xmluxe-elementToAdd | awk '{ print length }' > /tmp/xmluxe-elementKind
+
+	leggoElementKind="$(cat /tmp/xmluxe-elementKind)"
+
+	# I if
+	if test $leggoElementKind -eq 0
+
+	then
+
+################# INIZIO SERIES LMXE, LMX
+
+## I if
+		if test ! $leggoBytesSinossi -gt 0 
+			
+		then 
+
+		## l'elemento da aggiungere è una series 
+	
+                cat /tmp/xmluxe-elementToAdd | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-idNumericPiece
+
+		idNumericPiece=$(cat /tmp/xmluxe-idNumericPiece)
+## II if
+		if test $idNumericPiece -lt 10
+
+		then
+			echo 0$(echo $idNumericPiece - 1 | bc) > /tmp/xmluxe-idNumericPiecePreviousSeries
+
+			leggoIdNumericPiecePreviousSeries=$(cat /tmp/xmluxe-idNumericPiecePreviousSeries)
+### III if
+			if test $leggoIdNumericPiecePreviousSeries == "00"
+			then
+
+				echo "è la prima series del documento" > /tmp/xmluxe-Ichild
+
+					else
+				idNumericPiecePreviousSeries=$(cat /tmp/xmluxe-idNumericPiecePreviousSeries)
+
+					## verifico se l'id che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericPiecePreviousSeries$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericPiecePreviousSeries doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+				
+				fi
+## chiusura IV if
+
+			fi
+## chiusura III if
+
+
+		else
+
+                        echo $(echo $idNumericPiece - 1 | bc) > /tmp/xmluxe-idNumericPiecePreviousSeries
+
+			leggoIdNumericPiecePreviousSeries=$(cat /tmp/xmluxe-idNumericPiecePreviousSeries)
+### III if
+			if test $leggoIdNumericPiecePreviousSeries == "0"
+			 then
+
+				 echo "è la prima series del documento" > /tmp/xmluxe-ISeriese
+
+			else
+				idNumericPiecePreviousSeries=$(cat /tmp/xmluxe-idNumericPiecePreviousSeries)
+
+					## verifico se l'id che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericPiecePreviousSeries$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericPiecePreviousSeries doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+
+				fi
+
+				### chiusura IV if
+### chiusura III if
+			fi
+### chiusura II if
+		fi
+### II if
+
+### In alternativa hai anche /tmp/xmluxe-ISeriese
+			if [ ! -f /tmp/xmluxe-itemSeries ]; then
+
+			clear 
+
+                        java /usr/local/lib/xmlux/java/xmluxe/matter/partFileWriter7.java 
+
+			if [ -f /tmp/xmluxe-itemSinossi ]; then
+
+				echo "$leggoIdRoot 00" | sed 's/ //g' > /tmp/xmluxe-append
+
+				idNumericPiecePreviousSeries="$(cat /tmp/xmluxe-append)"
+
+				grep -n "<!-- end $idNumericPiecePreviousSeries -->" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+			else
+
+				echo "$leggoIdRoot" | sed 's/ //g' > /tmp/xmluxe-append
+
+				idNumericPiecePreviousSeries="$(cat /tmp/xmluxe-append)"
+
+				grep -n "ID=\"$leggoIdRoot\"" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+	
+			fi
+		
+		else
+
+			grep -n "<!-- end $leggoIdRoot$idNumericPiecePreviousSeries -->" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+### chiusura II if
+			fi
+
+			leggoNumberLine=$(cat /tmp/xmluxe-numberLine)
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine+1| bc > /tmp/xmluxe-numberLinePlus1
+
+leggoAggiunta=$(cat /tmp/xmluxe-numberLinePlus1)
+
+echo "$leggoAggiunta;GdGZZ" > /tmp/xmluxe-precommand
+
+###### elimino il <<;>> che ho usato prima come separatore
+echo ":s/\;\(.*\)/\1/g
+ZZ" > /tmp/xmluxe-delPointVirgo
+
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+### elimino tutto ciò che è al di sotto della riga $leggoNumerLine
+
+## backup file originale
+cp $targetFile.lmx /tmp/xmluxe-pre
+
+vim -s /tmp/xmluxe-precommand /tmp/xmluxe-pre
+
+### appendo a /tmp/pre
+leggoItem="$(cat /tmp/xmluxe-itemSeries)"
+
+### II if
+		if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+			echo "Insert title of the series to add, starting from line number 3.
+At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<$leggoItem ID=\"$leggoIDToAdd\">$leggoW
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<$leggoItem ID=\"$leggoIDToAdd\">xmluxe: Add title to $leggoItem please
+
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+## chiusura II if
+		fi
+
+########### II parte: Mi posiziono sulla I riga ed elimino tutto ciò che 
+### è al di sotto di essa ma fino alla riga $leggoNumerLine, quindi compreso <<%%BeginPageSsetup>>
+
+cp $targetFile.lmx /tmp/xmluxe-post
+
+echo "1G$leggoNumberLine;ddZZ" > /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-commandPost1 /tmp/xmluxe-post
+
+cat /tmp/xmluxe-pre /tmp/xmluxe-post > $targetFile.lmx
+
+echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoItem $leggoIDToAdd added" > $targetFile.lmxe
+
+## chiusura I if
+	fi
+
+fi
+
+################# INIZIO CAPITOLO LMXE, LMX
+
+	if test $leggoElementKind -eq 1
+
+	then
+		## l'elemento da aggiungere è un capitolo
+
+                cat /tmp/xmluxe-elementToAdd | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-idNumericLessRoot
+
+		idNumericLessRoot=$(cat /tmp/xmluxe-idNumericLessRoot)
+
+		cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f1,1 > /tmp/xmluxe-idNumericIPiece
+
+		idNumericIPiece="$(cat /tmp/xmluxe-idNumericIPiece)"
+
+		cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f2,2 > /tmp/xmluxe-idNumericIIPiece
+
+		idNumericIIPiece="$(cat /tmp/xmluxe-idNumericIIPiece)"
+
+		if test $idNumericIIPiece -lt 10
+
+		then
+			echo 0$(echo $idNumericIIPiece - 1 | bc) > /tmp/xmluxe-idNumericIIPiecePrevious
+
+			leggoIdNumericPiecePrevious="$(cat /tmp/xmluxe-idNumericIIPiecePrevious)"
+
+			if test $leggoIdNumericPiecePrevious == "00"
+			then
+
+				echo "è il primo child" > /tmp/xmluxe-Ichild
+
+				idNumericPreviousPiece="$idNumericIPiece"
+					else
+				idNumericPreviousPiece=$(cat /tmp/xmluxe-idNumericIIPiecePrevious)
+
+				## verifico se l'id del capitolo che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericIPiece.$idNumericPreviousPiece$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericIPiece.$idNumericPreviousPiece doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+
+				fi
+
+				### chiusura IV if
+
+			fi
+
+
+		else
+
+                        echo $(echo $idNumericIIPiece - 1 | bc) > /tmp/xmluxe-idNumericIIPiecePrevious
+
+			leggoIdNumericPiecePrevious="$(cat /tmp/xmluxe-idNumericIIPiecePrevious)"
+
+			if test $leggoIdNumericPiecePrevious == "0"
+		
+			then
+				echo "è il primo child" > /tmp/xmluxe-Ichild
+				
+				idNumericPreviousPiece="$idNumericIPiece"
+					else
+				idNumericPreviousPiece=$(cat /tmp/xmluxe-idNumericIIPiecePrevious)
+
+					## verifico se l'id del capitolo che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericIPiece.$idNumericPreviousPiece$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericIPiece.$idNumericPreviousPiece doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+
+				fi
+
+				### chiusura IV if
+
+			fi
+
+
+		fi
+
+			if [ -f /tmp/xmluxe-Ichild ]; then
+
+			idNumericPrevious="$idNumericIPiece"
+
+			grep -n "ID=\"$leggoIdRoot$idNumericPrevious\"" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+			if [ ! -f /tmp/xmluxe-itemITEM ]; then
+
+			echo "I Item of a Series" > /tmp/xmluxe-firstElementITEM
+
+				### first Item not of a Series but of the entire document
+
+			clear 
+
+			java /usr/local/lib/xmlux/java/xmluxe/matter/chapterFileWriter7.java
+			
+			fi
+
+			else
+
+			idNumericPrevious="$idNumericIPiece.$idNumericPreviousPiece"
+
+			grep -n "<!-- end $leggoIdRoot$idNumericPrevious -->" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+			fi
+
+			leggoNumberLine=$(cat /tmp/xmluxe-numberLine)
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+if [ -f /tmp/xmluxe-Ichild ]; then
+
+	if [ ! -f /tmp/xmluxe-itemSinossi ]; then
+
+#	if [ -f /tmp/xmluxe-appendUnderRoot ]; then
+
+echo $leggoNumberLine + 1 | bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine  > /tmp/xmluxe-numberLineMinusMinus
+
+
+else
+
+echo $leggoNumberLine +1 | bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine  > /tmp/xmluxe-numberLineMinusMinus
+
+	fi
+
+	## -2 in modo da rispettare l'eventuale contenuto del paragrafo, e inserire il
+	# subparagrafo appena dopo di esso quindi appena prima della chiusura del paragrafo.
+	# La chiusura del paragrafo consiste di 2 linee, la </paragraph> e la <!-- end 'Id del paragrafo' -->
+#echo $leggoNumberLine -1| bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+#echo $leggoNumberLine-2| bc > /tmp/xmluxe-numberLineMinusMinus
+
+
+#	fi
+
+			
+leggoMinus=$(cat /tmp/xmluxe-numberLineMinus1)
+
+leggoMinusMinus=$(cat /tmp/xmluxe-numberLineMinusMinus)
+
+echo "$leggoMinus;GdGZZ" > /tmp/xmluxe-precommand
+
+###### elimino il <<;>> che ho usato prima come separatore
+echo ":s/\;\(.*\)/\1/g
+ZZ" > /tmp/xmluxe-delPointVirgo
+
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+### elimino tutto ciò che è al di sotto della riga $leggoNumerLine
+
+## backup file originale
+cp $targetFile.lmx /tmp/xmluxe-pre
+
+vim -s /tmp/xmluxe-precommand /tmp/xmluxe-pre
+
+### appendo a /tmp/pre
+leggoItem="$(cat /tmp/xmluxe-itemITEM)"
+
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert title (at line n. 3), and possible content (starting from line n. 4)
+of the item to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<$leggoItem ID=\"$leggoIDToAdd\">$leggoW
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<$leggoItem ID=\"$leggoIDToAdd\">xmluxe: Add title to $leggoItem please
+
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+		fi
+
+########### II parte: Mi posiziono sulla I riga ed elimino tutto ciò che 
+### è al di sotto di essa ma fino alla riga $leggoNumerLine
+
+cp $targetFile.lmx /tmp/xmluxe-post
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+
+echo "1G$leggoMinusMinus;ddZZ" > /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-commandPost1 /tmp/xmluxe-post
+
+cat /tmp/xmluxe-pre /tmp/xmluxe-post > $targetFile.lmx
+
+else
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine+1| bc > /tmp/xmluxe-numberLinePlus1
+
+leggoAggiunta=$(cat /tmp/xmluxe-numberLinePlus1)
+
+echo "$leggoAggiunta;GdGZZ" > /tmp/xmluxe-precommand
+
+###### elimino il <<;>> che ho usato prima come separatore
+echo ":s/\;\(.*\)/\1/g
+ZZ" > /tmp/xmluxe-delPointVirgo
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+### elimino tutto ciò che è al di sotto della riga $leggoNumerLine
+
+## backup file originale
+cp $targetFile.lmx /tmp/xmluxe-pre
+
+vim -s /tmp/xmluxe-precommand /tmp/xmluxe-pre
+
+### appendo a /tmp/pre
+leggoItem="$(cat /tmp/xmluxe-itemITEM)"
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert title (at line n. 3), and possible content (starting from line n. 4)
+of the item to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<$leggoItem ID=\"$leggoIDToAdd\">$leggoW
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<$leggoItem ID=\"$leggoIDToAdd\">xmluxe: Add title to $leggoItem please
+
+</$leggoItem>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+		fi
+
+
+########### II parte: Mi posiziono sulla I riga ed elimino tutto ciò che 
+### è al di sotto di essa ma fino alla riga $leggoNumerLine, quindi compreso <<%%BeginPageSsetup>>
+
+cp $targetFile.lmx /tmp/xmluxe-post
+
+echo "1G$leggoNumberLine;ddZZ" > /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-commandPost1 /tmp/xmluxe-post
+
+cat /tmp/xmluxe-pre /tmp/xmluxe-post > $targetFile.lmx
+
+	fi
+
+echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoItem $leggoIDToAdd added" > $targetFile.lmxe
+
+fi
+
+################# INIZIO SEZIONE LMXE, LMX
+
+	if test $leggoElementKind -eq 2
+
+	then
+		## l'elemento da aggiungere è una sezione
+                cat /tmp/xmluxe-elementToAdd | sed 's/'$leggoIdRoot'//g' > /tmp/xmluxe-idNumericLessRoot
+
+		idNumericLessRoot=$(cat /tmp/xmluxe-idNumericLessRoot)
+
+		cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f1,1 > /tmp/xmluxe-idNumericIPiece
+
+		idNumericIPiece="$(cat /tmp/xmluxe-idNumericIPiece)"
+
+		cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f2,2 > /tmp/xmluxe-idNumericIIPiece
+
+		idNumericIIPiece="$(cat /tmp/xmluxe-idNumericIIPiece)"
+
+		cat /tmp/xmluxe-idNumericLessRoot | cut -d. -f3,3 > /tmp/xmluxe-idNumericIIIPiece
+
+		idNumericIIIPiece="$(cat /tmp/xmluxe-idNumericIIIPiece)"
+
+		if test $idNumericIIIPiece -lt 10
+
+		then
+			echo 0$(echo $idNumericIIIPiece - 1 | bc) > /tmp/xmluxe-idNumericIIIPiecePrevious
+
+			leggoIdNumericPiecePreviousSeries="$(cat /tmp/xmluxe-idNumericIIIPiecePrevious)"
+
+			if test $leggoIdNumericPiecePreviousSeries == "00"
+			
+			then
+
+				echo "è il primo child" > /tmp/xmluxe-Ichild
+
+				idNumericPreviousPiece="$idNumericIIPiece"
+			
+			else
+	
+				idNumericPreviousPiece=$(cat /tmp/xmluxe-idNumericIIIPiecePrevious)
+
+					## verifico se l'id del capitolo che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$idNumericPreviousPiece$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$idNumericPreviousPiece doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+
+				fi
+
+				### chiusura IV if
+			fi
+
+
+		else
+
+                        echo $(echo $idNumericIIIPiece - 1 | bc) > /tmp/xmluxe-idNumericIIIPiecePrevious
+
+			leggoIdNumericPiecePreviousSeries="$(cat /tmp/xmluxe-idNumericIIIPiecePrevious)"
+
+			if test $leggoIdNumericPiecePreviousSeries == "0"
+			
+			then
+
+				echo "è il primo child" > /tmp/xmluxe-Ichild
+				
+				idNumericPreviousPiece="$idNumericIIPiece"
+				
+			else
+		
+				idNumericPreviousPiece=$(cat /tmp/xmluxe-idNumericIIIPiecePrevious)
+
+					## verifico se l'id del capitolo che l'utente vuole aggiungere ha un omologo precedente
+				grep "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$idNumericPreviousPiece$" /tmp/xmluxe-itemsEtIDs > /tmp/xmluxe-verificaEsistenzaPrevious
+
+				stat --format %s /tmp/xmluxe-verificaEsistenzaPrevious > /tmp/xmluxe-verificaEsistenzaPreviousBytes
+
+				leggoBytes=$(cat /tmp/xmluxe-verificaEsistenzaPreviousBytes)
+## IV if
+				if test $leggoBytes -eq 0
+
+				then
+				
+				clear
+
+				echo "$leggoIdRoot$idNumericIPiece.$idNumericIIPiece.$idNumericPreviousPiece doesn't exist, but you would like to add
+$leggoIDToAdd."
+
+				echo "Forced exit."
+
+				exit
+
+				fi
+
+				### chiusura IV if
+			fi
+
+		fi
+
+		## Appendo all'interno di un capitolo, ma non è obbligatorio avere un capitolo.
+			if [ -f /tmp/xmluxe-Ichild ]; then
+
+				## Verifico se esiste un capitolo
+
+				if [ -f /tmp/xmluxe-itemITEM ]; then
+
+			idNumericPrevious="$idNumericIPiece.$idNumericIIPiece"
+			
+			grep -n "<!-- end $leggoIdRoot$idNumericPrevious -->" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+				else
+	
+			grep -n "ID=\"$leggoIdRoot\"" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+			fi
+
+			## Non fare confusione tra I child e l'esistenza di ...-itemKeyOrValue, il I child si riferisce
+			## all'appartenza a uno specifico padre, mentre  ...-itemKeyOrValue si riferisce all'esistenza
+			## di un elemento 'section' all'interno di tutto il documento -- non all'interno di uno specifico padre --.
+			if [ ! -f /tmp/xmluxe-itemKeyOrValue ]; then
+
+	
+				echo "I Key or Value of an element" > /tmp/xmluxe-firstElementKeyOrValue
+
+			
+				### first section not of chapter but of the entire document
+
+			clear 
+
+			java /usr/local/lib/xmlux/java/xmluxe/matter/sectionFileWriter7.java
+
+			fi
+
+			else
+
+			idNumericPrevious="$idNumericIPiece.$idNumericIIPiece.$idNumericPreviousPiece"
+
+			grep -n "<!-- end $leggoIdRoot$idNumericPrevious -->" /tmp/xmluxe-css000 | cut -d: -f1 > /tmp/xmluxe-numberLine
+
+			fi
+
+			leggoNumberLine=$(cat /tmp/xmluxe-numberLine)
+
+		
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+if [ -f /tmp/xmluxe-Ichild ]; then
+
+	if [ -f /tmp/xmluxe-itemITEM ]; then
+
+	## -2 in modo da rispettare l'eventuale contenuto del paragrafo, e inserire il
+	# subparagrafo appena dopo di esso quindi appena prima della chiusura del paragrafo.
+	# La chiusura del paragrafo consiste di 2 linee, la </paragraph> e la <!-- end 'Id del paragrafo' -->
+echo $leggoNumberLine -1| bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine -2 | bc > /tmp/xmluxe-numberLineMinusMinus
+
+	else
+	
+	if [ ! -f /tmp/xmluxe-itemSinossi ]; then
+
+#	if [ -f /tmp/xmluxe-appendUnderRoot ]; then
+
+echo $leggoNumberLine +1 | bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine  > /tmp/xmluxe-numberLineMinusMinus
+
+else
+
+echo $leggoNumberLine +1 | bc > /tmp/xmluxe-numberLineMinus1
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine | bc > /tmp/xmluxe-numberLineMinusMinus
+
+	fi
+
+
+	fi
+
+
+	echo "esiste già un elemento Key or Value" > /dev/null
+
+leggoMinus=$(cat /tmp/xmluxe-numberLineMinus1)
+
+leggoMinusMinus=$(cat /tmp/xmluxe-numberLineMinusMinus)
+
+echo "$leggoMinus;GdGZZ" > /tmp/xmluxe-precommand
+
+###### elimino il <<;>> che ho usato prima come separatore
+echo ":s/\;\(.*\)/\1/g
+ZZ" > /tmp/xmluxe-delPointVirgo
+
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+### elimino tutto ciò che è al di sotto della riga $leggoNumerLine
+
+## backup file originale
+cp $targetFile.lmx /tmp/xmluxe-pre
+
+vim -s /tmp/xmluxe-precommand /tmp/xmluxe-pre
+
+### appendo a /tmp/pre
+#leggoItem="$(cat /tmp/xmluxe-itemKeyOrValue)"
+
+if [ -f /tmp/xmluxe-optionKey.lmx ]; then
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert title (at line n. 2) of the key to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<Key ID=\"$leggoIDToAdd\" name = \"Key $leggoIDToAdd\">$leggoW</Key>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<Key ID=\"$leggoIDToAdd\" name = \"Key $leggoIDToAdd\">xmluxe: Add title to Key please</Key>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+		fi
+
+	else
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert value (at line n. 2) of the Element Value to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<Value ID=\"$leggoIDToAdd\" name = \"Value $leggoIDToAdd\">$leggoW</Value>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<Value ID=\"$leggoIDToAdd\" name = \"Value $leggoIDToAdd\">xmluxe: Add title to Value please</Value>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+		fi
+
+fi
+########### II parte: Mi posiziono sulla I riga ed elimino tutto ciò che 
+### è al di sotto di essa ma fino alla riga $leggoNumerLine, quindi compreso <<%%BeginPageSsetup>>
+
+cp $targetFile.lmx /tmp/xmluxe-post
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+
+echo "1G$leggoMinusMinus;ddZZ" > /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-commandPost1 /tmp/xmluxe-post
+
+cat /tmp/xmluxe-pre /tmp/xmluxe-post > $targetFile.lmx
+
+else
+
+###### I parte: mi posiziono sulla riga $leggoNumberLine ed elimino tutto ciò che 
+##### è al di sotto di essa
+echo $leggoNumberLine+1| bc > /tmp/xmluxe-numberLinePlus1
+
+leggoAggiunta=$(cat /tmp/xmluxe-numberLinePlus1)
+
+echo "$leggoAggiunta;GdGZZ" > /tmp/xmluxe-precommand
+
+###### elimino il <<;>> che ho usato prima come separatore
+echo ":s/\;\(.*\)/\1/g
+ZZ" > /tmp/xmluxe-delPointVirgo
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-precommand
+
+### elimino tutto ciò che è al di sotto della riga $leggoNumerLine
+
+## backup file originale
+cp $targetFile.lmx /tmp/xmluxe-pre
+
+vim -s /tmp/xmluxe-precommand /tmp/xmluxe-pre
+
+### appendo a /tmp/pre
+#leggoItem="$(cat /tmp/xmluxe-itemKeyOrValue)"
+
+if [ -f /tmp/xmluxe-optionKey.lmx ]; then
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert title (at line n. 2) of the Key Element to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<Key ID=\"$leggoIDToAdd\" name = \"Key $leggoIDToAdd\">$leggoW</Key>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<Key ID=\"$leggoIDToAdd\" name = \"Key $leggoIDToAdd\">xmluxe: Add title to Key please</Key>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+	fi
+
+else
+
+	if [ -f /tmp/xmluxe-optionW.lmx ]; then
+
+		echo "Insert value (at line n. 2) of the Value Element to add. At the end save and exit.
+" >> /tmp/xmluxe-optionW.lmx
+
+			gvim -f /tmp/xmluxe-optionW.lmx
+
+			vim -s /usr/local/lib/xmlux/command-delFirstLine /tmp/xmluxe-optionW.lmx
+			
+			leggoW="$(cat /tmp/xmluxe-optionW.lmx)"
+
+			echo "
+<Value ID=\"$leggoIDToAdd\" name = \"Value $leggoIDToAdd\">$leggoW</Value>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+else
+
+		echo "
+<Value ID=\"$leggoIDToAdd\" name = \"Value $leggoIDToAdd\">xmluxe: Add title to Value please</Value>
+<!-- end $leggoIDToAdd -->
+" >> /tmp/xmluxe-pre
+
+
+	fi
+
+		fi
+
+########### II parte: Mi posiziono sulla I riga ed elimino tutto ciò che 
+### è al di sotto di essa ma fino alla riga $leggoNumerLine, quindi compreso <<%%BeginPageSsetup>>
+
+cp $targetFile.lmx /tmp/xmluxe-post
+
+echo "1G$leggoNumberLine;ddZZ" > /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-delPointVirgo /tmp/xmluxe-commandPost1
+
+vim -s /tmp/xmluxe-commandPost1 /tmp/xmluxe-post
+
+cat /tmp/xmluxe-pre /tmp/xmluxe-post > $targetFile.lmx
+
+	fi
+echo "
+$(date +"%Y-%m-%d-%H-%M")	$leggoItem $leggoIDToAdd added" > $targetFile.lmxe
+
+fi
+
+fi
+
+################################ FINE ADD ACTION
+
+################################ INIZIO REMOVE ACTION
+
+grep "remove" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionRemove
+
+stat --format %s /tmp/xmluxe-actionRemove > /tmp/xmluxe-actionRemoveBytes
+
+leggoBytes=$(cat /tmp/xmluxe-actionRemoveBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xmluxe-actionRemove | cut -d= -f2,2 | awk '$1 > 0 {print $1}' >  /tmp/xmluxe-idToRemove
+
+idToRemove="$(cat /tmp/xmluxe-idToRemove)"
+
+grep -n "ID=\"$idToRemove\"" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToRemoveBeginLine
+
+nLineBeginIdToRemove=$(cat /tmp/xmluxe-idToRemoveBeginLine)
+
+grep -n "<!-- end $idToRemove -->" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToRemoveEndLine
+
+nLineEndIdToRemove=$(cat /tmp/xmluxe-idToRemoveEndLine)
+
+linesToDelete=$(echo $nLineEndIdToRemove - $nLineBeginIdToRemove | bc)
+
+echo "$nLineBeginIdToRemove Gd$linesToDelete
+ZZ
+
+" | sed 's/ //g' > /tmp/xmluxe-blockToDelete
+
+
+vim -s /tmp/xmluxe-blockToDelete $targetFile.lmx
+
+	echo "
+$(date +"%Y-%m-%d-%H-%M")	$idToRemove removed" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+
+fi
+
+grep "^--jump" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionJump
+
+stat --format %s /tmp/xmluxe-actionJump > /tmp/xmluxe-actionJumpBytes
+
+leggoBytes=$(cat /tmp/xmluxe-actionJumpBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xmluxe-actionJump | cut -d= -f2,2 | awk '$1 > 0 {print $1}' >  /tmp/xmluxe-idToJump
+
+idToJump="$(cat /tmp/xmluxe-idToJump)"
+
+grep -n "ID=\"$idToJump\"" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToJumpBeginLine
+
+nLineBeginIdToJump=$(cat /tmp/xmluxe-idToJumpBeginLine)
+
+gvim +''$nLineBeginIdToJump'|norm! zt' $targetFile.lmx 
+
+fi
+
+######### Select id block in read-only mode
+
+
+grep "selectR" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionSelectR
+
+stat --format %s /tmp/xmluxe-actionSelectR > /tmp/xmluxe-actionSelectRBytes
+
+leggoBytes=$(cat /tmp/xmluxe-actionSelectRBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xmluxe-actionSelectR | cut -d= -f2,2 | awk '$1 > 0 {print $1}' >  /tmp/xmluxe-idToSelectR
+
+idToSelectR="$(cat /tmp/xmluxe-idToSelectR)"
+
+grep -n "ID=\"$idToSelectR\"" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToSelectRBeginLine
+
+nLineBeginIdToSelectR=$(cat /tmp/xmluxe-idToSelectRBeginLine)
+
+grep -n "<!-- end $idToSelectR -->" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToSelectREndLine
+
+
+####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
+nLineEndIdToSelectR=$(cat /tmp/xmluxe-idToSelectREndLine)
+
+echo $nLineEndIdToSelectR - $nLineBeginIdToSelectR | bc > /tmp/xmluxe-linesToSelect
+
+linesToSelectR=$(cat /tmp/xmluxe-linesToSelect)
+
+linesToSelectRPlusComment=$(($linesToSelectR + 1))
+
+#echo "$nLineBeginIdToSelectR Gd$linesToSelectR
+#ZZ
+
+#" | sed 's/ //g' > /tmp/xmluxe-blockToSelectR
+
+
+#vim -s /tmp/xmluxe-blockToSelectR $targetFile.lmx
+
+#### Fine 'se dovessi rimuovere il blocco'.
+
+### inizio modifica rispetto a remove
+cp $targetFile.lmx /tmp/xmluxe-bloccoSelezionato.lmx
+
+## Rimuovo dalla I riga all'inizio del blocco da selezionare
+
+echo $(($nLineBeginIdToSelectR - 2)) > /tmp/xmluxe-realFirstLine
+
+realFirstLine=$(cat /tmp/xmluxe-realFirstLine)
+
+echo  "1 Gd$realFirstLine
+ZZ
+
+" | sed 's/ //g' > /tmp/xmluxe-command01-bloccoSelezionato
+
+
+vim -s /tmp/xmluxe-command01-bloccoSelezionato /tmp/xmluxe-bloccoSelezionato.lmx
+
+#grep -n "<!-- end $idToSelectR -->" /tmp/xmluxe-bloccoSelezionato.lmx | cut -d: -f1,1 > /tmp/xmluxe-idToSelectREndLine
+
+
+
+#echo " "
+#echo "
+#Prima linea da selezionare:
+#$nLineBeginIdToSelectR testing
+#real $realFirstLine testing
+
+#Linee da selezionare:
+#$linesToSelectR testing
+#con commento finale $linesToSelectRPlusComment testing
+
+#/tmp/xmluxe-bloccoSelezionato.lmx testing
+#" 
+
+#read -p "testing 6392" EnterNull
+
+
+## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
+echo  "$linesToSelectR GdG
+ZZ
+
+" | sed 's/ //g' > /tmp/xmluxe-command02-bloccoSelezionato
+
+vim -s /tmp/xmluxe-command02-bloccoSelezionato /tmp/xmluxe-bloccoSelezionato.lmx
+
+gview -f /tmp/xmluxe-bloccoSelezionato.lmx
+
+
+## fine modifica rispetto a remove
+
+	echo "
+$(date +"%Y-%m-%d-%H-%M")	$idToSelectR selected in read-only mode" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+
+#read -p "testing 6421" EnterNull
+
+fi
+
+
+######### Select id block in write mode
+
+grep "selectW" /tmp/xmluxePseudoOptions/* > /tmp/xmluxe-actionSelectW
+
+stat --format %s /tmp/xmluxe-actionSelectW > /tmp/xmluxe-actionSelectWBytes
+
+leggoBytes=$(cat /tmp/xmluxe-actionSelectWBytes)
+
+if test $leggoBytes -gt 0
+
+then
+	cat /tmp/xmluxe-actionSelectW | cut -d= -f2,2 | awk '$1 > 0 {print $1}' >  /tmp/xmluxe-idToSelectW
+
+idToSelectW="$(cat /tmp/xmluxe-idToSelectW)"
+
+grep -n "ID=\"$idToSelectW\"" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToSelectWBeginLine
+
+nLineBeginIdToSelectW=$(cat /tmp/xmluxe-idToSelectWBeginLine)
+
+grep -n "<!-- end $idToSelectW -->" /tmp/xmluxe-css000 | cut -d: -f1,1 > /tmp/xmluxe-idToSelectWEndLine
+
+
+####### Se dovessi rimuovere il blocco, invece io devo selezionarlo
+nLineEndIdToSelectW=$(cat /tmp/xmluxe-idToSelectWEndLine)
+
+echo $nLineEndIdToSelectW - $nLineBeginIdToSelectW | bc > /tmp/xmluxe-linesToSelect
+
+linesToSelectW=$(cat /tmp/xmluxe-linesToSelect)
+
+linesToSelectWPlusComment=$(($linesToSelectW + 1))
+
+#echo "$nLineBeginIdToSelectW Gd$linesToSelectW
+#ZZ
+
+#" | sed 's/ //g' > /tmp/xmluxe-blockToSelectW
+
+
+#vim -s /tmp/xmluxe-blockToSelectW $targetFile.lmx
+
+#### Fine 'se dovessi rimuovere il blocco'.
+
+### inizio modifica rispetto a remove
+cp $targetFile.lmx /tmp/xmluxe-bloccoSelezionato.lmx
+
+## Rimuovo dalla I riga all'inizio del blocco da selezionare
+
+echo $(($nLineBeginIdToSelectW - 2)) > /tmp/xmluxe-realFirstLine
+
+realFirstLine=$(cat /tmp/xmluxe-realFirstLine)
+
+echo  "1 Gd$realFirstLine
+ZZ
+
+" | sed 's/ //g' > /tmp/xmluxe-command01-bloccoSelezionato
+
+
+vim -s /tmp/xmluxe-command01-bloccoSelezionato /tmp/xmluxe-bloccoSelezionato.lmx
+
+#grep -n "<!-- end $idToSelectW -->" /tmp/xmluxe-bloccoSelezionato.lmx | cut -d: -f1,1 > /tmp/xmluxe-idToSelectWEndLine
+
+
+
+#echo " "
+#echo "
+#Prima linea da selezionare:
+#$nLineBeginIdToSelectW testing
+#real $realFirstLine testing
+
+#Linee da selezionare:
+#$linesToSelectW testing
+#con commento finale $linesToSelectWPlusComment testing
+
+#/tmp/xmluxe-bloccoSelezionato.lmx testing
+#" 
+
+#read -p "testing 6392" EnterNull
+
+
+## Rimuovo dall'ultima riga del blocco da selezionare, all'ultima riga del contenuto originale
+echo  "$linesToSelectW GdG
+ZZ
+
+" | sed 's/ //g' > /tmp/xmluxe-command02-bloccoSelezionato
+
+vim -s /tmp/xmluxe-command02-bloccoSelezionato /tmp/xmluxe-bloccoSelezionato.lmx
+
+
+gvim -f /tmp/xmluxe-bloccoSelezionato.lmx
+
+
+realFirstLine=$(($nLineBeginIdToSelectW - 1))
+
+#cat $targetFile.lmx | sed -n '1,'$nLineBeginIdToSelectW'p' > /tmp/xmluxe-targetFile-blocco_01.lmx
+
+cat $targetFile.lmx | sed -n '1,'$realFirstLine'p' > /tmp/xmluxe-targetFile-blocco_01.lmx
+
+awk '{ nlines++;  print nlines }' $targetFile.lmx | tail -n1 > /tmp/xmluxe-nLines
+
+nLines=$(cat /tmp/xmluxe-nLines)
+
+
+cat $targetFile.lmx | sed -n ''$nLineEndIdToSelectW','$nLines'p' > /tmp/xmluxe-targetFile-blocco_03.lmx
+
+
+## composizione
+
+cat /tmp/xmluxe-targetFile-blocco_01.lmx /tmp/xmluxe-bloccoSelezionato.lmx > /tmp/xmluxe-targetFile-blocco_02.lmx
+
+cat /tmp/xmluxe-targetFile-blocco_02.lmx /tmp/xmluxe-targetFile-blocco_03.lmx > /tmp/xmluxe-targetFile-blocco_04.lmx
+
+cp /tmp/xmluxe-targetFile-blocco_04.lmx $targetFile.lmx
+
+
+	echo "
+$(date +"%Y-%m-%d-%H-%M")	$idToSelectW selected in write mode" >> $targetFile.lmxe
+
+echo " " >> $targetFile.lmxe
+
+fi
+
+rm -fr /tmp/xmluxe*
+
+
+exit
+

@@ -1,10 +1,24 @@
-Allo stato attuale matter-book e brief-book, per xmluxe, sono uguali.
+* Allo stato attuale matter-book e brief-book, per xmluxe, sono uguali.
 Tuttavia, ho separato i due, per lasciare la possibilità in futuro
 di differenziarli eventualmente -- per ora non occorre e non credo 
 lo farò in futuro, ma non mi è costato nulla predisporre il tutto --.
 
-Nei commenti dei codici article e data ci sono dei retaggi
+* Nei commenti dei codici article e data ci sono dei retaggi
 ininfluenti delle document class book, in quanto ho adattato gli altri
 sui book.
 
+* L'ordine di scomporre il codice in script presenti in xmluxeScripts, invece
+di avere un unico file grandissimo "disordinato" in xmluxeDocumentClass,
+l'ho eseguito dopo un po' di tempo dalla concezione del codice cmq 
+funzionante anche in unico file. 
+Anzi sicuramente funzionante quello in un unico file, in  quanto quello
+scomposto non l'ho testato; ma non dovrebbe esserci problemi
+a meno di miei errori di distrazione.
+
+Tuttavia, la versione passata, quella con il codice non scomposto totalmente
+in script ma presentato per la maggior parte in un unico file---è presente in
+xmluxeDocumentClass-unicoFile/
+
+Invece, per xtextus, ho lasciato la versione passata: la maggior parte del codice
+in un unico file. Questo, perché non ho tempo.
 

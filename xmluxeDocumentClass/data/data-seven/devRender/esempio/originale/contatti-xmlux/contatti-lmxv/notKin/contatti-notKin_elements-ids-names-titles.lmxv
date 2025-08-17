@@ -1,0 +1,57 @@
+<!-- (not kin) Elements, IDs, names and titles tree
+radix a "contatti" Contatti
+gradusI a01 "parenti" Parenti
+gradusI a02 "colleghi" Colleghi
+gradusII a01.01 "mamma" Mamma
+gradusII a01.02 "pater" Pater
+gradusII a01.03 "sorella" Sorella
+gradusII a02.01 "aa" AA
+gradusIII a01.01.01 "recapiti telefonici mamma" Recapiti telefonici mamma
+gradusIII a01.01.02 "indirizzi mamma" Indirizzi mamma
+gradusIII a01.02.01 "recapiti telefonici pater" Recapiti telefonici pater
+gradusIII a01.02.02 "indirizzi pater" Indirizzi pater
+gradusIII a01.03.01 "recapiti telefonici sorella" Recapiti telefonici sorella
+gradusIII a01.03.02 "indirizzi sorella" Indirizzi sorella
+gradusIII a02.01.01 "recapiti telefonici aa" Recapiti telefonici aa
+gradusIII a02.01.02 "indirizzi aa" Indirizzi aa
+gradusIV a01.01.01.01 "mobili mamma" Mobili mamma
+gradusIV a01.01.01.02 "fissi mamma" Fissi mamma
+gradusIV a01.01.02.01 "Fisici mamma" Fisici
+gradusIV a01.01.02.03 "web mamma" Web
+gradusIV a01.02.01.01 "mobili pater" Mobili pater
+gradusIV a01.02.01.02 "fissi pater" Fissi pater
+gradusIV a01.02.02.01 "Fisici pater" Fisici
+gradusIV a01.02.02.03 "web pater" Web
+gradusIV a01.03.01.01 "mobili sorella" Mobili sorella
+gradusIV a01.03.01.02 "fissi sorella" Fissi sorella
+gradusIV a01.03.02.01 "Fisici sorella" Fisici
+gradusIV a01.03.02.03 "web sorella" Web
+gradusIV a02.01.01.01 "mobili aa" Mobili aa
+gradusIV a02.01.01.02 "fissi aa" Fissi aa
+gradusIV a02.01.02.01 "Fisici aa" Fisici
+gradusIV a02.01.02.03 "web aa" Web
+gradusV a01.01.01.01.01 "cellulare mamma" 320 47 43 057
+gradusV a01.01.01.02.01 "fisso casa mamma" 0831 849101
+gradusV a01.01.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.01.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+gradusV a01.01.02.03.01 "gmail mamma"  cosimaribezzo@gmail.com
+gradusV a01.01.02.03.02 "libero mamma"  mimmaribezzo@libero.it
+gradusV a01.02.01.01.01 "cellulare pater" 338 12 82 755
+gradusV a01.02.01.02.01 "fisso casa pater" 0831 849101
+gradusV a01.02.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.02.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+gradusV a01.02.02.03.01 "gmail pater"  floro.fantini@gmail.com
+gradusV a01.02.02.03.02 "pec pater"  floro.fantini@pec.it
+gradusV a01.03.01.01.01 "cellulare sorella" 328 35 25 357
+gradusV a01.03.01.02.01 "fisso casa sorella" 081 18 36 1308
+gradusV a01.03.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+gradusV a01.03.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+gradusV a01.03.02.03.01 "gmail sorella" g.fantini@gmail.com
+gradusV a01.03.02.03.02 "pec sorella" 
+gradusV a02.01.01.01.01 "cellulare aa" xxx xx xx xx
+gradusV a02.01.01.02.01 "fisso casa aa" yyyy yyyyyy
+gradusV a02.01.02.01.01 "domicilio mamma" domicilio: BB
+gradusV a02.01.02.01.02 "residenza mamma" residenza: CC
+gradusV a02.01.02.03.01 "gmail aa" w@w.com
+gradusV a02.01.02.03.02 "pec aa" 
+end Elements, IDs, names and titles tree (not kin) -->

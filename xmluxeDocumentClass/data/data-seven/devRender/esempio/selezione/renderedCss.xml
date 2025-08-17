@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="renderedCss.css"?>
+<!DOCTYPE a SYSTEM "renderedCss.dtd">
+<!-- septem gradus data document class -->
+
+<!-- begin radix -->
+<radix>
+<gradusI>
+<gradusII>
+<gradusIII ID="a01.01.02" name="indirizzi mamma">Indirizzi mamma
+
+<gradusIV ID="a01.01.02.01" name="fisici mamma">Indirizzi fisici mamma
+<gradusV ID="a01.01.02.01.01" name="domicilio mamma">domicilio: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.01.02.01.01 -->
+<gradusV ID="a01.01.02.01.02" name="residenza mamma">residenza: Via Torneo Dei Rioni, 43
+</gradusV>
+<!-- end a01.01.02.01.02 -->
+</gradusIV>
+<!-- end a01.01.02.01 -->
+
+<gradusIV ID="a01.01.02.03" name="web mamma">Indirizzi Web mamma
+<gradusV ID="a01.01.02.03.01" name="gmail mamma">cosimaribezzo@gmail.com
+</gradusV>
+<!-- end a01.01.02.03.01 -->
+<gradusV ID="a01.01.02.03.02" name="libero mamma">mimmaribezzo@libero.it
+</gradusV>
+<!-- end a01.01.02.03.02 -->
+</gradusIV>
+<!-- end a01.01.02.03 -->
+
+</gradusIII>
+</gradusII>
+</gradusI>
+</radix>

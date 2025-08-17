@@ -1,0 +1,168 @@
+<!-- Root = a= titulus = title = radix = radix a -->
+<!ELEMENT radix ANY>
+<!-- All that is in "gradusI" = gradusI = a01 -->
+<!ELEMENT gradusI (#PCDATA)>
+<!ATTLIST gradusI ID CDATA "a01">
+<!-- All that is in "gradusI" = gradusI = a02 -->
+<!ELEMENT gradusI (#PCDATA)>
+<!ATTLIST gradusI ID CDATA "a02">
+<!-- All that is under "gradusII" = gradusII = a01.01 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+)>
+<!ATTLIST gradusII ID CDATA "a01.01">
+<!-- All that is under "gradusII" = gradusII = a01.02 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+)>
+<!ATTLIST gradusII ID CDATA "a01.02">
+<!-- All that is under "gradusII" = gradusII = a01.03 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+)>
+<!ATTLIST gradusII ID CDATA "a01.03">
+<!-- All that is under "gradusII" = gradusII = a02.01 -->
+<!ELEMENT gradusII (gradusIII+, gradusIV+, gradusV+)>
+<!ATTLIST gradusII ID CDATA "a02.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.01.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.01.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.01.02 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.01.02">
+<!-- All that is under "gradusIII" = gradusIII = a01.02.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.02.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.02.02 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.02.02">
+<!-- All that is under "gradusIII" = gradusIII = a01.03.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.03.01">
+<!-- All that is under "gradusIII" = gradusIII = a01.03.02 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a01.03.02">
+<!-- All that is under "gradusIII" = gradusIII = a02.01.01 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a02.01.01">
+<!-- All that is under "gradusIII" = gradusIII = a02.01.02 -->
+<!ELEMENT gradusIII (gradusIV+, gradusV+)>
+<!ATTLIST gradusIII ID CDATA "a02.01.02">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.01.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.01.02 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.01.02">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.02.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.02.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.01.02.03 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.01.02.03">
+<!-- All that is under "gradusIV" = gradusIV = a01.02.01.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.02.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.02.01.02 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.02.01.02">
+<!-- All that is under "gradusIV" = gradusIV = a01.02.02.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.02.02.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.02.02.03 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.02.02.03">
+<!-- All that is under "gradusIV" = gradusIV = a01.03.01.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.03.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.03.01.02 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.03.01.02">
+<!-- All that is under "gradusIV" = gradusIV = a01.03.02.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.03.02.01">
+<!-- All that is under "gradusIV" = gradusIV = a01.03.02.03 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a01.03.02.03">
+<!-- All that is under "gradusIV" = gradusIV = a02.01.01.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a02.01.01.01">
+<!-- All that is under "gradusIV" = gradusIV = a02.01.01.02 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a02.01.01.02">
+<!-- All that is under "gradusIV" = gradusIV = a02.01.02.01 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a02.01.02.01">
+<!-- All that is under "gradusIV" = gradusIV = a02.01.02.03 -->
+<!ELEMENT gradusIV (gradusV+)>
+<!ATTLIST gradusIV ID CDATA "a02.01.02.03">
+<!-- All that is in "gradusV" = gradusV = a01.01.01.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.01.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.01.01.02.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.01.02.01">
+<!-- All that is in "gradusV" = gradusV = a01.01.02.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.02.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.01.02.01.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.02.01.02">
+<!-- All that is in "gradusV" = gradusV = a01.01.02.03.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.02.03.01">
+<!-- All that is in "gradusV" = gradusV = a01.01.02.03.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.01.02.03.02">
+<!-- All that is in "gradusV" = gradusV = a01.02.01.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.01.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.02.01.02.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.01.02.01">
+<!-- All that is in "gradusV" = gradusV = a01.02.02.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.02.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.02.02.01.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.02.01.02">
+<!-- All that is in "gradusV" = gradusV = a01.02.02.03.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.02.03.01">
+<!-- All that is in "gradusV" = gradusV = a01.02.02.03.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.02.02.03.02">
+<!-- All that is in "gradusV" = gradusV = a01.03.01.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.01.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.03.01.02.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.01.02.01">
+<!-- All that is in "gradusV" = gradusV = a01.03.02.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.02.01.01">
+<!-- All that is in "gradusV" = gradusV = a01.03.02.01.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.02.01.02">
+<!-- All that is in "gradusV" = gradusV = a01.03.02.03.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.02.03.01">
+<!-- All that is in "gradusV" = gradusV = a01.03.02.03.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a01.03.02.03.02">
+<!-- All that is in "gradusV" = gradusV = a02.01.01.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.01.01.01">
+<!-- All that is in "gradusV" = gradusV = a02.01.01.02.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.01.02.01">
+<!-- All that is in "gradusV" = gradusV = a02.01.02.01.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.02.01.01">
+<!-- All that is in "gradusV" = gradusV = a02.01.02.01.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.02.01.02">
+<!-- All that is in "gradusV" = gradusV = a02.01.02.03.01 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.02.03.01">
+<!-- All that is in "gradusV" = gradusV = a02.01.02.03.02 -->
+<!ELEMENT gradusV (#PCDATA)>
+<!ATTLIST gradusV ID CDATA "a02.01.02.03.02">
+ 
+<!-- Constants -->
+ 
+ 

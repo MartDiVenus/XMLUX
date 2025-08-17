@@ -1,0 +1,57 @@
+<!-- IDs, names and titles tree
+a "contatti" Contatti
+a01 "parenti" Parenti
+a01.01 "mamma" Mamma
+a01.01.01 "recapiti telefonici mamma" Recapiti telefonici mamma
+a01.01.01.01 "mobili mamma" Mobili mamma
+a01.01.01.01.01 "cellulare mamma" 320 47 43 057
+a01.01.01.02 "fissi mamma" Fissi mamma
+a01.01.01.02.01 "fisso casa mamma" 0831 849101
+a01.01.02 "indirizzi mamma" Indirizzi mamma
+a01.01.02.01 "Fisici" Fisici
+a01.01.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.01.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.01.02.03 "web" Web
+a01.01.02.03.01 "gmail" cosimaribezzo@gmail.com
+a01.01.02.03.02 "libero" mimmaribezzo@libero.it
+a01.02 "pater" Pater
+a01.02.01 "recapiti telefonici pater" Recapiti telefonici pater
+a01.02.01.01 "mobili pater" Mobili pater
+a01.02.01.01.01 "cellulare pater" 338 12 82 755
+a01.02.01.02 "fissi pater" Fissi pater
+a01.02.01.02.01 "fisso casa pater" 0831 849101
+a01.02.02 "indirizzi pater" Indirizzi pater
+a01.02.02.01 "Fisici" Fisici
+a01.02.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.02.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.02.02.03 "web" Web
+a01.02.02.03.01 "gmail" floro.fantini@gmail.com
+a01.02.02.03.02 "pec" floro.fantini@pec.it
+a01.03 "sorella" Sorella
+a01.03.01 "recapiti telefonici sorella" Recapiti telefonici sorella
+a01.03.01.01 "mobili sorella" Mobili sorella
+a01.03.01.01.01 "cellulare sorella" 328 35 25 357
+a01.03.01.02 "fissi sorella" Fissi sorella
+a01.03.01.02.01 "fisso casa sorella" 081 18 36 1308
+a01.03.02 "indirizzi sorella" Indirizzi sorella
+a01.03.02.01 "Fisici" Fisici
+a01.03.02.01.01 "domicilio mamma" domicilio: Via Torneo Dei Rioni, 43
+a01.03.02.01.02 "residenza mamma" residenza: Via Torneo Dei Rioni, 43
+a01.03.02.03 "web" Web
+a01.03.02.03.01 "gmail" g.fantini@gmail.com
+a01.03.02.03.02 "pec" 
+a02 "colleghi" Colleghi
+a02.01 "aa" AA
+a02.01.01 "recapiti telefonici aa" Recapiti telefonici aa
+a02.01.01.01 "mobili aa" Mobili aa
+a02.01.01.01.01 "cellulare aa" xxx xx xx xx
+a02.01.01.02 "fissi aa" Fissi aa
+a02.01.01.02.01 "fisso casa aa" yyyy yyyyyy
+a02.01.02 "indirizzi aa" Indirizzi aa
+a02.01.02.01 "Fisici" Fisici
+a02.01.02.01.01 "domicilio mamma" domicilio: BB
+a02.01.02.01.02 "residenza mamma" residenza: CC
+a02.01.02.03 "web" Web
+a02.01.02.03.01 "gmail" w@w.com
+a02.01.02.03.02 "pec" 
+end IDs, names and titles tree -->

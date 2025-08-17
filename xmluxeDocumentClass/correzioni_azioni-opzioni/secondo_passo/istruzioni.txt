@@ -1,0 +1,42 @@
+cp SOSTBRIEFMATTER.vi ~/.vim/vimScript/xmlux/
+
+cp SOSTDATASEVEN.vim ~/.vim/vimScript/xmlux/
+
+cp SOSTCATEGORYPIE.vim ~/.vim/vimScript/xmlux/
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/brief/brief-article/xmluxeBrief-article.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTBRIEFMATTER.vim" -c ":cal SOSTBRIEFMATTER#SOSTBRIEFMATTER()" $targetFile -c :w -c :q
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/matter/matter-article/xmluxeMatter-article.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTBRIEFMATTER.vim" -c ":cal SOSTBRIEFMATTER#SOSTBRIEFMATTER()" $targetFile -c :w -c :q
+
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/brief/brief-book/xmluxeBrief-book.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTBRIEFMATTER.vim" -c ":cal SOSTBRIEFMATTER#SOSTBRIEFMATTER()" $targetFile -c :w -c :q
+
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/matter/matter-book/xmluxeMatter-book.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTBRIEFMATTER.vim" -c ":cal SOSTBRIEFMATTER#SOSTBRIEFMATTER()" $targetFile -c :w -c :q
+
+
+## già pronto
+#targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/data/data-seven/xmluxeData-seven.sh"
+#vim -c ":runtime! vimScript/xmlux/SOSTDATASEVEN.vim" -c ":cal SOSTDATASEVEN#SOSTDATASEVEN()" $targetFile -c :w -c :q
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/data/categoryDataset/xmluxeData-categoryDataset01.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTCATEGORYPIE.vim" -c ":cal SOSTCATEGORYPIE#SOSTCATEGORYPIE()" $targetFile -c :w -c :q
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/data/categoryDataset/xmluxeData-categoryDataset02.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTCATEGORYPIE.vim" -c ":cal SOSTCATEGORYPIE#SOSTCATEGORYPIE()" $targetFile -c :w -c :q
+
+
+targetFile="/usr/local/lib/xmlux/xmluxeDocumentClass/data/pieDataset/xmluxeData-pieDataset.sh"
+vim -c ":runtime! vimScript/xmlux/SOSTCATEGORYPIE.vim" -c ":cal SOSTCATEGORYPIE#SOSTCATEGORYPIE()" $targetFile -c :w -c :q
+
+
