@@ -1,0 +1,34 @@
+<!-- (not kin) Elements, IDs and titles tree
+radix a Title
+synopsis a00 Synopsis
+section a01 Section a01
+section a02 xmluxe: aZeroTre
+section a03 xmluxe: Add title to section please
+subsection a01.01 Subsection a01.01
+subsection a01.02 xmluxe: Add title to subsection please
+subsection a03.01 xmluxe: Add title to subsection please
+subsection a03.02 xmluxe: Add title to subsection please
+subsection a03.03 xmluxe: Add title to subsection please
+subsubsection a01.01.01 Subsubsection a01.01.01
+subsubsection a03.02.01 xmluxe: Add title to subsubsection please
+subsubsection a03.02.02 xmluxe: Add title to subsubsection please
+subsubsection a03.02.03  sottosottosezione aZeroTre.zeroDue.zeroTre
+subsubsection a03.02.04  sottosottosezione aZeroTre.zeroDue.zeroTre
+paragraph a01.01.01.01 Paragraph a01.01.01.01
+paragraph a03.02.02.01 xmluxe: Add title to paragraph please
+paragraph a03.02.02.02 xmluxe: Add title to paragraph please
+paragraph a03.02.02.03 past aZeroTre.zeroDue.zeroDue.zeroTre
+subparagraph a01.01.01.01.01 Subparagraph a01.01.01.01.01
+subparagraph a03.02.02.02.01 xmluxe: Add title to subparagraph please
+subparagraph a03.02.02.02.02 xmluxe: Add title to subparagraph please
+subparagraph a03.02.02.02.03 xmluxe: Add title to subparagraph please
+saxum a01.01.01.01.01.01 Saxum a01.01.01.01.01.01
+saxum a03.02.02.02.02.01 xmluxe: Add title to saxum please
+saxum a03.02.02.02.02.02 xmluxe: Add title to saxum please
+saxum a03.02.02.02.02.03 xmluxe: Add title to saxum please
+subsaxum a01.01.01.01.01.01.01 Subsaxum a01.01.01.01.01.01.01
+subsaxum a03.02.02.02.02.01.01 xmluxe: Add title to subsaxum please
+subsaxum a03.02.02.02.02.02.01 xmluxe: Add title to subsaxum please
+subsaxum a03.02.02.02.02.02.02 xmluxe: Add title to subsaxum please
+subsaxum a03.02.02.02.02.02.03 xmluxe: Add title to subsaxum please
+end elements, IDs and titles tree (not kin) -->

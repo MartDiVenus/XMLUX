@@ -1,0 +1,32 @@
+<!-- IDs and titles tree
+a Title
+a00 Synopsis
+a01 Section a01
+a01.01 Subsection a01.01
+a01.01.01 Subsubsection a01.01.01
+a01.01.01.01 Paragraph a01.01.01.01
+a01.01.01.01.01 Subparagraph a01.01.01.01.01
+a01.01.01.01.01.01 Saxum a01.01.01.01.01.01
+a01.01.01.01.01.01.01 Subsaxum a01.01.01.01.01.01.01
+a01.02 PROVA past a0Uno.0Tre
+a03 PROVA past a03
+a03.01 xmluxe: Add title to subsection please
+a03.02 xmluxe: Add title to subsection please
+a03.02.01 xmluxe: Add title to subsubsection please
+a03.02.02 xmluxe: Add title to subsubsection please
+a03.02.02.01 xmluxe: Add title to paragraph please
+a03.02.02.02 xmluxe: Add title to paragraph please
+a03.02.02.02.01 xmluxe: Add title to subparagraph please
+a03.02.02.02.02 xmluxe: Add title to subparagraph please
+a03.02.02.02.02.01 xmluxe: Add title to saxum please
+a03.02.02.02.02.01.01 xmluxe: Add title to subsaxum please
+a03.02.02.02.02.02 xmluxe: Add title to saxum please
+a03.02.02.02.02.02.01 xmluxe: Add title to subsaxum please
+a03.02.02.02.02.02.02 PROVA SUBSAXUM past a0Tre.0Due.0Due.0Due.0Due.0Due.0Tre
+a03.02.02.02.02.03 xmluxe: Add title to saxum please
+a03.02.02.02.03 xmluxe: Add title to subparagraph please
+a03.02.02.03 past aZeroTre.zeroDue.zeroDue.zeroTre
+a03.02.03 sottosottosezione aZeroTre.zeroDue.zeroTre
+a03.02.04 sottosottosezione aZeroTre.zeroDue.zeroTre
+a03.03 xmluxe: Add title to subsection please
+end IDs and titles tree -->

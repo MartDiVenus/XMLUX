@@ -1,0 +1,10 @@
+Non ricordo se parse per matter è differente dalle altre document class,
+forse lo è per via del counter.
+Per stare sicuro, creo uno script dedicato alle document class di matter.
+
+<<Non ricordo>> perché l'ordine di scomporre il codice in script, invece
+di avere un unico file grandissimo ind xmluxeDocumentClass, l'ho eseguito
+dopo un po' di tempo dalla concezione del codice cmq funzionante anche in
+unico file. Anzi sicuramente funzionante quello in un unico file, in 
+quanto quello scomposto non l'ho testato; ma non dovrebbe esserci problemi
+a meno di miei errori di distrazione.

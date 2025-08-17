@@ -1,0 +1,8 @@
+In data-seven e pieDataset, invece di utilizzare seq,
+come faccio per le altre document class,
+creo script al volo. Il risultato è il medesimo,
+solo che non utilizzando seq spendo forse qualche millisecondo
+in più. Fino a oggi non ho riscontrato problemi di
+stabilità con seq, nemmeno in codici pesanti; però
+mi riservo questa alternativa, ossia creando in data-seven
+e pieDataset script al volo sicuramente stabili sempre.
