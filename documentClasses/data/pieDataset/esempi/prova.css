@@ -1,0 +1,66 @@
+/* Root = a =  = titulus */
+PieDataset { background-color: rgb(54,69,79); color: rgb(170,170,170); text-align: center; font-size: 43pt; font-weight: bold;
+font-family: Roboto, Roboto, sans-serif }
+/** 'Item' = Item a01*/
+Item { display: block; font-size: 23pt; font-weight: bold; font-family: Roboto, "Roboto", sans-serif;
+margin-left: 300px; margin-right: 300px; padding-top: 3ex; padding-bottom: 3ex; padding-left: 2ex; padding-right: 2ex; border-bottom: 2px solid rgb(25, 25, 50) }
+/* Key or Value Key a01.01 */
+Key { display: block; font-size: 95%; font-weight: bold; font-family: Roboto, "Roboto", sans-serif;
+padding-top: 2ex; padding-bottom: 2ex }
+/* gradusVI ENV */
+p { display: block; font-size: 20pt; font-weight: normal; font-style: normal;
+font-family: Roboto, "Roboto", sans-serif; white-space: pre; line-break: loose }
+pg { display: block; font-size: 20pt; font-weight: normal; font-style: normal;
+font-family: Roboto, "Roboto", sans-serif; width: 1050px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word }
+center { display: block; font-size: 20pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif; text-align: center }
+/* FONTS */
+/** style **/
+it { font-size: 20pt; font-weight: normal; font-style: italic; font-family: Roboto, "Roboto", sans-serif; white-space: pre }
+sl { font-size: 20pt; font-weight: normal; font-style: oblique; font-family: Roboto, "Roboto", sans-serif; white-space: pre }
+/** weight, weight/style **/
+bf { font-size: 20pt; font-weight: bold; font-family: Roboto, "Roboto", sans-serif; white-space: pre }
+em { font-size: 20pt; font-style: oblique; font-weight: bold; font-family: Roboto, "Roboto", sans-serif; white-space: pre }
+/** variant **/
+scaps { font-size: 20pt; font-weight: normal; font-style: normal; font-variant: small-caps; font-family: Roboto, "Roboto", sans-serif; white-space: pre }
+/* DECORATION */
+under { font-size: 20pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif; white-space: pre; text-decoration: underline }
+lthr { font-size: 20pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif; white-space: pre; text-decoration: line-through }
+/* PATH, URL ENV */
+url { background-color: rgb(54,69,79); color: rgb(0,191,255);
+white-space: pre; font-size: 12pt; font-weight: normal; font-family: arial }
+/* PROGR  ENV */
+CODE { background-color: rgb(150,150,150); color: rgb(20,20,20);
+display: block; white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+code { background-color: rgb(150,150,150); color: rgb(20,20,20);
+white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* Snippet in blocco*/
+SNIP { background-color: rgb(51,54,70); color: rgb(230,220,210);
+display: block; white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* snippet in linea*/
+snip { background-color: rgb(51,54,70); color: rgb(230,220,210);
+white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* OUTPUT in blocco*/
+OUTPUT { background-color: rgb(43,43,43); color: rgb(230,220,210);
+display: block; white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* output in linea*/
+output { background-color: rgb(43,43,43); color: rgb(230,220,210);
+white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* Frammenti di codice e.g. comandi, in linea ovviamente  altrimenti se fosse in blocco
+ * sarebbe uno SNIPPET */
+pcode { background-color: rgb(70,43,70); color: rgb(240,220,240);
+white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+PCODE { display: block; background-color: rgb(70,43,70); color: rgb(240,220,240);
+white-space: pre; font-size: 15pt; font-weight: normal; font-family: monospace }
+/* LIST ENV */
+description { display: list-item; list-style-type: none }
+enumerate { display: list-item; list-style-type: decimal }
+task { display: list-item; list-style-type: lower-alpha }
+roman { display: list-item; list-style-type: lower-roman }
+ROMAN { display: list-item; list-style-type: upper-roman }
+square { display: list-item; list-style-type: square }
+itemize { display: list-item; list-style-type: disc }
+/* SIZE ENV */
+large  { font-size: 25pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif }
+Large  { font-size: 28pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif }
+small  { font-size: 15pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif }
+tiny { font-size: 12pt; font-weight: normal; font-family: Roboto, "Roboto", sans-serif }

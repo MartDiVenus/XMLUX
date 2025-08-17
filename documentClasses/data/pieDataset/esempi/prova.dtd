@@ -1,0 +1,24 @@
+<!-- Root = a= titulus = title = category dataset 01  = PieDataset a -->
+<!ELEMENT PieDataset ANY>
+<!-- All that is under "ITEM" = Item = a01 -->
+<!ELEMENT Item (Key+, Value+)>
+<!ATTLIST Item ID CDATA "a01">
+<!-- All that is under "ITEM" = Item = a02 -->
+<!ELEMENT Item (Key+, Value+)>
+<!ATTLIST Item ID CDATA "a02">
+<!-- All that is in "Item" = Key = a01.01 -->
+<!ELEMENT Key (#PCDATA)>
+<!ATTLIST Key ID CDATA "a01.01">
+<!-- All that is in "Item" = Value = a01.02 -->
+<!ELEMENT Value (#PCDATA)>
+<!ATTLIST Value ID CDATA "a01.02">
+<!-- All that is in "Item" = Key = a02.01 -->
+<!ELEMENT Key (#PCDATA)>
+<!ATTLIST Key ID CDATA "a02.01">
+<!-- All that is in "Item" = Value = a02.02 -->
+<!ELEMENT Value (#PCDATA)>
+<!ATTLIST Value ID CDATA "a02.02">
+ 
+<!-- Constants -->
+ 
+ 

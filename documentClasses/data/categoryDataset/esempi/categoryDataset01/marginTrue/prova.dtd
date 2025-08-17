@@ -1,0 +1,27 @@
+<!-- Root = a= titulus = title = category dataset 01  = CategoryDataset a -->
+<!ELEMENT CategoryDataset ANY>
+<!-- All that is under "Series" = Series = a01 -->
+<!ELEMENT Series (Item+, Key+, Value+)>
+<!ATTLIST Series ID CDATA "a01">
+<!-- All that is under "Item" = Item = a01.01 -->
+<!ELEMENT Item (Key+, Value+)>
+<!ATTLIST Item ID CDATA "a01.01">
+<!-- All that is under "Item" = Item = a01.02 -->
+<!ELEMENT Item (Key+, Value+)>
+<!ATTLIST Item ID CDATA "a01.02">
+<!-- All that is in "Key or Value" = Key = a01.01.01 -->
+<!ELEMENT Key (#PCDATA)>
+<!ATTLIST Key ID CDATA "a01.01.01">
+<!-- All that is in "Key or Value" = Value = a01.01.02 -->
+<!ELEMENT Value (#PCDATA)>
+<!ATTLIST Value ID CDATA "a01.01.02">
+<!-- All that is in "Key or Value" = Key = a01.02.01 -->
+<!ELEMENT Key (#PCDATA)>
+<!ATTLIST Key ID CDATA "a01.02.01">
+<!-- All that is in "Key or Value" = Value = a01.02.02 -->
+<!ELEMENT Value (#PCDATA)>
+<!ATTLIST Value ID CDATA "a01.02.02">
+ 
+<!-- Constants -->
+ 
+ 
