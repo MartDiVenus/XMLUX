@@ -81,5 +81,12 @@ _______________
 
 various corrections, improvements, new features.
 For details, see README/xmlux-doc/xmlux-doc.xml
+_______________
+
+
+	v3.2.0: Aug 17, 2025
+
+various corrections, improvements, new features.
+For details, see README/xmlux-doc/xmlux-doc.xml
 
 
