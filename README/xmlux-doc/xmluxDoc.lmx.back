@@ -117,7 +117,7 @@ xmlux '--document-class' --f'path and name (without extension) of new file'
 wildcard <pcode>*</pcode> as <pcode>--f</pcode> entire value or partial value, is accepted.
 
 e.g.
-<code>xmlux --matter-book --f=/home/beatrix/test/bea</code>
+<code>xmlux --matter-book -f/home/beatrix/test/bea</code>
 or
 <CODE>cd /home/beatrix/test
 xmlux --matter-book -fbea
@@ -173,68 +173,32 @@ above <sl>radix</sl> element (on the head of <sl>radix</sl> element).</p>
 <pg>Generating *.lmx by <it>xmlux</it> and/or composing
 *.lmx by <it>xmluxe</it>, you will see this rule applied automatically.</pg></square>
 \ppluxbl
-<square><pg>ID Attribute must be written in capital letters, but not <it>name</it> attribute because
-JFreeChart doesn't accept capital letters for it.</pg></square>
-\ppluxbl
-<square><pg>If you use my software <sl>datalux</sl>\cluxmdash<it>name</it> attribute for <it>Key</it> elements and <it>Value</it> elements, 
-must contain <pcode>KEY</pcode> and <pcode>VALUE</pcode> respectively.
-	e.g.</pg>
-<snip>\csluxlt{}Key <scaps>id</scaps>="a01.01.01" name="KEY ..."\csluxgt</snip>
-</square>
-\ppluxbl
-<square><p><it>name</it> attribute must have the last position (field) in attribute line.
-e.g.
-<snip>\csluxlt{}section <scaps>id</scaps>="a01.01.01" <it>n</it><scaps>attr</scaps>="bla" name="bla bla"\csluxgt{}Bla Bla Bla</snip></p>
-</square>
-\ppluxbl
 <square><pg>You'll have <sl>xmlux</sl> document class specified on the top of *.lmx file, automatically.</pg>
 	<p>e.g. <snip>\csluxlt{}!-- matter book document class --\csluxgt</snip></p>
-	<p>You must not delete or move it.</p>
+	<p>You must not delete it.</p>
 </square>
 \ppluxbl
-<square><pg>For data document class readable by JFreeChart\cluxmdash{}Key and Value 
-element closings <pcode>\csluxlt{}/'element'\csluxgt</pcode>
-must not have a reserved line (row), e.g. the following closing is right</pg>
-<SNIP>\csluxlt{}Key <scaps>id</scaps>="..."\csluxgt'Key content'\csluxlt{}/Key\csluxgt</SNIP>
-</square>
-\ppluxbl
-<pg><square>For #PCDATA elements like (\csluxlt{}p\csluxgt,\csluxlt{}code\csluxgt etc.),
-so for not toc elements\cluxmdash{}you are free to not observe the following rule.
+<square><pg>For #PCDATA elements like (\csluxlt{}p\csluxgt,\csluxlt{}code\csluxgt etc.), so for not toc elements \cluxmdash
+you are free to not observe the following rule.
 If you don't use <it>xmluxe</it> to compose <sl>lmx</sl> file \cluxmdash manually,
-you have to add the following comment at the end of each toc element,
-\csluxlsquare{}just below the end of toc element\csluxrsquare: 
-<pcode>\csluxlt{}!-- end 'ID' --\csluxgt</pcode>
+you have to add the following comment at the end of each toc element: 
+<SNIP>\csluxlt{}!-- end '<scaps>id</scaps>' --\csluxgt</SNIP>
 e.g. at the end of this subsubsection a01.03.01.02.02, you have to have:
 <SNIP>\csluxlt{}/subsubsection\csluxgt
 \csluxlt{}!-- end a01.03.01.02.02 --\csluxgt
 </SNIP>
-There are other ways to get results but this rule is useful during the document composition too.
-</square></pg>
+There are other ways to get results but this rule is useful during the document composition too.</pg></square>
 \ppluxbl
 <!-- Anche se usassi <pg> al posto di <p>, avresti bisogno di inserire il punto all'interno
 di <it>Special characters.</it> per non avere il punto solo in un'altra riga.-->
-<square><pg>You must respect name of <sl>xmlux</sl>'s elements, e.g. 
-<pcode>\csluxlt{}chapter\csluxgt</pcode> for brief and matter books document classes,
-<pcode>\csluxlt{}saxum\csluxgt</pcode> for brief and matter articles document classes, 
-<pcode>\csluxlt{}Item\csluxgt</pcode> for category dataset* and piedataset
-	document classes, <pcode>\csluxlt{}gradusI\csluxgt</pcode> for septem gradus (data seven) document class.
-	In other words, you can't rename elements.</pg>
-</square>
-\ppluxbl
 <p><square>You have to respect special characters, like you will see in the subsubsection <it>Special characters.</it></square></p>
 \ppluxbl
 <p><square>You have to respect special patterns, like you will see in the subsubsection <it>Special patterns.</it></square></p>
 \ppluxbl
-<pg><square>You can rename radix ID, assigning any name, but you have to respect
-	my logical ID toc structure, like you will see in the subsubsection <it>Toc Elements Structure.</it>
-But for a reason of human visual cleanness, better to have a literal \cluxndash not alphanumeric \cluxndash root (radix)
-ID. e.g.
-<SNIP>\csluxlt{}radix <scaps>id</scaps>="a"\csluxgt{}Title
-</SNIP>
-</square></pg>
-\ppluxbl
-<p><square>Images to load must have <pcode>img</pcode> prefix, e.g. 
-<SNIP>\csluxlt{}imgFig01 <scaps>id</scaps>="..."\csluxgt{}</SNIP>.</square></p>
+<pg><square>You can rename elements and radix <scaps>id</scaps> assigning them any name, but you have to respect
+	my logical <scaps>id</scaps> toc structure, like you will see in the subsubsection <it>Toc Elements Structure.</it></square></pg>
+	\ppluxbl
+<p><square>Images to load must have <pcode>img</pcode> prefix, e.g. <snip>\csluxlt{}imgFig01 <scaps> id</scaps>="..."\csluxgt{}</snip>.</square></p>
 </subsubsection>
 <!-- end a01.03.01.02.02 -->
 
@@ -244,6 +208,8 @@ environments, it is a good routine to use <pcode>xml:space="preserve"</pcode>, e
 <SNIP>\csluxlt{}CODE xml:space="preserve"\csluxgt 'code content' \csluxlt{}/CODE\csluxgt</SNIP>
 </itemize></pg>
 \ppluxbl
+<pg><itemize>For a reason of human visual cleanness, better to have a literal \cluxndash not alphanumeric \cluxndash root (radix)
+<scaps>id</scaps>.</itemize></pg>
 <p><itemize><it>xmlux</it> layout is UTF-8 oriented.</itemize></p>
 </subsubsection>
 <!-- end a01.03.01.02.03 -->
@@ -323,17 +289,9 @@ You don't have to specify <pcode>just</pcode> necessarily, it is only a free cho
 </subsubsection>
 <!-- end a01.03.01.02.04 -->
 
-<subsubsection ID="a01.03.01.02.05">Environments
-<pg>I have not free time to list and to describe all environments provided by <sl>xmlux</sl>, but
-you can find every environment in  <sl>xmluxDoc</sl> codex, so in xmluxDoc.css in particular.
-I'm sorry to use <it>\csluxlt{}url\csluxgt</it> to specify local path too, but I find it a
-practical arrangement now; when I'll have free time, I'll introduce paths/links differentiations.</pg>
-</subsubsection>
-<!-- end a01.03.01.02.05 -->
+<subsubsection ID="a01.03.01.02.05">Special characters
 
-<subsubsection ID="a01.03.01.02.06">Special characters
-
-<paragraph ID="a01.03.01.02.06.01">Typology and list of special characters
+<paragraph ID="a01.03.01.02.05.01">Typology and list of special characters
 <pg>There are xml special characters, like e.g. \csluxamp, \csluxlt, \csluxgt; and there are
 <it>xmlux</it> special character like *, \csluxamp.
 The difference between them is the following: without <it>xmlux</it>, you can't write xml special characters nowhere
@@ -345,9 +303,9 @@ forbidden to write them in the element string too, but writing them there you'll
 perfect production of xmluxc's files.
 </pg>
 </paragraph>
-<!-- end a01.03.01.02.06.01 -->
+<!-- end a01.03.01.02.05.01 -->
 
-<paragraph ID="a01.03.01.02.06.02">Importing special characters
+<paragraph ID="a01.03.01.02.05.02">Importing special characters
 <p>Two examples of commands, you can find the list I'm making in <url>/usr/local/lib/xmlux/char/</url>.</p>
 <p xml:space="preserve">e.g.
 ampersand	 	         \csluxamp               \csluxamp{}#x26;        \csluxbslash{}csluxamp
@@ -384,24 +342,19 @@ and so on.
 <p><pcode>cslux</pcode> means <it>special character</it>.</p>
 <pg>To join on the right side \cluxndash for the left side you don't need nothing \cluxndash 
 a mapped character with an other character, or another command, you have to use 
-<pcode>\csluxlcurly{}\csluxrcurly</pcode> pattern.</pg>
-<pg>To break <sl>xmlux</sl> VIM's syntax syn region coloration, you have to use 
-<pcode>\csluxlcurly{}\csluxrcurly</pcode> pattern, as an alternative to a blank space.</pg>
-<p>e.g.
-<pcode>\csluxbslash{}ppluxbl\csluxlcurly{}\csluxrcurly</pcode>
-</p>
-<pg>For these reasons I made <pcode>\csluxlcurly</pcode> and 
+<pcode>\csluxlcurly{}\csluxrcurly</pcode> pattern; 
+for this reason I made <pcode>\csluxlcurly</pcode> and 
 <pcode>\csluxrcurly</pcode> as special characters.
 </pg>
 </paragraph>
-<!-- end a01.03.01.02.06.02 -->
+<!-- end a01.03.01.02.05.02 -->
 
 </subsubsection>
-<!-- end a01.03.01.02.06 -->
+<!-- end a01.03.01.02.05 -->
 
-<subsubsection ID="a01.03.01.02.07">Patterns
+<subsubsection ID="a01.03.01.02.06">Patterns
 
-<paragraph ID="a01.03.01.02.07.01">Special patterns
+<paragraph ID="a01.03.01.02.06.01">Special patterns
 <pg>Inside text body, it is forbidden to write  <pcode>id=</pcode> pattern with uppercase \csluxlt{}id\csluxgt.
 	This pattern  is a <it>xmlux</it> syntax reserved pattern, you can write it with uppercase \csluxlt{}ID\csluxgt
 only in	element strings. You can use lowercase in the body ot the text to express
@@ -409,11 +362,11 @@ it, or you can use <pcode>\csluxlt{}scaps\csluxgt</pcode> environment (<it>small
 e.g. <snip>\csluxlt{}scaps\csluxgt{}id=a\csluxlt{}/scaps\csluxgt</snip>
 to have <output><scaps>id</scaps>=a</output>. Of course, you can use hexadecimal or decimal systems to write literal
 part of this reserved pattern.
-	Analogously, for other attributes except for <it>name</it> attribute because it must be written in lowercase.</pg>
+</pg>
 </paragraph>
-<!-- end a01.03.01.02.07.01 -->
+<!-- end a01.03.01.02.06.01 -->
 
-<paragraph ID="a01.03.01.02.07.02">Importing patterns
+<paragraph ID="a01.03.01.02.06.02">Importing patterns
 
 <pg>Two examples of commands. I hope you help me, sending to me other commands
 organized by type.</pg>
@@ -425,24 +378,24 @@ e.g. for a decorative pattern:
 \ppluxbl
 <pg>You have some my patterns in <url>/usr/local/lib/xmlux/pattern</url>.</pg>
 </paragraph>
-<!-- end a01.03.01.02.07.02 -->
+<!-- end a01.03.01.02.06.02 -->
 
 
 </subsubsection>
-<!-- end a01.03.01.02.07 -->
+<!-- end a01.03.01.02.06 -->
 
-<subsubsection ID="a01.03.01.02.08">Importing images
+<subsubsection ID="a01.03.01.02.07">Importing images
 	
 <p>Images have to marked by <pcode>img</pcode> prefix, e.g. <snip>\csluxlt{}imgFig01</snip>.</p>
 <p>One image for line and with attributes, e.g.</p>
 <SNIP xml:space="preserve">
 \csluxlt{}center\csluxgt{} caption (optional line) \csluxlt{}/center\csluxgt{}
 <small>
-\csluxlt{}imgFig01 <scaps>id</scaps>="fig01" SOURCE="logo.png" <scaps>alt</scaps>="art" <scaps>width</scaps>="500px" <scaps>height</scaps>="500px" <scaps>float</scaps>="center"\csluxgt{}\csluxlt{}/imgFig01\csluxgt
+\csluxlt{}imgFig01 <scaps>id</scaps>="fig01" SOURCE="logo.png" ALT="art" WIDTH="500px" HEIGHT="500px" FLOAT="center"\csluxgt{}\csluxlt{}/imgFig01\csluxgt
 </small>
 </SNIP>
 
-<pg><under>N.B.</under> ALT's value made of composed words must be written in camel case, e.g. <pcode><scaps>alt</scaps>="artWork"</pcode>.</pg>
+<pg><under>N.B.</under> ALT's value made of composed words must be written in camel case, e.g. <pcode>ALT="artWork"</pcode>.</pg>
 \ppluxbl
 <pg>By <pcode>\csluxlt{}WITH\csluxgt and \csluxlt{}HEIGHT\csluxgt</pcode> you cut out the original image,
 you don't scale it.</pg>
@@ -456,8 +409,8 @@ from 100\cpluxthinsp{}px to 1700\cpluxthinsp{}px.</pg>
 For my page layout, I prefer my float system to other built-in floats.
 </pg>
 \ppluxbl
-<pg>I suggest &#8211; <under>but only as  <pcode>ID</pcode> value</under> &#8211;
-to specify the ID relative element too. 
+<pg>I suggest &#8211; <under>but only as  <pcode><scaps>id</scaps></pcode> value</under> &#8211;
+to specify the <scaps>id</scaps> relative element too. 
 e.g.  <snip><scaps>id</scaps>="fig01_a03.01.02.04"</snip> not <lthr>&#x3C;imgFig01_a03.01.02.04 <scaps>id</scaps>=...</lthr>.</pg>
 \ppluxbl
 
@@ -501,11 +454,11 @@ e.g.  <snip><scaps>id</scaps>="fig01_a03.01.02.04"</snip> not <lthr>&#x3C;imgFig
 <imgFig08 ID="fig08" SOURCE="pics/cherryTree.jpg" ALT="cherryTree" WIDTH="400px" HEIGHT="400px" FLOAT="center"></imgFig08>
 
 </subsubsection>
-<!-- end a01.03.01.02.08 -->
+<!-- end a01.03.01.02.07 -->
 
-<subsubsection ID="a01.03.01.02.09">ToC Elements Structure
-<pg>You'll have in *.lmx file, a basic structure marked by a not modifiable ID,
-you can change only \cluxndash but in all elements \cluxndash the ID of the radix (root).
+<subsubsection ID="a01.03.01.02.08">ToC Elements Structure
+<pg>You'll have in *.lmx file, a basic structure marked by a not modifiable <scaps>id</scaps>,
+you can change only \cluxndash but in all elements \cluxndash the <scaps>id</scaps> of the radix (root).
 \ppluxbl
 e.g. for <it>matter book document class</it> and <it>brief book document class</it>, 
 the way I suggest is the following scheme, if you think about a book, where <sl>'synopsis'</sl>
@@ -540,7 +493,7 @@ you can compose the book in a single folder, e.g. BeaGarden-xmlux, so in a singl
 but this simple feature isn't supplied by this <it>xmlux</it> version \cluxndash for time reasons \cluxndash.
 </pg>
 </subsubsection>
-<!-- end a01.03.01.02.09 -->
+<!-- end a01.03.01.02.08 -->
 
 <subsubsection ID="a01.03.01.02.01">Mode
 <paragraph ID="a01.03.01.02.01.01">xmluxe: LMX, XML structural composing, editing, manipulations automatically
@@ -548,7 +501,7 @@ but this simple feature isn't supplied by this <it>xmlux</it> version \cluxndash
 Using <it>xmluxe</it> you can compose and/or edit <sl>lmx</sl> file structure in an orderly, logical,
 	corrected, forced way. Thus, you don't have to respect rules like those to add comments manually.</pg>
 	\ppluxbl
-<pg>In addition, using <it>xmluxe</it> you don't fear to get ID adding/moving/removing wrong.</pg>
+<pg>In addition, using <it>xmluxe</it> you don't fear to get <scaps>id</scaps> adding/moving/removing wrong.</pg>
 
 <p>
 <CODE>xmluxe -h</CODE>
@@ -557,373 +510,149 @@ Name: xmluxe
 
 Goal: to compose, edit, manipulate *.lmx structure by automatic, logical, orderly,
 forced way too.
-jump*, select*, parse*, render* are common actions for xmluxe and xtextus, but 
-xmluxe logs everything of them in *.lmxe.
-xtextus doesn't supply some other xmluxe's powerful actions.
-An other difference is the speed of execution, xmluxe is few milliseconds slower
-than xtextus.
 
 
 help                                                      -h
 
-	
 
-chars 		 					   -char
-open by gvim: /usr/local/lib/xmlux/char/
-	
-
-pattern							   -pattern
-open by gvim: /usr/local/lib/xmlux/pattern/
-
-
-
-
-Target (closed) file.					--f='Value without extension'                             
+Target (closed) file.                                     
 wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
-is accepted. 
-If you have (into the project folder) one *.lmx only \csluxlsquare{}together other xmlux files\csluxrsquare,
-as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g.
-<pcode>--f=*</pcode>\csluxrsquare.
+is accepted.						--f='Value without extension'
 
 
 
-Open *.lmx file jumping to ID line by ID.					
-							--jump-id='ID'
+Open *.lmx file jumping to the <scaps>id</scaps> line.   		--jump='<scaps>id</scaps>'
 
-
-Open *.lmx file jumping to name attribute ID line by name attribute.	
-Warning! Double-quoted name attribute"
-							--jump-name="'name'"
-
-Open *.lmx file jumping to title line by title.				
-Warning! Double-quoted title"				--jump-title="'title'"
-
-
-
-
-Select by name attribute, in read-only mode,
-the element and its children.				--selectR-name="'name'"					
-Warning! Double-quoted name attribute.			
-
-Select by title, in read-only mode,
-the element and its children.				--selectR-title="'title'"					
-Warning! Double-quoted title.				
-
-
-Select by ID,in read-only mode,
-the element and its children.				--selectR-id='ID'						
-Warning! Not quoted ID, not double-quoted ID.		
-
-
-Select by name attribute, in write mode,
-the element and its children.				--selectW-name="'name'"				
-Warning! Double-quoted name attribute			
-
-
-Select by title, in write mode,
-the element and its children.				--selectW-title="'title'"
-Warning! Double-quoted name attribute.			
-
-
-Select by ID, the element and its children.		--selectW-id='ID'
-Warning! Not quoted ID, not double-quoted ID.
-
-
-
-
-Render through name attribute, by css* style, the element
-and its children.					--renderCss-name="'name'"
-Warning! Double-quoted name attribute
-
-
-Render through title, by css* style, the element
-and its children.					--renderCss-title="'title'"
-Warning! Double-quoted title
-
-
-Render through ID, by css* style, the element
-and its children.					--renderCss-id='ID'
-Warning! Not quoted ID, not double-quoted ID
-
-
-
-
-Parse by name attribute the element only, not its children.		
-Warning! Double-quoted name attribute"
-							--parse-name="'name'"
-
-
-Parse by title the element only, not its children.			
-Warning! Double-quoted title"
-							--parse-title="'title'"
-
-
-
-Parse by ID the element only, not its children.				
-Warning! Not quoted ID, not double-quoted ID"
-							--parse-id='ID'"
-
-
-
-Parse by name attribute the element and its children.		
-Warning! Double-quoted name attribute
-						--parse-name="'name'" -all
-
-
-Parse by title the element and its children.			
-Warning! Double-quoted title"
-						--parse-title="'title'" -all
-
-Parse by ID the element and its children.			
-Warning! Not quoted ID, not double-quoted ID
-						--parse-id='ID' -all
-
-
-
-
-Insert an ID family level					--ins='ID'
-
-
-	For:
-brief article, brief book, matter article, matter book, data-seven, 
-you can insert every elements.
-
-	For:
-category dataset01, category dataset02,
-you can insert Series or Items, value and key are inserted consequentially.
-
-	For:
-pie dataset,
-you can insert Items only, value and key are inserted consequentially.
-
-
-Only for septem gradus data (data-seven)
-Insert gradusI ID, cloning the structure made by 
-xtextus' -st option. 						--ins='ID' -st
-
-
-
-		Only for:
-brief article, brief book, matter article, matter book, data-seven;
-for category dataset01, category dataset02, pie dataset, it happens automatically. 
-Category dataset02 has not title for Items, it has titles for Series.
-Insert an ID family level, specifying title and content of element too.		
-								--ins='ID' -t
-
-		Only for:
-brief article, brief book, matter article, matter book, data-seven;
-for category dataset01, category dataset02, pie dataset, it happens automatically.
-Insert an ID family level, specifying name attribute of element too.		
-								--ins='ID' -name
-
-		Only for:
-brief article, brief book, matter article, matter book, data-seven;
-for category dataset01, category dataset02, pie dataset, it happens automatically.
-Category dataset02 has not title for Items, it has titles for Series.
-Insert an ID family level, specifying name attribute of element,
-and titles too.										
-								--ins='ID' -name -t
-
-	
-Insert an ID family level, following the structure assigned
-in *.str file, and sort ascending through name attribute	--ins-a='ID' -st
-that you'll supply interactively.
-
-Insert an ID family level, following the structure assigned
-in *.str file, and sort ascending through title			--ins-at='ID' -st
-that you'll supply interactively.
-
-Insert an ID family level, following the structure assigned
-in *.str file, and sort descending through name attribute	--ins-d='ID' -st
-that you'll supply interactively.
-
-Insert an ID family level, following the structure assigned
-in *.str file, and sort descending through title		--ins-dt='ID' -st
-that you'll supply interactively.
 
 
 
 	Only for septem gradus data document class (data-seven):
-Insert an ID family level, and sort ascending
-through name attribute that you'll supply interactively.	--ins-a='ID'
 
-Insert an ID family level, and sort ascending
-through name attribute, that you'll supply interactively;		
-specifying title and content of element too.			--ins-a='ID' -t
+Insert an <scaps>id</scaps> family level,
+and sort ascending through name attribute		--ins-a='<scaps>id</scaps>'
 
-Insert an ID family level, and sort ascending
-through title that you'll supply interactively.			--ins-at='ID'
+Insert an <scaps>id</scaps> family level,
+and sort ascending through title			--ins-at='<scaps>id</scaps>'
 
-Insert an ID family level, and sort ascending
-through title that you'll supply interactively;		
-specifying name attribute too.					--ins-at='ID' -name
+Insert an <scaps>id</scaps> family level,
+and sort descending through name attribute		--ins-d='<scaps>id</scaps>'
 
-Insert an ID family level, and sort descending
-through name attribute that you'll supply interactively.	--ins-d='ID'
+Insert an <scaps>id</scaps> family level,
+and sort descending through title			--ins-dt='<scaps>id</scaps>'
 
-Insert an ID family level, and sort descending
-through name attribute,	that you'll supply interactively;
-specifying title and content of element too.			--ins-d='ID' -t
-
-
-Insert an ID family level, and sort descending
-through title.							--ins-dt='ID'
-
-Insert an ID family level, and sort descending
-through title that you'll supply interactively;		
-specifying name attribute too.					--ins-dt='ID' -name
-
-
-<small>Both, insert actions, are the fastest human way, but the slowest machine way.
-insert action is a very fast machine task however.</small>
-<small>Next istance \csluxlt{}Add the ID element\csluxgt is the slowest human way, but the fastest machine way.</small>
+<small>Both, insert actions, are the fastest human way, but the slowest machine way.</small>
+<small>Next istance \csluxlt{}Add the <scaps>id</scaps> element\csluxgt is the slowest human way, but the fastest machine way.</small>
 
 
 
 
-Add the ID element.                       		  	--add='ID'
+Add the <scaps>id</scaps> element.                       		  	--add='<scaps>id</scaps>'
 
-Write title and content of the ID 
+Write title and content of the <scaps>id</scaps> 
 element to add.             				  			-w
 
 For category dataset and pie dataset document classes:
-Add title of the ID Key element to add.  					-k
-Key ID and Value ID have same lenght, so if option -k is not
+Add title of the <scaps>id</scaps> Key element to add.  					-k
+Key <scaps>id</scaps> and Value <scaps>id</scaps> have same lenght, so if option -k is not
 specified, you'll want to add a Value element.  
 
 
 
 
 	Only for <sl>septem gradus data document class (data-seven)</sl>:
-Ascending sort by ID level and through name attribute:
-from A to Z, from 0 to +infinity				--sort-a='IDlevel'
+Ascending sort by <scaps>id</scaps> level and through name attribute:
+from A to Z, from 0 to +infinity				--sort-a='<scaps>id</scaps>level'
 
 
 	Only for septem gradus data document class (data-seven):
-Descending sort by ID level and through name attribute:
-from Z to A, from +infinity to 0				--sort-d='IDlevel'
+Descending sort by <scaps>id</scaps> level and through name attribute:
+from Z to A, from +infinity to 0				--sort-d='<scaps>id</scaps>level'
 
 
-Sort by ID level and through title.				-t
-
-
-
-Delete IDs lacks (IDs voids).
-It can consist in document checking.			  -delLack
-It makes no sense to specify this option for
-Keys or Values, because an Item can contain
-only one Key and one Value. You can express this
-option for Items, Series, chapters, sections, and
-any other element, except for Keys and Values.
-
-
-
-Remove the ID element and its children.                   --remove='ID'
-
-
-Remove the ID element and its children, 
-delete IDs lacks (voids) finally.                         --remove='ID' -delLack
+Sort by <scaps>id</scaps> level and through title.				-t
 
 
 
 
-Move the ID element and its 
-children after 'Value' unit.                              --move='ID' -a'Value'
+Remove the <scaps>id</scaps> element and 
+its children.                       			  --remove='<scaps>id</scaps>'
 
-Move all elements starting from the ID 
+
+
+
+Select in read-only mode the <scaps>id</scaps> element and 
+its children.                       			  --selectR='<scaps>id</scaps>'
+
+Select in write mode the <scaps>id</scaps> element and 
+its children.                       			  --selectW='<scaps>id</scaps>'
+
+
+
+
+Move the <scaps>id</scaps> element and its 
+children after 'Value' unit.                              --move='<scaps>id</scaps>' -a'Value'
+
+Move all elements starting from the <scaps>id</scaps> 
 element  \csluxlsquare{}and their children\csluxrsquare after 'Value' unit 
-until the relative end.                                   --move='ID' -a'Value' -end
+until the relative end.                                   --move='<scaps>id</scaps>' -a'Value' -end
 
-Move the ID element and its children 
-before 'Value' unit.                                      --move='ID' -b'Value'
+Move the <scaps>id</scaps> element and its children 
+before 'Value' unit.                                      --move='<scaps>id</scaps>' -b'Value'
 
-Move all elements starting from the ID
+Move all elements starting from the <scaps>id</scaps>
 element \csluxlsquare{}and their children\csluxrsquare before 'Value' unit
-until the relative end.	 			          --move='ID' -b'Value' -end
+until the relative end.	 			          --move='<scaps>id</scaps>' -b'Value' -end
 
 
 
 
-Delete multiple empty lines.				-delEmpty
-Avoid to use this option in documents having 
-<pcode>xml:space="preserve"</pcode>
-because it would ruin the formatting.
-
-
-Add one empty line after an element closing		-addEmpty
-<pcode>\cluxlt{}!-- end ... --\cluxgt</pcode>
-
-
-Execute -delEmpty and -addEmpty options 
-together in one instance				-format
-
-
-
-	<scaps>Usage</scaps>
-cd 'path of the project'
-
-Simple are the following examples, but you can use <it>xmluxe</it> for any element, e.g. you
-can use xmluxe to move one or more paragraphs of the same family too:
+<scaps>usage</scaps>
+Simple are the following examples, but you can use <it>xmluxe</it> for any element,
+e.g. you can use <it>xmluxe</it> to move one or more paragraphs of the same family too:
 <code>xmluxe --action -option --f='Value without extension'</code>
+
 e.g.
-	Only for data document classes 
-(data-seven, category dataset01, category dataset02, pie dataset):
-To insert a gradusIII ID, of a01's family (a01 gradusI), e.g.
-xmluxe --ins=a01.01.01 --f=greeting
-e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04.
-But if exists a02.01.03, you will not get a02.01.04 because you have specified
-a01 family.
-
-
 
 	Only for <sl>septem gradus data document class (data-seven)</sl>:
-To sort by ID level axx.xx.xx (GradusIII) and through name attribute ascending.
+
+To sort by <scaps>id</scaps> level axx.xx.xx (GradusIII) and through name attribute ascending.
 e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
 <code>xmluxe --sort-a=a01.01.01 --f=*</code>
 
 
-To sort by ID level axx.xx.xx (GradusIII) and through name attribute descending.
+To sort by <scaps>id</scaps> level axx.xx.xx (GradusIII) and through name attribute descending.
 e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
 <code>xmluxe --sort-d=a01.01.01 --f=*</code>
 
 
-To sort by ID level axx.xx.xx (GradusIII) and through title ascending.
+To sort by <scaps>id</scaps> level axx.xx.xx (GradusIII) and through title ascending.
 e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
 <code>xmluxe --sort-a=a01.01.01 -t --f=*</code>
 
 
-To sort by ID level axx.xx.xx (GradusIII) and through title descending.
+To sort by <scaps>id</scaps> level axx.xx.xx (GradusIII) and through title descending.
 e.g. a01.01.01 ... a01.01.03, a02.01.01 ... a02.01.03 
 <code>xmluxe --sort-d=a01.01.01 -t --f=*</code>
 
-
-
-
-	Only for data document classes 
-(<sl>data-seven, category dataset01, category dataset02, pie dataset</sl>):
-To insert a gradusIII ID, of a01's family (a01 gradusI), e.g.
-<code>xmluxe --ins=a01.01.01 --f=greeting</code>
-e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04.
-But if exists a02.01.03, you will not get a02.01.04 because you have specified
-a01 family.
-
+	
 
 	Only for <sl>septem gradus data document class (data-seven)</sl>:
-To insert a gradusIII ID, of a01's family (a01 gradusI), and to sort ascending
+
+To insert a gradusIII <scaps>id</scaps>, of a01's family (a01 gradusI), and to sort ascending
 through name attribute, both actions automatically.
 e.g. to add a GradusIII, that will be insert and sorted ascending through name
 attribute automatically:
 <code>xmluxe --ins-a=a01.01.01 --f=greeting</code>
-e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04
-but sorting by ID level and through name attribute.
+e.g. if last existing a01 gradusIII <scaps>id</scaps> was a01.01.03, you will have a01.01.04
+but sorting by <scaps>id</scaps> level and through name attribute.
 
-To insert a gradusIII ID, of a01's family (a01 gradusI), and to sort ascending
+To insert a gradusIII <scaps>id</scaps>, of a01's family (a01 gradusI), and to sort ascending
 through title, both actions automatically.
 e.g. to add a GradusIII, that will be insert and sorted ascending through title
 automatically:
 <code>xmluxe --ins-at=a01.01.01 --f=greeting</code>
-e.g. if last existing a01 gradusIII ID was a01.01.03, you will have a01.01.04
-but sorting by ID level and through title.
+e.g. if last existing a01 gradusIII <scaps>id</scaps> was a01.01.03, you will have a01.01.04
+but sorting by <scaps>id</scaps> level and through title.
 
 
 
@@ -935,28 +664,15 @@ element to add, in this xmlux session.
 <code>xmluxe --add=a01.03 -w --f=greeting</code>
 
 
-
-
-e.g. If you have a lack between first chapter  and third chapter:
-<code>xmluxe -delLack --f=greeting</code>
-
-
-
-To remove the second chapter (and its children) of the first part,
-and to delete the lack that will be created (by removal) between
-first chapter  and third chapter.
-<code>xmluxe --remove=a01.02 -delLack --f=greeting</code>
-
-
 To remove the second chapter (and its children) of the first part.
 <code>xmluxe --remove=a01.02 --f=greeting</code>
 
 
-To select in read-only mode the ID element and its children.
+To select in read-only mode the <scaps>id</scaps> element and its children.
 e.g.
 <code>xmluxe --selectR=a02 --f=greeting</code>
 
-To select in write mode the ID element and its children.
+To select in write mode the <scaps>id</scaps> element and its children.
 <code>xmluxe --selectW=a02 --f=greeting</code>
 
 
@@ -966,7 +682,7 @@ To move part a08, and its children, one unit after.
 
 To move parts, and their children, one unit after until the end; starting from
 part a07.
-Be careful: You must specify the lowest ID among parts you want to move.
+Be careful: You must specify the lowest <scaps>id</scaps> among parts you want to move.
 e.g. you have parts from part a01 to a09. You want to move parts a07, a08, a09, 
 one unit after to have part a08, a09, a10; of course then, you'll have a lack
 between part a06 and part a08 because part a07 doesn't exist no more. e.g. you
@@ -984,7 +700,7 @@ To move part a05, and its children, one unit before.
 
 
 To move parts after part a06 \csluxlsquare{}including it\csluxrsquare and their children, one unit before,
-until the end. Be careful: You must specify the lowest ID among parts you want
+until the end. Be careful: You must specify the lowest <scaps>id</scaps> among parts you want
 to move.
 e.g. you have parts from part a01 to part a08. Between part a04 and part a06 you
 have a lack (e.g. you removed part a05). To downshift part a08, a07, a06 of one
@@ -1026,9 +742,9 @@ So paternity, descendants will be respected and graphic translation will be done
 </pg>
 \ppluxbl
 \ppluxbl
-<p>Automatically, to order everything alphanumerically, ascending, by ID and 
+<p>Automatically, to order everything alphanumerically, ascending, by <scaps>id</scaps> and 
 through title that will be assigned interactively:
-<code>xmluxe --ins-at='ID family level' --f=bea</code>
+<code>xmluxe --ins-at='<scaps>id</scaps> family level' --f=bea</code>
 e.g.
 Automatically, to insert a <pcode>GradusIII</pcode> element in <pcode>a02</pcode> family, although:
 <pcode>A-GradusIII (a02.01.01)
@@ -1039,9 +755,9 @@ exist already.</p>
 \ppluxbl
 <p>Following the same way, you can order through <it>name</it> attribute, and by
 descending mode.
-<code>xmluxe --ins-a='ID family level' --f=bea</code>
-<code>xmluxe --ins-dt='ID family level' --f=bea</code>
-<code>xmluxe --ins-d='ID family level' --f=bea</code>
+<code>xmluxe --ins-a='<scaps>id</scaps> family level' --f=bea</code>
+<code>xmluxe --ins-dt='<scaps>id</scaps> family level' --f=bea</code>
+<code>xmluxe --ins-d='<scaps>id</scaps> family level' --f=bea</code>
 </p>
 <pg>Warning! It is not a simple telephone book ordering/editing.
 It's a complex structure ordering/editing, because
@@ -1050,129 +766,6 @@ without "touching", mixing higher, lower or parallel levels.
 </pg>
 </subparagraph>
 <!-- end a01.03.01.02.01.01.01 -->
-
-<subparagraph ID="a01.03.01.02.01.01.02"><sl>select</sl>, <sl>parse</sl>, <sl>render</sl> actions focus
-<pg>*.xml gotten by rendering doesn't provide *.dtd file, because css rendering wants be only a fast way
-to extract contents from original *.xml, and to display by web browser, 
-for current <sl>xmlux</sl> version at least.
-\ppluxbl 
-Parsing by title key of an element without children has not sense.
-\ppluxbl 
-Rendering by title key of an element without children has not sense.
-\ppluxbl 
-Selecting  by title key of an element without children has sense, because
-you can read or edit xml codex.
-\ppluxbl 
-Later on, I'll explain the difference between two methods. 
-This subparagraph will not contain the explanation of above-mentioned actions
-		by ID key \cluxndash even if <sl>xmlux</sl> provides it \cluxndash{}
-because using ID is the powerful, universal but less human choice. 
-\ppluxbl 
-Finally, for everyday, resorting to <it>name</it> attribute is the best method.
-\ppluxbl 
-But I remind you that to get all relations between ID, <it>name</it> and title,
-there are following instances \csluxlsquare{}in which title key results very powerful\csluxrsquare:</pg>
-<CODE>xmluxv --find-title="'title'" --f=*
-xmluxv --find-name="'name'" --f=*
-xmluxv --find-id='ID' --f=*
-</CODE>
-\ppluxbl{}
-<enumerate><pg><sl>Method n. 1</sl>: To specify <it>name</it> attribute like
-	key to have more cleaness, aesthetic beauty, to travel beside almost human waves.
-For a likable reading is better to compose *.lmx with <it>name</it> attribute,
-by this way sickening repetitions of titles segments are avoided.
-\ppluxbl{}
-The only rule to respect is the following\cluxmdash{}any <it>name</it> attribute must
-be different from one other.</pg>
-<p>e.g. having
-<snip>\csluxlt{}gradusV <scaps>id</scaps>="a01.01.01.01.01" name="mom mobile number"\csluxgt{}123 45 67 891</snip>
-
-<code>xmluxe --parse-name="mom smartphone number" --f=contacts</code>
-<output>123 45 67 891</output> will be printed on stdout and on /tmp/parsed-xmluxe.
-</p>
-<p>e.g. having
-<snip>\csluxlt{}gradusIV <scaps>id</scaps>="a01.03.02.03" name="sister web">Web links</snip>
-for parsing, or selecting, or rendering of <pcode>\csluxlt{}gradusII\csluxgt{}Sister</pcode>'s web links,
-<it>name</it> attribute key is enough and is the best way to parse.
-<code>xmluxe --parse-name="sister web" --f=contacts</code>
-</p>
-<p>
-According to next <sl>Method n. 2</sl>, I'd have:
-<snip>\csluxlt{}gradusIV <scaps>id</scaps>="a01.03.02.03" name="sister web"\csluxgt{}Sister web links</snip>
-alias
-<snip>\csluxlt{}gradusIV <scaps>id</scaps>="a01.03.02.03"\csluxgt{}Sister web links</snip>
-<code>xmluxe --parse-titolo="Sister web links" --f=contacts</code>
-</p>
-<pg>
-	It needs to differentiate titles, inserting <pcode>Sister</pcode> in every <pcode>gradusII</pcode>'child title,
-	because in the document exists already:</pg>
-<p>e.g.
-<snip>\csluxlt{}gradusIV <scaps>id</scaps>="a01.01.02.03"\csluxgt{}Mom web links</snip>
-
-Hereafter, <sl>Method n. 2</sl> innerly.
-</p>
-</enumerate>
-<enumerate><pg><sl>Method n. 2</sl>: Using title key to not have search limits,
-losing aesthetic beauty but travelling beside human wave.</pg>
-\ppluxbl{}
-<pg>If I want to parse, or to render an element by its value (title), that I read
-	by web browser usually, rather <it>name</it> attribute is hidden\cluxmdash{}
-		title key search is better.</pg>
-<p>e.g.
-<snip>\csluxlt{}gradusIII <scaps>id</scaps>="a01.03.02" name="sister web"\csluxgt{}Sister web</snip>
-you can execute
-<code>xmluxe --renderCss-title="sister web" --f=contacts</code>
-
-Warning! Parsing, rendering of a value like title, has not sense.
-e.g. having
-<snip>\csluxlt{}gradusV <scaps>id</scaps>="a01.03.01.02.01" name="sister's house telephone number">777 66 55 4444</snip>
-<code>xmluxe --renderCss-title="777 66 55 4444" --f=contacts</code></p>
-<pg>Rightly, I'll get <output>777 66 55 4444</output> printed in web browser; even if by css style,
-it is of little usefulness.
-This is one of edge cases that operate with <sl>Method n. 1</sl> too,
-but by title key because it doesn't exist another title that is equal to
-above-mentioned \csluxlsquare{}telephone number is unique\csluxrsquare{}.</pg>
-<p>e.g. 
-<code>xmluxe --renderCss-name="sister's house telephone number" --f=contacts</code>
-</p>
-<pg>But, if you search a title with occurrence not equal to one \csluxlsquare{}because 
-not differentiated\csluxrsquare\cluxmdash{}the search will fail.
-That's why in <url>README/examples/contacts/keySearch-title_name_id</url> there are titles followed
-by <pcode>gradusII</pcode> content\cluxmdash{}to differentiate them and, so, to identify them.
-
-In this context, don't forget the power of action <pcode>--find-title="'title"</pcode> di 
-<sl>xmluxv</sl>.</pg>
-<p>e.g.
-<code> xmluxv --find-title="Web links" --f=*</code>
-<OUTPUT xml:space="preserve"><small>contatti-ids-titles.lmxv : a01.03.02.03 Web links
-contacts-ids-titles.lmxv : a02.01.02.03 Web links
-contacts-ids-names-titles.lmxv : a01.03.02.03 "sister web" Web links
-contacts-ids-names-titles.lmxv : a02.01.02.03 "web colleague" Web links
-contacts-elements-titles.lmxv : gradusIV  Web links
-contacts-elements-titles.lmxv : gradusIV  Web links
-contacts-ids-elements-titles.lmxv : a01.03.02.03 gradusIV Web links
-contacts-ids-elements-titles.lmxv : a02.01.02.03 gradusIV Web links
-contacts-ids-elements-names-titles.lmxv : a01.03.02.03 gradusIV "sister web" Web links
-contacts-ids-elements-names-titles.lmxv : a02.01.02.03 gradusIV "web colleague" Web links
-contacts-titles.lmxv : Web links
-contacts-titles.lmxv : Web links
-
-
---find-title="Web links"
-printed on
-contacts-lmxv/contacts-lmxv_find.txt
-
-and with coloured \csluxlt{}:\csluxgt{} separator on
-contacts-lmxv/contacts-lmxv_find-coloured.txt
-to print executing:
-echo -e "$(cat contacts-lmxv/contacts-lmxv_find-coloured.txt)"
-
-You have
-contacts-lmxv/contacts-lmxv_find-paths.txt
-too.</small></OUTPUT></p>
-</enumerate>
-</subparagraph>
-<!-- end a01.03.01.02.01.01.02 -->
 
 <paragraph ID="a01.03.01.02.01.02">xtextus: LMX, XML opening and little structural composing, editing manually
 <pg><bf><it>xtextus</it> manual mode:</bf>
@@ -1195,110 +788,39 @@ xtextus -h
 <OUTPUT xml:space="preserve">
 Goal: View and/or edit *.xml or *.lmx by xml vim syntax, tags (to do), and my vim
 colours.
-jump*, select*, parse*, render* are common actions for xtextus and xmluxe, but
-xtextus doesn't log anything of them.
-xtextus doesn't supply some other xmluxe's powerful actions.
-An other difference is the speed of execution, xtextus is few milliseconds faster than
-xmluxe.
-
-For xtextus and xmluxe common actions, see xmluxe help or xmluxe README section.
 
 	
 help                                                      -h
 
-	
 
-chars 		 					   -char
-open by gvim: /usr/local/lib/xmlux/char/
-	
-
-pattern							   -pattern
-open by gvim: /usr/local/lib/xmlux/pattern/
-
-
-
-
-target file 
+target file                                               --f='Value with extension'
 wildcard <pcode>*</pcode> as <pcode>--f</pcode> entire value or partial value, is accepted.
-If you have (into the project folder) one *.lmx only \csluxlsquare{}together other xmlux files\csluxrsquare,
-as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g. <pcode>--f=*</pcode>\csluxrsquare.
-	
-
-For jump*, select*, parse*, render* actions 		
-						--f='Value without extension'
 
 
-For -o, -p, -view options					  
-						--f='Value with or without extension'
-P.S. -view option reads only xml files.
+open file jumping to <scaps>id</scaps> line                    	  --jump='<scaps>id</scaps>'
 
-
-
-open file						  -o
-
-
-print in ps and pdf, with xml fancy syntax		  -p
-
-
-Only for septem gradus data (data-seven):
-make a structure for the first gradusI
-(e.g. a01) and its children. 		                  -st
-
-
-
-view xml by Yumberc XMLView (Java FX)		  	  -view
-
-
-<scaps>Usage</scaps>
-
-<code>cd 'path of the project'</code>
-
-<code>xtextus 'option' --f='Value with or without extension'</code>
-
-<code>xtextus 'action' --f='Value without extension'</code>
+<scaps>usage</scaps>
+<code>xtextus -option --f='\csluxlt{}Value with extension\csluxgt'</code>
 
 e.g.
+<CODE>xtextus --f=greeting.xml
 
-<code>cd greeting-xmlux</code>
+xtextus --f=greeting.lmx
 
-<code>xtextus -o --f=greeting.xml</code>
+xtextus --jump=a02.01.01 --f=greeting.xml
 
-<code>xtextus -o --f=greeting.lmx</code>
-
-<code>xtextus -o --f=greeting</code>
-
-
-<code>xtextus -p --f=greeting.xml</code>
-
-<code>xtextus -p --f=greeting.lmx</code>
-
-<code>xtextus -p --f=greeting</code>
-
-
-<code>xtextus -st --f=greeting.lmx</code>
-
-
-<code>xtextus -view --f=greeting</code>
-aka
-<code>xtextus -view --f=greeting.xml</code>
-aka
-<code>xtextus -view --f=*</code>
-	
-
-<code>xtextus --jump-id=a01.01 --f=greeting</code>
-<code>xtextus --jump-id=a01.01 --f=*</code>
-
-<code>xtextus --selectR-name="happy" --f=greeting</code>
-<code>xtextus --selectR-name="happy" --f=*</code>
-
-<code>xtextus --selectW-id="a01.01.01" --f=greeting</code>
-<code>xtextus --selectW-id="a01.01.01" --f=*</code>
-
-<code>xtextus --parse-title="Sunny" --f=greeting</code>
-<code>xtextus --parse-title="Sunny" --f=*</code>
-
-<code>xtextus --renderCss-id="a02" --f=greeting</code>
-<code>xtextus --renderCss-id="a02" --f=*</code>
+xtextus --jump=a02.01.01 --f=greeting.lmx
+</CODE>
+e.g.
+<code>/usr/local/bin/xtextus /home/beatrix/test/bea-xmlux/bea.lmx</code>
+or
+<code>xtextus /home/beatrix/test/bea-xmlux/bea.lmx</code>
+or
+<code>cd /home/beatrix/test/bea-xmlux</code>
+<code>xtextus bea.lmx</code>
+and, finally
+<code>cd /home/beatrix/test/bea-xmlux</code>
+<code>xtextus bea.xml</code>
 </OUTPUT>
 </p>
 </subsection>
@@ -1311,49 +833,45 @@ aka
 help					-h
 
 target file				--f='file name  without extension'
-wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
-is accepted. 
-If you have (into the project folder) one *.lmx only \csluxlsquare{}together other xmlux files\csluxrsquare,
-as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g. <pcode>--f=*</pcode>\csluxrsquare.
+wildcard <pcode>*</pcode> as <pcode>--f</pcode> entire value or partial value, is accepted.
 
 
+view <scaps>id</scaps>s list                                           		-id
 
-view IDs list                                           		-id
-
-view <it>name</it>s list                                           		-n
+view names list                                           		-n
 
 view elements list                                                      -e
 
 view titles list                                                        -t
 
-view IDs and <it>name</it>s list                                 		-in
+view <scaps>id</scaps>s and names list                                 		-in
 
-view IDs and elements list                               		-ie
+view <scaps>id</scaps>s and elements list                               		-ie
 
-view IDs and titles list                                 		-it
+view <scaps>id</scaps>s and titles list                                 		-it
 
 view elements and titles list                                           -et
 
-view IDs, elements and <it>name</it>s list                        		-ien
+view <scaps>id</scaps>s, elements and names list                        		-ien
 
-view IDs, elements and <it>name</it>s list                        		-int
+view <scaps>id</scaps>s, elements and names list                        		-int
 
-view IDs, elements and titles list                			-iet
+view <scaps>id</scaps>s, elements and titles list                			-iet
 
-view IDs, elements, <it>name</it>s and titles list                		-all
+view <scaps>id</scaps>s, elements, names and titles list                		-all
 
-find/match IDs or <it>name</it>s or titles, and their relations:"
+find/match <scaps>id</scaps>s or names or titles, and their relations:"
 
-find/match IDs						--find-id='ID'
-					or equally	--find-id="''ID'"
+find/match <scaps>id</scaps>s						--find-id='<scaps>id</scaps>'
+					or equally	--find-id="''<scaps>id</scaps>'"
 
-find/match <it>name</it>			only		--find-name="'name'""
+find/match name				only		--find-name="'name'""
 
 find/match title			only		--find-title="'title'""
 
 
 <scaps>usage</scaps>
-<code>xmluxv -option --action --f\csluxlt{}Value without extension\csluxgt</code>
+<code>xmluxv -option --f\csluxlt{}Value without extension\csluxgt</code>
 
 e.g.
 <code>xmluxv -s -all --f=bea</code>
@@ -1361,11 +879,11 @@ e.g.
 <code>xmluxv -all --f=bea</code>
 
 
-<code>xmluxv --find-id='ID' --f=bea"</code>
+<code>xmluxv --find-id='<scaps>id</scaps>' --f=bea"</code>
 or equally
-<code>xmluxv --find-id=\"'ID'\" --f=bea</code>
+<code>xmluxv --find-id=\"'<scaps>id</scaps>'\" --f=bea</code>
 
-for <it>name</it> attribute, only double-quoted value is accepted:
+for name attribute, only double-quoted value is accepted:
 <code>xmluxv --find-name=\"'name'\" --f=bea</code>
 
 for title, only double-quoted value is accepted:
@@ -1401,15 +919,8 @@ Goal: To compile *.lmx files to have xml files.
 
 
 <scaps>target file</scaps>\cpluxtab\cpluxtab--f='file name without extension'
-wildcard <pcode>*</pcode> as <pcode>-f</pcode> entire value or partial value,
-is accepted. 
-If you have (into the project folder) one *.lmx only \csluxlsquare{}together other xmlux files\csluxrsquare,
-as default and as I suggest, just type one <pcode>*</pcode> \csluxlsquare{}e.g.
-<pcode>--f=*</pcode>\csluxrsquare.
+wildcard <pcode>*</pcode> as <pcode>--f=</pcode> entire value or partial value, is accepted.
 
-
-<scaps>dtd file creation</scaps>\cpluxtab--dtd=false/true
-To have a fast compilation, you have to specify --dtd=false.
 
 <scaps>margin borders</scaps>\cpluxtab\cpluxtab--margin=true
 
@@ -1419,8 +930,6 @@ To have a fast compilation, you have to specify --dtd=false.
 
 e.g.:
 <code>xmluxc --f=greeting</code>
-
-<code>xmluxc --dtd=false --f=greeting</code>
 
 <code>xmluxc --margin=true --f=greeting</code>
 </OUTPUT>
@@ -1457,11 +966,6 @@ to print without fancy syntax by web browser, or to print with fancy syntax
 <pg>If you commit an ortographic mistake, writing a wrong command, you have to press
 <code>\csluxlsquare{}Ctrl-C\csluxrsquare</code> sequence to close <it>xmluxc</it> sometimes.
 </pg>
-	\ppluxbl{}
-<pg>If you commit a mistake, writing twice the same ID for two elements, you'll have 
-a perfect output *.xml sometimes, and e.g. the following message on the stderr:
-<OUTPUT>sed: expression -e #1, character 9: regular expression not ended to address</OUTPUT>
-</pg>
 </subsubsection>
 <!-- end a01.03.01.06.02 -->
 
@@ -1488,24 +992,18 @@ bringing opportune modifications as I have done to have e.g. level number seven 
 level number six, and so on.</pg>
 \ppluxbl
 <pg>
-	<itemize><it>matter book</it> has counters, it displays <sl>Times New Roman serif</sl> fonts. It has
-		parts and chapters.</itemize>
-	<itemize><it>brief book</it> has not counters, it displays <sl>Times New Roman serif</sl> fonts. It has
-parts and chapters.</itemize>
-	<itemize><it>matter article</it> has counters, it displays <sl>Arial serif</sl> fonts. It has not
-parts and chapters, but it has saxum under subparagraph, and subsaxum under saxum.</itemize>
-	<itemize><it>brief article</it> has not counters, it displays <sl>Arial serif</sl> fonts. It has not
-parts and chapters, but it has saxum under subparagraph, and subsaxum under saxum.</itemize>
+	<itemize><it>matter book</it> has counters, it displays <sl>Times New Roman serif</sl> fonts;</itemize>
+	<itemize><it>brief book</it> has not counters, it displays <sl>Times New Roman serif</sl> fonts;</itemize>
+	<itemize><it>matter article</it> has counters, it displays <sl>Arial serif</sl> fonts;</itemize>
+	<itemize><it>brief article</it> has not counters, it displays <sl>Arial serif</sl> fonts;</itemize>
 	<itemize><it>septem gradus data</it> has not counters, it displays <sl>Roboto sans serif</sl> fonts.
-		For this document class, <sl>xmluxc</sl> doesn't provide synopsis element by default. ToC structure is
-	parallel to previous document class, even if it has not synopsis and names of elements are different.</itemize>
-<itemize><it>category dataset 01 document class</it> has not counters. It has an own ToC structure, different
-	from any previous document class. It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
-<itemize><it>category dataset 02 document class</it> has not counters. It has an own ToC structure, different
-	from any previous document class,  but it is very similar only to category dataset 01 class. It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
-<itemize><it>pie dataset class</it> has not counters. It has an own ToC structure, different
-	from any previous document class, it is similar only to category dataset 01 and 02 classes.
-	It displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+	For this document class, <sl>xmluxc</sl> doesn't provide synopsis element by default.</itemize>
+	<itemize><it>category dataset 01 document class</it> has not counters, has not synopsis element,
+		it displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+	<itemize><it>category dataset 02 document class</it> has not counters, has not synopsis element,
+		it displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
+	<itemize><it>pie dataset document class</it> has not counters, has not synopsis element,
+	it displays <sl>Roboto sans serif</sl> fonts. It can be rendered by JFreeChart.</itemize>
 </pg>
 
 </subsubsection>
@@ -1653,41 +1151,36 @@ I suggest chromium web browser.</p>
 <!-- end a01.03 -->
 
 <chapter ID="a01.04">Changes
-<center>v3.2.0 2025-04-17</center>
+<center>v3.0.0</center>
 <p>
-	<itemize>Corrected <sl>xmluxv</sl> help, adding <pcode>--action</pcode>.</itemize>
-	
-	<itemize>Corrected <sl>xmluxe</sl> <pcode>--sort</pcode> actions.</itemize>
-
-	<itemize>Corrected <pcode>cluxgt</pcode> representation in
-	<url>/usr/local/lib/xmlux/char/genericChar/char.txt</url>
-	<url>/usr/local/lib/xmlux/char/mathChar/charM.txt</url>
-        </itemize>
-
-	<itemize>Improved <sl>xmluxe</sl> adding:
-	<enumerate><pcode>--ins=... -st</pcode> action;</enumerate>
-	<enumerate><pcode>-delEmpty</pcode> option;</enumerate>
-	<enumerate><pcode>-addEmpty</pcode> option;</enumerate>
-	<enumerate><pcode>-format</pcode> option;</enumerate>
-</itemize>
-
-	<itemize>Improved <sl>xtextus</sl> adding <pcode>-st</pcode> option.</itemize>
-
-
-	<itemize>Improved <sl>xmluxc</sl> adding <pcode>--dtd</pcode> action.</itemize>
+<itemize>Improved <pcode> --f='*' </pcode> option usage.</itemize>
+<itemize>Improved and corrected <pcode> --=f'without extension'</pcode> in <sl>xtextus</sl>.</itemize>
+<itemize>Added:
+<enumerate><it>matter article document class</it>;</enumerate>
+<enumerate><it>brief book document class</it>;</enumerate>
+<enumerate><it>brief article document class</it>;</enumerate>
+<enumerate><it>septem gradus data document class</it>.</enumerate>
+<enumerate><it>category dataset 01 document class</it>.</enumerate>
+<enumerate><it>category dataset 02 document class</it>.</enumerate>
+<enumerate><it>pie dataset document class</it>.</enumerate>
+<enumerate><it>xmluxe sort actions</it>.</enumerate>
+<enumerate><it>xmluxe insert actions</it>.</enumerate>
+<enumerate><it>xmluxe select actions</it>.</enumerate>
+<enumerate><it>xmluxv folder feature</it>.</enumerate>
+<enumerate><it>xmluxv find actions</it>.</enumerate>
+<enumerate><it>xmluxv various options</it>.</enumerate>
+So, some options and actions are changed.</itemize>
 </p>
 </chapter>
 <!-- end a01.04 -->
 
 <chapter ID="a01.05">Copyright
-<p>Copyright (C) not commercial 
-2023.10.29 - 2024.11.04
-Mario Fantini (marfant7@gmail.com).
-
+<p>Copyright (C) 2023.10.29 Mario Fantini (marfant7@gmail.com).
 BASH copyright applies to <it>xmlux</it>'s BASH usage.
+GNU copyright applies to <it>xmlux</it>'s GNU usage.
+XML copyright applies to <it>xmlux</it>'s XML usage.
 VIM copyright applies to <it>xmlux</it>'s VIM usage.
 JAVA copyright applies to <it>xmlux</it>'s JAVA usage.
-XMLView.java https://yumberc.github.io/
 W3C copyright applies to <it>xmlux</it>'s W3C usage.
 And so on, as regards all tools and languages used by <it>xmlux</it>.
 </p>
@@ -1703,7 +1196,7 @@ GNU General Public License for more details.\cluxgt{}\cluxgt{}
 \ppluxind{}Mainly, my copyright means: you can use, share <it>xmlux</it> \cluxndash for noble causes \cluxndash, but:
 	\cpluxbull you have to specify, to declare its paternity (mine), and whose contributors'
 	\cpluxthinsp{}\cpluxthinsp\cpluxthinsp{}important "brushstrokes";
-	\cpluxbull you have to respect bash, vim, java, w3c, \csluxlsquare{}and so on\csluxrsquare copyrights.
+	\cpluxbull you have to respect bash, gnu, xml, vim, java, w3c, \csluxlsquare{}and so on\csluxrsquare copyrights.
 </p>
 </chapter>
 <!-- end a01.05 -->

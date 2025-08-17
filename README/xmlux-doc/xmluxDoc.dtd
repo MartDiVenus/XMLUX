@@ -16,7 +16,7 @@
 <!ELEMENT chapter (OUTPUT+, p+, paragraph+, section+, SNIP+, subsection+, subsubsection+)>
 <!ATTLIST chapter ID CDATA "a01.03">
 <!-- All that is under "chapter" = chapter = a01.04 -->
-<!ELEMENT chapter (center+, enumerate+, it+, itemize+, p+, pcode+, sl+)>
+<!ELEMENT chapter (center+, enumerate+, itemize+, p+, pcode+, sl+, url+)>
 <!ATTLIST chapter ID CDATA "a01.04">
 <!-- All that is under "chapter" = chapter = a01.05 -->
 <!ELEMENT chapter (it+, p+, pg+)>
